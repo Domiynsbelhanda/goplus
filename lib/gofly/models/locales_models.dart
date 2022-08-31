@@ -29,26 +29,26 @@ class LocaleModel {
     this.drawerScreen,
   });
 
-  final String chooseLang;
-  final IntroModel introScreen;
-  final LoginModel loginScreen;
-  final ForgotPasswordModel forgotPasswordScreen;
-  final SignupModel signupScreen;
-  final EnterPhoneModel enterPhoneScreen;
-  final VerifyPhoneModel verifyPhoneScreen;
-  final DestinationModel destinationScreen;
-  final SetPickupTimeModel setPickupTimeScreen;
-  final SearchPlaceModel searchPlaceScreen;
-  final PaymentOptionModel paymentOptionScreen;
-  final PaymentModel paymentScreen;
-  final PaymentDetailsModel paymentDetailsScreen;
-  final CancelRideModel cancelRideScreen;
-  final ReviewModel reviewScreen;
-  final MyProfileModel myProfileScreen;
-  final YourRideModel yourRideScreen;
-  final NotificationModel notificationScreen;
-  final ChatsModel chatsScreen;
-  final DrawerModel drawerScreen;
+  final String? chooseLang;
+  final IntroModel? introScreen;
+  final LoginModel? loginScreen;
+  final ForgotPasswordModel? forgotPasswordScreen;
+  final SignupModel? signupScreen;
+  final EnterPhoneModel? enterPhoneScreen;
+  final VerifyPhoneModel? verifyPhoneScreen;
+  final DestinationModel? destinationScreen;
+  final SetPickupTimeModel? setPickupTimeScreen;
+  final SearchPlaceModel? searchPlaceScreen;
+  final PaymentOptionModel? paymentOptionScreen;
+  final PaymentModel? paymentScreen;
+  final PaymentDetailsModel? paymentDetailsScreen;
+  final CancelRideModel? cancelRideScreen;
+  final ReviewModel? reviewScreen;
+  final MyProfileModel? myProfileScreen;
+  final YourRideModel? yourRideScreen;
+  final NotificationModel? notificationScreen;
+  final ChatsModel? chatsScreen;
+  final DrawerModel? drawerScreen;
 
   factory LocaleModel.fromJson(Map<String, dynamic> json) => LocaleModel(
         chooseLang: json["choose_lang"],
@@ -83,35 +83,35 @@ class LocaleModel {
 
   Map<String, dynamic> toJson() => {
         "choose_lang": chooseLang,
-        "intro_screen": introScreen.toJson(),
-        "login_screen": loginScreen.toJson(),
-        "forgot_password_screen": forgotPasswordScreen.toJson(),
-        "signup_screen": signupScreen.toJson(),
-        "enter_phone_screen": enterPhoneScreen.toJson(),
-        "verify_phone_screen": verifyPhoneScreen.toJson(),
-        "destination_screen": destinationScreen.toJson(),
-        "set_pickup_time_screen": setPickupTimeScreen.toJson(),
-        "search_place_screen": searchPlaceScreen.toJson(),
-        "payment_option_screen": paymentOptionScreen.toJson(),
-        "payment_screen": paymentScreen.toJson(),
-        "payment_details_screen": paymentDetailsScreen.toJson(),
-        "cancel_ride_screen": cancelRideScreen.toJson(),
-        "review_screen": reviewScreen.toJson(),
-        "my_profile_screen": myProfileScreen.toJson(),
-        "your_ride_screen": yourRideScreen.toJson(),
-        "notification_screen": notificationScreen.toJson(),
-        "chats_screen": chatsScreen.toJson(),
-        "drawer_screen": drawerScreen.toJson(),
+        "intro_screen": introScreen!.toJson(),
+        "login_screen": loginScreen!.toJson(),
+        "forgot_password_screen": forgotPasswordScreen!.toJson(),
+        "signup_screen": signupScreen!.toJson(),
+        "enter_phone_screen": enterPhoneScreen!.toJson(),
+        "verify_phone_screen": verifyPhoneScreen!.toJson(),
+        "destination_screen": destinationScreen!.toJson(),
+        "set_pickup_time_screen": setPickupTimeScreen!.toJson(),
+        "search_place_screen": searchPlaceScreen!.toJson(),
+        "payment_option_screen": paymentOptionScreen!.toJson(),
+        "payment_screen": paymentScreen!.toJson(),
+        "payment_details_screen": paymentDetailsScreen!.toJson(),
+        "cancel_ride_screen": cancelRideScreen!.toJson(),
+        "review_screen": reviewScreen!.toJson(),
+        "my_profile_screen": myProfileScreen!.toJson(),
+        "your_ride_screen": yourRideScreen!.toJson(),
+        "notification_screen": notificationScreen!.toJson(),
+        "chats_screen": chatsScreen!.toJson(),
+        "drawer_screen": drawerScreen!.toJson(),
       };
 }
 
 class CancelRideModel {
   CancelRideModel({
-    this.dropOff,
-    this.distance,
-    this.price,
-    this.trackRide,
-    this.cancelRide,
+    required this.dropOff,
+    required this.distance,
+    required this.price,
+    required this.trackRide,
+    required this.cancelRide,
   });
 
   final String dropOff;
@@ -140,7 +140,7 @@ class CancelRideModel {
 
 class ChatsModel {
   ChatsModel({
-    this.typeMessage,
+    required this.typeMessage,
   });
 
   final String typeMessage;
@@ -156,9 +156,9 @@ class ChatsModel {
 
 class DestinationModel {
   DestinationModel({
-    this.whereGoing,
-    this.bodyWhereGoing,
-    this.enterDestination,
+    required this.whereGoing,
+    required this.bodyWhereGoing,
+    required this.enterDestination,
   });
 
   final String whereGoing;
@@ -181,13 +181,13 @@ class DestinationModel {
 
 class DrawerModel {
   DrawerModel({
-    this.home,
-    this.yourRide,
-    this.payment,
-    this.message,
-    this.notification,
-    this.settings,
-    this.logout,
+    required this.home,
+    required this.yourRide,
+    required this.payment,
+    required this.message,
+    required this.notification,
+    required this.settings,
+    required this.logout,
   });
 
   final String home;
@@ -221,11 +221,11 @@ class DrawerModel {
 
 class EnterPhoneModel {
   EnterPhoneModel({
-    this.enterPhoneNum,
-    this.phoneNumError,
-    this.enterPhoneBody,
-    this.enterPhoneNumTwo,
-    this.sendCode,
+    required this.enterPhoneNum,
+    required this.phoneNumError,
+    required this.enterPhoneBody,
+    required this.enterPhoneNumTwo,
+    required this.sendCode,
   });
 
   final String enterPhoneNum;
@@ -254,11 +254,11 @@ class EnterPhoneModel {
 
 class ForgotPasswordModel {
   ForgotPasswordModel({
-    this.forgetPassTitle,
-    this.forgotPassBody,
-    this.enterEmailOrPhone,
-    this.enterEmailOrPhoneError,
-    this.send,
+    required this.forgetPassTitle,
+    required this.forgotPassBody,
+    required this.enterEmailOrPhone,
+    required this.enterEmailOrPhoneError,
+    required this.send,
   });
 
   final String forgetPassTitle;
@@ -287,13 +287,13 @@ class ForgotPasswordModel {
 
 class IntroModel {
   IntroModel({
-    this.titleLocateDesti,
-    this.bodyLocateDesti,
-    this.titleSelectYourRoot,
-    this.bodySelectYourRoot,
-    this.titleGetYourTexi,
-    this.bodyGetYourTexi,
-    this.startBtn,
+    required this.titleLocateDesti,
+    required this.bodyLocateDesti,
+    required this.titleSelectYourRoot,
+    required this.bodySelectYourRoot,
+    required this.titleGetYourTexi,
+    required this.bodyGetYourTexi,
+    required this.startBtn,
   });
 
   final String titleLocateDesti;
@@ -327,13 +327,13 @@ class IntroModel {
 
 class LoginModel {
   LoginModel({
-    this.welcome,
-    this.welcomeBody,
-    this.emailError,
-    this.passwordError,
-    this.forgotPassword,
-    this.login,
-    this.dontHaveAccount,
+    required this.welcome,
+    required this.welcomeBody,
+    required this.emailError,
+    required this.passwordError,
+    required this.forgotPassword,
+    required this.login,
+    required this.dontHaveAccount,
   });
 
   final String welcome;
@@ -367,18 +367,18 @@ class LoginModel {
 
 class MyProfileModel {
   MyProfileModel({
-    this.myProfile,
-    this.firstName,
-    this.firstNameError,
-    this.lastName,
-    this.lastNameError,
-    this.phoneNum,
-    this.phoneNumError,
-    this.emailAddress,
-    this.emailAddressError,
-    this.password,
-    this.passwordError,
-    this.save,
+    required this.myProfile,
+    required this.firstName,
+    required this.firstNameError,
+    required this.lastName,
+    required this.lastNameError,
+    required this.phoneNum,
+    required this.phoneNumError,
+    required this.emailAddress,
+    required this.emailAddressError,
+    required this.password,
+    required this.passwordError,
+    required this.save,
   });
 
   final String myProfile;
@@ -427,8 +427,8 @@ class MyProfileModel {
 
 class NotificationModel {
   NotificationModel({
-    this.notificaitons,
-    this.wantsToShareCab,
+    required this.notificaitons,
+    required this.wantsToShareCab,
   });
 
   final String notificaitons;
@@ -448,16 +448,16 @@ class NotificationModel {
 
 class PaymentDetailsModel {
   PaymentDetailsModel({
-    this.paymentDetails,
-    this.paymentDate,
-    this.paymentMethod,
-    this.paymentHistory,
-    this.to,
-    this.fullDetails,
-    this.youSpend,
-    this.onThisMon,
-    this.all,
-    this.wantsToShareCab,
+    required this.paymentDetails,
+    required this.paymentDate,
+    required this.paymentMethod,
+    required this.paymentHistory,
+    required this.to,
+    required this.fullDetails,
+    required this.youSpend,
+    required this.onThisMon,
+    required this.all,
+    required this.wantsToShareCab,
   });
 
   final String paymentDetails;
@@ -501,12 +501,12 @@ class PaymentDetailsModel {
 
 class PaymentOptionModel {
   PaymentOptionModel({
-    this.cash,
-    this.paymentMethod,
-    this.payWithMaster,
-    this.payWithPaypal,
-    this.payWithVisa,
-    this.bookRide,
+    required this.cash,
+    required this.paymentMethod,
+    required this.payWithMaster,
+    required this.payWithPaypal,
+    required this.payWithVisa,
+    required this.bookRide,
   });
 
   final String cash;
@@ -538,13 +538,13 @@ class PaymentOptionModel {
 
 class PaymentModel {
   PaymentModel({
-    this.addCreditCard,
-    this.scanCard,
-    this.cardHolderName,
-    this.cardHolderNameError,
-    this.cardNum,
-    this.cardNumError,
-    this.save,
+    required this.addCreditCard,
+    required this.scanCard,
+    required this.cardHolderName,
+    required this.cardHolderNameError,
+    required this.cardNum,
+    required this.cardNumError,
+    required this.save,
   });
 
   final String addCreditCard;
@@ -578,10 +578,10 @@ class PaymentModel {
 
 class ReviewModel {
   ReviewModel({
-    this.howYourTrip,
-    this.howYourTripBody,
-    this.addComment,
-    this.submitReview,
+    required this.howYourTrip,
+    required this.howYourTripBody,
+    required this.addComment,
+    required this.submitReview,
   });
 
   final String howYourTrip;
@@ -606,18 +606,18 @@ class ReviewModel {
 
 class SearchPlaceModel {
   SearchPlaceModel({
-    this.searchPlaceText,
-    this.whereYouGo,
-    this.yourPlace,
-    this.home,
-    this.homeAddress,
-    this.homeAddressError,
-    this.office,
-    this.officeAddress,
-    this.officeAddressError,
-    this.addPlace,
-    this.searchPlaceHere,
-    this.savePlace,
+    required this.searchPlaceText,
+    required this.whereYouGo,
+    required this.yourPlace,
+    required this.home,
+    required this.homeAddress,
+    required this.homeAddressError,
+    required this.office,
+    required this.officeAddress,
+    required this.officeAddressError,
+    required this.addPlace,
+    required this.searchPlaceHere,
+    required this.savePlace,
   });
 
   final String searchPlaceText;
@@ -667,8 +667,8 @@ class SearchPlaceModel {
 
 class SetPickupTimeModel {
   SetPickupTimeModel({
-    this.scheduleRide,
-    this.setPickupTime,
+    required this.scheduleRide,
+    required this.setPickupTime,
   });
 
   final String scheduleRide;
@@ -688,19 +688,19 @@ class SetPickupTimeModel {
 
 class SignupModel {
   SignupModel({
-    this.signUp,
-    this.signUpBody,
-    this.fullName,
-    this.fullNameError,
-    this.email,
-    this.emailError,
-    this.password,
-    this.passwordError,
-    this.confirmPass,
-    this.confirmPassError,
-    this.signUpBtn,
-    this.or,
-    this.signUpWithGoogle,
+    required this.signUp,
+    required this.signUpBody,
+    required this.fullName,
+    required this.fullNameError,
+    required this.email,
+    required this.emailError,
+    required this.password,
+    required this.passwordError,
+    required this.confirmPass,
+    required this.confirmPassError,
+    required this.signUpBtn,
+    required this.or,
+    required this.signUpWithGoogle,
   });
 
   final String signUp;
@@ -752,11 +752,11 @@ class SignupModel {
 
 class VerifyPhoneModel {
   VerifyPhoneModel({
-    this.verifyPhoneNum,
-    this.verifyPhoneBody,
-    this.didntReciveCode,
-    this.resend,
-    this.verifyBtn,
+    required this.verifyPhoneNum,
+    required this.verifyPhoneBody,
+    required this.didntReciveCode,
+    required this.resend,
+    required this.verifyBtn,
   });
 
   final String verifyPhoneNum;
@@ -785,8 +785,8 @@ class VerifyPhoneModel {
 
 class YourRideModel {
   YourRideModel({
-    this.yourRides,
-    this.today,
+    required this.yourRides,
+    required this.today,
   });
 
   final String yourRides;
