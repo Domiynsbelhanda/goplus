@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
-import 'package:texi_booking/pages/intro_screen.dart';
-import 'package:texi_booking/utils/app_colors.dart';
-import 'package:texi_booking/utils/strings.dart';
-import 'package:texi_booking/widgets/app_widgets/app_loader.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
+import 'package:goplus/gofly/pages/intro_screen.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/utils/strings.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_loader.dart';
 
 import '../utils/application_localizations.dart';
 
@@ -15,7 +15,7 @@ class ChooseALanguageScreen extends StatefulWidget {
 }
 
 class _HomepageState extends State<ChooseALanguageScreen> {
-  Size size;
+  late Size size;
   int selectedLanguage = 1;
 
   ApplicationLocalizations localization =
@@ -66,7 +66,7 @@ class _HomepageState extends State<ChooseALanguageScreen> {
                     Text(
                       Provider.of<LocalesProviderModel>(context, listen: false)
                           .getLocalizedStrings
-                          .chooseLang,
+                          .chooseLang!,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -83,7 +83,7 @@ class _HomepageState extends State<ChooseALanguageScreen> {
                         boxShadow: [
                           BoxShadow(
                               blurRadius: 3.0,
-                              color: Colors.grey[300],
+                              color: Colors.grey,
                               spreadRadius: 2)
                         ],
                         borderRadius: BorderRadius.circular(30.0),

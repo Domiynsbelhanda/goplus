@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/rounded_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_models.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
 import 'package:intl/intl.dart';
-import 'package:texi_booking/pages/search_place_screen.dart';
-import 'package:texi_booking/utils/app_colors.dart';
-import 'package:texi_booking/widgets/app_widgets/app_button.dart';
-import 'package:texi_booking/widgets/app_widgets/app_bar.dart';
-import 'package:texi_booking/widgets/map_widget.dart';
+import 'package:goplus/gofly/pages/search_place_screen.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_button.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_bar.dart';
+import 'package:goplus/gofly/widgets/map_widget.dart';
 
 class SetPickupTimeScreen extends StatefulWidget {
   @override
@@ -16,10 +16,10 @@ class SetPickupTimeScreen extends StatefulWidget {
 }
 
 class _SetPickupTimeScreenState extends State<SetPickupTimeScreen> {
-  Size size;
-  DateTime dateTime;
-  Duration duration;
-  SetPickupTimeModel _localeText;
+  late Size size;
+  late DateTime dateTime;
+  late Duration duration;
+  late SetPickupTimeModel _localeText;
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _SetPickupTimeScreenState extends State<SetPickupTimeScreen> {
     duration = Duration(minutes: 10);
     _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
         .getLocalizedStrings
-        .setPickupTimeScreen;
+        .setPickupTimeScreen!;
   }
 
   @override

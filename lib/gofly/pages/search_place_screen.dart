@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_models.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
-import 'package:texi_booking/pages/select_car_screen.dart';
-import 'package:texi_booking/utils/app_colors.dart';
-import 'package:texi_booking/utils/strings.dart';
-import 'package:texi_booking/widgets/app_widgets/app_button.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
+import 'package:goplus/gofly/pages/select_car_screen.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/utils/strings.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_button.dart';
 
 class SearchPlaceScreen extends StatefulWidget {
   @override
@@ -14,16 +14,16 @@ class SearchPlaceScreen extends StatefulWidget {
 }
 
 class _SearchPlaceScreenState extends State<SearchPlaceScreen> {
-  Size size;
+  late Size size;
   final formkey = GlobalKey<FormState>();
 
-  SearchPlaceModel _localeText;
+  late SearchPlaceModel _localeText;
   @override
   void initState() {
     super.initState();
     _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
         .getLocalizedStrings
-        .searchPlaceScreen;
+        .searchPlaceScreen!;
   }
 
   @override
@@ -119,7 +119,7 @@ class _SearchPlaceScreenState extends State<SearchPlaceScreen> {
                     padding: const EdgeInsets.only(left: 40.0),
                     child: TextFormField(
                       validator: (value) {
-                        if (value.isEmpty) {
+                        if (value!.isEmpty) {
                           return _localeText.homeAddressError;
                         }
                         return null;
@@ -150,7 +150,7 @@ class _SearchPlaceScreenState extends State<SearchPlaceScreen> {
                     padding: const EdgeInsets.only(left: 40.0),
                     child: TextFormField(
                       validator: (value) {
-                        if (value.isEmpty) {
+                        if (value!.isEmpty) {
                           return _localeText.officeAddressError;
                         }
                         return null;
@@ -252,7 +252,7 @@ class _SearchPlaceScreenState extends State<SearchPlaceScreen> {
                   AppButton(
                     name: _localeText.savePlace,
                     onTap: () {
-                      if (formkey.currentState.validate()) {
+                      if (formkey.currentState!.validate()) {
                         FocusScope.of(context).unfocus();
                         Navigator.push(
                           context,

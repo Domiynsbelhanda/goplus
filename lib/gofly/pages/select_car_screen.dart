@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:texi_booking/models/car_model.dart';
-import 'package:texi_booking/pages/payment/payment_option_screen.dart';
-import 'package:texi_booking/utils/app_colors.dart';
-import 'package:texi_booking/utils/strings.dart';
-import 'package:texi_booking/widgets/app_widgets/app_bar.dart';
-import 'package:texi_booking/widgets/map_widget.dart';
+import 'package:goplus/gofly/models/car_model.dart';
+import 'package:goplus/gofly/pages/payment/payment_option_screen.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/utils/strings.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_bar.dart';
+import 'package:goplus/gofly/widgets/map_widget.dart';
 
 class SelectCarScreen extends StatefulWidget {
   @override
@@ -13,7 +13,7 @@ class SelectCarScreen extends StatefulWidget {
 }
 
 class _SelectCarScreenState extends State<SelectCarScreen> {
-  Size size;
+  late Size size;
   List<CarList> cars = [
     CarList(
       images: StringValue.TOYOTA,

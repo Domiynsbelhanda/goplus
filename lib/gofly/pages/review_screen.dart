@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:texi_booking/pages/track_your_ride_screen.dart';
-import 'package:texi_booking/utils/app_colors.dart';
-import 'package:texi_booking/widgets/app_widgets/app_bar.dart';
-import 'package:texi_booking/widgets/map_widget.dart';
+import 'package:goplus/gofly/pages/track_your_ride_screen.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_bar.dart';
+import 'package:goplus/gofly/widgets/map_widget.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_models.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
 
 class ReviewScreen extends StatefulWidget {
   @override
@@ -14,9 +14,9 @@ class ReviewScreen extends StatefulWidget {
 }
 
 class _ReviewScreenState extends State<ReviewScreen> {
-  Size size;
+  late Size size;
 
-  ReviewModel _localeText;
+  late ReviewModel _localeText;
 
   @override
   void initState() {

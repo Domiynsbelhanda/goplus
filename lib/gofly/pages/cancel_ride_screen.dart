@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:texi_booking/pages/review_screen.dart';
-import 'package:texi_booking/pages/track_your_ride_screen.dart';
-import 'package:texi_booking/utils/app_colors.dart';
-import 'package:texi_booking/utils/strings.dart';
-import 'package:texi_booking/widgets/app_widgets/app_bar.dart';
+import 'package:goplus/gofly/pages/review_screen.dart';
+import 'package:goplus/gofly/pages/track_your_ride_screen.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/utils/strings.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_models.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
-import 'package:texi_booking/widgets/map_widget.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
+import 'package:goplus/gofly/widgets/map_widget.dart';
 
 class CancelRideScreen extends StatefulWidget {
   @override
@@ -16,9 +16,9 @@ class CancelRideScreen extends StatefulWidget {
 }
 
 class _CancelRideScreenState extends State<CancelRideScreen> {
-  Size size;
+  late Size size;
 
-  CancelRideModel _localeText;
+  late CancelRideModel _localeText;
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _CancelRideScreenState extends State<CancelRideScreen> {
     });
     _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
         .getLocalizedStrings
-        .cancelRideScreen;
+        .cancelRideScreen!;
   }
 
   @override

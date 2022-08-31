@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:texi_booking/widgets/map_widget.dart';
+import 'package:goplus/gofly/widgets/map_widget.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_models.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
 
 class TrackYourRidesScreen extends StatefulWidget {
   @override
@@ -10,16 +10,16 @@ class TrackYourRidesScreen extends StatefulWidget {
 }
 
 class _TrackYourRidesScreenState extends State<TrackYourRidesScreen> {
-  Size size;
+  late Size size;
 
-  CancelRideModel _localeText;
+  late CancelRideModel _localeText;
 
   @override
   void initState() {
     super.initState();
     _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
         .getLocalizedStrings
-        .cancelRideScreen;
+        .cancelRideScreen!;
   }
 
   @override

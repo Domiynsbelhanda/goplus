@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_models.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
-import 'package:texi_booking/utils/app_colors.dart';
-import 'package:texi_booking/utils/strings.dart';
-import 'package:texi_booking/widgets/slider_widget.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/utils/strings.dart';
+import 'package:goplus/gofly/widgets/slider_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import 'auth/login_screen.dart';
@@ -15,17 +15,17 @@ class IntroScreen extends StatefulWidget {
 }
 
 class _IntroScreenState extends State<IntroScreen> {
-  Size size;
+  late Size size;
   int selectedImage = 0;
   CarouselController buttonController = CarouselController();
-  IntroModel _localeText;
+  late IntroModel _localeText;
 
   @override
   void initState() {
     super.initState();
     _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
         .getLocalizedStrings
-        .introScreen;
+        .introScreen!;
   }
 
   @override
