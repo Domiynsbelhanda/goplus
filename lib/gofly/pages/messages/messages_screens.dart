@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:texi_booking/pages/messages/chats_screen.dart';
-import 'package:texi_booking/widgets/kf_drawer.dart';
+import 'package:goplus/gofly/pages/messages/chats_screen.dart';
+import 'package:goplus/gofly/widgets/kf_drawer.dart';
 
 class MessagesScreen extends KFDrawerContent {
   final bool isPage;
-  MessagesScreen({this.isPage});
+  MessagesScreen({required this.isPage});
   @override
   _MessagesScreenState createState() => _MessagesScreenState();
 }
 
 class _MessagesScreenState extends State<MessagesScreen> {
-  Size size;
+  late Size size;
 
   List name = [
     "Manojbhai",

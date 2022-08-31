@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_models.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
-import 'package:texi_booking/utils/app_colors.dart';
-import 'package:texi_booking/widgets/custom_clipper.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/widgets/custom_clipper.dart';
 
 class Chats extends StatefulWidget {
   @override
@@ -11,15 +11,15 @@ class Chats extends StatefulWidget {
 }
 
 class _ChatsState extends State<Chats> {
-  Size size;
-  ChatsModel _localeText;
+  late Size size;
+  late ChatsModel _localeText;
 
   @override
   void initState() {
     super.initState();
     _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
         .getLocalizedStrings
-        .chatsScreen;
+        .chatsScreen!;
   }
 
   @override
