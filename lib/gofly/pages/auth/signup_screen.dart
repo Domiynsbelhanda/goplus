@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:texi_booking/utils/app_colors.dart';
-import 'package:texi_booking/utils/strings.dart';
-import 'package:texi_booking/widgets/app_widgets/app_button.dart';
-import 'package:texi_booking/widgets/app_widgets/app_bar.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/utils/strings.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_button.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_models.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
 
 import 'enter_phone_number_screen.dart';
 
@@ -16,10 +16,10 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  Size size;
+  late Size size;
   final formkey = GlobalKey<FormState>();
 
-  SignupModel _localeText;
+  late SignupModel _localeText;
 
   @override
   void initState() {
@@ -71,7 +71,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     children: [
                       TextFormField(
                         validator: (value) {
-                          if (value.isEmpty) {
+                          if (value!.isEmpty) {
                             return _localeText.fullNameError;
                           }
                           return null;
@@ -88,7 +88,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       TextFormField(
                         validator: (value) {
-                          if (value.isEmpty) {
+                          if (value!.isEmpty) {
                             return _localeText.emailError;
                           }
                           return null;
@@ -105,7 +105,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       TextFormField(
                         validator: (value) {
-                          if (value.isEmpty) {
+                          if (value!.isEmpty) {
                             return _localeText.passwordError;
                           }
                           return null;
@@ -120,7 +120,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       SizedBox(height: 10.0),
                       TextFormField(
                         validator: (value) {
-                          if (value.isEmpty) {
+                          if (value!.isEmpty) {
                             return _localeText.confirmPassError;
                           }
                           return null;

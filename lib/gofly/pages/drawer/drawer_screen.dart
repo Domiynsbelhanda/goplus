@@ -1,23 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:texi_booking/pages/drawer/my_profile_screen.dart';
-import 'package:texi_booking/utils/app_colors.dart';
-import 'package:texi_booking/utils/class_builder.dart';
-import 'package:texi_booking/utils/strings.dart';
-import 'package:texi_booking/widgets/kf_drawer.dart';
+import 'package:goplus/gofly/pages/drawer/my_profile_screen.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/utils/class_builder.dart';
+import 'package:goplus/gofly/utils/strings.dart';
+import 'package:goplus/gofly/widgets/kf_drawer.dart';
 
 class DrawerScreen extends KFDrawerContent {
   String screen;
-  DrawerScreen({this.screen});
+  DrawerScreen({required this.screen});
   @override
   _DrawerScreenState createState() => _DrawerScreenState();
 }
 
 class _DrawerScreenState extends State<DrawerScreen>
     with TickerProviderStateMixin {
-  Size size;
-  KFDrawerController _drawerController;
+  late Size size;
+  late KFDrawerController _drawerController;
 
   @override
   void initState() {

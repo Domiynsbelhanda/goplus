@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:texi_booking/utils/app_colors.dart';
-import 'package:texi_booking/widgets/app_widgets/app_button.dart';
-import 'package:texi_booking/widgets/app_widgets/app_bar.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_button.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_bar.dart';
 
 import 'verify_number_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_models.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
 
 class PhoneNumberScreen extends StatefulWidget {
   @override
@@ -14,10 +14,10 @@ class PhoneNumberScreen extends StatefulWidget {
 }
 
 class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
-  Size size;
+  late Size size;
   final formkey = GlobalKey<FormState>();
 
-  EnterPhoneModel _localeText;
+  late EnterPhoneModel _localeText;
 
   @override
   void initState() {
@@ -87,7 +87,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                       key: formkey,
                       child: TextFormField(
                         validator: (value) {
-                          if (value.isEmpty) {
+                          if (value!.isEmpty) {
                             return _localeText.phoneNumError;
                           }
                           return null;
@@ -106,7 +106,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                 AppButton(
                   name: _localeText.sendCode,
                   onTap: () {
-                    if (formkey.currentState.validate())
+                    if (formkey.currentState!.validate())
                       Navigator.push(
                           context,
                           MaterialPageRoute(

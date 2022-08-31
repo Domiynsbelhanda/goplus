@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_models.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
-import 'package:texi_booking/pages/drawer/drawer_screen.dart';
-import 'package:texi_booking/utils/otp_text_field.dart';
-import 'package:texi_booking/utils/app_colors.dart';
-import 'package:texi_booking/widgets/app_widgets/app_bar.dart';
-import 'package:texi_booking/widgets/app_widgets/app_button.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
+import 'package:goplus/gofly/pages/drawer/drawer_screen.dart';
+import 'package:goplus/gofly/utils/otp_text_field.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_bar.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_button.dart';
 
 class VerifyNumberScreen extends StatefulWidget {
   @override

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_models.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
-import 'package:texi_booking/pages/drawer/drawer_screen.dart';
-import 'package:texi_booking/utils/app_colors.dart';
-import 'package:texi_booking/widgets/app_widgets/app_button.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
+import 'package:goplus/gofly/pages/drawer/drawer_screen.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_button.dart';
 
 import 'forgot_password_screens.dart';
 import 'signup_screen.dart';
@@ -16,9 +16,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  Size size;
+  late Size size;
   final formkey = GlobalKey<FormState>();
-  LoginModel _localeText;
+  late LoginModel _localeText;
 
   @override
   void initState() {
@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       TextFormField(
                         validator: (value) {
-                          if (value.isEmpty) {
+                          if (value!.isEmpty) {
                             return _localeText.emailError;
                           }
                           return null;
@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: 10.0),
                       TextFormField(
                         validator: (value) {
-                          if (value.isEmpty) {
+                          if (value!.isEmpty) {
                             return _localeText.passwordError;
                           }
                           return null;
@@ -156,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 AppButton(
                   name: _localeText.login,
                   onTap: () {
-                    if (formkey.currentState.validate())
+                    if (formkey.currentState!.validate())
                       Navigator.push(
                           context,
                           MaterialPageRoute(

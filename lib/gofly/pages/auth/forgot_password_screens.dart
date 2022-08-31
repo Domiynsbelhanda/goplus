@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:texi_booking/utils/app_colors.dart';
-import 'package:texi_booking/widgets/app_widgets/app_button.dart';
-import 'package:texi_booking/widgets/app_widgets/app_bar.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_button.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_models.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
 
 class ForgotScreen extends StatefulWidget {
   @override
@@ -12,10 +12,10 @@ class ForgotScreen extends StatefulWidget {
 }
 
 class _ForgotScreenState extends State<ForgotScreen> {
-  Size size;
+  late Size size;
   final formkey = GlobalKey<FormState>();
 
-  ForgotPasswordModel _localeText;
+  late ForgotPasswordModel _localeText;
 
   @override
   void initState() {
@@ -70,7 +70,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                   key: formkey,
                   child: TextFormField(
                     validator: (value) {
-                      if (value.isEmpty) {
+                      if (value!.isEmpty) {
                         return _localeText.enterEmailOrPhoneError;
                       }
                       return null;
@@ -86,7 +86,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                 AppButton(
                   name: _localeText.send,
                   onTap: () {
-                    formkey.currentState.validate();
+                    formkey.currentState!.validate();
                   },
                 ),
               ],
