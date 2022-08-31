@@ -1,0 +1,157 @@
+{
+    "choose_lang": "एक भाषा चुनें",
+    "intro_screen": {
+        "title_locate_desti": "गंतव्य का पता लगाएँ",
+        "body_locate_desti": "आपकी मंजिल आपके फिंगर्टिप्स पर है ऐप खोलें और\nआप जहां जाना चाहते हैं वहां प्रवेश करें",
+        "title_select_your_root": "अपना मार्ग चुनें",
+        "body_select_your_root": "अक्सर स्थान पर त्वरित पहुँच प्राप्त करें और उन्हें पसंदीदा के रूप में सहेजें",
+        "title_get_your_texi": "अपनी टैक्सी ले आओ",
+        "body_get_your_texi": "कीमत के लिए प्रतीक्षा और हॉगिंग की परेशानी के\nबिना टैक्सी बुक करने का तेज़ तरीका।",
+        "start_btn": "शुरू"
+    },
+    "login_screen": {
+        "welcome": "स्वागत हे",
+        "welcome_body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "email_error": "अपना ईमेल दर्ज करें",
+        "password_error": "अपना पासवर्ड दर्ज करें",
+        "forgot_password": "पासवर्ड भूल गए ?",
+        "login": "लॉग इन करें",
+        "dont_have_account": "खाता नहीं है?"
+    },
+    "forgot_password_screen": {
+        "forget_pass_title": "पासवर्ड भूल\nगए हैं",
+        "forgot_pass_body": "नया पासवर्ड प्राप्त करने के लिए कृपया अपना ईमेल पता या फ़ोन नंबर दर्ज करें।",
+        "enter_email_or_phone": "ईमेल या फोन नंबर दर्ज करें",
+        "enter_email_or_phone_error": "अपना नंबर दर्ज करें",
+        "send": "भेजें"
+    },
+    "signup_screen": {
+        "sign_up": "साइन अप",
+        "sign_up_body":"नीचे अपनी जानकारी भरें या गूगल के साथ साइन अप करें।",
+        "full_name": "पूरा नाम",
+        "full_name_error": "अपना पूरा नाम लिखे",
+        "email": "ईमेल",
+        "email_error": "अपना ईमेल दर्ज करें",
+        "password": "पासवर्ड",
+        "password_error": "अपना पासवर्ड डालें",
+        "confirm_pass": "पासवर्ड की पुष्टि कीजिये",
+        "confirm_pass_error": "अपना पुष्टि पासवर्ड दर्ज करें",
+        "sign_up_btn": "साइन अप",
+        "or": "या",
+        "sign_up_with_google": "गूगल के साथ साइन अप करें"
+    },
+    "enter_phone_screen": {
+        "enter_phone_num": "फ़ोन नंबर\nदर्ज करें",
+        "phone_num_error": "अपना नंबर दर्ज करें",
+        "enter_phone_body": "हम आपको आपके फ़ोन नंबर पर \nएक सत्यापन कोड भेजेंगे",
+        "enter_phone_num_two": "अपना फोन नंबर डालें",
+        "send_code": "कोड भेजो"
+    },
+    "verify_phone_screen": {
+        "verify_phone_num": "फ़ोन नंबर\nसत्यापित करें",
+        "verify_phone_body": "आपके फ़ोन नंबर पर एक कोड भेजा गया है",
+        "didnt_recive_code": "कोई कोड प्राप्त नहीं हुआ?",
+        "resend": "फिर से भेजिए",
+        "verify_btn": "सत्यापित करें"
+    },
+    "destination_screen": {
+        "where_going": "आप कहां जा रहे हैं?",
+        "body_where_going": "आप तेजी से अपनी जगह पर पहुंचते हैं",
+        "enter_destination": "गंतव्य दर्ज करें"
+    },
+    "set_pickup_time_screen": {
+        "schedule_ride": "एक सवारी अनुसूची",
+        "set_pickup_time": "पिकअप समय निर्धारित करें"
+    },
+    "search_place_screen": {
+        "search_place_text": "खोज स्थान",
+        "where_you_go": "आप कहाँ जाना चाहते हो ?",
+        "your_place": "अपनी जगह",
+        "home": "घर ",
+        "home_address": "घर का पता",
+        "home_address_error": "अपना घर का पता दर्ज करें",
+        "office": "कार्यालय",
+        "office_address": "कार्यालय का पता",
+        "office_address_error": "अपना कार्यालय का पता दर्ज करें",
+        "add_place": "जगह जोड़ें",
+        "search_place_here": "यहां अपना स्थान खोजें ...",
+        "save_place": "जगह बचाओ"
+    },
+    "payment_option_screen": {
+        "cash": "कैश",
+        "payment_method": "भुगतान का तरीका",
+        "pay_with_master": "मास्टर कार्ड के साथ भुगतान करें",
+        "pay_with_paypal": "पेपैल के साथ भुगतान करें",
+        "pay_with_visa": "वीजा के साथ भुगतान करें",
+        "book_ride": "सवारी बुक करें"
+    },
+    "payment_screen": {
+        "add_credit_card": "क्रेडिट कार्ड जोड़ें",
+        "scan_card": "स्कैन कार्ड",
+        "card_holder_name": "कार्डधारक का नाम",
+        "card_holder_name_error": "अपना नाम दर्ज करें",
+        "card_num": "कार्ड संख्या",
+        "card_num_error": "अपना कार्ड नंबर डालें",
+        "save": "सहेजें"
+    },
+    "payment_details_screen": {
+        "payment_details": "भुगतान विवरण",
+        "payment_date": "भुगतान तिथि",
+        "payment_method": "भुगतान का तरीका",
+        "payment_history": "भुगतान इतिहास",
+        "to": "को",
+        "full_details": "पूरा विवरण",
+        "you_spend": "आपने इस महीने में",
+        "on_this_mon": "खर्च किए हैं",
+        "all": "सब",
+        "wants_to_share_cab": "एक टैक्सी साझा करना चाहता है"
+    },
+    "cancel_ride_screen": {
+        "drop_off": "बाहर निकलना",
+        "distance": "दूरी",
+        "price": "कीमत",
+        "track_ride": "अपनी सवारी को ट्रैक करें",
+        "cancel_ride": "सवारी रद्द करें"
+    },
+    "review_screen": {
+        "how_your_trip" : "आपकी यात्रा कैसी थी ?",
+        "how_your_trip_body": "आपकी प्रतिक्रिया आपके अनुभव को बेहतर बनाने के लिए हमें प्रेरित करेगी",
+        "add_comment": "टिप्पणी जोड़ें",
+        "submit_review": "समीक्षा जमा करें"
+    },
+    "my_profile_screen": {
+        "my_profile": "मेरी प्रोफाइल",
+        "first_name": "प्रथम नाम",
+        "first_name_error": "अपना पहला नाम दर्ज करें",
+        "last_name": "अंतिम नाम",
+        "last_name_error": "अपना अंतिम नाम दर्ज करें",
+        "phone_num": "फ़ोन नंबर",
+        "phone_num_error": "अपना नंबर दर्ज करें",
+        "email_address": "ईमेल पता",
+        "email_address_error": "अपना ईमेल पता दर्ज करें",
+        "password":"पासवर्ड",
+        "password_error":"अपना पासवर्ड डालें",
+        "save": "सहेजें"
+    },
+    "your_ride_screen" : {
+        "your_rides": "आपकी सवारी",
+        "today": "आज"
+    },
+    "notification_screen": {
+        "notificaitons": "सूचनाएं",
+        "wants_to_share_cab": "एक टैक्सी साझा करना चाहता है"
+
+    },
+    "chats_screen" : {
+        "type_message": "एक संदेश लिखें"
+    },
+    "drawer_screen" : {
+        "home": "घर ",
+        "your_ride": "आपकी सवारी",
+        "payment": "भुगतान",
+        "message": "संदेश",
+        "notification": "अधिसूचना",
+        "settings": "समायोजन",
+        "logout": "लॉग आउट"
+    }
+}

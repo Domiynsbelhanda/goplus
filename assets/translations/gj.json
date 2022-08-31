@@ -1,0 +1,157 @@
+{
+    "choose_lang": "કોઈ ભાષા પસંદ કરો",
+    "intro_screen": {
+        "title_locate_desti": "લક્ષ્યસ્થાન શોધો",
+        "body_locate_desti": "તમારું લક્ષ્યસ્થાન તમારી આંગળીના વેઢે છે, એપ્લિકેશન ખોલો\n અને જ્યાં તમે જવા માંગતા હો ત્યાં દાખલ કરો.",
+        "title_select_your_root": "તમારો માર્ગ પસંદ કરો",
+        "body_select_your_root": "અવારનવાર સ્થાન પર ઝડપી પ્રવેશ મેળવો અને તેમને પ્રિય તરીકે સાચવો",
+        "title_get_your_texi": "તમારી ટેક્સી મેળવો ",
+        "body_get_your_texi": "વેઇટિંગ અને કિંમત માટે હોગિંગની મુશ્કેલી \nવિના ટેક્સી બુક કરવાની ઝડપી રીત.",
+        "start_btn": "શરૂઆત"
+    },
+    "login_screen": {
+        "welcome": "સ્વાગત છે",
+        "welcome_body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "email_error": "કૃપા કરીને તમારું ઇમેઇલ દાખલ કરો",
+        "password_error": "મહેરબાની કરીને તમારો પાસવર્ડ નાખો",
+        "forgot_password": "પાસવર્ડ ભૂલી ગયા છો?",
+        "login": "પ્રવેશ કરો",
+        "dont_have_account": "ખાતું નથી?"
+    },
+    "forgot_password_screen": {
+        "forget_pass_title": "તમારો પાસવર્ડ\nભૂલી ગયા છો",
+        "forgot_pass_body": "નવો પાસવર્ડ મેળવવા માટે કૃપા કરીને તમારું ઇમેઇલ સરનામું અથવા ફોન નંબર દાખલ કરો.",
+        "enter_email_or_phone": "ઇમેઇલ અથવા ફોન નંબર દાખલ કરો",
+        "enter_email_or_phone_error": "તમારો નંબર દાખલ કરો",
+        "send": "મોકલો"
+    },
+    "signup_screen": {
+        "sign_up": "સાઇન અપ",
+        "sign_up_body":"તમારી માહિતી નીચે ભરો અથવા ગૂગલ સાથે સાઇન અપ કરો.",
+        "full_name": "પૂરું નામ",
+        "full_name_error": "તમારું પૂરું નામ લખો",
+        "email": "ઇમેઇલ",
+        "email_error": "તમારું ઈમેલ એડ્રેસ લખો",
+        "password_error": "તમારો પાસવર્ડ નાખો",
+        "password": "પાસવર્ડ",
+        "confirm_pass": "પાસવર્ડની પુષ્ટિ કરો",
+        "confirm_pass_error": "તમારો પુષ્ટિ પાસવર્ડ દાખલ કરો",
+        "sign_up_btn": "સાઇન અપ",
+        "or": "અથવા",
+        "sign_up_with_google": "ગૂગલ સાથે સાઇન અપ કરો"
+    },
+    "enter_phone_screen": {
+        "enter_phone_num": "ફોન નંબર\nદાખલ કરો",
+        "phone_num_error": "તમારો નંબર દાખલ કરો",
+        "enter_phone_body": "અમે તમને તમારા ફોન નંબર પર\nએક વેરિફિકેશન કોડ મોકલીશું",
+        "enter_phone_num_two": "તમારો ફોન નંબર દાખલ કરો",
+        "send_code": "કોડ મોકલો"
+    },
+    "verify_phone_screen": {
+        "verify_phone_num": "ફોન નંબર\nચકાસો",
+        "verify_phone_body": "તમારા ફોન નંબર પર એક કોડ મોકલવામાં આવ્યો છે",
+        "didnt_recive_code": "કોઈ કોડ મળ્યો નથી ?",
+        "resend": "ફરીથી મોકલો",
+        "verify_btn": "ચકાસો"
+    },
+    "destination_screen": {
+        "where_going": "તમે ક્યાં જાવ છો?",
+        "body_where_going": "પાછા તમે સવારી કરો છો અને તમારા સ્થાન પર ઝડપથી પહોંચશો",
+        "enter_destination": "લક્ષ્યસ્થાન દાખલ કરો"
+    },
+    "set_pickup_time_screen": {
+        "schedule_ride": "એક રાઇડ સુનિશ્ચિત કરો",
+        "set_pickup_time": "પીકઅપ ટાઇમ સેટ કરો"
+    },
+    "search_place_screen": {
+        "search_place_text": "શોધ સ્થળ",
+        "where_you_go": "તમે જ્યાં જવા માંગો છો?",
+        "your_place": "તમારી જગ્યા",
+        "home": "ઘર",
+        "home_address": "ઘરનું સરનામું",
+        "home_address_error": "તમારા ઘરનું સરનામું દાખલ કરો",
+        "office": "કચેરી",
+        "office_address": "ઓફિસ નું સરનામું",
+        "office_address_error": "તમારા ઓફિસ નું સરનામું દાખલ કરો",
+        "add_place": "સ્થળ ઉમેરો",
+        "search_place_here": "અહીં તમારું સ્થાન શોધો ...",
+        "save_place": "સ્થાન સાચવો"
+    },
+    "payment_option_screen": {
+        "cash": "કેશ",
+        "payment_method": "ચુકવણી પદ્ધતિ",
+        "pay_with_master": "માસ્ટર કાર્ડ સાથે ચૂકવણી કરો",
+        "pay_with_paypal": "પેપાલ સાથે ચૂકવણી કરો",
+        "pay_with_visa": "વિઝા સાથે ચૂકવણી કરો",
+        "book_ride": "રાઇડ બુક કરો"
+    },
+    "payment_screen": {
+        "add_credit_card": "ક્રેડિટ કાર્ડ ઉમેરો",
+        "scan_card": "સ્કેન કાર્ડ",
+        "card_holder_name": "કાર્ડ ધારક નું નામ",
+        "card_holder_name_error": "તમારું નામ દાખલ કરો",
+        "card_num": "કાર્ડ ક્રમાંક",
+        "card_num_error": "તમારો કાર્ડ નંબર દાખલ કરો",
+        "save": "સાચવો"
+    },
+    "payment_details_screen": {
+        "payment_details": "ચુકવણીની વિગતો",
+        "payment_date": "ચુકવણીની તારીખ",
+        "payment_method": "ચુકવણી પદ્ધતિ",
+        "payment_history": "ચુકવણી ઇતિહાસ",
+        "to": "પ્રતિ",
+        "full_details": "સંપૂર્ણ વિગતો",
+        "you_spend": "તમે આ મહિનામાં",
+        "on_this_mon": "ખર્ચ્યા છે",
+        "all": "બધા",
+        "wants_to_share_cab": "એક કેબ શેર કરવા માંગે છે"
+    },
+    "cancel_ride_screen": {
+        "drop_off": "છોડો",
+        "distance": "અંતર",
+        "price": "કિંમત",
+        "track_ride": "તમારી રાઈડ ટ્રૅક કરો ",
+        "cancel_ride": "રાઇડ રદ કરો"
+    },
+    "review_screen": {
+        "how_your_trip" : "તમારી સફર કેવી હતી ?",
+        "how_your_trip_body": "તમારો પ્રતિસાદ અમને તમારા અનુભવને વધુ સારા બનાવવા માટે મદદ કરશે",
+        "add_comment": "ટિપ્પણી ઉમેરો",
+        "submit_review": "સમીક્ષા સબમિટ કરો"
+    },
+    "my_profile_screen": {
+        "my_profile": "મારી પ્રોફાઈલ",
+        "first_name": "પ્રથમ નામ",
+        "first_name_error": "તમારું પ્રથમ નામ દાખલ કરો",
+        "last_name": "છેલ્લું નામ",
+        "last_name_error": "તમારું છેલ્લું નામ દાખલ કરો",
+        "phone_num": "ફોન નંબર",
+        "phone_num_error": "તમારો નંબર દાખલ કરો",
+        "email_address": "ઈ - મેઈલ સરનામું",
+        "email_address_error": "તમારુ ઇમેઇલ એડ્રેસ દાખલ કરો",
+        "password":"પાસવર્ડ",
+        "password_error":"તમારો પાસવર્ડ નાખો",
+        "save": "સાચવો"
+    },
+    "your_ride_screen" : {
+        "your_rides": "તમારી સવારી",
+        "today": "આજે"
+    },
+    "notification_screen": {
+        "notificaitons": "સૂચનાઓ",
+        "wants_to_share_cab": "એક કેબ શેર કરવા માંગે છે"
+
+    },
+    "chats_screen" : {
+        "type_message": "એક સંદેશ લખો"
+    },
+    "drawer_screen" : {
+        "home": "ઘર",
+        "your_ride": "તમારી રાઇડ",
+        "payment": "ચુકવણી",
+        "message": "સંદેશ",
+        "notification": "સૂચના",
+        "settings": "સેટિંગ્સ",
+        "logout": "લૉગ આઉટ"
+    }
+}

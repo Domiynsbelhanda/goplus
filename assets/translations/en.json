@@ -1,0 +1,156 @@
+{
+    "choose_lang": "Choose a Language",
+    "intro_screen": {
+        "title_locate_desti": "Locate the Destination",
+        "body_locate_desti": "Your destination is at your Fingertips open app\n and enter where you want to go",
+        "title_select_your_root": "Select Your Route",
+        "body_select_your_root": "Get quick access to frequent location And save them as a favorite",
+        "title_get_your_texi": "Get Your Taxi",
+        "body_get_your_texi": "Faster way to book taxi without the hassle of \nwaiting & hogging for price.",
+        "start_btn": "Start"
+    },
+    "login_screen": {
+        "welcome": "welcome",
+        "welcome_body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "email_error": "Please enter your email",
+        "password_error": "Please enter your password",
+        "forgot_password": "Forgot password ?",
+        "login": "Log in",
+        "dont_have_account": "Don't have an account ?"
+    },
+    "forgot_password_screen": {
+        "forget_pass_title": "Forgot your\npassword",
+        "forgot_pass_body": "Please enter your email address or phone number to receive new password.",
+        "enter_email_or_phone": "Enter email or phone number",
+        "enter_email_or_phone_error": "Enter your number",
+        "send": "Send"
+    },
+    "signup_screen": {
+        "sign_up": "Sign Up",
+        "sign_up_body": "Fill up your information below or sign up with google.",
+        "full_name": "Full name",
+        "full_name_error": "Enter your full name",
+        "email": "Email",
+        "email_error": "Enter your email",
+        "password": "Password",
+        "password_error": "Enter your password",
+        "confirm_pass": "Confirm Password",
+        "confirm_pass_error": "Enter your confirm password",
+        "sign_up_btn": "Sign up",
+        "or": "OR",
+        "sign_up_with_google": "Sign up with google"
+    },
+    "enter_phone_screen": {
+        "enter_phone_num": "Enter Phone\nnumber",
+        "phone_num_error": "Enter your number",
+        "enter_phone_body": "We'll send you a verification code to\nyour phone number",
+        "enter_phone_num_two": "Enter your phone number",
+        "send_code": "Send code"
+    },
+    "verify_phone_screen": {
+        "verify_phone_num": "Verify phone\nnumber",
+        "verify_phone_body": "A code has been send to your phone number",
+        "didnt_recive_code": "Didn't receive a code ? ",
+        "resend": "RESEND",
+        "verify_btn": "Verify"
+    },
+    "destination_screen": {
+        "where_going": "Where are you going?",
+        "body_where_going": "Back you ride & reach at your place fast",
+        "enter_destination": "Enter Destination"
+    },
+    "set_pickup_time_screen": {
+        "schedule_ride": "Schedule a Ride",
+        "set_pickup_time": "Set Pickup Time"
+    },
+    "search_place_screen": {
+        "search_place_text": "Search Place",
+        "where_you_go": "Where you want to go ?",
+        "your_place": "Your place",
+        "home": "Home",
+        "home_address": "Home Address",
+        "home_address_error": "Enter your home address",
+        "office": "Office",
+        "office_address": "Office Address",
+        "office_address_error": "Enter your office address",
+        "add_place": "Add Place",
+        "search_place_here": "Search your place here...",
+        "save_place": "Save Place"
+    },
+    "payment_option_screen": {
+        "cash": "Cash",
+        "payment_method": "Payment method",
+        "pay_with_master": "Pay with Master card",
+        "pay_with_paypal": "Pay with Paypal",
+        "pay_with_visa": "Pay with visa",
+        "book_ride": "Book a Ride"
+    },
+    "payment_screen": {
+        "add_credit_card": "Add Credit Card",
+        "scan_card": "Scan Card",
+        "card_holder_name": "Card Holder Name",
+        "card_holder_name_error": "Enter your name",
+        "card_num": "Card Number",
+        "card_num_error": "Enter your card number",
+        "save": "Save"
+    },
+    "payment_details_screen": {
+        "payment_details": "Payment Details",
+        "payment_date": "Payment date",
+        "payment_method": "Payment method",
+        "payment_history": "Payment History",
+        "to": "To",
+        "full_details": "Full Details",
+        "you_spend": "You have spend",
+        "on_this_mon": "on this month",
+        "all": "All",
+        "wants_to_share_cab": "wants to share a cab"
+    },
+    "cancel_ride_screen": {
+        "drop_off": "Drop off",
+        "distance": "Distance",
+        "price": "Price",
+        "track_ride": "Track Your Ride",
+        "cancel_ride": "Cancel Ride"
+    },
+    "review_screen": {
+        "how_your_trip": "How was your Trip ?",
+        "how_your_trip_body": "Your feedback will help us to make \n your experience better",
+        "add_comment": "Add a Comment",
+        "submit_review": "Submit Review"
+    },
+    "my_profile_screen": {
+        "my_profile": "My Profile",
+        "first_name": "First Name",
+        "first_name_error": "Enter your first name",
+        "last_name": "Last Name",
+        "last_name_error": "Enter your last name",
+        "phone_num": "Phone Number",
+        "phone_num_error": "Enter your number",
+        "email_address": "Email Address",
+        "email_address_error": "Enter your email address",
+        "password": "Password",
+        "password_error": "Enter your password",
+        "save": "Save"
+    },
+    "your_ride_screen": {
+        "your_rides": "Your Rides",
+        "today": "Today"
+    },
+    "notification_screen": {
+        "notificaitons": "Notifications",
+        "wants_to_share_cab": "wants to share a cab"
+    },
+    "chats_screen": {
+        "type_message": "Type a Message"
+    },
+    "drawer_screen": {
+        "home": "Home",
+        "your_ride": "Your Ride",
+        "payment": "Payment",
+        "message": "Message",
+        "notification": "Notification",
+        "settings": "Settings",
+        "logout": "Log out"
+    }
+}
