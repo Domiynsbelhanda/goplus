@@ -10,8 +10,8 @@ import 'package:goplus/gofly/widgets/kf_drawer.dart';
 import 'notification_screen.dart';
 
 class YourRidesScreen extends KFDrawerContent {
-  final bool isPage;
-  YourRidesScreen({required this.isPage});
+  final bool? isPage;
+  YourRidesScreen({this.isPage});
   @override
   YourRidesScreenState createState() => YourRidesScreenState();
 }

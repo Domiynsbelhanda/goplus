@@ -3,8 +3,8 @@ import 'package:goplus/gofly/pages/messages/chats_screen.dart';
 import 'package:goplus/gofly/widgets/kf_drawer.dart';
 
 class MessagesScreen extends KFDrawerContent {
-  final bool isPage;
-  MessagesScreen({required this.isPage});
+  final bool? isPage;
+  MessagesScreen({this.isPage});
   @override
   _MessagesScreenState createState() => _MessagesScreenState();
 }

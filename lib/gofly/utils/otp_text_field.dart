@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:texi_booking/utils/app_colors.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
 
 enum FieldStyle { underline, box }
 
@@ -31,12 +31,12 @@ class OTPTextField extends StatefulWidget {
   final FieldStyle fieldStyle;
 
   /// Callback function, called when a change is detected to the pin.
-  final ValueChanged<String> onChanged;
+  final ValueChanged<String>? onChanged;
 
   /// Callback function, called when pin is completed.
-  final ValueChanged<String> onCompleted;
+  final ValueChanged<String>? onCompleted;
   OTPTextField(
-      {Key key,
+      {Key? key,
       this.length = 4,
       this.width = 10,
       this.fieldWidth = 30,
@@ -54,17 +54,19 @@ class OTPTextField extends StatefulWidget {
 }
 
 class _OTPTextFieldState extends State<OTPTextField> {
-  List<FocusNode> _focusNodes;
-  List<TextEditingController> _textControllers;
+  late List<FocusNode> _focusNodes;
+  FocusNode? focus;
+  late List<TextEditingController> _textControllers;
+  TextEditingController? text;
 
-  List<Widget> _textFields;
-  List<String> _pin;
+  late List<Widget> _textFields;
+  late List<String> _pin;
 
   @override
   void initState() {
     super.initState();
-    _focusNodes = List<FocusNode>.filled(widget.length, null, growable: false);
-    _textControllers = List<TextEditingController>.filled(widget.length, null,
+    _focusNodes = List<FocusNode>.filled(widget.length, focus!, growable: false);
+    _textControllers = List<TextEditingController>.filled(widget.length, text!,
         growable: false);
 
     _pin = List.generate(widget.length, (int i) {
@@ -171,11 +173,11 @@ class _OTPTextFieldState extends State<OTPTextField> {
           if (!_pin.contains(null) &&
               !_pin.contains('') &&
               currentPin.length == widget.length) {
-            widget.onCompleted(currentPin);
+            widget.onCompleted!(currentPin);
           }
 
           // Call the `onChanged` callback function
-          widget.onChanged(currentPin);
+          widget.onChanged!(currentPin);
         },
       ),
     );
@@ -209,10 +211,10 @@ class _OTPTextFieldState extends State<OTPTextField> {
     if (!_pin.contains(null) &&
         !_pin.contains('') &&
         currentPin.length == widget.length) {
-      widget.onCompleted(currentPin);
+      widget.onCompleted!(currentPin);
     }
 
     // Call the `onChanged` callback function
-    widget.onChanged(currentPin);
+    widget.onChanged!(currentPin);
   }
 }

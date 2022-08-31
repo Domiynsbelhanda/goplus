@@ -7,8 +7,8 @@ import 'package:goplus/gofly/widgets/kf_drawer.dart';
 import '../messages/chats_screen.dart';
 
 class NotificationsScreen extends KFDrawerContent {
-  bool isPage;
-  NotificationsScreen({required this.isPage});
+  bool? isPage;
+  NotificationsScreen({this.isPage});
   @override
   _NotificationsScreenState createState() => _NotificationsScreenState();
 }
