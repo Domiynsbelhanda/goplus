@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_models.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
-import 'package:texi_booking/utils/app_colors.dart';
-import 'package:texi_booking/utils/strings.dart';
-import 'package:texi_booking/widgets/bar_chart.dart';
-import 'package:texi_booking/widgets/kf_drawer.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/utils/strings.dart';
+import 'package:goplus/gofly/widgets/bar_chart.dart';
+import 'package:goplus/gofly/widgets/kf_drawer.dart';
 
 class PaymentDetailsScreen extends KFDrawerContent {
   @override
@@ -14,7 +14,7 @@ class PaymentDetailsScreen extends KFDrawerContent {
 }
 
 class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
-  Size size;
+  late Size size;
   List image = [
     StringValue.TOYOTA,
     StringValue.HONDA,
@@ -53,14 +53,14 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
     "\$11.25",
   ];
 
-  PaymentDetailsModel _localeText;
+  late PaymentDetailsModel _localeText;
 
   @override
   void initState() {
     super.initState();
     _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
         .getLocalizedStrings
-        .paymentDetailsScreen;
+        .paymentDetailsScreen!;
   }
 
   @override
