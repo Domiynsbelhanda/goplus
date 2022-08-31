@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:texi_booking/utils/app_colors.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
 
 class AppLoader extends StatelessWidget {
-  static Size size;
+  late Size size;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class AppLoaderForImage extends StatelessWidget {
                 new AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
             value: loadingProgress.expectedTotalBytes != null
                 ? loadingProgress.cumulativeBytesLoaded /
-                    loadingProgress.expectedTotalBytes
+                    loadingProgress.expectedTotalBytes!
                 : null,
           ),
         ));

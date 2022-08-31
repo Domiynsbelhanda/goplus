@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppTextField extends StatelessWidget {
-  final TextFormField field;
-  final String error;
-  const AppTextField({Key key, this.field, this.error}) : super(key: key);
+  final TextFormField? field;
+  final String? error;
+  const AppTextField({Key? key, this.field, this.error}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

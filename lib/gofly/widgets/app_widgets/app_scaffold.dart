@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:texi_booking/utils/app_colors.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
 
 class AppScaffold extends StatelessWidget {
-  final Widget body;
-  final Widget bottomNavigationBar;
-  final Widget flexibleSpace;
-  final Widget actionHeader;
+  final Widget? body;
+  final Widget? bottomNavigationBar;
+  final Widget? flexibleSpace;
+  final Widget? actionHeader;
   const AppScaffold(
-      {Key key,
+      {Key? key,
       this.body,
       this.bottomNavigationBar,
       this.flexibleSpace,

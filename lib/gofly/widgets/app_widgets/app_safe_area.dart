@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppSafeArea extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
   AppSafeArea({this.child});
   @override
   Widget build(BuildContext context) {

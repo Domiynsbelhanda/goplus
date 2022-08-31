@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:texi_booking/utils/strings.dart';
+import 'package:goplus/gofly/utils/strings.dart';
 
 class APPBAR extends StatefulWidget {
-  final String centerTitle;
-  final Color color;
+  final String? centerTitle;
+  final Color? color;
   final bool menu;
-  final Function onTap;
+  var onTap;
   final bool visiable;
 
   APPBAR(
@@ -64,7 +64,7 @@ class _APPBARState extends State<APPBAR> {
                   color: Colors.transparent,
                 )
               : Text(
-                  widget.centerTitle,
+                  widget.centerTitle!,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
           widget.visiable
