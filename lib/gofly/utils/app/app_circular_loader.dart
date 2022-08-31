@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../app_colors.dart';
 
 class AppCircularProgress extends StatelessWidget {
-  static Size size;
+  late Size size;
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
@@ -54,7 +54,7 @@ class AppCircularProgressForImage extends StatelessWidget {
                 new AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
             value: loadingProgress.expectedTotalBytes != null
                 ? loadingProgress.cumulativeBytesLoaded /
-                    loadingProgress.expectedTotalBytes
+                    loadingProgress.expectedTotalBytes!
                 : null,
           ),
         ));
