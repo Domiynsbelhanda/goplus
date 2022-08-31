@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_models.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
-import 'package:texi_booking/widgets/kf_drawer.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
+import 'package:goplus/gofly/widgets/kf_drawer.dart';
 
 import '../messages/chats_screen.dart';
 
 class NotificationsScreen extends KFDrawerContent {
   bool isPage;
-  NotificationsScreen({this.isPage});
+  NotificationsScreen({required this.isPage});
   @override
   _NotificationsScreenState createState() => _NotificationsScreenState();
 }
 
 class _NotificationsScreenState extends State<NotificationsScreen> {
-  Size size;
+  late Size size;
 
   List name = [
     "Manojbhai",
@@ -31,14 +31,14 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     "55 minutes ago",
   ];
 
-  NotificationModel _localeText;
+  late NotificationModel _localeText;
 
   @override
   void initState() {
     super.initState();
     _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
         .getLocalizedStrings
-        .notificationScreen;
+        .notificationScreen!;
   }
 
   @override

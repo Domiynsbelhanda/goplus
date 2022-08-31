@@ -3,19 +3,19 @@ library kf_drawer;
 import 'package:flutter/material.dart';
 
 class KFDrawerController {
-  KFDrawerController({this.items, @required KFDrawerContent initialPage}) {
+  KFDrawerController({required this.items, required KFDrawerContent initialPage}) {
     this.page = initialPage;
   }
 
   List<KFDrawerItem> items;
-  Function close;
-  Function open;
-  KFDrawerContent page;
+  var close;
+  var open;
+  KFDrawerContent? page;
 }
 
 // ignore: must_be_immutable
 class KFDrawerContent extends StatefulWidget {
-  Function onMenuPressed;
+  var onMenuPressed;
 
   @override
   State<StatefulWidget> createState() {
@@ -25,12 +25,12 @@ class KFDrawerContent extends StatefulWidget {
 
 class KFDrawer extends StatefulWidget {
   KFDrawer({
-    Key key,
-    this.header,
-    this.footer,
+    Key? key,
+    required this.header,
+    required this.footer,
     this.items,
-    this.controller,
-    this.decoration,
+    required this.controller,
+    required this.decoration,
     this.drawerWidth,
     this.minScale,
     this.borderRadius,
@@ -44,16 +44,16 @@ class KFDrawer extends StatefulWidget {
   Widget header;
   Widget footer;
   BoxDecoration decoration;
-  List<KFDrawerItem> items;
+  List<KFDrawerItem>? items;
   KFDrawerController controller;
-  double drawerWidth;
-  double minScale;
-  double borderRadius;
-  double shadowBorderRadius;
-  double shadowOffset;
-  bool scrollable;
-  EdgeInsets menuPadding;
-  bool disableContentTap;
+  double? drawerWidth;
+  double? minScale;
+  double? borderRadius;
+  double? shadowBorderRadius;
+  double? shadowOffset;
+  bool? scrollable;
+  EdgeInsets? menuPadding;
+  bool? disableContentTap;
 
   @override
   _KFDrawerState createState() => _KFDrawerState();
@@ -71,9 +71,9 @@ class _KFDrawerState extends State<KFDrawer> with TickerProviderStateMixin {
   bool _scrollable = false;
   bool _disableContentTap = true;
 
-  Animation<double> animation, scaleAnimation;
-  Animation<BorderRadius> radiusAnimation;
-  AnimationController animationController;
+  late Animation<double> animation, scaleAnimation;
+  late Animation<BorderRadius> radiusAnimation;
+  late AnimationController animationController;
 
   _open() {
     animationController.forward();
@@ -121,7 +121,7 @@ class _KFDrawerState extends State<KFDrawer> with TickerProviderStateMixin {
             widget.controller.close();
           };
         }
-        item.page.onMenuPressed = _onMenuPressed;
+        item.page!.onMenuPressed = _onMenuPressed;
         return item;
       }).toList();
     }
@@ -172,7 +172,7 @@ class _KFDrawerState extends State<KFDrawer> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    widget.controller.page.onMenuPressed = _onMenuPressed;
+    widget.controller.page!.onMenuPressed = _onMenuPressed;
     widget.controller.close = _close;
     widget.controller.open = _open;
 
@@ -256,7 +256,7 @@ class _KFDrawerState extends State<KFDrawer> with TickerProviderStateMixin {
                         left: animation.value * _shadowOffset,
                       ),
                       child: ClipRRect(
-                        borderRadius: radiusAnimation.value,
+                        borderRadius: radiusAnimation!.value,
                         child: Container(
                           color: Colors.white,
                           child: widget.controller.page,
@@ -282,14 +282,14 @@ class _KFDrawerState extends State<KFDrawer> with TickerProviderStateMixin {
 
 class _KFDrawer extends StatefulWidget {
   _KFDrawer({
-    Key key,
-    this.animationController,
-    this.header,
-    this.footer,
-    this.items,
-    this.decoration,
-    this.scrollable,
-    this.padding,
+    Key? key,
+    required this.animationController,
+    required this.header,
+    required this.footer,
+    required this.items,
+    required this.decoration,
+    required this.scrollable,
+    required this.padding,
   });
 
   final Widget header;
@@ -365,17 +365,17 @@ class __KFDrawerState extends State<_KFDrawer> {
 }
 
 class KFDrawerItem extends StatelessWidget {
-  KFDrawerItem({this.onPressed, this.text, this.icon});
+  KFDrawerItem({required this.onPressed, required this.text, required this.icon});
 
   KFDrawerItem.initWithPage(
-      {this.onPressed, this.text, this.icon, this.alias, this.page});
+      {this.onPressed, required this.text, required this.icon, this.alias, required this.page});
 
-  Function onPressed;
+  var onPressed;
   Widget text;
   Widget icon;
 
-  String alias;
-  KFDrawerContent page;
+  String? alias;
+  KFDrawerContent? page;
 
   @override
   Widget build(BuildContext context) {

@@ -8,8 +8,8 @@ import 'package:goplus/gofly/utils/strings.dart';
 import 'package:goplus/gofly/widgets/kf_drawer.dart';
 
 class DrawerScreen extends KFDrawerContent {
-  String screen;
-  DrawerScreen({required this.screen});
+  String? screen;
+  DrawerScreen({ this.screen});
   @override
   _DrawerScreenState createState() => _DrawerScreenState();
 }

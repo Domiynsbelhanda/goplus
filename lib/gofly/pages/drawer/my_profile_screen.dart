@@ -3,11 +3,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_models.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
-import 'package:texi_booking/pages/drawer/your_ride_screen.dart';
-import 'package:texi_booking/utils/app_colors.dart';
-import 'package:texi_booking/widgets/app_widgets/app_button.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
+import 'package:goplus/gofly/pages/drawer/your_ride_screen.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_button.dart';
 import 'package:image_picker/image_picker.dart';
 
 class MyProfileScreen extends StatefulWidget {
@@ -16,10 +16,10 @@ class MyProfileScreen extends StatefulWidget {
 }
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
-  Size size;
+  late Size size;
   final formkey = GlobalKey<FormState>();
-  MyProfileModel _localeText;
-  File profileImage;
+  late MyProfileModel _localeText;
+  late File profileImage;
   final picker = ImagePicker();
 
   @override
@@ -27,7 +27,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     super.initState();
     _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
         .getLocalizedStrings
-        .myProfileScreen;
+        .myProfileScreen!;
   }
 
   @override
@@ -132,7 +132,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   children: [
                     TextFormField(
                       validator: (value) {
-                        if (value.isEmpty) {
+                        if (value!.isEmpty) {
                           return _localeText.firstNameError;
                         }
                         return null;
@@ -148,7 +148,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     SizedBox(height: 20),
                     TextFormField(
                       validator: (value) {
-                        if (value.isEmpty) {
+                        if (value!.isEmpty) {
                           return _localeText.lastNameError;
                         }
                         return null;
@@ -164,7 +164,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     SizedBox(height: 20),
                     TextFormField(
                       validator: (value) {
-                        if (value.isEmpty) {
+                        if (value!.isEmpty) {
                           return _localeText.phoneNumError;
                         }
                         return null;
@@ -181,7 +181,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     SizedBox(height: 20),
                     TextFormField(
                       validator: (value) {
-                        if (value.isEmpty) {
+                        if (value!.isEmpty) {
                           return _localeText.emailAddressError;
                         }
                         return null;
@@ -197,7 +197,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     SizedBox(height: 20),
                     TextFormField(
                       validator: (value) {
-                        if (value.isEmpty) {
+                        if (value!.isEmpty) {
                           return _localeText.passwordError;
                         }
                         return null;
@@ -221,7 +221,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             AppButton(
               name: _localeText.save,
               onTap: () {
-                if (formkey.currentState.validate())
+                if (formkey.currentState!.validate())
                   Navigator.push(
                       context,
                       MaterialPageRoute(

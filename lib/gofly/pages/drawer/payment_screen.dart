@@ -1,33 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_models.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
-import 'package:texi_booking/utils/app_colors.dart';
-import 'package:texi_booking/utils/strings.dart';
-import 'package:texi_booking/widgets/app_widgets/app_button.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/utils/strings.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_button.dart';
 
 import '../cancel_ride_screen.dart';
 
 class PaymentScreen extends StatefulWidget {
   final bool isPage;
-  PaymentScreen({this.isPage});
+  PaymentScreen({required this.isPage});
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
   final formkey = GlobalKey<FormState>();
-  Size size;
+  late Size size;
 
-  PaymentModel _localeText;
+  late PaymentModel _localeText;
 
   @override
   void initState() {
     super.initState();
     _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
         .getLocalizedStrings
-        .paymentScreen;
+        .paymentScreen!;
   }
 
   Widget build(BuildContext context) {
@@ -112,7 +112,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
                 TextFormField(
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value!.isEmpty) {
                       return _localeText.cardHolderNameError;
                     }
                     return null;
@@ -132,7 +132,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
                 TextFormField(
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value!.isEmpty) {
                       return _localeText.cardNumError;
                     }
                     return null;
@@ -161,7 +161,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             ),
                             TextFormField(
                               validator: (value) {
-                                if (value.isEmpty) {
+                                if (value!.isEmpty) {
                                   return "Exp. date";
                                 }
                                 return null;
@@ -191,7 +191,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             ),
                             TextFormField(
                               validator: (value) {
-                                if (value.isEmpty) {
+                                if (value!.isEmpty) {
                                   return "CVV number";
                                 }
                                 return null;
@@ -212,7 +212,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 AppButton(
                   name: _localeText.save,
                   onTap: () {
-                    if (formkey.currentState.validate()) {
+                    if (formkey.currentState!.validate()) {
                       FocusScope.of(context).unfocus();
                       Navigator.push(
                           context,

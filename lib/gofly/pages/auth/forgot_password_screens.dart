@@ -22,7 +22,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
     super.initState();
     _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
         .getLocalizedStrings
-        .forgotPasswordScreen;
+        .forgotPasswordScreen!;
   }
 
   @override

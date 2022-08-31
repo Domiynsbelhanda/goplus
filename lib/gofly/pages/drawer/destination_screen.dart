@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:texi_booking/models/locales_models.dart';
-import 'package:texi_booking/models/locales_provider_model.dart';
-import 'package:texi_booking/pages/set_pickup_time_screen.dart';
-import 'package:texi_booking/utils/strings.dart';
-import 'package:texi_booking/widgets/kf_drawer.dart';
-import 'package:texi_booking/widgets/map_widget.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
+import 'package:goplus/gofly/models/locales_provider_model.dart';
+import 'package:goplus/gofly/pages/set_pickup_time_screen.dart';
+import 'package:goplus/gofly/utils/strings.dart';
+import 'package:goplus/gofly/widgets/kf_drawer.dart';
+import 'package:goplus/gofly/widgets/map_widget.dart';
 
 class DestinationScreen extends KFDrawerContent {
   @override
@@ -15,15 +15,15 @@ class DestinationScreen extends KFDrawerContent {
 }
 
 class _DestinationScreenState extends State<DestinationScreen> {
-  Size size;
-  DestinationModel _localeText;
+  late Size size;
+  late DestinationModel _localeText;
 
   @override
   void initState() {
     super.initState();
     _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
         .getLocalizedStrings
-        .destinationScreen;
+        .destinationScreen!;
   }
 
   @override

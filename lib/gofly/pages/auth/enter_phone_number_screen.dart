@@ -24,7 +24,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
     super.initState();
     _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
         .getLocalizedStrings
-        .enterPhoneScreen;
+        .enterPhoneScreen!;
   }
 
   @override

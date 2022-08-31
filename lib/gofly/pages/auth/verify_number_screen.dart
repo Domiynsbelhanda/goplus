@@ -14,18 +14,18 @@ class VerifyNumberScreen extends StatefulWidget {
 }
 
 class _VerifyNumberState extends State<VerifyNumberScreen> {
-  Size size;
-  String code;
-  bool onEditing = false;
+  late Size size;
+  late String code;
+  late bool onEditing = false;
 
-  VerifyPhoneModel _localeText;
+  late VerifyPhoneModel _localeText;
 
   @override
   void initState() {
     super.initState();
     _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
         .getLocalizedStrings
-        .verifyPhoneScreen;
+        .verifyPhoneScreen!;
   }
 
   @override

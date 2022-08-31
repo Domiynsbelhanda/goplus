@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
         .getLocalizedStrings
-        .loginScreen;
+        .loginScreen!;
   }
 
   @override

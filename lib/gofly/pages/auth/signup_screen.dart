@@ -26,7 +26,7 @@ class _SignupScreenState extends State<SignupScreen> {
     super.initState();
     _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
         .getLocalizedStrings
-        .signupScreen;
+        .signupScreen!;
   }
 
   @override
