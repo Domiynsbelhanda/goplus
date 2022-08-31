@@ -23,7 +23,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
     super.initState();
     _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
         .getLocalizedStrings
-        .reviewScreen;
+        .reviewScreen!;
     Future.delayed(Duration(seconds: 0)).then((_) {
       bottomSheet();
     });
