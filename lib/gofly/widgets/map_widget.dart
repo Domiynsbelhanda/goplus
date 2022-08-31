@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:texi_booking/pages/messages/chats_screen.dart';
+import 'package:goplus/gofly/pages/messages/chats_screen.dart';
 
 class MapWidget extends StatelessWidget {
   @override

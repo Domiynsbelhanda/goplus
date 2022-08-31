@@ -7,7 +7,7 @@ class BarChartSample extends StatefulWidget {
 }
 
 class BarChartSampleState extends State<BarChartSample> {
-  Size size;
+  late Size size;
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;

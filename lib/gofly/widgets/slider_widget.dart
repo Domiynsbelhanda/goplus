@@ -5,13 +5,13 @@ class Sliders extends StatefulWidget {
   final String image;
   final String name;
   final String intro;
-  Sliders({this.image, this.name, this.intro});
+  Sliders({required this.image, required this.name, required this.intro});
   @override
   _SlidersState createState() => _SlidersState();
 }
 
 class _SlidersState extends State<Sliders> {
-  Size size;
+  late Size size;
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;

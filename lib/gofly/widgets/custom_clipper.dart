@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomRRectClipper extends CustomClipper<Path> {
   bool left;
-  CustomRRectClipper({this.left});
+  CustomRRectClipper({required this.left});
   @override
   @override
   Path getClip(Size size) {

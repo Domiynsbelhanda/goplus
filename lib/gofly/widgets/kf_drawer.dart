@@ -19,7 +19,8 @@ class KFDrawerContent extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return null;
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 }
 
@@ -72,7 +73,7 @@ class _KFDrawerState extends State<KFDrawer> with TickerProviderStateMixin {
   bool _disableContentTap = true;
 
   late Animation<double> animation, scaleAnimation;
-  late Animation<BorderRadius> radiusAnimation;
+  late Animation<BorderRadius?> radiusAnimation;
   late AnimationController animationController;
 
   _open() {
@@ -125,32 +126,32 @@ class _KFDrawerState extends State<KFDrawer> with TickerProviderStateMixin {
         return item;
       }).toList();
     }
-    return widget.items;
+    return widget.items!;
   }
 
   @override
   void initState() {
     super.initState();
     if (widget.minScale != null) {
-      _minScale = widget.minScale;
+      _minScale = widget.minScale!;
     }
     if (widget.borderRadius != null) {
-      _borderRadius = widget.borderRadius;
+      _borderRadius = widget.borderRadius!;
     }
     if (widget.shadowOffset != null) {
-      _shadowOffset = widget.shadowOffset;
+      _shadowOffset = widget.shadowOffset!;
     }
     if (widget.shadowBorderRadius != null) {
-      _shadowBorderRadius = widget.shadowBorderRadius;
+      _shadowBorderRadius = widget.shadowBorderRadius!;
     }
     if (widget.drawerWidth != null) {
-      _drawerWidth = widget.drawerWidth;
+      _drawerWidth = widget.drawerWidth!;
     }
     if (widget.scrollable != null) {
-      _scrollable = widget.scrollable;
+      _scrollable = widget.scrollable!;
     }
     if (widget.disableContentTap != null) {
-      _disableContentTap = widget.disableContentTap;
+      _disableContentTap = widget.disableContentTap!;
     }
     animationController = AnimationController(
         duration: const Duration(milliseconds: 250), vsync: this);
@@ -212,7 +213,7 @@ class _KFDrawerState extends State<KFDrawer> with TickerProviderStateMixin {
       child: Stack(
         children: <Widget>[
           _KFDrawer(
-            padding: widget.menuPadding,
+            padding: widget.menuPadding!,
             scrollable: _scrollable,
             animationController: animationController,
             header: widget.header,
