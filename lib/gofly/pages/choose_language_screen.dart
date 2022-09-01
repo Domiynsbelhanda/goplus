@@ -20,11 +20,19 @@ class _HomepageState extends State<ChooseALanguageScreen> {
   late Size size;
   int selectedLanguage = 0;
 
+  void language() async{
+
+    String jsonString =
+    await rootBundle.loadString('assets/translations/fr.json');
+    LocaleModel lg = localeModelFromJson(jsonString);
+
+    Provider.of<LocalesProviderModel>(context, listen: false)
+        .updateLocalizedString(lg);
+  }
+
   @override
   void initState() {
-    Provider.of<LocalesProviderModel>(context, listen: false).updateLocalizedString(
-        LocaleModel(chooseLang: 'fr')
-    );
+    language();
   }
 
   ApplicationLocalizations localization =
@@ -45,6 +53,10 @@ class _HomepageState extends State<ChooseALanguageScreen> {
               if (snapshot.hasError)
                 return Center(child: Text('Error: ${snapshot.error}'));
               else {
+                // var oklm = Provider.of<LocalesProviderModel>(context, listen: false)
+                //     .getLocalizedStrings.introScreen!;
+                // return Text('Belhanda ${oklm!.bodyGetYourTexi}');
+                return IntroScreen();
                 return Column(
                   children: [
                     SizedBox(

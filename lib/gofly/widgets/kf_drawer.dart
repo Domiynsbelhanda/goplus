@@ -213,7 +213,7 @@ class _KFDrawerState extends State<KFDrawer> with TickerProviderStateMixin {
       child: Stack(
         children: <Widget>[
           _KFDrawer(
-            padding: widget.menuPadding!,
+            padding: EdgeInsets.all(1.0),
             scrollable: _scrollable,
             animationController: animationController,
             header: widget.header,

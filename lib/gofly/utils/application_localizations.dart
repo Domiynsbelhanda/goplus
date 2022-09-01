@@ -15,37 +15,20 @@ class ApplicationLocalizations {
   }
 
   LocaleModel? _localizedStrings;
-  LocaleModel? _lgString;
-  LocaleModel? _frString;
+  late LocaleModel _frString;
 
   Future<bool> loadLangs(BuildContext context) async {
-    if (Provider.of<LocalesProviderModel>(context, listen: false)
-            .getLocalizedStrings ==
-        null) {
-      for (var langCode in ["lg", "fr"]) {
-        String jsonString =
-            await rootBundle.loadString('assets/translations/$langCode.json');
-        switch (langCode) {
-          case "lg":
-            _lgString = localeModelFromJson(jsonString);
-            break;
-          case "fr":
-            _frString = localeModelFromJson(jsonString);
-            break;
-          default:
-        }
-      }
-    }
+    String jsonString =
+    await rootBundle.loadString('assets/translations/fr.json');
+    _frString = localeModelFromJson(jsonString);
     return true;
   }
 
   bool changeLang(BuildContext context, String jsonString, {required String langCode}) {
     if (langCode == null) langCode = appLocale!.languageCode;
 
-    LocaleModel lg = localeModelFromJson(jsonString);
-
     Provider.of<LocalesProviderModel>(context, listen: false)
-        .updateLocalizedString(lg);
+        .updateLocalizedString(_frString);
 
     return true;
   }
