@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:goplus/gofly/models/locales_provider_model.dart';
@@ -17,7 +18,7 @@ class ChooseALanguageScreen extends StatefulWidget {
 
 class _HomepageState extends State<ChooseALanguageScreen> {
   late Size size;
-  int selectedLanguage = 1;
+  int selectedLanguage = 0;
 
   @override
   void initState() {
@@ -102,10 +103,12 @@ class _HomepageState extends State<ChooseALanguageScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async {
+                              String jsonString =
+                                await rootBundle.loadString('assets/translations/fr.json');
                               setState(() {
                                 selectedLanguage = 0;
-                                localization.changeLang(context,
+                                localization.changeLang(context, jsonString,
                                     langCode: "fr");
                               });
                             },
@@ -132,10 +135,12 @@ class _HomepageState extends State<ChooseALanguageScreen> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async {
+                              String jsonString =
+                                  await rootBundle.loadString('assets/translations/fr.json');
                               setState(() {
                                 selectedLanguage = 1;
-                                localization.changeLang(context,
+                                localization.changeLang(context, jsonString,
                                     langCode: "lg");
                               });
                             },

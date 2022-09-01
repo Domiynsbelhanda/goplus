@@ -35,16 +35,18 @@ class ApplicationLocalizations {
           default:
         }
       }
-      Provider.of<LocalesProviderModel>(context, listen: false)
-          .updateLocalizedString(_frString!);
     }
     return true;
   }
 
-  bool changeLang(BuildContext context, {required String langCode}) {
+  bool changeLang(BuildContext context, String jsonString, {required String langCode}) {
     if (langCode == null) langCode = appLocale!.languageCode;
+
+    LocaleModel lg = localeModelFromJson(jsonString);
+
     Provider.of<LocalesProviderModel>(context, listen: false)
-        .updateLocalizedString(LocaleModel(chooseLang: langCode));
+        .updateLocalizedString(lg);
+
     return true;
   }
 }
