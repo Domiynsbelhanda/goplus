@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:goplus/gofly/models/locales_models.dart';
 import 'package:provider/provider.dart';
 import 'package:goplus/gofly/models/locales_provider_model.dart';
 import 'package:goplus/gofly/pages/choose_language_screen.dart';
@@ -22,9 +23,20 @@ void main() async {
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _MyApp();
+  }
+}
+
+class _MyApp extends State<MyApp>{
+
+
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.themeData,

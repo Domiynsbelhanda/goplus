@@ -7,6 +7,7 @@ import 'package:goplus/gofly/utils/app_colors.dart';
 import 'package:goplus/gofly/utils/strings.dart';
 import 'package:goplus/gofly/widgets/app_widgets/app_loader.dart';
 
+import '../models/locales_models.dart';
 import '../utils/application_localizations.dart';
 
 class ChooseALanguageScreen extends StatefulWidget {
@@ -18,8 +19,16 @@ class _HomepageState extends State<ChooseALanguageScreen> {
   late Size size;
   int selectedLanguage = 1;
 
+  @override
+  void initState() {
+    Provider.of<LocalesProviderModel>(context, listen: false).updateLocalizedString(
+        LocaleModel(chooseLang: 'en')
+    );
+  }
+
   ApplicationLocalizations localization =
       ApplicationLocalizations(Locale("en"));
+
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +53,7 @@ class _HomepageState extends State<ChooseALanguageScreen> {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: "Texi",
+                            text: "GO TAXI",
                             style: TextStyle(
                               fontSize: 35.0,
                               fontWeight: FontWeight.bold,
@@ -64,9 +73,9 @@ class _HomepageState extends State<ChooseALanguageScreen> {
                     ),
                     SizedBox(height: size.height * 0.05),
                     Text(
-                      Provider.of<LocalesProviderModel>(context, listen: false)
+                      '${Provider.of<LocalesProviderModel>(context, listen: false)
                           .getLocalizedStrings
-                          .chooseLang!,
+                          .chooseLang!}',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

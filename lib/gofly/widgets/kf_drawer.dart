@@ -257,7 +257,7 @@ class _KFDrawerState extends State<KFDrawer> with TickerProviderStateMixin {
                         left: animation.value * _shadowOffset,
                       ),
                       child: ClipRRect(
-                        borderRadius: radiusAnimation!.value,
+                        borderRadius: radiusAnimation.value,
                         child: Container(
                           color: Colors.white,
                           child: widget.controller.page,

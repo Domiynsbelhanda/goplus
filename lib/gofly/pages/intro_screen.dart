@@ -18,7 +18,7 @@ class _IntroScreenState extends State<IntroScreen> {
   late Size size;
   int selectedImage = 0;
   CarouselController buttonController = CarouselController();
-  late IntroModel _localeText;
+  IntroModel? _localeText;
 
   @override
   void initState() {
@@ -66,18 +66,18 @@ class _IntroScreenState extends State<IntroScreen> {
             items: [
               Sliders(
                 image: StringValue.INTRO1,
-                name: _localeText.titleLocateDesti,
-                intro: _localeText.bodyLocateDesti,
+                name: _localeText!.titleLocateDesti,
+                intro: _localeText!.bodyLocateDesti,
               ),
               Sliders(
                 image: StringValue.INTRO2,
-                name: _localeText.titleSelectYourRoot,
-                intro: _localeText.bodySelectYourRoot,
+                name: _localeText!.titleSelectYourRoot,
+                intro: _localeText!.bodySelectYourRoot,
               ),
               Sliders(
                 image: StringValue.INTRO3,
-                name: _localeText.titleGetYourTexi,
-                intro: _localeText.bodyGetYourTexi,
+                name: _localeText!.titleGetYourTexi,
+                intro: _localeText!.bodyGetYourTexi,
               ),
             ],
             carouselController: buttonController,
@@ -174,7 +174,7 @@ class _IntroScreenState extends State<IntroScreen> {
                               ]),
                           child: Center(
                             child: Text(
-                              _localeText.startBtn,
+                              _localeText!.startBtn,
                               style: TextStyle(
                                   fontWeight: FontWeight.w500, fontSize: 12),
                             ),
