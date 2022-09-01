@@ -225,7 +225,7 @@ class _HomepageState extends State<ChooseALanguageScreen> {
                             children: [
                               Icon(Icons.call, size: 18),
                               Text(
-                                "   +91 1234567890",
+                                "   +243 999 999 999",
                                 style: TextStyle(fontSize: 12),
                               ),
                             ],
