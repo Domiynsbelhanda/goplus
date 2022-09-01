@@ -47,10 +47,8 @@ class _MyApp extends State<MyApp>{
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [
-        Locale('en', ''),
         Locale('fr', ''),
-        Locale('gj', ''),
-        Locale('hn', ''),
+        Locale('lg', ''),
       ],
       home: ChooseALanguageScreen(),
     );

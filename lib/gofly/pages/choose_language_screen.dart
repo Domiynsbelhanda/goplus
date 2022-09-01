@@ -22,12 +22,12 @@ class _HomepageState extends State<ChooseALanguageScreen> {
   @override
   void initState() {
     Provider.of<LocalesProviderModel>(context, listen: false).updateLocalizedString(
-        LocaleModel(chooseLang: 'en')
+        LocaleModel(chooseLang: 'fr')
     );
   }
 
   ApplicationLocalizations localization =
-      ApplicationLocalizations(Locale("en"));
+      ApplicationLocalizations(Locale("fr"));
 
 
   @override
@@ -43,7 +43,7 @@ class _HomepageState extends State<ChooseALanguageScreen> {
             } else {
               if (snapshot.hasError)
                 return Center(child: Text('Error: ${snapshot.error}'));
-              else
+              else {
                 return Column(
                   children: [
                     SizedBox(
@@ -53,7 +53,7 @@ class _HomepageState extends State<ChooseALanguageScreen> {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: "GO TAXI",
+                            text: "GO+",
                             style: TextStyle(
                               fontSize: 35.0,
                               fontWeight: FontWeight.bold,
@@ -61,7 +61,7 @@ class _HomepageState extends State<ChooseALanguageScreen> {
                             ),
                           ),
                           TextSpan(
-                            text: " Booking",
+                            text: " TAXI",
                             style: TextStyle(
                               fontSize: 35.0,
                               fontWeight: FontWeight.bold,
@@ -106,7 +106,7 @@ class _HomepageState extends State<ChooseALanguageScreen> {
                               setState(() {
                                 selectedLanguage = 0;
                                 localization.changeLang(context,
-                                    langCode: "hn");
+                                    langCode: "fr");
                               });
                             },
                             child: AnimatedContainer(
@@ -122,7 +122,7 @@ class _HomepageState extends State<ChooseALanguageScreen> {
                               ),
                               child: Center(
                                 child: Text(
-                                  "Hindi",
+                                  "Français",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 15.0,
@@ -136,7 +136,7 @@ class _HomepageState extends State<ChooseALanguageScreen> {
                               setState(() {
                                 selectedLanguage = 1;
                                 localization.changeLang(context,
-                                    langCode: "en");
+                                    langCode: "lg");
                               });
                             },
                             child: AnimatedContainer(
@@ -152,37 +152,7 @@ class _HomepageState extends State<ChooseALanguageScreen> {
                               ),
                               child: Center(
                                 child: Text(
-                                  "English",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15.0,
-                                      color: Colors.black),
-                                ),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                selectedLanguage = 2;
-                                localization.changeLang(context,
-                                    langCode: "gj");
-                              });
-                            },
-                            child: AnimatedContainer(
-                              duration: Duration(milliseconds: 500),
-                              margin: EdgeInsets.all(5.0),
-                              height: size.height * 0.07,
-                              width: size.width * 0.25,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30.0),
-                                color: selectedLanguage == 2
-                                    ? AppColors.primaryColor
-                                    : Colors.white,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Gujarati",
+                                  "Lingala",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 15.0,
@@ -265,6 +235,7 @@ class _HomepageState extends State<ChooseALanguageScreen> {
                     )
                   ],
                 );
+              }
             }
           }),
     );
