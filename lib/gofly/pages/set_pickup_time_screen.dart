@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rounded_date_picker/rounded_picker.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:goplus/gofly/models/locales_models.dart';
 import 'package:goplus/gofly/models/locales_provider_model.dart';
@@ -97,7 +97,7 @@ class _SetPickupTimeScreenState extends State<SetPickupTimeScreen> {
                             ),
                             GestureDetector(
                               onTap: () async {
-                                DateTime newDateTime =
+                                DateTime? newDateTime =
                                     await showRoundedDatePicker(
                                   theme: ThemeData(
                                     accentColor: AppColors.primaryColor,
@@ -144,7 +144,7 @@ class _SetPickupTimeScreenState extends State<SetPickupTimeScreen> {
                             ),
                             GestureDetector(
                               onTap: () async {
-                                TimeOfDay newTime = await showRoundedTimePicker(
+                                TimeOfDay? newTime = await showRoundedTimePicker(
                                     theme: ThemeData(
                                       accentColor: AppColors.primaryColor,
                                       primaryColor: AppColors.primaryColor,
