@@ -181,7 +181,7 @@ class _DrawerScreenState extends State<DrawerScreen>
           text: Container(
             margin: EdgeInsets.only(left: 30),
             child: Text(
-              'Log out',
+              'Deconnexion',
               style: TextStyle(color: Colors.black),
             ),
           ),
