@@ -42,7 +42,7 @@ class _IntroScreenState extends State<IntroScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Texi",
+                  "GO+",
                   style: TextStyle(
                     fontSize: 35.0,
                     fontWeight: FontWeight.bold,
@@ -51,7 +51,7 @@ class _IntroScreenState extends State<IntroScreen> {
                 ),
                 SizedBox(width: 5.0),
                 Text(
-                  "Booking",
+                  "Taxi",
                   style: TextStyle(
                     fontSize: 35.0,
                     fontWeight: FontWeight.bold,
@@ -65,18 +65,18 @@ class _IntroScreenState extends State<IntroScreen> {
             items: [
               Sliders(
                 image: StringValue.INTRO1,
-                name: _localeText!.titleLocateDesti,
-                intro: _localeText!.bodyLocateDesti,
+                name: _localeText.titleLocateDesti,
+                intro: _localeText.bodyLocateDesti,
               ),
               Sliders(
                 image: StringValue.INTRO2,
-                name: _localeText!.titleSelectYourRoot,
-                intro: _localeText!.bodySelectYourRoot,
+                name: _localeText.titleSelectYourRoot,
+                intro: _localeText.bodySelectYourRoot,
               ),
               Sliders(
                 image: StringValue.INTRO3,
-                name: _localeText!.titleGetYourTexi,
-                intro: _localeText!.bodyGetYourTexi,
+                name: _localeText.titleGetYourTexi,
+                intro: _localeText.bodyGetYourTexi,
               ),
             ],
             carouselController: buttonController,
@@ -159,8 +159,8 @@ class _IntroScreenState extends State<IntroScreen> {
                               ));
                         },
                         child: Container(
-                          height: size.width * 0.13,
-                          width: size.width * 0.13,
+                          height: size.width * 0.21,
+                          width: size.width * 0.21,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: AppColors.primaryColor,
@@ -173,7 +173,7 @@ class _IntroScreenState extends State<IntroScreen> {
                               ]),
                           child: Center(
                             child: Text(
-                              _localeText!.startBtn,
+                              _localeText.startBtn,
                               style: TextStyle(
                                   fontWeight: FontWeight.w500, fontSize: 12),
                             ),
@@ -194,7 +194,7 @@ class _IntroScreenState extends State<IntroScreen> {
                               ));
                         },
                         child: Text(
-                          "Skip",
+                          "Sauter",
                           style: TextStyle(
                             fontSize: 12.0,
                             fontWeight: FontWeight.w500,

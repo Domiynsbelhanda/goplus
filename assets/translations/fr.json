@@ -1,156 +1,156 @@
 {
-    "choose_lang": "Choose a Language",
+    "choose_lang": "Choisir une langue",
     "intro_screen": {
-        "title_locate_desti": "Locate the Destination",
-        "body_locate_desti": "Your destination is at your Fingertips open app\n and enter where you want to go",
-        "title_select_your_root": "Select Your Route",
-        "body_select_your_root": "Get quick access to frequent location And save them as a favorite",
-        "title_get_your_texi": "Get Your Taxi",
-        "body_get_your_texi": "Faster way to book taxi without the hassle of \nwaiting & hogging for price.",
-        "start_btn": "Start"
+        "title_locate_desti": "Localiser la destination",
+        "body_locate_desti": "Votre destination est à portée de main application ouverte\n et entrez où vous voulez aller",
+        "title_select_your_root": "Sélectionnez votre itinéraire",
+        "body_select_your_root": "Accédez rapidement à des emplacements fréquents et enregistrez-les en tant que favoris",
+        "title_get_your_texi": "Prenez votre taxi",
+        "body_get_your_texi": "Un moyen plus rapide de réserver un taxi sans les tracas de \nattendre et accaparer le prix.",
+        "start_btn": "Commencer"
     },
     "login_screen": {
-        "welcome": "welcome",
-        "welcome_body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        "email_error": "Please enter your email",
-        "password_error": "Please enter your password",
-        "forgot_password": "Forgot password ?",
-        "login": "Log in",
-        "dont_have_account": "Don't have an account ?"
+        "welcome": "Bienvenue",
+        "welcome_body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, eiusmod sed tempor incididunt ut labore et dolore magna aliqua.",
+        "email_error": "Veuillez saisir votre adresse e-mail",
+        "password_error": "Veuillez entrer votre mot de passe",
+        "forgot_password": "Mot de passe oublié ?",
+        "login": "S'identifier",
+        "dont_have_account": "Vous n’avez pas de compte ?"
     },
     "forgot_password_screen": {
-        "forget_pass_title": "Forgot your\npassword",
-        "forgot_pass_body": "Please enter your email address or phone number to receive new password.",
-        "enter_email_or_phone": "Enter email or phone number",
-        "enter_email_or_phone_error": "Enter your number",
-        "send": "Send"
+        "forget_pass_title": "Oublié votre\nmot de passe",
+        "forgot_pass_body": "Veuillez entrer votre adresse e-mail ou votre numéro de téléphone pour recevoir un nouveau mot de passe.",
+        "enter_email_or_phone": "Entrez l’adresse e-mail ou le numéro de téléphone",
+        "enter_email_or_phone_error": "Entrez votre numéro",
+        "send": "Envoyer"
     },
     "signup_screen": {
-        "sign_up": "Sign Up",
-        "sign_up_body": "Fill up your information below or sign up with google.",
-        "full_name": "Full name",
-        "full_name_error": "Enter your full name",
-        "email": "Email",
-        "email_error": "Enter your email",
-        "password": "Password",
-        "password_error": "Enter your password",
-        "confirm_pass": "Confirm Password",
-        "confirm_pass_error": "Enter your confirm password",
-        "sign_up_btn": "Sign up",
-        "or": "OR",
-        "sign_up_with_google": "Sign up with google"
+        "sign_up": "S’enregistrer",
+        "sign_up_body": "Remplissez vos informations ci-dessous ou inscrivez-vous avec Google.",
+        "full_name": "Nom complet",
+        "full_name_error": "Entrez votre nom complet",
+        "email": "Messagerie électronique",
+        "email_error": "Entrez votre adresse e-mail",
+        "password": "Mot de passe",
+        "password_error": "Entrez votre mot de passe",
+        "confirm_pass": "Confirmer le mot de passe",
+        "confirm_pass_error": "Entrez votre mot de passe de confirmation",
+        "sign_up_btn": "S’enregistrer",
+        "or": "OU",
+        "sign_up_with_google": "S'enregistrer avec Google"
     },
     "enter_phone_screen": {
-        "enter_phone_num": "Enter Phone\nnumber",
-        "phone_num_error": "Enter your number",
-        "enter_phone_body": "We'll send you a verification code to\nyour phone number",
-        "enter_phone_num_two": "Enter your phone number",
-        "send_code": "Send code"
+        "enter_phone_num": "Entrez le téléphone\nnombre",
+        "phone_num_error": "Entrez votre numéro",
+        "enter_phone_body": "Nous vous enverrons un code de vérification à\nvotre numéro de téléphone",
+        "enter_phone_num_two": "Entrez votre numéro de téléphone",
+        "send_code": "Envoyer le code"
     },
     "verify_phone_screen": {
-        "verify_phone_num": "Verify phone\nnumber",
-        "verify_phone_body": "A code has been send to your phone number",
-        "didnt_recive_code": "Didn't receive a code ? ",
-        "resend": "RESEND",
-        "verify_btn": "Verify"
+        "verify_phone_num": "Vérifier le téléphone\nnombre",
+        "verify_phone_body": "Un code a été envoyé à votre numéro de téléphone",
+        "didnt_recive_code": "Vous n’avez pas reçu de code ? ",
+        "resend": "RENVOYER",
+        "verify_btn": "Vérifier"
     },
     "destination_screen": {
-        "where_going": "Where are you going?",
-        "body_where_going": "Back you ride & reach at your place fast",
-        "enter_destination": "Enter Destination"
+        "where_going": "Où allez-vous?",
+        "body_where_going": "Retour vous roulez et atteignez votre place rapidement",
+        "enter_destination": "Entrez la destination"
     },
     "set_pickup_time_screen": {
-        "schedule_ride": "Schedule a Ride",
-        "set_pickup_time": "Set Pickup Time"
+        "schedule_ride": "Planifier un trajet",
+        "set_pickup_time": "Définir l’heure de ramassage"
     },
     "search_place_screen": {
-        "search_place_text": "Search Place",
-        "where_you_go": "Where you want to go ?",
-        "your_place": "Your place",
-        "home": "Home",
-        "home_address": "Home Address",
-        "home_address_error": "Enter your home address",
-        "office": "Office",
-        "office_address": "Office Address",
-        "office_address_error": "Enter your office address",
-        "add_place": "Add Place",
-        "search_place_here": "Search your place here...",
-        "save_place": "Save Place"
+        "search_place_text": "Lieu de recherche",
+        "where_you_go": "Où voulez-vous aller ?",
+        "your_place": "Votre place",
+        "home": "Domicile",
+        "home_address": "Adresse du domicile",
+        "home_address_error": "Entrez l’adresse de votre domicile",
+        "office": "Bureau",
+        "office_address": "Adresse du bureau",
+        "office_address_error": "Entrez l’adresse de votre bureau",
+        "add_place": "Ajouter un lieu",
+        "search_place_here": "Cherchez votre place ici...",
+        "save_place": "Enregistrer la place"
     },
     "payment_option_screen": {
-        "cash": "Cash",
-        "payment_method": "Payment method",
-        "pay_with_master": "Pay with Master card",
-        "pay_with_paypal": "Pay with Paypal",
-        "pay_with_visa": "Pay with visa",
-        "book_ride": "Book a Ride"
+        "cash": "Argent",
+        "payment_method": "Mode de paiement",
+        "pay_with_master": "Payer avec Master card",
+        "pay_with_paypal": "Payer avec PayPal",
+        "pay_with_visa": "Payer avec visa",
+        "book_ride": "Réserver un tour"
     },
     "payment_screen": {
-        "add_credit_card": "Add Credit Card",
-        "scan_card": "Scan Card",
-        "card_holder_name": "Card Holder Name",
-        "card_holder_name_error": "Enter your name",
-        "card_num": "Card Number",
-        "card_num_error": "Enter your card number",
-        "save": "Save"
+        "add_credit_card": "Ajouter une carte de crédit",
+        "scan_card": "Carte de numérisation",
+        "card_holder_name": "Nom du titulaire de la carte",
+        "card_holder_name_error": "Entrez votre nom",
+        "card_num": "Numéro de carte",
+        "card_num_error": "Entrez votre numéro de carte",
+        "save": "Sauvegarder"
     },
     "payment_details_screen": {
-        "payment_details": "Payment Details",
-        "payment_date": "Payment date",
-        "payment_method": "Payment method",
-        "payment_history": "Payment History",
-        "to": "To",
-        "full_details": "Full Details",
-        "you_spend": "You have spend",
-        "on_this_mon": "on this month",
-        "all": "All",
-        "wants_to_share_cab": "wants to share a cab"
+        "payment_details": "Détails de paiement",
+        "payment_date": "Date de paiement",
+        "payment_method": "Mode de paiement",
+        "payment_history": "Historique des paiements",
+        "to": "À",
+        "full_details": "Détails complets",
+        "you_spend": "Vous avez dépensé",
+        "on_this_mon": "sur ce mois-ci",
+        "all": "Tout",
+        "wants_to_share_cab": "veut partager un taxi"
     },
     "cancel_ride_screen": {
-        "drop_off": "Drop off",
+        "drop_off": "Déposer",
         "distance": "Distance",
-        "price": "Price",
-        "track_ride": "Track Your Ride",
-        "cancel_ride": "Cancel Ride"
+        "price": "Prix",
+        "track_ride": "Suivez votre trajet",
+        "cancel_ride": "Annuler le trajet"
     },
     "review_screen": {
-        "how_your_trip": "How was your Trip ?",
-        "how_your_trip_body": "Your feedback will help us to make \n your experience better",
-        "add_comment": "Add a Comment",
-        "submit_review": "Submit Review"
+        "how_your_trip": "Comment s’est passé votre voyage ?",
+        "how_your_trip_body": "Vos commentaires nous aideront à faire \n votre expérience mieux",
+        "add_comment": "Ajouter un commentaire",
+        "submit_review": "Soumettre un avis"
     },
     "my_profile_screen": {
-        "my_profile": "My Profile",
-        "first_name": "First Name",
-        "first_name_error": "Enter your first name",
-        "last_name": "Last Name",
-        "last_name_error": "Enter your last name",
-        "phone_num": "Phone Number",
-        "phone_num_error": "Enter your number",
-        "email_address": "Email Address",
-        "email_address_error": "Enter your email address",
-        "password": "Password",
-        "password_error": "Enter your password",
-        "save": "Save"
+        "my_profile": "Mon profil",
+        "first_name": "Prénom",
+        "first_name_error": "Entrez votre prénom",
+        "last_name": "Nom",
+        "last_name_error": "Entrez votre nom de famille",
+        "phone_num": "Numéro de téléphone",
+        "phone_num_error": "Entrez votre numéro",
+        "email_address": "Adresse courriel",
+        "email_address_error": "Entrez votre adresse e-mail",
+        "password": "Mot de passe",
+        "password_error": "Entrez votre mot de passe",
+        "save": "Sauvegarder"
     },
     "your_ride_screen": {
-        "your_rides": "Your Rides",
-        "today": "Today"
+        "your_rides": "Vos trajets",
+        "today": "Aujourd’hui"
     },
     "notification_screen": {
         "notificaitons": "Notifications",
-        "wants_to_share_cab": "wants to share a cab"
+        "wants_to_share_cab": "veut partager un taxi"
     },
     "chats_screen": {
-        "type_message": "Type a Message"
+        "type_message": "Tapez un message"
     },
     "drawer_screen": {
-        "home": "Home",
-        "your_ride": "Your Ride",
-        "payment": "Payment",
+        "home": "Domicile",
+        "your_ride": "Votre trajet",
+        "payment": "Paiement",
         "message": "Message",
         "notification": "Notification",
-        "settings": "Settings",
-        "logout": "Log out"
+        "settings": "Paramètres",
+        "logout": "Se déconnecter"
     }
 }
