@@ -21,4 +21,5 @@ class StringValue {
   static const HOME = "assets/Svg/home.svg";
   static const YOURRIDE = "assets/Svg/your_ride.svg";
   static const LOGOUT = "assets/Svg/log_out.svg";
+  static const MOBILE = "assets/Svg/mobile.svg";
 }

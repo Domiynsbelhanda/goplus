@@ -204,6 +204,24 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     margin: EdgeInsets.symmetric(horizontal: 15),
                   ),
                   ListTile(
+                    leading: SvgPicture.asset(StringValue.MOBILE),
+                    title: Text(
+                      'Mobile Money',
+                      style: TextStyle(
+                        fontSize: 12.0,
+                      ),
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 18,
+                    ),
+                  ),
+                  Container(
+                    color: Colors.grey[300],
+                    height: 0.5,
+                    margin: EdgeInsets.symmetric(horizontal: 15),
+                  ),
+                  ListTile(
                     leading: SvgPicture.asset(StringValue.MASTER),
                     title: Text(
                       _localeText.payWithMaster,

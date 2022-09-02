@@ -19,7 +19,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   late Size size;
   final formkey = GlobalKey<FormState>();
   late MyProfileModel _localeText;
-  late File profileImage;
+  File? profileImage;
   final picker = ImagePicker();
 
   @override
@@ -90,7 +90,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                     color: Colors.grey,
                                   )
                                 : Image.file(
-                                    profileImage,
+                                    profileImage!,
                                     fit: BoxFit.cover,
                                   ),
                           ),
