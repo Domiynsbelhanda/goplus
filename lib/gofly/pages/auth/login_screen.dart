@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Texi",
+                      "GO+",
                       style: TextStyle(
                         fontSize: 35.0,
                         fontWeight: FontWeight.bold,
@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(width: 5.0),
                     Text(
-                      "Booking",
+                      "Taxi",
                       style: TextStyle(
                         fontSize: 35.0,
                         fontWeight: FontWeight.bold,

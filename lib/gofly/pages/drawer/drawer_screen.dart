@@ -28,13 +28,14 @@ class _DrawerScreenState extends State<DrawerScreen>
         KFDrawerItem.initWithPage(
           text: Padding(
             padding: const EdgeInsets.only(left: 40, bottom: 15, top: 15),
-            child: Text('Home', style: TextStyle(color: Colors.white)),
+            child: Text('Accueil', style: TextStyle(color: Colors.black)),
           ),
           icon: Container(
             margin: const EdgeInsets.only(bottom: 15, top: 15),
             child: SvgPicture.asset(
               StringValue.HOME,
               height: 20,
+              color: Colors.black,
             ),
           ),
           page: ClassBuilder.fromString('DestinationScreen'),
@@ -43,14 +44,15 @@ class _DrawerScreenState extends State<DrawerScreen>
           text: Padding(
             padding: const EdgeInsets.only(left: 25, bottom: 15, top: 15),
             child: Text(
-              'Your Ride',
-              style: TextStyle(color: Colors.white),
+              'Vos Trajets',
+              style: TextStyle(color: Colors.black),
             ),
           ),
           icon: Container(
             margin: const EdgeInsets.only(bottom: 15, top: 15),
             child: SvgPicture.asset(
               StringValue.YOURRIDE,
+              color: Colors.black,
             ),
           ),
           page: ClassBuilder.fromString('YourRidesScreen'),
@@ -59,14 +61,15 @@ class _DrawerScreenState extends State<DrawerScreen>
           text: Padding(
             padding: const EdgeInsets.only(left: 39, bottom: 15, top: 15),
             child: Text(
-              'Payment',
-              style: TextStyle(color: Colors.white),
+              'Paiements',
+              style: TextStyle(color: Colors.black),
             ),
           ),
           icon: Container(
             margin: const EdgeInsets.only(bottom: 15, top: 15),
             child: SvgPicture.asset(
               StringValue.PAYMENT,
+              color: Colors.black,
             ),
           ),
           page: ClassBuilder.fromString('PaymentDetailsScreen'),
@@ -74,10 +77,10 @@ class _DrawerScreenState extends State<DrawerScreen>
         KFDrawerItem.initWithPage(
           text: Padding(
               padding: const EdgeInsets.only(left: 39, bottom: 15, top: 15),
-              child: Text('Message', style: TextStyle(color: Colors.white))),
+              child: Text('Message', style: TextStyle(color: Colors.black))),
           icon: Container(
               margin: const EdgeInsets.only(bottom: 15, top: 15),
-              child: SvgPicture.asset(StringValue.MESSAGE)),
+              child: SvgPicture.asset(StringValue.MESSAGE, color: Colors.black,)),
           page: ClassBuilder.fromString('MessagesScreen'),
         ),
         KFDrawerItem.initWithPage(
@@ -85,27 +88,27 @@ class _DrawerScreenState extends State<DrawerScreen>
             padding: const EdgeInsets.only(left: 42, bottom: 15, top: 15),
             child: Text(
               'Notification',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.black),
             ),
           ),
           icon: Container(
               margin: const EdgeInsets.only(bottom: 15, top: 15),
-              child: SvgPicture.asset(StringValue.NOTIFICATION)),
+              child: SvgPicture.asset(StringValue.NOTIFICATION, color: Colors.black,)),
           page: ClassBuilder.fromString('NotificationsScreen'),
         ),
         KFDrawerItem.initWithPage(
           text: Padding(
             padding: const EdgeInsets.only(left: 35, bottom: 15, top: 15),
             child: Text(
-              'Settings',
-              style: TextStyle(color: Colors.white),
+              'Parametres',
+              style: TextStyle(color: Colors.black),
             ),
           ),
           icon: Container(
             margin: const EdgeInsets.only(bottom: 15, top: 15),
             child: Icon(
               Icons.settings,
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
           page: ClassBuilder.fromString('DestinationScreen'),
@@ -153,21 +156,21 @@ class _DrawerScreenState extends State<DrawerScreen>
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Evaana Musk",
+                  Text("Youness Dominique",
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold)),
+                          color: Colors.black, fontWeight: FontWeight.bold)),
                   SizedBox(
                     height: 10,
                   ),
-                  Text("Richmond Hill, NY 11419",
-                      style: TextStyle(color: Colors.white, fontSize: 12))
+                  Text("youness.dominique@gmail.com",
+                      style: TextStyle(color: Colors.black, fontSize: 12))
                 ],
               ),
               Spacer(),
               IconButton(
                 icon: Icon(
                   Icons.close,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 onPressed: () {},
               ),
@@ -179,10 +182,10 @@ class _DrawerScreenState extends State<DrawerScreen>
             margin: EdgeInsets.only(left: 30),
             child: Text(
               'Log out',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.black),
             ),
           ),
-          icon: SvgPicture.asset(StringValue.LOGOUT),
+          icon: SvgPicture.asset(StringValue.LOGOUT, color: Colors.black,),
           onPressed: () {
             if (widget.screen == 'login') {
               Navigator.pop(context);
