@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/gofly/pages/messages/chats_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:geolocator/geolocator.dart';
 
 class MapWidget extends StatelessWidget {
 
@@ -10,6 +11,16 @@ class MapWidget extends StatelessWidget {
       Permission.location,
       Permission.storage,
     ].request();
+  }
+
+  late LatLng currentLatLng;
+
+  void myPostition() async {
+    Geolocator.getCurrentPosition().then((currLocation){
+      setState((){
+        currentLatLng = new LatLng(currLocation.latitude, currLocation.longitude);
+      });
+    });
   }
 
   @override
