@@ -4,7 +4,15 @@ import 'package:goplus/gofly/pages/messages/chats_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
 
-class MapWidget extends StatelessWidget {
+class MapWidget extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _MapWidget();
+  }
+}
+
+class _MapWidget extends State<MapWidget> {
 
   void setPermissions() async{
     Map<Permission, PermissionStatus> statuses = await [
@@ -12,19 +20,19 @@ class MapWidget extends StatelessWidget {
     ].request();
   }
 
+  void getPosition(){
+    Geolocator.getCurrentPosition().then((currLocation){
+      setState(() {
+        currentLatLng = LatLng(currLocation.latitude, currLocation.longitude);
+      });
+    });
+  }
+
   late LatLng currentLatLng;
 
   @override
   initState(){
-    Geolocator.getCurrentPosition().then((currLocation){
-      currentLatLng = new LatLng(currLocation.latitude, currLocation.longitude);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    setPermissions();
-    return Container(child: mapView(context));
+    getPosition();
   }
 
   Widget mapView(BuildContext context) {
@@ -53,5 +61,12 @@ class MapWidget extends StatelessWidget {
         zoom: 15,
       ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    setPermissions();
+    return Container(child: mapView(context));
   }
 }
