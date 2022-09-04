@@ -7,6 +7,7 @@ import 'package:goplus/gofly/models/locales_provider_model.dart';
 import 'package:goplus/gofly/pages/choose_language_screen.dart';
 import 'package:goplus/gofly/utils/class_builder.dart';
 import 'package:goplus/gofly/widgets/theme_data.dart';
+import 'package:animated_splash/animated_splash.dart';
 
 void main() async {
   ClassBuilder.registerClasses();
@@ -50,7 +51,12 @@ class _MyApp extends State<MyApp>{
         Locale('fr', ''),
         Locale('lg', ''),
       ],
-      home: ChooseALanguageScreen(),
+      home: AnimatedSplash(
+        home: ChooseALanguageScreen(),
+        duration: 2500,
+        type: AnimatedSplashType.StaticDuration,
+        imagePath: "assets/icon/Logo.png",
+      ),
     );
   }
 }

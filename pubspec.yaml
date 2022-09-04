@@ -50,6 +50,7 @@ dependencies:
   fl_chart: ^0.55.1
   image_picker: ^0.8.5+3
   permission_handler: ^10.0.0
+  animated_splash:
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +85,7 @@ flutter:
   assets:
     - assets/Svg/
     - assets/translations/
+    - assets/icon/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
