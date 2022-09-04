@@ -55,9 +55,9 @@ class OTPTextField extends StatefulWidget {
 
 class _OTPTextFieldState extends State<OTPTextField> {
   late List<FocusNode> _focusNodes;
-  FocusNode? focus;
+  FocusNode focus = new FocusNode();
   late List<TextEditingController> _textControllers;
-  TextEditingController? text;
+  TextEditingController text = new TextEditingController();
 
   late List<Widget> _textFields;
   late List<String> _pin;
@@ -65,8 +65,8 @@ class _OTPTextFieldState extends State<OTPTextField> {
   @override
   void initState() {
     super.initState();
-    _focusNodes = List<FocusNode>.filled(widget.length, focus!, growable: false);
-    _textControllers = List<TextEditingController>.filled(widget.length, text!,
+    _focusNodes = List<FocusNode>.filled(widget.length, focus, growable: false);
+    _textControllers = List<TextEditingController>.filled(widget.length, text,
         growable: false);
 
     _pin = List.generate(widget.length, (int i) {

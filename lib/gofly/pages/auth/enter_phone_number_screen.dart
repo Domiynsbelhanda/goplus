@@ -68,7 +68,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                     Container(
                       alignment: Alignment.center,
                       height: size.height * 0.06,
-                      width: size.height * 0.06,
+                      width: size.height * 0.07,
                       margin: EdgeInsets.only(right: 15),
                       decoration: BoxDecoration(
                           border: Border.all(
