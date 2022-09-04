@@ -188,7 +188,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   ListTile(
                     leading: SvgPicture.asset(StringValue.CASH),
                     title: Text(
-                      _localeText.cash,
+                      'Payer Cash',
                       style: TextStyle(
                         fontSize: 12.0,
                       ),
