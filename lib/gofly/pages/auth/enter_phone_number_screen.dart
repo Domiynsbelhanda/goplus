@@ -75,7 +75,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                         color: AppColors.primaryColor,
                       )),
                       child: Text(
-                        "+91",
+                        "+243",
                         style: TextStyle(
                           fontSize: 16.0,
                         ),

@@ -7,6 +7,7 @@ import 'package:goplus/gofly/utils/strings.dart';
 import 'package:goplus/gofly/widgets/slider_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
+import 'auth/enter_phone_number_screen.dart';
 import 'auth/login_screen.dart';
 
 class IntroScreen extends StatefulWidget {
@@ -156,7 +157,7 @@ class _IntroScreenState extends State<IntroScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => LoginScreen(),
+                                builder: (_) => PhoneNumberScreen(),
                               ));
                         },
                         child: Container(
