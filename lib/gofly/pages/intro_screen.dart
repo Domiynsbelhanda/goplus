@@ -47,6 +47,7 @@ class _IntroScreenState extends State<IntroScreen> {
                     fontSize: 35.0,
                     fontWeight: FontWeight.bold,
                     color: AppColors.primaryColor,
+                    fontFamily: 'Anton'
                   ),
                 ),
                 SizedBox(width: 5.0),
