@@ -161,108 +161,108 @@ class _SearchPlaceScreenState extends State<SearchPlaceScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: size.height * 0.03),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          _localeText.addPlace,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22.0,
-                          ),
-                        ),
-                      ),
-                      Icon(
-                        Icons.my_location,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: size.height * 0.03),
-                  Container(
-                    height: 50,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30.0),
-                        color: Color(0xfff4f4f4)),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.search),
-                        hintText: _localeText.searchPlaceHere,
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(15.0),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 30.0),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "9 N. Deerfield St. Moses Lake, WA 98837",
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                      Icon(
-                        Icons.location_on,
-                        color: Colors.grey,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15.0),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "820 Lawrence Lane Carmel, Ny 1051",
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                      Icon(
-                        Icons.location_on,
-                        color: Colors.grey,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15.0),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "09 Brown St. South Richmmond Hill, NY 11419",
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                      Icon(
-                        Icons.location_on,
-                        color: Colors.grey,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: size.height * 0.06),
-                  AppButton(
-                    name: _localeText.savePlace,
-                    onTap: () {
-                      if (formkey.currentState!.validate()) {
-                        FocusScope.of(context).unfocus();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => SelectCarScreen(),
-                          ),
-                        );
-                      }
-                    },
-                  ),
+                  // SizedBox(height: size.height * 0.03),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: Text(
+                  //         _localeText.addPlace,
+                  //         style: TextStyle(
+                  //           fontWeight: FontWeight.bold,
+                  //           fontSize: 22.0,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     Icon(
+                  //       Icons.my_location,
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(height: size.height * 0.03),
+                  // Container(
+                  //   height: 50,
+                  //   alignment: Alignment.center,
+                  //   decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(30.0),
+                  //       color: Color(0xfff4f4f4)),
+                  //   child: TextFormField(
+                  //     decoration: InputDecoration(
+                  //       prefixIcon: Icon(Icons.search),
+                  //       hintText: _localeText.searchPlaceHere,
+                  //       border: InputBorder.none,
+                  //       contentPadding: EdgeInsets.all(15.0),
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(height: 30.0),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: Text(
+                  //         "9 N. Deerfield St. Moses Lake, WA 98837",
+                  //         overflow: TextOverflow.ellipsis,
+                  //         style: TextStyle(
+                  //           color: Colors.grey,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     Icon(
+                  //       Icons.location_on,
+                  //       color: Colors.grey,
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(height: 15.0),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: Text(
+                  //         "820 Lawrence Lane Carmel, Ny 1051",
+                  //         overflow: TextOverflow.ellipsis,
+                  //         style: TextStyle(
+                  //           color: Colors.grey,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     Icon(
+                  //       Icons.location_on,
+                  //       color: Colors.grey,
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(height: 15.0),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: Text(
+                  //         "09 Brown St. South Richmmond Hill, NY 11419",
+                  //         overflow: TextOverflow.ellipsis,
+                  //         style: TextStyle(
+                  //           color: Colors.grey,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     Icon(
+                  //       Icons.location_on,
+                  //       color: Colors.grey,
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(height: size.height * 0.06),
+                  // AppButton(
+                  //   name: _localeText.savePlace,
+                  //   onTap: () {
+                  //     if (formkey.currentState!.validate()) {
+                  //       FocusScope.of(context).unfocus();
+                  //       Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //           builder: (_) => SelectCarScreen(),
+                  //         ),
+                  //       );
+                  //     }
+                  //   },
+                  // ),
                 ],
               ),
             ),
