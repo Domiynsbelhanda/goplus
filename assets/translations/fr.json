@@ -6,8 +6,8 @@
         "title_select_your_root": "Sélectionnez votre itinéraire",
         "body_select_your_root": "Accédez rapidement à des emplacements fréquents et enregistrez-les en tant que favoris",
         "title_get_your_texi": "Prenez votre taxi",
-        "body_get_your_texi": "Un moyen plus rapide de réserver un taxi sans les tracas de \nattendre et accaparer le prix.",
-        "start_btn": "Commencer"
+        "body_get_your_texi": "Le moyen le plus rapide de réserver un taxi \n en toute sécurité et à un prix très abordable.",
+        "start_btn": "Lancer"
     },
     "login_screen": {
         "welcome": "Bienvenue",

@@ -8,18 +8,16 @@ class MapWidget extends StatelessWidget {
 
   void setPermissions() async{
     Map<Permission, PermissionStatus> statuses = await [
-      Permission.location,
-      Permission.storage,
+      Permission.location
     ].request();
   }
 
   late LatLng currentLatLng;
 
-  void myPostition() async {
+  @override
+  initState(){
     Geolocator.getCurrentPosition().then((currLocation){
-      setState((){
-        currentLatLng = new LatLng(currLocation.latitude, currLocation.longitude);
-      });
+      currentLatLng = new LatLng(currLocation.latitude, currLocation.longitude);
     });
   }
 
@@ -37,10 +35,10 @@ class MapWidget extends StatelessWidget {
       markers: {
         Marker(
           markerId: MarkerId("1"),
-          position: LatLng(21.215415017175165, 72.8879595194489),
+          position: currentLatLng,
           infoWindow: InfoWindow(
-            title: "John Cruzz",
-            snippet: " 85,W, Jockey Street Park Forest, IL 60466",
+            title: "Ma Position",
+            snippet: "",
             anchor: Offset(45, 45),
             onTap: () => Navigator.push(
               context,
@@ -51,7 +49,7 @@ class MapWidget extends StatelessWidget {
         ),
       },
       initialCameraPosition: CameraPosition(
-        target: LatLng(21.215415017175165, 72.8879595194489),
+        target: currentLatLng,
         zoom: 15,
       ),
     );
