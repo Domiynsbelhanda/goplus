@@ -124,7 +124,8 @@ class _DrawerScreenState extends State<DrawerScreen>
     return Scaffold(
       body: KFDrawer(
         controller: _drawerController,
-        header: Container(
+        header: Padding(
+          padding: EdgeInsets.only(top: 48.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -177,22 +178,25 @@ class _DrawerScreenState extends State<DrawerScreen>
             ],
           ),
         ),
-        footer: KFDrawerItem(
-          text: Container(
-            margin: EdgeInsets.only(left: 30),
-            child: Text(
-              'Deconnexion',
-              style: TextStyle(color: Colors.black),
+        footer: Padding(
+          padding: const EdgeInsets.only(bottom: 48.0),
+          child: KFDrawerItem(
+            text: Container(
+              margin: EdgeInsets.only(left: 30),
+              child: Text(
+                'Deconnexion',
+                style: TextStyle(color: Colors.black),
+              ),
             ),
+            icon: SvgPicture.asset(StringValue.LOGOUT, color: Colors.black,),
+            onPressed: () {
+              if (widget.screen == 'login') {
+                Navigator.pop(context);
+              } else {
+                Navigator.of(context)..pop()..pop()..pop()..pop();
+              }
+            },
           ),
-          icon: SvgPicture.asset(StringValue.LOGOUT, color: Colors.black,),
-          onPressed: () {
-            if (widget.screen == 'login') {
-              Navigator.pop(context);
-            } else {
-              Navigator.of(context)..pop()..pop()..pop()..pop();
-            }
-          },
         ),
         decoration: BoxDecoration(color: AppColors.primaryColor),
       ),

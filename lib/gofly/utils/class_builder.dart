@@ -5,6 +5,8 @@ import 'package:goplus/gofly/pages/drawer/notification_screen.dart';
 import 'package:goplus/gofly/pages/drawer/your_ride_screen.dart';
 import 'package:goplus/gofly/pages/payment/payment_details_screen.dart';
 
+import '../pages/drawer/my_profile_screen.dart';
+
 typedef T Constructor<T>();
 
 final Map<String, Constructor<Object>> _constructors =
@@ -21,6 +23,7 @@ class ClassBuilder {
     register<PaymentDetailsScreen>(() => PaymentDetailsScreen());
     register<MessagesScreen>(() => MessagesScreen());
     register<NotificationsScreen>(() => NotificationsScreen());
+    register<YourRidesScreen>(() => YourRidesScreen());
     register<YourRidesScreen>(() => YourRidesScreen());
   }
 
