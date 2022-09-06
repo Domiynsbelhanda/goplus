@@ -82,85 +82,85 @@ class _SearchPlaceScreenState extends State<SearchPlaceScreen> {
                       )
                     ],
                   ),
-                  SizedBox(height: 30.0),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          _localeText.yourPlace,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22.0,
-                          ),
-                        ),
-                      ),
-                      Icon(
-                        Icons.my_location,
-                      ),
-                    ],
-                  ),
+                  // SizedBox(height: 30.0),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: Text(
+                  //         _localeText.yourPlace,
+                  //         style: TextStyle(
+                  //           fontWeight: FontWeight.bold,
+                  //           fontSize: 22.0,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     Icon(
+                  //       Icons.my_location,
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(height: 20.0),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.home,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(width: 20.0),
-                      Text(
-                        _localeText.home,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 40.0),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return _localeText.homeAddressError;
-                        }
-                        return null;
-                      },
-                      cursorColor: AppColors.primaryColor,
-                      decoration: InputDecoration(
-                        hintText: _localeText.homeAddress,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 5.0),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.business_center,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(width: 20.0),
-                      Text(
-                        _localeText.office,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 40.0),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return _localeText.officeAddressError;
-                        }
-                        return null;
-                      },
-                      cursorColor: AppColors.primaryColor,
-                      decoration: InputDecoration(
-                        hintText: _localeText.officeAddress,
-                      ),
-                    ),
-                  ),
+                  // Row(
+                  //   children: [
+                  //     Icon(
+                  //       Icons.home,
+                  //       color: Colors.grey,
+                  //     ),
+                  //     SizedBox(width: 20.0),
+                  //     Text(
+                  //       _localeText.home,
+                  //       style: TextStyle(
+                  //         fontWeight: FontWeight.bold,
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 40.0),
+                  //   child: TextFormField(
+                  //     validator: (value) {
+                  //       if (value!.isEmpty) {
+                  //         return _localeText.homeAddressError;
+                  //       }
+                  //       return null;
+                  //     },
+                  //     cursorColor: AppColors.primaryColor,
+                  //     decoration: InputDecoration(
+                  //       hintText: _localeText.homeAddress,
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(height: 5.0),
+                  // Row(
+                  //   children: [
+                  //     Icon(
+                  //       Icons.business_center,
+                  //       color: Colors.grey,
+                  //     ),
+                  //     SizedBox(width: 20.0),
+                  //     Text(
+                  //       _localeText.office,
+                  //       style: TextStyle(
+                  //         fontWeight: FontWeight.bold,
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 40.0),
+                  //   child: TextFormField(
+                  //     validator: (value) {
+                  //       if (value!.isEmpty) {
+                  //         return _localeText.officeAddressError;
+                  //       }
+                  //       return null;
+                  //     },
+                  //     cursorColor: AppColors.primaryColor,
+                  //     decoration: InputDecoration(
+                  //       hintText: _localeText.officeAddress,
+                  //     ),
+                  //   ),
+                  // ),
                   // SizedBox(height: size.height * 0.03),
                   // Row(
                   //   children: [
@@ -249,20 +249,20 @@ class _SearchPlaceScreenState extends State<SearchPlaceScreen> {
                   //   ],
                   // ),
                   // SizedBox(height: size.height * 0.06),
-                  // AppButton(
-                  //   name: _localeText.savePlace,
-                  //   onTap: () {
-                  //     if (formkey.currentState!.validate()) {
-                  //       FocusScope.of(context).unfocus();
-                  //       Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(
-                  //           builder: (_) => SelectCarScreen(),
-                  //         ),
-                  //       );
-                  //     }
-                  //   },
-                  // ),
+                  AppButton(
+                    name: _localeText.savePlace,
+                    onTap: () {
+                      if (formkey.currentState!.validate()) {
+                        FocusScope.of(context).unfocus();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => SelectCarScreen(),
+                          ),
+                        );
+                      }
+                    },
+                  ),
                 ],
               ),
             ),
