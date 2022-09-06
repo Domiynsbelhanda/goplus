@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:goplus/gofly/models/locales_models.dart';
 import 'package:provider/provider.dart';
 import 'package:goplus/gofly/models/locales_provider_model.dart';
 import 'package:goplus/gofly/pages/choose_language_screen.dart';
 import 'package:goplus/gofly/utils/class_builder.dart';
 import 'package:goplus/gofly/widgets/theme_data.dart';
-import 'package:animated_splash/animated_splash.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 void main() async {
   ClassBuilder.registerClasses();
@@ -51,11 +50,11 @@ class _MyApp extends State<MyApp>{
         Locale('fr', ''),
         Locale('lg', ''),
       ],
-      home: AnimatedSplash(
-        home: ChooseALanguageScreen(),
+      home: AnimatedSplashScreen(
+        nextScreen: ChooseALanguageScreen(),
         duration: 2500,
-        type: AnimatedSplashType.StaticDuration,
-        imagePath: "assets/icon/Logo.png",
+        splash: "assets/icon/white-text.png",
+        backgroundColor : Color(0xFFFFD80E),
       ),
     );
   }

@@ -101,10 +101,19 @@ class _OTPTextFieldState extends State<OTPTextField> {
   /// * Requires a build context
   /// * Requires Int position of the field
   Widget buildTextField(BuildContext context, int i) {
-    if (_focusNodes[i] == null) _focusNodes[i] = new FocusNode();
+    if (_focusNodes[i] == null)
+    {
+      _focusNodes[i] = new FocusNode();
+    } else {
+      _focusNodes[i] = new FocusNode();
+    }
 
     if (_textControllers[i] == null)
+      {
+        _textControllers[i] = new TextEditingController();
+      } else {
       _textControllers[i] = new TextEditingController();
+    }
 
     return Container(
       width: widget.fieldWidth,
