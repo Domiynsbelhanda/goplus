@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:goplus/gofly/utils/app_colors.dart';
 
 import '../utils/strings.dart';
+import 'choose_language_screen.dart';
 
 class Dashboard extends StatefulWidget{
   @override
@@ -24,7 +25,18 @@ class _Dashboard extends State<Dashboard>{
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          cardDashboard('Go Taxi', StringValue.TAXI, (){})
+          cardDashboard('Go Taxi', StringValue.TAXI, (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ChooseALanguageScreen())
+            );
+          }),
+
+          cardDashboard('Go Fly', StringValue.PLANE, (){
+          }),
+
+          cardDashboard('Go Shop', StringValue.SHOPPING, (){
+          })
         ],
       )
     );
@@ -32,21 +44,21 @@ class _Dashboard extends State<Dashboard>{
 
   Widget cardDashboard(String text, String icons, Function click){
     return GestureDetector(
-      onTap: ()=> click,
+      onTap: ()=> click(),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 16.0, top: 16.0),
         child: Container(
           width: size.width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16.0),
             boxShadow: [
               BoxShadow(
-                color: AppColors.primaryColor,
+                color: AppColors.primaryColor.withOpacity(0.3),
                 offset: const Offset(
-                  2.0,
-                  2.0,
+                  1.0,
+                  1.0,
                 ),
-                blurRadius: 5.0,
+                blurRadius: 3.0,
                 spreadRadius: 1.0,
               ), //BoxShadow
               BoxShadow(
