@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:goplus/gofly/pages/dashboard.dart';
 import 'package:provider/provider.dart';
 import 'package:goplus/gofly/models/locales_provider_model.dart';
 import 'package:goplus/gofly/pages/choose_language_screen.dart';
@@ -51,7 +52,7 @@ class _MyApp extends State<MyApp>{
         Locale('lg', ''),
       ],
       home: AnimatedSplashScreen(
-        nextScreen: ChooseALanguageScreen(),
+        nextScreen: Dashboard(), //ChooseALanguageScreen(),
         duration: 2500,
         splash: "assets/icon/white-text.png",
         backgroundColor : Color(0xFFFFD80E),
