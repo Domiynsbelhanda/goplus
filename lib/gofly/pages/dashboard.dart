@@ -50,13 +50,19 @@ class _Dashboard extends State<Dashboard>{
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
 
-          Row(
-            children: itemDashboard.map((e) => CardPicture(
-              imagePath: '${e['imagePath']}',
-              title: '${e['title']}',
-              description: '${e['description']}',
-              onTap: e['onTap'],
-            )).toList(),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: itemDashboard.map((e) => Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                child: CardPicture(
+                  imagePath: '${e['imagePath']}',
+                  title: '${e['title']}',
+                  description: '${e['description']}',
+                  onTap: e['onTap'],
+                ),
+              )).toList(),
+            ),
           ),
 
           // cardDashboard('Go Taxi', StringValue.TAXI, (){
