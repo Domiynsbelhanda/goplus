@@ -5,6 +5,7 @@ import 'package:goplus/gofly/widgets/card_dashboard_item_image.dart';
 import 'package:goplus/gofly/widgets/tab_item_dashboard.dart';
 
 import '../utils/strings.dart';
+import '../widgets/card_dashboard_item_seller.dart';
 import 'choose_language_screen.dart';
 
 class Dashboard extends StatefulWidget{
@@ -34,7 +35,12 @@ class _Dashboard extends State<Dashboard>{
         'imagePath' : 'https://s.yimg.com/uu/api/res/1.2/U1yjMObipSzabrdKnKRe5A--~B/aD01NzY7dz0xMDI0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/fr/rfi_475/37d66899f6929e74c54fd4ce5e51f6c1',
         'title': 'Bâtiment Hypnose',
         'description' : 'Rejoignez le grand bâtiment',
-        'onTap': ()=>print('belhanda')
+        'onTap': (){
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => ChooseALanguageScreen())
+            // );
+        }
       },
 
       {
@@ -106,81 +112,112 @@ class _Dashboard extends State<Dashboard>{
     itemDashboard = tabActive == 0 ? placeList : townList;
     // TODO: implement build
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-              padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Discover',
-              style: TextStyle(
-                fontSize: size.width / 15,
-                fontWeight: FontWeight.w500
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+                padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'Discover',
+                style: TextStyle(
+                  fontSize: size.width / 15,
+                  fontWeight: FontWeight.w500
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
-            child: Row(
-              children: [
-                TabItem(
-                  size: size,
-                  title: 'Best Place',
-                  activate: tabActive == 0 ? true : false,
-                  onTap: (){
-                    setState(() {
-                      if(tabActive == 1){
-                        tabActive = 0;
-                      }
-                    });
-                  },
-                ),
-
-                SizedBox(width: 16.0,),
-                TabItem(
-                  size: size,
-                  title: 'Best Destination',
-                  activate: tabActive == 1 ? true : false,
-                  onTap: (){
-                    setState(() {
-                      if(tabActive == 0){
-                        tabActive = 1;
-                      }
-                    });
-                  },
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
               child: Row(
-                children: itemDashboard.map((e) => Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                  child: CardPicture(
-                    imagePath: '${e['imagePath']}',
-                    title: '${e['title']}',
-                    description: '${e['description']}',
-                    onTap: e['onTap'],
+                children: [
+                  TabItem(
+                    size: size,
+                    title: 'Best Place',
+                    activate: tabActive == 0 ? true : false,
+                    onTap: (){
+                      setState(() {
+                        if(tabActive == 1){
+                          tabActive = 0;
+                        }
+                      });
+                    },
                   ),
-                )).toList(),
+
+                  SizedBox(width: 16.0,),
+                  TabItem(
+                    size: size,
+                    title: 'Best Destination',
+                    activate: tabActive == 1 ? true : false,
+                    onTap: (){
+                      setState(() {
+                        if(tabActive == 0){
+                          tabActive = 1;
+                        }
+                      });
+                    },
+                  ),
+                ],
               ),
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: itemDashboard.map((e) => Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: CardPicture(
+                      imagePath: '${e['imagePath']}',
+                      title: '${e['title']}',
+                      description: '${e['description']}',
+                      onTap: e['onTap'],
+                    ),
+                  )).toList(),
+                ),
+              ),
+            ),
 
-          // cardDashboard('Go Taxi', StringValue.TAXI, (){
-          //   Navigator.push(
-          //     context,
-          //     MaterialPageRoute(builder: (context) => ChooseALanguageScreen())
-          //   );
-          // }),
-          //
-          // cardDashboard('Go Fly', StringValue.PLANE, (){
-          // }),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'Best Seller',
+                style: TextStyle(
+                    fontSize: size.width / 15,
+                    fontWeight: FontWeight.w500
+                ),
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: itemDashboard.map((e) => Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: CardPictureSeller(
+                      imagePath: '${e['imagePath']}',
+                      title: '${e['title']}',
+                      description: '${e['description']}',
+                      onTap: e['onTap'],
+                    ),
+                  )).toList(),
+                ),
+              ),
+            ),
+
+            // cardDashboard('Go Taxi', StringValue.TAXI, (){
+            //   Navigator.push(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => ChooseALanguageScreen())
+            //   );
+            // }),
+            //
+            // cardDashboard('Go Fly', StringValue.PLANE, (){
+            // }),
+          ],
+        ),
       )
     );
   }
