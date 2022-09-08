@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:goplus/gofly/pages/placeDetails.dart';
 import 'package:goplus/gofly/utils/app_colors.dart';
 import 'package:goplus/gofly/widgets/card_dashboard_item_image.dart';
 import 'package:goplus/gofly/widgets/tab_item_dashboard.dart';
@@ -37,10 +38,12 @@ class _Dashboard extends State<Dashboard>{
         'title': 'Bâtiment Hypnose',
         'description' : 'Rejoignez le grand bâtiment',
         'onTap': (){
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => ChooseALanguageScreen())
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PlaceDetailScreen(
+                placeList[0]
+              ))
+            );
         }
       },
 
@@ -48,28 +51,56 @@ class _Dashboard extends State<Dashboard>{
         'imagePath' : 'https://miningandbusiness.com/wp-content/uploads/2019/09/LUBUMBASHI-LA-KATANGAISE.jpg',
         'title': 'La Poste',
         'description' : 'Le milieu de la ville',
-        'onTap': ()=>print('belhanda')
+        'onTap': (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PlaceDetailScreen(
+                  placeList[1]
+              ))
+          );
+        }
       },
 
       {
         'imagePath' : 'https://mapio.net/images-p/35534226.jpg',
         'title': 'Basilique Sainte Marie',
         'description' : 'La commune Kenya, le coin show.',
-        'onTap': ()=>print('belhanda')
+        'onTap': (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PlaceDetailScreen(
+                  placeList[2]
+              ))
+          );
+        }
       },
 
       {
         'imagePath' : 'https://www.sunna-design.com/wp-content/uploads/2020/02/DJI_0921-logo.jpg',
         'title': 'Square Lubumbashi',
         'description' : 'Un meilleur endroit de divertissement.',
-        'onTap': ()=>print('belhanda')
+        'onTap': (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PlaceDetailScreen(
+                  placeList[3]
+              ))
+          );
+        }
       },
 
       {
         'imagePath' : 'https://mnctvcongo.net/wp-content/uploads/2022/08/IMG-20220827-WA0003-780x470.jpg',
         'title': 'Commune Ruashi',
         'description' : 'Atteignez les coins réculés.',
-        'onTap': ()=>print('belhanda')
+        'onTap': (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PlaceDetailScreen(
+                  placeList[4]
+              ))
+          );
+        }
       }
     ];
 
@@ -78,35 +109,70 @@ class _Dashboard extends State<Dashboard>{
         'imagePath' : 'https://tourisme.gouv.cd/wp-content/uploads/2020/01/lubumbashi2.jpg',
         'title': 'Lubumbashi',
         'description' : 'La ville cuprifère.',
-        'onTap': ()=>print('belhanda')
+        'onTap': (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PlaceDetailScreen(
+                  townList[0]
+              ))
+          );
+        }
       },
 
       {
         'imagePath' : 'https://img.20mn.fr/OUwnBcNCQ669K-HCXsa3rw/830x532_bruxelles_une_cite_a_taille_humaine0',
         'title': 'Bruxelles',
         'description' : 'Le centre de l\'europe.',
-        'onTap': ()=>print('belhanda')
+        'onTap': (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PlaceDetailScreen(
+                  townList[1]
+              ))
+          );
+        }
       },
 
       {
         'imagePath' : 'https://hotel-leon-kinshasa.com/wp-content/uploads/2022/01/istockphoto-497156586-612x612-1.jpg',
         'title': 'Kinshasa',
         'description' : 'La capitale de la rumba et culture africaine.',
-        'onTap': ()=>print('belhanda')
+        'onTap': (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PlaceDetailScreen(
+                  townList[2]
+              ))
+          );
+        }
       },
 
       {
         'imagePath' : 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/a6/9f/24/mosque.jpg?w=700&h=500&s=1',
         'title': 'Dakar',
         'description' : 'L\'Authenticité africaine.',
-        'onTap': ()=>print('belhanda')
+        'onTap': (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PlaceDetailScreen(
+                  townList[3]
+              ))
+          );
+        }
       },
 
       {
         'imagePath' : 'https://mnctvcongo.net/wp-content/uploads/2022/08/IMG-20220827-WA0003-780x470.jpg',
         'title': 'Commune Ruashi',
         'description' : 'Atteignez les coins réculés.',
-        'onTap': ()=>print('belhanda')
+        'onTap': (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PlaceDetailScreen(
+                  townList[4]
+              ))
+          );
+        }
       }];
 
     itemSeller = [
