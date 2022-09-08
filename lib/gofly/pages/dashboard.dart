@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/widgets/card_dashboard_item_image.dart';
 
 import '../utils/strings.dart';
 import 'choose_language_screen.dart';
@@ -25,18 +26,20 @@ class _Dashboard extends State<Dashboard>{
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          cardDashboard('Go Taxi', StringValue.TAXI, (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ChooseALanguageScreen())
-            );
-          }),
-
-          cardDashboard('Go Fly', StringValue.PLANE, (){
-          }),
-
-          cardDashboard('Go Shop', StringValue.SHOPPING, (){
-          })
+          CardPicture(
+            imagePath: 'https://s.yimg.com/uu/api/res/1.2/U1yjMObipSzabrdKnKRe5A--~B/aD01NzY7dz0xMDI0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/fr/rfi_475/37d66899f6929e74c54fd4ce5e51f6c1',
+            title: 'Batiment Hypnose',
+            description: 'Rejoignez la meilleure place.'
+          ),
+          // cardDashboard('Go Taxi', StringValue.TAXI, (){
+          //   Navigator.push(
+          //     context,
+          //     MaterialPageRoute(builder: (context) => ChooseALanguageScreen())
+          //   );
+          // }),
+          //
+          // cardDashboard('Go Fly', StringValue.PLANE, (){
+          // }),
         ],
       )
     );
