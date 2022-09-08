@@ -21,6 +21,8 @@ class _Dashboard extends State<Dashboard>{
 
   late List itemDashboard;
 
+  int tabActive = 0;
+
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
@@ -84,7 +86,7 @@ class _Dashboard extends State<Dashboard>{
                 TabItem(
                   size: size,
                   title: 'Best Place',
-                  activate: true,
+                  activate: tabActive == 0 ? true : false,
                   onTap: ()=> print(''),
                 ),
 
@@ -92,8 +94,14 @@ class _Dashboard extends State<Dashboard>{
                 TabItem(
                   size: size,
                   title: 'Best Destination',
-                  activate: false,
-                  onTap: ()=> print(''),
+                  activate: tabActive == 1 ? true : false,
+                  onTap: (){
+                    setState(() {
+                      if(tabActive == 0){
+                        tabActive = 1;
+                      }
+                    });
+                  },
                 ),
               ],
             ),
