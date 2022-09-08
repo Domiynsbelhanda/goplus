@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goplus/gofly/pages/select_car_screen.dart';
 import 'package:goplus/gofly/widgets/app_widgets/app_button.dart';
 
 class PlaceDetailScreen extends StatefulWidget{
@@ -104,6 +105,12 @@ class _PlaceDetailScreen extends State<PlaceDetailScreen>{
                 width: size.width,
                 child: AppButton(
                   name: 'RESERVER',
+                  onTap: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SelectCarScreen())
+                    );
+                  },
                 ),
               ),
             )
