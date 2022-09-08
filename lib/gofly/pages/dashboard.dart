@@ -23,6 +23,7 @@ class _Dashboard extends State<Dashboard>{
   late List itemDashboard;
   late List placeList;
   late List townList;
+  late List itemSeller;
 
   int tabActive = 0;
 
@@ -106,7 +107,38 @@ class _Dashboard extends State<Dashboard>{
         'title': 'Commune Ruashi',
         'description' : 'Atteignez les coins réculés.',
         'onTap': ()=>print('belhanda')
-      }
+      }];
+
+    itemSeller = [
+    {
+    'imagePath' : 'https://zoom-eco.net/wp-content/uploads/2019/12/IMG_20191214_092058.jpg',
+    'title': 'Congo Airways',
+    'onTap': ()=>print('belhanda')
+    },
+
+    {
+    'imagePath' : 'https://cdn.uc.assets.prezly.com/83477061-4765-40db-97df-dc2cbd6c30da/-/resize/1108x/-/quality/best/-/format/auto/',
+    'title': 'Bruxelles Airlines',
+    'onTap': ()=>print('belhanda')
+    },
+
+    {
+    'imagePath' : 'https://newsaero.info/news/admin/assets/image/actualite/actualite3618.jpg',
+    'title': 'SA Airlines',
+    'onTap': ()=>print('belhanda')
+    },
+
+    {
+    'imagePath' : 'https://www.tourmag.com/photo/art/default/53441096-40459454.jpg?v=1611779069',
+    'title': 'Ethipian Airways',
+    'onTap': ()=>print('belhanda')
+    },
+
+    {
+    'imagePath' : 'https://www.financialafrik.com/wp-content/uploads/2020/09/kenya-airways-600x311.jpg',
+    'title': 'Kenya Airways',
+    'onTap': ()=>print('belhanda')
+    }
     ];
 
     itemDashboard = tabActive == 0 ? placeList : townList;
@@ -194,12 +226,11 @@ class _Dashboard extends State<Dashboard>{
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: itemDashboard.map((e) => Padding(
+                  children: itemSeller.map((e) => Padding(
                     padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                     child: CardPictureSeller(
                       imagePath: '${e['imagePath']}',
                       title: '${e['title']}',
-                      description: '${e['description']}',
                       onTap: e['onTap'],
                     ),
                   )).toList(),

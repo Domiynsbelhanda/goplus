@@ -2,12 +2,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 class CardPictureSeller extends StatelessWidget {
-  CardPictureSeller({this.onTap, this.imagePath, this.title, this.description});
+  CardPictureSeller({this.onTap, this.imagePath, this.title});
 
   final Function? onTap;
   final String? imagePath;
   final String? title;
-  final String? description;
 
   @override
   Widget build(BuildContext context) {
@@ -67,19 +66,6 @@ class CardPictureSeller extends StatelessWidget {
                           color: Colors.white
                         ),
                       ),
-
-                      SizedBox(height: 4.0,),
-
-                      Container(
-                        width: size.width / 2.5,
-                        child: Text(
-                          '${description!}',
-                          style: TextStyle(
-                            fontSize: size.width / 30,
-                              color: Colors.white,
-                          ),
-                        ),
-                      )
                     ],
                   ),
                 )
