@@ -18,6 +18,29 @@ class _Dashboard extends State<Dashboard>{
 
   late Size size;
 
+  List itemDashboard = [
+    {
+      'imagePath' : 'https://s.yimg.com/uu/api/res/1.2/U1yjMObipSzabrdKnKRe5A--~B/aD01NzY7dz0xMDI0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/fr/rfi_475/37d66899f6929e74c54fd4ce5e51f6c1',
+      'title': 'Bâtiment Hypnose',
+      'description' : 'Rejoignez le grand bâtiment',
+      'onTap': ()=>print('belhanda')
+    },
+
+    {
+      'imagePath' : 'https://s.yimg.com/uu/api/res/1.2/U1yjMObipSzabrdKnKRe5A--~B/aD01NzY7dz0xMDI0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/fr/rfi_475/37d66899f6929e74c54fd4ce5e51f6c1',
+      'title': 'Bâtiment Hypnose',
+      'description' : 'Rejoignez le grand bâtiment',
+      'onTap': ()=>print('belhanda')
+    },
+
+    {
+      'imagePath' : 'https://s.yimg.com/uu/api/res/1.2/U1yjMObipSzabrdKnKRe5A--~B/aD01NzY7dz0xMDI0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/fr/rfi_475/37d66899f6929e74c54fd4ce5e51f6c1',
+      'title': 'Bâtiment Hypnose',
+      'description' : 'Rejoignez le grand bâtiment',
+      'onTap': ()=>print('belhanda')
+    }
+  ];
+
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
@@ -26,11 +49,16 @@ class _Dashboard extends State<Dashboard>{
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CardPicture(
-            imagePath: 'https://s.yimg.com/uu/api/res/1.2/U1yjMObipSzabrdKnKRe5A--~B/aD01NzY7dz0xMDI0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/fr/rfi_475/37d66899f6929e74c54fd4ce5e51f6c1',
-            title: 'Batiment Hypnose',
-            description: 'Rejoignez la meilleure place.'
+
+          Row(
+            children: itemDashboard.map((e) => CardPicture(
+              imagePath: '${e['imagePath']}',
+              title: '${e['title']}',
+              description: '${e['description']}',
+              onTap: e['onTap'],
+            )).toList(),
           ),
+
           // cardDashboard('Go Taxi', StringValue.TAXI, (){
           //   Navigator.push(
           //     context,
