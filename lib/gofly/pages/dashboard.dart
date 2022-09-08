@@ -18,37 +18,87 @@ class _Dashboard extends State<Dashboard>{
 
   late Size size;
 
-  List itemDashboard = [
-    {
-      'imagePath' : 'https://s.yimg.com/uu/api/res/1.2/U1yjMObipSzabrdKnKRe5A--~B/aD01NzY7dz0xMDI0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/fr/rfi_475/37d66899f6929e74c54fd4ce5e51f6c1',
-      'title': 'Bâtiment Hypnose',
-      'description' : 'Rejoignez le grand bâtiment',
-      'onTap': ()=>print('belhanda')
-    },
-
-    {
-      'imagePath' : 'https://s.yimg.com/uu/api/res/1.2/U1yjMObipSzabrdKnKRe5A--~B/aD01NzY7dz0xMDI0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/fr/rfi_475/37d66899f6929e74c54fd4ce5e51f6c1',
-      'title': 'Bâtiment Hypnose',
-      'description' : 'Rejoignez le grand bâtiment',
-      'onTap': ()=>print('belhanda')
-    },
-
-    {
-      'imagePath' : 'https://s.yimg.com/uu/api/res/1.2/U1yjMObipSzabrdKnKRe5A--~B/aD01NzY7dz0xMDI0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/fr/rfi_475/37d66899f6929e74c54fd4ce5e51f6c1',
-      'title': 'Bâtiment Hypnose',
-      'description' : 'Rejoignez le grand bâtiment',
-      'onTap': ()=>print('belhanda')
-    }
-  ];
+  late List itemDashboard;
 
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
+
+    itemDashboard = [
+      {
+        'imagePath' : 'https://s.yimg.com/uu/api/res/1.2/U1yjMObipSzabrdKnKRe5A--~B/aD01NzY7dz0xMDI0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/fr/rfi_475/37d66899f6929e74c54fd4ce5e51f6c1',
+        'title': 'Bâtiment Hypnose',
+        'description' : 'Rejoignez le grand bâtiment',
+        'onTap': ()=>print('belhanda')
+      },
+
+      {
+        'imagePath' : 'https://miningandbusiness.com/wp-content/uploads/2019/09/LUBUMBASHI-LA-KATANGAISE.jpg',
+        'title': 'La Poste',
+        'description' : 'Le milieu de la ville',
+        'onTap': ()=>print('belhanda')
+      },
+
+      {
+        'imagePath' : 'https://mapio.net/images-p/35534226.jpg',
+        'title': 'Basilique Sainte Marie',
+        'description' : 'La commune Kenya, le coin show.',
+        'onTap': ()=>print('belhanda')
+      },
+
+      {
+        'imagePath' : 'https://www.sunna-design.com/wp-content/uploads/2020/02/DJI_0921-logo.jpg',
+        'title': 'Square Lubumbashi',
+        'description' : 'Un meilleur endroit de divertissement.',
+        'onTap': ()=>print('belhanda')
+      },
+
+      {
+        'imagePath' : 'https://mnctvcongo.net/wp-content/uploads/2022/08/IMG-20220827-WA0003-780x470.jpg',
+        'title': 'Commune Ruashi',
+        'description' : 'Atteignez les coins réculés.',
+        'onTap': ()=>print('belhanda')
+      }
+    ];
     // TODO: implement build
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Padding(
+              padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'Discover',
+              style: TextStyle(
+                fontSize: size.width / 15,
+                fontWeight: FontWeight.w500
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
+            child: Row(
+              children: [
+                Text(
+                  'Meilleur Lieu',
+                  style: TextStyle(
+                      fontSize: size.width / 25,
+                      color: Colors.grey
+                  ),
+                ),
+
+                SizedBox(width: 16.0,),
+                Text(
+                  'Meilleur Lieu',
+                  style: TextStyle(
+                    fontSize: size.width / 25,
+                    color: Colors.grey
+                  ),
+                )
+              ],
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SingleChildScrollView(
