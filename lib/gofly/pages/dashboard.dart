@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:goplus/gofly/utils/app_colors.dart';
 import 'package:goplus/gofly/widgets/card_dashboard_item_image.dart';
+import 'package:goplus/gofly/widgets/tab_item_dashboard.dart';
 
 import '../utils/strings.dart';
 import 'choose_language_screen.dart';
@@ -80,22 +81,20 @@ class _Dashboard extends State<Dashboard>{
             padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
             child: Row(
               children: [
-                Text(
-                  'Meilleur Lieu',
-                  style: TextStyle(
-                      fontSize: size.width / 25,
-                      color: Colors.grey
-                  ),
+                TabItem(
+                  size: size,
+                  title: 'Best Place',
+                  activate: true,
+                  onTap: ()=> print(''),
                 ),
 
                 SizedBox(width: 16.0,),
-                Text(
-                  'Meilleur Lieu',
-                  style: TextStyle(
-                    fontSize: size.width / 25,
-                    color: Colors.grey
-                  ),
-                )
+                TabItem(
+                  size: size,
+                  title: 'Best Destination',
+                  activate: false,
+                  onTap: ()=> print(''),
+                ),
               ],
             ),
           ),
