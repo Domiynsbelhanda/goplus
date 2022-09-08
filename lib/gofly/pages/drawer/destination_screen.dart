@@ -9,6 +9,8 @@ import 'package:goplus/gofly/utils/strings.dart';
 import 'package:goplus/gofly/widgets/kf_drawer.dart';
 import 'package:goplus/gofly/widgets/map_widget.dart';
 
+import '../../widgets/card_dashboard_item_place.dart';
+
 class DestinationScreen extends KFDrawerContent {
   @override
   _DestinationScreenState createState() => _DestinationScreenState();
@@ -17,6 +19,7 @@ class DestinationScreen extends KFDrawerContent {
 class _DestinationScreenState extends State<DestinationScreen> {
   late Size size;
   late DestinationModel _localeText;
+  late List itemSeller;
 
   @override
   void initState() {
@@ -29,6 +32,43 @@ class _DestinationScreenState extends State<DestinationScreen> {
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
+
+    itemSeller = [
+      {
+        'imagePath' : 'https://zoom-eco.net/wp-content/uploads/2019/12/IMG_20191214_092058.jpg',
+        'title': 'Congo Airways',
+        'description': 'A 20 Min',
+        'onTap': ()=>print('belhanda')
+      },
+
+      {
+        'imagePath' : 'https://cdn.uc.assets.prezly.com/83477061-4765-40db-97df-dc2cbd6c30da/-/resize/1108x/-/quality/best/-/format/auto/',
+        'title': 'Bruxelles Airlines',
+        'description': 'A 20 Min',
+        'onTap': ()=>print('belhanda')
+      },
+
+      {
+        'imagePath' : 'https://newsaero.info/news/admin/assets/image/actualite/actualite3618.jpg',
+        'title': 'SA Airlines',
+        'description': 'A 20 Min',
+        'onTap': ()=>print('belhanda')
+      },
+
+      {
+        'imagePath' : 'https://www.tourmag.com/photo/art/default/53441096-40459454.jpg?v=1611779069',
+        'title': 'Ethipian Airways',
+        'description': 'A 20 Min',
+        'onTap': ()=>print('belhanda')
+      },
+
+      {
+        'imagePath' : 'https://www.financialafrik.com/wp-content/uploads/2020/09/kenya-airways-600x311.jpg',
+        'title': 'Kenya Airways',
+        'description': 'A 20 Min',
+        'onTap': ()=>print('belhanda')
+      }
+    ];
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -147,6 +187,23 @@ class _DestinationScreenState extends State<DestinationScreen> {
                             ),
                           ),
                         ),
+                        SizedBox(height: 16,),
+
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: itemSeller.map((e) => Padding(
+                              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                              child: CardPicturePlace(
+                                imagePath: '${e['imagePath']}',
+                                title: '${e['title']}',
+                                description: '${e['description']}',
+                                onTap: e['onTap'],
+                              ),
+                            )).toList(),
+                          ),
+                        ),
+
                         SizedBox(height: 20.0),
                       ],
                     ),
