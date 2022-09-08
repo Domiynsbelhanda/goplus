@@ -20,6 +20,8 @@ class _Dashboard extends State<Dashboard>{
   late Size size;
 
   late List itemDashboard;
+  late List placeList;
+  late List townList;
 
   int tabActive = 0;
 
@@ -27,7 +29,7 @@ class _Dashboard extends State<Dashboard>{
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
 
-    itemDashboard = [
+    placeList = [
       {
         'imagePath' : 'https://s.yimg.com/uu/api/res/1.2/U1yjMObipSzabrdKnKRe5A--~B/aD01NzY7dz0xMDI0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/fr/rfi_475/37d66899f6929e74c54fd4ce5e51f6c1',
         'title': 'Bâtiment Hypnose',
@@ -63,6 +65,45 @@ class _Dashboard extends State<Dashboard>{
         'onTap': ()=>print('belhanda')
       }
     ];
+
+    townList = [
+      {
+        'imagePath' : 'https://tourisme.gouv.cd/wp-content/uploads/2020/01/lubumbashi2.jpg',
+        'title': 'Lubumbashi',
+        'description' : 'La ville cuprifère.',
+        'onTap': ()=>print('belhanda')
+      },
+
+      {
+        'imagePath' : 'https://img.20mn.fr/OUwnBcNCQ669K-HCXsa3rw/830x532_bruxelles_une_cite_a_taille_humaine0',
+        'title': 'Bruxelles',
+        'description' : 'Le centre de l\'europe.',
+        'onTap': ()=>print('belhanda')
+      },
+
+      {
+        'imagePath' : 'https://hotel-leon-kinshasa.com/wp-content/uploads/2022/01/istockphoto-497156586-612x612-1.jpg',
+        'title': 'Kinshasa',
+        'description' : 'La capitale de la rumba et culture africaine.',
+        'onTap': ()=>print('belhanda')
+      },
+
+      {
+        'imagePath' : 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/a6/9f/24/mosque.jpg?w=700&h=500&s=1',
+        'title': 'Dakar',
+        'description' : 'L\'Authenticité africaine.',
+        'onTap': ()=>print('belhanda')
+      },
+
+      {
+        'imagePath' : 'https://mnctvcongo.net/wp-content/uploads/2022/08/IMG-20220827-WA0003-780x470.jpg',
+        'title': 'Commune Ruashi',
+        'description' : 'Atteignez les coins réculés.',
+        'onTap': ()=>print('belhanda')
+      }
+    ];
+
+    itemDashboard = tabActive == 0 ? placeList : townList;
     // TODO: implement build
     return Scaffold(
       body: Column(
@@ -87,7 +128,13 @@ class _Dashboard extends State<Dashboard>{
                   size: size,
                   title: 'Best Place',
                   activate: tabActive == 0 ? true : false,
-                  onTap: ()=> print(''),
+                  onTap: (){
+                    setState(() {
+                      if(tabActive == 1){
+                        tabActive = 0;
+                      }
+                    });
+                  },
                 ),
 
                 SizedBox(width: 16.0,),
