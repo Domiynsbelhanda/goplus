@@ -7,6 +7,8 @@ import 'package:goplus/gofly/utils/class_builder.dart';
 import 'package:goplus/gofly/utils/strings.dart';
 import 'package:goplus/gofly/widgets/kf_drawer.dart';
 
+import '../dashboard.dart';
+
 class DrawerScreen extends KFDrawerContent {
   String? screen;
   DrawerScreen({ this.screen});
@@ -178,25 +180,53 @@ class _DrawerScreenState extends State<DrawerScreen>
             ],
           ),
         ),
-        footer: Padding(
-          padding: const EdgeInsets.only(bottom: 48.0),
-          child: KFDrawerItem(
-            text: Container(
-              margin: EdgeInsets.only(left: 30),
-              child: Text(
-                'Deconnexion',
-                style: TextStyle(color: Colors.black),
+        footer: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 48.0),
+              child: KFDrawerItem(
+                text: Container(
+                  margin: EdgeInsets.only(left: 30),
+                  child: Text(
+                    'Dashboard',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+                icon: Icon(
+                  Icons.menu,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) =>
+                          Dashboard()),
+                          (route) => false);
+                },
               ),
             ),
-            icon: SvgPicture.asset(StringValue.LOGOUT, color: Colors.black,),
-            onPressed: () {
-              if (widget.screen == 'login') {
-                Navigator.pop(context);
-              } else {
-                Navigator.of(context)..pop()..pop()..pop()..pop();
-              }
-            },
-          ),
+
+            Padding(
+              padding: const EdgeInsets.only(bottom: 48.0),
+              child: KFDrawerItem(
+                text: Container(
+                  margin: EdgeInsets.only(left: 30),
+                  child: Text(
+                    'Deconnexion',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+                icon: SvgPicture.asset(StringValue.LOGOUT, color: Colors.black,),
+                onPressed: () {
+                  if (widget.screen == 'login') {
+                    Navigator.pop(context);
+                  } else {
+                    Navigator.of(context)..pop()..pop()..pop()..pop();
+                  }
+                },
+              ),
+            ),
+          ],
         ),
         decoration: BoxDecoration(color: AppColors.primaryColor),
       ),

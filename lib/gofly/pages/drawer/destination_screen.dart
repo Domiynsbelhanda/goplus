@@ -82,7 +82,7 @@ class _DestinationScreenState extends State<DestinationScreen> {
                 height: size.width * 0.15,
                 width: size.width * 0.15,
                 color: Colors.white,
-                child: Icon(
+                child: const Icon(
                   Icons.my_location,
                   size: 32.0,
                 ),
