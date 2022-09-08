@@ -276,6 +276,25 @@ class _Dashboard extends State<Dashboard>{
               ),
             ),
 
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                cardDashboard('Besoin d\'un Taxi?', StringValue.TAXI, (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ChooseALanguageScreen())
+                  );
+                }),
+
+                cardDashboard('Besoin d\'un Billet?', StringValue.PLANE, (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ChooseALanguageScreen())
+                  );
+                }),
+              ],
+            ),
+
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
@@ -303,16 +322,6 @@ class _Dashboard extends State<Dashboard>{
                 ),
               ),
             ),
-
-            // cardDashboard('Go Taxi', StringValue.TAXI, (){
-            //   Navigator.push(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => ChooseALanguageScreen())
-            //   );
-            // }),
-            //
-            // cardDashboard('Go Fly', StringValue.PLANE, (){
-            // }),
           ],
         ),
       )
@@ -323,14 +332,14 @@ class _Dashboard extends State<Dashboard>{
     return GestureDetector(
       onTap: ()=> click(),
       child: Padding(
-        padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 16.0, top: 16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Container(
-          width: size.width,
+          width: size.width / 2.4,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16.0),
             boxShadow: [
               BoxShadow(
-                color: AppColors.primaryColor.withOpacity(0.3),
+                color: Colors.black.withOpacity(0.3),
                 offset: const Offset(
                   1.0,
                   1.0,
@@ -347,12 +356,11 @@ class _Dashboard extends State<Dashboard>{
             ]
           ),
           child: Padding(
-            padding: const EdgeInsets.only(top: 32.0, bottom: 32.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(width: 8.0,),
                 Container(
                   height: size.width / 3.5,
                   width: size.width / 3,
@@ -382,12 +390,14 @@ class _Dashboard extends State<Dashboard>{
                   ),
                 ),
 
+                SizedBox(height: 16.0,),
+
                 Text(
                   '${text}',
                   style: TextStyle(
                     fontFamily: 'Anton',
-                    color: AppColors.primaryColor,
-                    fontSize: size.width / 10
+                    color: Colors.grey,
+                    fontSize: size.width / 20
                   ),
                 ),
 
