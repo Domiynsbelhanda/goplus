@@ -71,7 +71,7 @@ class CardPicturePlace extends StatelessWidget {
                       Container(
                         width: size.width / 3.5,
                         child: Text(
-                          '${description!}',
+                          '${description!}.',
                           style: TextStyle(
                             fontSize: size.width / 35,
                             color: Colors.white,
