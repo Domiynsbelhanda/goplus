@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
 
 class Sliders extends StatefulWidget {
   final String image;
@@ -15,38 +16,65 @@ class _SlidersState extends State<Sliders> {
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height,
-      width: size.width,
-      decoration: BoxDecoration(
-        color: Colors.blueGrey
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 15,
-            ),
-            height: size.height * 0.3,
-            child: SvgPicture.asset(widget.image),
+    return Stack(
+      children: [
+        Container(
+          height: size.height,
+          width: size.width,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage(
+                  '${widget.image}'
+                ),
+              fit: BoxFit.fitHeight
+            )
           ),
-          SizedBox(height: 45.0),
-          Text(
-            widget.name,
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
+        ),
+
+        Container(
+          height: size.height,
+          width: size.width,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: FractionalOffset.topCenter,
+              end: FractionalOffset.bottomCenter,
+              colors: [
+                Colors.white.withOpacity(0.0),
+                Colors.white.withOpacity(1.0),
+              ],
             ),
           ),
-          SizedBox(height: 20.0),
-          Text(
-            widget.intro,
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.grey[400]),
-          )
-        ],
-      ),
+        ),
+
+        Positioned(
+          bottom: 100.0,
+          left: 0.0,
+          right: 0.0,
+          child: Container(
+            width: size.width / 1.2,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: 45.0),
+                Text(
+                  widget.name,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                Text(
+                  widget.intro,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black),
+                )
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

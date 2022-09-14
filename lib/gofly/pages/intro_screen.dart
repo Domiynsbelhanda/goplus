@@ -35,42 +35,33 @@ class _IntroScreenState extends State<IntroScreen> {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          Container(
-            height: size.height,
-            width: size.width,
-            child: CarouselSlider(
-              items: [
-                Sliders(
-                  image: StringValue.INTRO1,
-                  name: _localeText.titleLocateDesti,
-                  intro: _localeText.bodyLocateDesti,
-                ),
-                Sliders(
-                  image: StringValue.INTRO2,
-                  name: _localeText.titleSelectYourRoot,
-                  intro: _localeText.bodySelectYourRoot,
-                ),
-                Sliders(
-                  image: StringValue.INTRO3,
-                  name: _localeText.titleGetYourTexi,
-                  intro: _localeText.bodyGetYourTexi,
-                ),
-              ],
-              carouselController: buttonController,
-              options: CarouselOptions(
-                  height: size.height,
-                  autoPlay: false,
-                  scrollPhysics: ClampingScrollPhysics(),
-                  enableInfiniteScroll: false,
-                  viewportFraction: 1,
-                  aspectRatio: 2.0,
-                  reverse: false,
-                  onPageChanged: (index, context) {
-                    setState(() {
-                      selectedImage = index;
-                    });
-                  }),
-            ),
+          CarouselSlider(
+            items: [
+              Sliders(
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Tour_de_l%27%C3%89changeur_de_Limete.jpg/800px-Tour_de_l%27%C3%89changeur_de_Limete.jpg',
+                name: 'Echangeur de limété',
+                intro: _localeText.bodyLocateDesti,
+              ),
+              Sliders(
+                image: 'https://www.gospelmuzik.cd/sites/default/files/styles/background_la_une/public/2021-10/fikin-batteur-tam-tam-210718-800px.jpg?itok=zHFEUu64',
+                name: 'Foire Internationale de Kinshasa',
+                intro: _localeText.bodySelectYourRoot,
+              )
+            ],
+            carouselController: buttonController,
+            options: CarouselOptions(
+                height: size.height,
+                autoPlay: false,
+                scrollPhysics: ClampingScrollPhysics(),
+                enableInfiniteScroll: false,
+                viewportFraction: 1,
+                aspectRatio: 2.0,
+                reverse: false,
+                onPageChanged: (index, context) {
+                  setState(() {
+                    selectedImage = index;
+                  });
+                }),
           ),
           Column(
             children: [
@@ -100,54 +91,6 @@ class _IntroScreenState extends State<IntroScreen> {
                     )
                   ],
                 ),
-              ),
-              Spacer(),
-              SizedBox(
-                height: 20.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: EdgeInsets.all(2.0),
-                    height: size.height * 0.01,
-                    width: size.height * 0.01,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: selectedImage == 0
-                            ? AppColors.primaryColor
-                            : Colors.transparent,
-                        border: selectedImage == 0
-                            ? Border.all(color: AppColors.primaryColor)
-                            : Border.all(color: Colors.black54)),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(2.0),
-                    height: size.height * 0.01,
-                    width: size.height * 0.01,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: selectedImage == 1
-                            ? AppColors.primaryColor
-                            : Colors.transparent,
-                        border: selectedImage == 1
-                            ? Border.all(color: AppColors.primaryColor)
-                            : Border.all(color: Colors.black54)),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(2.0),
-                    height: size.height * 0.01,
-                    width: size.height * 0.01,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: selectedImage == 2
-                            ? AppColors.primaryColor
-                            : Colors.transparent,
-                        border: selectedImage == 2
-                            ? Border.all(color: AppColors.primaryColor)
-                            : Border.all(color: Colors.black54)),
-                  ),
-                ],
               ),
               Spacer(),
               Container(
