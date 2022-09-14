@@ -10,6 +10,8 @@ import 'package:provider/provider.dart';
 import 'package:goplus/gofly/models/locales_models.dart';
 import 'package:goplus/gofly/models/locales_provider_model.dart';
 
+import '../cancel_ride_screen.dart';
+
 class PaymentMethodScreen extends KFDrawerContent {
   @override
   _PaymentMethodScreenState createState() => _PaymentMethodScreenState();
@@ -324,9 +326,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => PaymentScreen(
-                      isPage: true,
-                    ),
+                    builder: (_) => CancelRideScreen()
                   ),
                 );
               },

@@ -59,32 +59,32 @@ class _DrawerScreenState extends State<DrawerScreen>
           ),
           page: ClassBuilder.fromString('YourRidesScreen'),
         ),
-        KFDrawerItem.initWithPage(
-          text: Padding(
-            padding: const EdgeInsets.only(left: 39, bottom: 15, top: 15),
-            child: Text(
-              'Paiements',
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
-          icon: Container(
-            margin: const EdgeInsets.only(bottom: 15, top: 15),
-            child: SvgPicture.asset(
-              StringValue.PAYMENT,
-              color: Colors.black,
-            ),
-          ),
-          page: ClassBuilder.fromString('PaymentDetailsScreen'),
-        ),
-        KFDrawerItem.initWithPage(
-          text: Padding(
-              padding: const EdgeInsets.only(left: 39, bottom: 15, top: 15),
-              child: Text('Message', style: TextStyle(color: Colors.black))),
-          icon: Container(
-              margin: const EdgeInsets.only(bottom: 15, top: 15),
-              child: SvgPicture.asset(StringValue.MESSAGE, color: Colors.black,)),
-          page: ClassBuilder.fromString('MessagesScreen'),
-        ),
+        // KFDrawerItem.initWithPage(
+        //   text: Padding(
+        //     padding: const EdgeInsets.only(left: 39, bottom: 15, top: 15),
+        //     child: Text(
+        //       'Paiements',
+        //       style: TextStyle(color: Colors.black),
+        //     ),
+        //   ),
+        //   icon: Container(
+        //     margin: const EdgeInsets.only(bottom: 15, top: 15),
+        //     child: SvgPicture.asset(
+        //       StringValue.PAYMENT,
+        //       color: Colors.black,
+        //     ),
+        //   ),
+        //   page: ClassBuilder.fromString('PaymentDetailsScreen'),
+        // ),
+        // KFDrawerItem.initWithPage(
+        //   text: Padding(
+        //       padding: const EdgeInsets.only(left: 39, bottom: 15, top: 15),
+        //       child: Text('Message', style: TextStyle(color: Colors.black))),
+        //   icon: Container(
+        //       margin: const EdgeInsets.only(bottom: 15, top: 15),
+        //       child: SvgPicture.asset(StringValue.MESSAGE, color: Colors.black,)),
+        //   page: ClassBuilder.fromString('MessagesScreen'),
+        // ),
         KFDrawerItem.initWithPage(
           text: Padding(
             padding: const EdgeInsets.only(left: 42, bottom: 15, top: 15),
