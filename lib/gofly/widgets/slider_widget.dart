@@ -15,31 +15,38 @@ class _SlidersState extends State<Sliders> {
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 15,
+    return Container(
+      height: size.height,
+      width: size.width,
+      decoration: BoxDecoration(
+        color: Colors.blueGrey
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 15,
+            ),
+            height: size.height * 0.3,
+            child: SvgPicture.asset(widget.image),
           ),
-          height: size.height * 0.3,
-          child: SvgPicture.asset(widget.image),
-        ),
-        SizedBox(height: 45.0),
-        Text(
-          widget.name,
-          style: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
+          SizedBox(height: 45.0),
+          Text(
+            widget.name,
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        SizedBox(height: 20.0),
-        Text(
-          widget.intro,
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.grey[400]),
-        )
-      ],
+          SizedBox(height: 20.0),
+          Text(
+            widget.intro,
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.grey[400]),
+          )
+        ],
+      ),
     );
   }
 }
