@@ -97,7 +97,7 @@ class _IntroScreenState extends State<IntroScreen> {
                 margin: EdgeInsets.all(10.0),
                 height: size.height * 0.09,
                 width: size.width * 0.9,
-                child: selectedImage == 2
+                child: selectedImage == 1
                     ? Row(
                         children: [
                           Spacer(),
