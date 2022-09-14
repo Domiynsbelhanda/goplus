@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goplus/gofly/pages/dashboard.dart';
 import 'package:provider/provider.dart';
 import 'package:goplus/gofly/models/locales_models.dart';
 import 'package:goplus/gofly/models/locales_provider_model.dart';
@@ -96,7 +97,7 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => DrawerScreen(),
+                      builder: (_) => Dashboard(),
                     ),
                   ),
                 ),
