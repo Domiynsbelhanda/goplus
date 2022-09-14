@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:goplus/gofly/pages/placeDetails.dart';
+import 'package:goplus/gofly/pages/set_pickup_time_screen.dart';
 import 'package:goplus/gofly/utils/app_colors.dart';
 import 'package:goplus/gofly/widgets/card_dashboard_item_image.dart';
 import 'package:goplus/gofly/widgets/tab_item_dashboard.dart';
+import 'package:provider/provider.dart';
 
+import '../models/locales_models.dart';
+import '../models/locales_provider_model.dart';
 import '../utils/strings.dart';
 import '../widgets/card_dashboard_item_seller.dart';
 import 'choose_language_screen.dart';
@@ -23,6 +27,16 @@ class _Dashboard extends State<Dashboard>{
 
   late List itemDashboard;
   late List placeList;
+
+  late DestinationModel _localeText;
+
+  @override
+  void initState() {
+    super.initState();
+    _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
+        .getLocalizedStrings
+        .destinationScreen!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -151,6 +165,66 @@ class _Dashboard extends State<Dashboard>{
               ),
             ),
 
+            Container(
+              width: size.width,
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20.0, top: 25),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Où Allez-vous?',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22.0,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0),
+                      child: Text(
+                        _localeText.bodyWhereGoing,
+                        style:
+                        TextStyle(color: Colors.grey, fontSize: 16.0),
+                      ),
+                    ),
+                    SizedBox(height: 10.0),
+                    Container(
+                      margin:
+                      EdgeInsets.only(bottom: 20, top: 20, right: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: Colors.grey[100],
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                spreadRadius: 1,
+                                blurRadius: 10)
+                          ]),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: _localeText.enterDestination,
+                          border: InputBorder.none,
+                          suffixIcon: IconButton(
+                            icon: Icon(Icons.search),
+                            onPressed: () {
+                              FocusScope.of(context).unfocus();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => SetPickupTimeScreen(),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       )

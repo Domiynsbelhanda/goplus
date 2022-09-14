@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
+import 'package:goplus/gofly/pages/select_car_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:goplus/gofly/models/locales_models.dart';
 import 'package:goplus/gofly/models/locales_provider_model.dart';
@@ -188,7 +189,7 @@ class _SetPickupTimeScreenState extends State<SetPickupTimeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => SearchPlaceScreen(),
+                          builder: (_) => SelectCarScreen(),
                         ),
                       );
                     },

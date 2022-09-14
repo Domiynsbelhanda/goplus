@@ -157,7 +157,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            "\$105",
+                            "\$5",
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -166,6 +166,57 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                         ),
                       ),
                     ],
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 15.0,
+                      top: 10,
+                    ),
+                    child: Text(
+                      'Information sur le chauffeur',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Prix par 30 min : 5\$',
+                      style: TextStyle(
+                        fontSize: 12.0,
+                      ),
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 18,
+                    ),
+                  ),
+                  Container(
+                    color: Colors.grey[300],
+                    height: 0.5,
+                    margin: EdgeInsets.symmetric(horizontal: 15),
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Couleur : Bleu',
+                      style: TextStyle(
+                        fontSize: 12.0,
+                      ),
+                    )
+                  ),
+                  Container(
+                    color: Colors.grey[300],
+                    height: 0.5,
+                    margin: EdgeInsets.symmetric(horizontal: 15),
+                  ),
+                  SizedBox(
+                    height: 10,
                   )
                 ],
               ),
@@ -198,67 +249,67 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                       size: 18,
                     ),
                   ),
-                  Container(
-                    color: Colors.grey[300],
-                    height: 0.5,
-                    margin: EdgeInsets.symmetric(horizontal: 15),
-                  ),
-                  ListTile(
-                    leading: SvgPicture.asset(StringValue.CASH),
-                    title: Text(
-                      'Mobile Money',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 18,
-                    ),
-                  ),
-                  Container(
-                    color: Colors.grey[300],
-                    height: 0.5,
-                    margin: EdgeInsets.symmetric(horizontal: 15),
-                  ),
-                  ListTile(
-                    leading: SvgPicture.asset(StringValue.MASTER),
-                    title: Text(
-                      _localeText.payWithMaster,
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                  ),
-                  ListTile(
-                    leading: SvgPicture.asset(
-                      StringValue.PAYPAL,
-                    ),
-                    title: Text(
-                      _localeText.payWithPaypal,
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                  ),
-                  ListTile(
-                    leading: Container(
-                      height: size.width * 0.1,
-                      width: size.width * 0.1,
-                      child: SvgPicture.asset(StringValue.VISA),
-                    ),
-                    title: Text(
-                      _localeText.payWithVisa,
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    color: Colors.grey[300],
-                    height: 0.5,
-                    margin: EdgeInsets.symmetric(horizontal: 15),
-                  ),
+                  // Container(
+                  //   color: Colors.grey[300],
+                  //   height: 0.5,
+                  //   margin: EdgeInsets.symmetric(horizontal: 15),
+                  // ),
+                  // ListTile(
+                  //   leading: SvgPicture.asset(StringValue.CASH),
+                  //   title: Text(
+                  //     'Mobile Money',
+                  //     style: TextStyle(
+                  //       fontSize: 12.0,
+                  //     ),
+                  //   ),
+                  //   trailing: Icon(
+                  //     Icons.arrow_forward_ios,
+                  //     size: 18,
+                  //   ),
+                  // ),
+                  // Container(
+                  //   color: Colors.grey[300],
+                  //   height: 0.5,
+                  //   margin: EdgeInsets.symmetric(horizontal: 15),
+                  // ),
+                  // ListTile(
+                  //   leading: SvgPicture.asset(StringValue.MASTER),
+                  //   title: Text(
+                  //     _localeText.payWithMaster,
+                  //     style: TextStyle(
+                  //       fontSize: 12.0,
+                  //     ),
+                  //   ),
+                  // ),
+                  // ListTile(
+                  //   leading: SvgPicture.asset(
+                  //     StringValue.PAYPAL,
+                  //   ),
+                  //   title: Text(
+                  //     _localeText.payWithPaypal,
+                  //     style: TextStyle(
+                  //       fontSize: 12.0,
+                  //     ),
+                  //   ),
+                  // ),
+                  // ListTile(
+                  //   leading: Container(
+                  //     height: size.width * 0.1,
+                  //     width: size.width * 0.1,
+                  //     child: SvgPicture.asset(StringValue.VISA),
+                  //   ),
+                  //   title: Text(
+                  //     _localeText.payWithVisa,
+                  //     style: TextStyle(
+                  //       fontSize: 12.0,
+                  //     ),
+                  //   ),
+                  // ),
+                  // Container(
+                  //   color: Colors.grey[300],
+                  //   height: 0.5,
+                  //   margin: EdgeInsets.symmetric(horizontal: 15),
+                  // ),
                   SizedBox(
                     height: 10,
                   )
