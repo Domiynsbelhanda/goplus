@@ -124,7 +124,7 @@ class _Dashboard extends State<Dashboard>{
                     Padding(
                       padding: const EdgeInsets.only(top: 5.0),
                       child: Text(
-                        'Où allez-vous?',
+                        'Réjoignez votre destination grâce à nos taxis disponibles',
                         style:
                         TextStyle(color: Colors.grey, fontSize: 16.0),
                       ),
@@ -145,7 +145,7 @@ class _Dashboard extends State<Dashboard>{
                           ]),
                       child: TextField(
                         decoration: InputDecoration(
-                          hintText: 'Joignez votre destination',
+                          hintText: 'Entrez votre destination ici',
                           border: InputBorder.none,
                           suffixIcon: IconButton(
                             icon: Icon(Icons.search),
