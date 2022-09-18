@@ -264,6 +264,36 @@ class _TourismForm extends State<TourismForm>{
         return null;
       },
       ),
+
+      CoolStep(
+        title: 'Voyage de Rêve - Tourisme',
+        subtitle: 'Validation du formulaire',
+        content: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          width: double.infinity,
+          child: GestureDetector(
+              onTap: () {
+
+              },
+              child: Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: AppColors.primaryColor,
+                        borderRadius: BorderRadius.circular(8.0)
+                    ),
+                    margin: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16.0),
+                    child: const Text(
+                        'CONFIRMATION DU RENDEZ-VOUS'
+                    ),
+                  )
+              )
+          ),
+        ),
+        validation: () {
+          return null;
+        },
+      ),
     ];
 
     final stepper = CoolSteppers(
@@ -281,7 +311,7 @@ class _TourismForm extends State<TourismForm>{
             Positioned(
                 top: 16,
                 right: 16,
-                child: BackButtons(context)
+                child: CloseButtons(context)
             ),
           ],
         ),
