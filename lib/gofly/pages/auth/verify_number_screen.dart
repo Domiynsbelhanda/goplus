@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:goplus/gofly/pages/dashboard.dart';
+import 'package:goplus/dashboard.dart';
 import 'package:provider/provider.dart';
 import 'package:goplus/gofly/models/locales_models.dart';
 import 'package:goplus/gofly/models/locales_provider_model.dart';

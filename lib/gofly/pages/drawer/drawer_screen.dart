@@ -7,7 +7,7 @@ import 'package:goplus/gofly/utils/class_builder.dart';
 import 'package:goplus/gofly/utils/strings.dart';
 import 'package:goplus/gofly/widgets/kf_drawer.dart';
 
-import '../dashboard.dart';
+import '../../../dashboard.dart';
 
 class DrawerScreen extends KFDrawerContent {
   String? screen;

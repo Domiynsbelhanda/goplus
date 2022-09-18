@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:goplus/gofly/pages/placeDetails.dart';
+import 'package:goplus/placeDetails.dart';
 import 'package:goplus/gofly/pages/set_pickup_time_screen.dart';
 import 'package:goplus/gofly/utils/app_colors.dart';
 import 'package:goplus/gofly/widgets/card_dashboard_item_image.dart';
 import 'package:goplus/gofly/widgets/tab_item_dashboard.dart';
 import 'package:provider/provider.dart';
 
-import '../models/locales_models.dart';
-import '../models/locales_provider_model.dart';
-import '../utils/strings.dart';
-import '../widgets/card_dashboard_item_seller.dart';
-import 'choose_language_screen.dart';
+import 'gofly/models/locales_models.dart';
+import 'gofly/models/locales_provider_model.dart';
+import 'gofly/utils/strings.dart';
+import 'gofly/widgets/card_dashboard_item_seller.dart';
+import 'gofly/pages/choose_language_screen.dart';
 
 class Dashboard extends StatefulWidget{
   @override

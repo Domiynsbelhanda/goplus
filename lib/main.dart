@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:goplus/gofly/pages/dashboard.dart';
+import 'package:goplus/dashboard.dart';
 import 'package:provider/provider.dart';
 import 'package:goplus/gofly/models/locales_provider_model.dart';
 import 'package:goplus/gofly/pages/choose_language_screen.dart';
@@ -42,17 +42,17 @@ class _MyApp extends State<MyApp>{
       debugShowCheckedModeBanner: false,
       theme: AppTheme.themeData,
       title: "Go Plus",
-      localizationsDelegates: [
+      supportedLocales: const [
+        Locale('fr', ''),
+        Locale('lg', ''),
+      ],
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
-        Locale('fr', ''),
-        Locale('lg', ''),
-      ],
       home: AnimatedSplashScreen(
-        nextScreen: ChooseALanguageScreen(), //Dashboard(), //Dashboard(), //
+        nextScreen: Dashboard(), //Dashboard(), //Dashboard(), //
         duration: 2500,
         splash: "assets/icon/white-text.png",
         backgroundColor : Color(0xFFFFD80E),
