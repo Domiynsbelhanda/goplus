@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
 
-notification_dialog(BuildContext context, String text) {
+notification_dialog(BuildContext context, String text, var button) {
 
   // set up the button
   Widget okButton = TextButton(
-    child: Text("FERMER"),
-    onPressed: () {
-      Navigator.pop(context);
-    },
+    child: Container(
+      padding: const EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          color: AppColors.primaryColor,
+          borderRadius: BorderRadius.circular(8.0)
+        ),
+        child: Text(
+            '${button['label']}',
+          style: TextStyle(
+            color: Colors.black
+          ),
+        )
+    ),
+    onPressed: button['onTap'],
   );
 
   double width = MediaQuery.of(context).size.width;
@@ -19,7 +30,7 @@ notification_dialog(BuildContext context, String text) {
         BorderRadius.circular(20.0)),
     child: SizedBox(
       width: width / 1,
-      height: width / 1,
+      height: width / 1.3,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -38,10 +49,14 @@ notification_dialog(BuildContext context, String text) {
                 '${text}',
                 style: TextStyle(
                   fontSize: width / 15,
-                  color: Colors.green
-                ),
+                  color: Colors.green,
+                )
               ),
-            )
+            ),
+
+            SizedBox(height: 16.0),
+
+            okButton
           ]
         )
       ),

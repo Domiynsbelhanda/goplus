@@ -1,5 +1,6 @@
 import 'package:cool_stepper/cool_stepper.dart';
 import 'package:flutter/material.dart';
+import 'package:goplus/dashboard.dart';
 import 'package:goplus/gofly/utils/app_colors.dart';
 import 'package:goplus/gofly/widgets/app_widgets/app_button.dart';
 import 'package:goplus/widget/backButton.dart';
@@ -274,7 +275,19 @@ class _TourismForm extends State<TourismForm>{
           width: double.infinity,
           child: GestureDetector(
               onTap: () {
-                notification_dialog(context, 'Votre rendez-vous a été prise.');
+                notification_dialog(context,
+                    'Votre rendez-vous a été prise.',
+                  {
+                    'label' : 'FERMER',
+                    'onTap' : (){
+                      Navigator.pushAndRemoveUntil(context,
+                          MaterialPageRoute(
+                              builder: (context)=> Dashboard()
+                          ), (route) => false);
+                    }
+
+                  }
+                );
               },
               child: Center(
                   child: Container(
