@@ -13,15 +13,14 @@ class CoolSteppers extends StatelessWidget{
     // TODO: implement build
     return CoolStepper(
       showErrorSnackbar: false,
-      onCompleted: () {
-        print('Etape terminée!');
-      },
+      onCompleted: ()=>onCompleted,
       steps: steps,
-      config: CoolStepperConfig(
+      config: const CoolStepperConfig(
           backText: 'PRECEDENT',
           nextText: 'SUIVANT',
           stepText: 'ETAPE',
-          ofText: 'SUR'
+          ofText: 'SUR',
+          finalText: 'FIN'
       ),
     );
   }
