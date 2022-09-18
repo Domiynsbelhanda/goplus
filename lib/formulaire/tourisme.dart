@@ -26,13 +26,18 @@ class _TourismForm extends State<TourismForm>{
       CoolStep(
           title: 'Voyage de Rêve - Tourisme',
           subtitle: 'Choissisez votre pays de rêve',
-          content: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-
-              ],
-            ),
+          content: Column(
+            children: [
+              _buildSelector(
+                context: context,
+                name: 'CANADA',
+              ),
+              SizedBox(height: 16.0),
+              _buildSelector(
+                context: context,
+                name: 'DUBAI',
+              ),
+            ],
           ), validation: () {
               return null;
             },
@@ -82,12 +87,12 @@ class _TourismForm extends State<TourismForm>{
   }) {
     final isActive = name == pays;
 
-    return Expanded(
+    return Container(
       child: AnimatedContainer(
         duration: Duration(milliseconds: 200),
         curve: Curves.easeInOut,
         decoration: BoxDecoration(
-          color: isActive ? Theme.of(context!).primaryColor : null,
+          color: isActive ? Colors.black : null,
           border: Border.all(
             width: 0,
           ),
