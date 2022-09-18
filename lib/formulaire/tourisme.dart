@@ -209,6 +209,61 @@ class _TourismForm extends State<TourismForm>{
         return null;
       },
       ),
+
+      CoolStep(
+        title: 'Voyage de Rêve - Tourisme',
+        subtitle: 'Choissisez une heure de rendez-vous',
+        content: Column(
+          children: [
+            _buildSelector(
+              context: context,
+              name: '09h00',
+            ),
+            SizedBox(height: 16.0),
+            _buildSelector(
+              context: context,
+              name: '10h00',
+            ),
+            SizedBox(height: 16.0),
+            _buildSelector(
+              context: context,
+              name: '11h00',
+            ),
+            SizedBox(height: 16.0),
+            _buildSelector(
+              context: context,
+              name: '12h00',
+            ),
+            SizedBox(height: 16.0),
+            _buildSelector(
+              context: context,
+              name: '13h00',
+            ),
+            SizedBox(height: 16.0),
+            _buildSelector(
+              context: context,
+              name: '14h00',
+            ),
+            SizedBox(height: 16.0),
+            _buildSelector(
+              context: context,
+              name: '15h00',
+            ),
+            SizedBox(height: 16.0),
+            _buildSelector(
+              context: context,
+              name: '16h00',
+            ),
+            SizedBox(height: 16.0),
+            _buildSelector(
+              context: context,
+              name: '17h00',
+            ),
+          ],
+        ), validation: () {
+        return null;
+      },
+      ),
     ];
 
     final stepper = CoolSteppers(
