@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:goplus/formulaire/facilitation.dart';
 import 'package:goplus/placeDetails.dart';
 import 'package:goplus/gofly/pages/set_pickup_time_screen.dart';
 import 'package:goplus/gofly/utils/app_colors.dart';
@@ -176,7 +177,23 @@ class _Dashboard extends State<Dashboard>{
               ))
           );
         }
-      }
+      },
+
+      {
+        'imagePath' : 'assets/images/tourism.jpg',
+        'title': 'FACILITATION VISA',
+        'subtitle': 'FACILITATION VISA',
+        'description' : 'Obtenez votre visa ...',
+        'status': false,
+        'onTap': (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FacilitationForm(
+                  placeList[6]
+              ))
+          );
+        }
+      },
     ];
 
     itemDashboard = placeList;
