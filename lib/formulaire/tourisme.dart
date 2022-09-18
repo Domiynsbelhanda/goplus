@@ -23,7 +23,7 @@ class TourismForm extends StatefulWidget{
 class _TourismForm extends State<TourismForm>{
 
   final _formKey = GlobalKey<FormState>();
-  String? pays = 'Canada';
+  String? pays = '';
 
   DateTime selectedDate = DateTime.now();
   bool showDate = false;
@@ -112,45 +112,30 @@ class _TourismForm extends State<TourismForm>{
 
   @override
   Widget build(BuildContext context) {
-
+    List item = widget.datas['country'];
     final steps = [
       CoolStep(
-          title: 'Voyage de Rêve - Tourisme',
+          title: '${widget.datas['subtitle']} - ${widget.datas['title']}',
           subtitle: 'Choissisez votre pays de rêve',
           content: Column(
-            children: [
-              _buildSelector(
-                context: context,
-                name: 'CANADA',
-              ),
-              SizedBox(height: 16.0),
-              _buildSelector(
-                context: context,
-                name: 'DUBAI',
-              ),
-              SizedBox(height: 16.0),
-              _buildSelector(
-                context: context,
-                name: 'ESPAGNE',
-              ),
-              SizedBox(height: 16.0),
-              _buildSelector(
-                context: context,
-                name: 'FRANCE',
-              ),
-              SizedBox(height: 16.0),
-              _buildSelector(
-                context: context,
-                name: 'TURQUIE',
-              ),
-            ],
-          ), validation: () {
+            children: item
+                .map((e)=>
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: _buildSelector(
+                    context: context,
+                    name: '${e}',
+                  ),
+                ),
+            ).toList(),
+          ),
+            validation: () {
               return null;
             },
       ),
 
       CoolStep(
-        title: 'Voyage de Rêve - Tourisme',
+        title: '${widget.datas['subtitle']} - ${widget.datas['title']}',
         subtitle: 'Entrez vos coordonnées',
         content: Form(
             key: _formKey,
@@ -174,7 +159,7 @@ class _TourismForm extends State<TourismForm>{
       ),
 
       CoolStep(
-        title: 'Voyage de Rêve - Tourisme',
+        title: '${widget.datas['subtitle']} - ${widget.datas['title']}',
         subtitle: 'Choissisez une date de rendez-vous',
         content: Column(
           children: [
@@ -213,7 +198,7 @@ class _TourismForm extends State<TourismForm>{
       ),
 
       CoolStep(
-        title: 'Voyage de Rêve - Tourisme',
+        title: '${widget.datas['subtitle']} - ${widget.datas['title']}',
         subtitle: 'Choissisez une heure de rendez-vous',
         content: Column(
           children: [
@@ -268,7 +253,7 @@ class _TourismForm extends State<TourismForm>{
       ),
 
       CoolStep(
-        title: 'Voyage de Rêve - Tourisme',
+        title: '${widget.datas['subtitle']} - ${widget.datas['title']}',
         subtitle: 'Validation du formulaire',
         content: Container(
           padding: const EdgeInsets.symmetric(horizontal: 15),

@@ -42,8 +42,16 @@ class _Dashboard extends State<Dashboard>{
       {
         'imagePath' : 'assets/images/tourism.jpg',
         'title': 'TOURISME',
+        'subtitle': 'Voyage de rêve',
         'description' : 'Réalisez vos rêves de tourisme.',
         'status': false,
+        'country' : [
+          'CANADA',
+          'DUBAI',
+          'ESPAGNE',
+          'FRANCE',
+          'TURQUIE'
+        ],
         'onTap': (){
             Navigator.push(
               context,
@@ -51,6 +59,30 @@ class _Dashboard extends State<Dashboard>{
                 placeList[0]
               ))
             );
+        }
+      },
+
+      {
+        'imagePath' : 'assets/images/tourism.jpg',
+        'title': 'ETUDE',
+        'subtitle': 'Voyage de rêve',
+        'description' : 'Réalisez vos rêves de tourisme.',
+        'status': false,
+        'country' : [
+          'AFRIQUE DU SUD',
+          'BIELORUSSIE',
+          'CANADA'
+          'CHYPRE',
+          'FRANCE',
+          'TUNISIE'
+        ],
+        'onTap': (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => TourismForm(
+                  placeList[1]
+              ))
+          );
         }
       }
     ];
