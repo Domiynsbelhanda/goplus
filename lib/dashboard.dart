@@ -84,6 +84,73 @@ class _Dashboard extends State<Dashboard>{
               ))
           );
         }
+      },
+
+      {
+        'imagePath' : 'assets/images/tourism.jpg',
+        'title': 'ETUDE',
+        'subtitle': 'Crédit Voyage',
+        'description' : 'Réalisez vos rêves de tourisme.',
+        'status': false,
+        'country' : [
+          'BIELORUSSIE',
+          'CANADA',
+          'CHYPRE',
+          'DUBAI',
+          'FRANCE',
+          'TUNISIE'
+        ],
+        'onTap': (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => TourismForm(
+                  placeList[2]
+              ))
+          );
+        }
+      },
+
+      {
+        'imagePath' : 'assets/images/tourism.jpg',
+        'title': 'TOURISME',
+        'subtitle': 'Crédit Voyage',
+        'description' : 'Réalisez vos rêves de tourisme.',
+        'status': false,
+        'country' : [
+          'DUBAI',
+          'CANADA'
+        ],
+        'onTap': (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => TourismForm(
+                  placeList[3]
+              ))
+          );
+        }
+      },
+
+      {
+        'imagePath' : 'assets/images/tourism.jpg',
+        'title': '',
+        'subtitle': 'BOURSE D\'ETUDE',
+        'description' : 'Réalisez vos rêves de tourisme.',
+        'status': false,
+        'country' : [
+          'BIELORUSSIE',
+          'CANADA',
+          'CHYPRE',
+          'ESPAGNE',
+          'TUNISIE'
+        ],
+        'onTap': (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => TourismForm(
+                  placeList[4]
+              ))
+          );
+        }
       }
     ];
 
