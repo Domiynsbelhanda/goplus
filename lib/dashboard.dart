@@ -7,6 +7,7 @@ import 'package:goplus/gofly/widgets/card_dashboard_item_image.dart';
 import 'package:goplus/gofly/widgets/tab_item_dashboard.dart';
 import 'package:provider/provider.dart';
 
+import 'formulaire/tourisme.dart';
 import 'gofly/models/locales_models.dart';
 import 'gofly/models/locales_provider_model.dart';
 import 'gofly/utils/strings.dart';
@@ -44,72 +45,17 @@ class _Dashboard extends State<Dashboard>{
 
     placeList = [
       {
-        'imagePath' : 'https://s.yimg.com/uu/api/res/1.2/U1yjMObipSzabrdKnKRe5A--~B/aD01NzY7dz0xMDI0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/fr/rfi_475/37d66899f6929e74c54fd4ce5e51f6c1',
-        'title': 'Bâtiment Hypnose',
-        'description' : 'Rejoignez le grand bâtiment',
+        'imagePath' : 'assets/images/tourism.jpg',
+        'title': 'VOYAGE DE REVE - TOURISME',
+        'description' : 'Réalisez vos rêves de tourisme.',
+        'status': false,
         'onTap': (){
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PlaceDetailScreen(
+              MaterialPageRoute(builder: (context) => TourismForm(
                 placeList[0]
               ))
             );
-        }
-      },
-
-      {
-        'imagePath' : 'https://miningandbusiness.com/wp-content/uploads/2019/09/LUBUMBASHI-LA-KATANGAISE.jpg',
-        'title': 'La Poste',
-        'description' : 'Le milieu de la ville',
-        'onTap': (){
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PlaceDetailScreen(
-                  placeList[1]
-              ))
-          );
-        }
-      },
-
-      {
-        'imagePath' : 'https://mapio.net/images-p/35534226.jpg',
-        'title': 'Basilique Sainte Marie',
-        'description' : 'La commune Kenya, le coin show.',
-        'onTap': (){
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PlaceDetailScreen(
-                  placeList[2]
-              ))
-          );
-        }
-      },
-
-      {
-        'imagePath' : 'https://www.sunna-design.com/wp-content/uploads/2020/02/DJI_0921-logo.jpg',
-        'title': 'Square Lubumbashi',
-        'description' : 'Un meilleur endroit de divertissement.',
-        'onTap': (){
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PlaceDetailScreen(
-                  placeList[3]
-              ))
-          );
-        }
-      },
-
-      {
-        'imagePath' : 'https://mnctvcongo.net/wp-content/uploads/2022/08/IMG-20220827-WA0003-780x470.jpg',
-        'title': 'Commune Ruashi',
-        'description' : 'Atteignez les coins réculés.',
-        'onTap': (){
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PlaceDetailScreen(
-                  placeList[4]
-              ))
-          );
         }
       }
     ];
