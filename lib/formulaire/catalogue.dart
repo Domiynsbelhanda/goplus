@@ -9,18 +9,18 @@ import 'package:goplus/widget/cool_steper.dart';
 import 'package:goplus/widget/notification_dialog.dart';
 import 'package:intl/intl.dart';
 
-class TourismForm extends StatefulWidget{
+class CatalogueForm extends StatefulWidget{
   var datas;
-  TourismForm(this.datas, {Key? key}) : super(key: key);
+  CatalogueForm(this.datas, {Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _TourismForm();
+    return _CatalogueForm();
   }
 }
 
-class _TourismForm extends State<TourismForm>{
+class _CatalogueForm extends State<CatalogueForm>{
 
   final _formKey = GlobalKey<FormState>();
   String? pays = '';
@@ -113,6 +113,7 @@ class _TourismForm extends State<TourismForm>{
   @override
   Widget build(BuildContext context) {
     List item = widget.datas['country'];
+    List format = widget.datas['format'];
     final steps = [
       CoolStep(
         title: widget.datas['subtitle'] != widget.datas['subtitle'] ?
@@ -138,24 +139,20 @@ class _TourismForm extends State<TourismForm>{
 
       CoolStep(
         title: widget.datas['subtitle'] != widget.datas['subtitle'] ?
-          '${widget.datas['subtitle']} - ${widget.datas['title']}'
+        '${widget.datas['subtitle']} - ${widget.datas['title']}'
             : '${widget.datas['subtitle']}',
-        subtitle: 'Entrez vos coordonnées',
-        content: Form(
-            key: _formKey,
-            child: Column(
-              children: form1.map((e) => BuildTextField(
-                labelText: '${e['labelText']}',
-                keyboardType: e['keyboardType'],
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return '${e['validator']}';
-                  }
-                  return null;
-                }, context: context,
-                controller: e['controller'],
-              )).toList(),
-            )
+        subtitle: 'Choissisez votre pays de rêve',
+        content: Column(
+          children: format
+              .map((e)=>
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: _buildSelector(
+                  context: context,
+                  name: '${e}',
+                ),
+              ),
+          ).toList(),
         ),
         validation: () {
           return null;
@@ -163,115 +160,15 @@ class _TourismForm extends State<TourismForm>{
       ),
 
       CoolStep(
-        title: widget.datas['subtitle'] != widget.datas['subtitle'] ?
-        '${widget.datas['subtitle']} - ${widget.datas['title']}'
-            : '${widget.datas['subtitle']}',
-        subtitle: 'Choissisez une date de rendez-vous',
-        content: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              width: double.infinity,
-              child: GestureDetector(
-                onTap: () {
-                  _selectDate(context);
-                  showDate = true;
-                },
-                child: Center(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryColor,
-                        borderRadius: BorderRadius.circular(8.0)
-                      ),
-                      margin: const EdgeInsets.all(16.0),
-                      padding: const EdgeInsets.all(16.0),
-                      child: const Text(
-                          'CHOISIR UNE DATE'
-                      ),
-                    )
-                )
-              ),
-            ),
-
-            showDate ? Center(
-                child: Text('Vous avez choisi le : ${getDate()}'
-                )) : const SizedBox(),
-          ],
-        ),
-        validation: () {
-        return null;
-      },
-      ),
-
-      CoolStep(
-        title: widget.datas['subtitle'] != widget.datas['subtitle'] ?
-        '${widget.datas['subtitle']} - ${widget.datas['title']}'
-            : '${widget.datas['subtitle']}',
-        subtitle: 'Choissisez une heure de rendez-vous',
-        content: Column(
-          children: [
-            _buildSelector(
-              context: context,
-              name: '09h00',
-            ),
-            SizedBox(height: 16.0),
-            _buildSelector(
-              context: context,
-              name: '10h00',
-            ),
-            SizedBox(height: 16.0),
-            _buildSelector(
-              context: context,
-              name: '11h00',
-            ),
-            SizedBox(height: 16.0),
-            _buildSelector(
-              context: context,
-              name: '12h00',
-            ),
-            SizedBox(height: 16.0),
-            _buildSelector(
-              context: context,
-              name: '13h00',
-            ),
-            SizedBox(height: 16.0),
-            _buildSelector(
-              context: context,
-              name: '14h00',
-            ),
-            SizedBox(height: 16.0),
-            _buildSelector(
-              context: context,
-              name: '15h00',
-            ),
-            SizedBox(height: 16.0),
-            _buildSelector(
-              context: context,
-              name: '16h00',
-            ),
-            SizedBox(height: 16.0),
-            _buildSelector(
-              context: context,
-              name: '17h00',
-            ),
-          ],
-        ), validation: () {
-        return null;
-      },
-      ),
-
-      CoolStep(
-        title: widget.datas['subtitle'] != widget.datas['subtitle'] ?
-        '${widget.datas['subtitle']} - ${widget.datas['title']}'
-            : '${widget.datas['subtitle']}',
-        subtitle: 'Validation du formulaire',
+        title: '${widget.datas['subtitle']} - ${widget.datas['title']}',
+        subtitle: 'Telechargez au format.',
         content: Container(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           width: double.infinity,
           child: GestureDetector(
               onTap: () {
                 notification_dialog(context,
-                    'Votre rendez-vous a été prise.',
+                    'TELECHARGEMENT EN COURS...',
                   {
                     'label' : 'FERMER',
                     'onTap' : (){
@@ -293,7 +190,7 @@ class _TourismForm extends State<TourismForm>{
                     margin: const EdgeInsets.all(16.0),
                     padding: const EdgeInsets.all(16.0),
                     child: const Text(
-                        'CONFIRMATION DU RENDEZ-VOUS'
+                        'TELECHARGER'
                     ),
                   )
               )

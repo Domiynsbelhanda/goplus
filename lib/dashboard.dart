@@ -7,6 +7,7 @@ import 'package:goplus/gofly/widgets/card_dashboard_item_image.dart';
 import 'package:goplus/gofly/widgets/tab_item_dashboard.dart';
 import 'package:provider/provider.dart';
 
+import 'formulaire/catalogue.dart';
 import 'formulaire/tourisme.dart';
 import 'gofly/models/locales_models.dart';
 import 'gofly/models/locales_provider_model.dart';
@@ -132,7 +133,7 @@ class _Dashboard extends State<Dashboard>{
 
       {
         'imagePath' : 'assets/images/tourism.jpg',
-        'title': '',
+        'title': 'BOURSE D\'ETUDE',
         'subtitle': 'BOURSE D\'ETUDE',
         'description' : 'Réalisez vos rêves de tourisme.',
         'status': false,
@@ -148,6 +149,30 @@ class _Dashboard extends State<Dashboard>{
               context,
               MaterialPageRoute(builder: (context) => TourismForm(
                   placeList[4]
+              ))
+          );
+        }
+      },
+
+      {
+        'imagePath' : 'assets/images/tourism.jpg',
+        'title': 'CATALOGUE',
+        'subtitle': 'CATALOGUE',
+        'description' : 'Réalisez vos rêves de tourisme.',
+        'status': false,
+        'country' : [
+          'ETUDE',
+          'TOURISME'
+        ],
+        'format': [
+          'AUDIO',
+          'PDF'
+        ],
+        'onTap': (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CatalogueForm(
+                  placeList[5]
               ))
           );
         }
