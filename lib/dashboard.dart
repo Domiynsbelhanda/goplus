@@ -29,14 +29,9 @@ class _Dashboard extends State<Dashboard>{
   late List itemDashboard;
   late List placeList;
 
-  late DestinationModel _localeText;
-
   @override
   void initState() {
     super.initState();
-    _localeText = Provider.of<LocalesProviderModel>(context, listen: false)
-        .getLocalizedStrings
-        .destinationScreen!;
   }
 
   @override
@@ -129,7 +124,7 @@ class _Dashboard extends State<Dashboard>{
                     Padding(
                       padding: const EdgeInsets.only(top: 5.0),
                       child: Text(
-                        _localeText.bodyWhereGoing,
+                        'Où allez-vous?',
                         style:
                         TextStyle(color: Colors.grey, fontSize: 16.0),
                       ),
@@ -150,7 +145,7 @@ class _Dashboard extends State<Dashboard>{
                           ]),
                       child: TextField(
                         decoration: InputDecoration(
-                          hintText: _localeText.enterDestination,
+                          hintText: 'Joignez votre destination',
                           border: InputBorder.none,
                           suffixIcon: IconButton(
                             icon: Icon(Icons.search),

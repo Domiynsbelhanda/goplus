@@ -42,14 +42,14 @@ class _MyApp extends State<MyApp>{
       debugShowCheckedModeBanner: false,
       theme: AppTheme.themeData,
       title: "Go Plus",
-      supportedLocales: const [
-        Locale('fr', ''),
-        Locale('lg', ''),
-      ],
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('fr', ''),
+        Locale('lg', ''),
       ],
       home: AnimatedSplashScreen(
         nextScreen: Dashboard(), //Dashboard(), //Dashboard(), //
