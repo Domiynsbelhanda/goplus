@@ -65,7 +65,7 @@ class _Dashboard extends State<Dashboard>{
       },
 
       {
-        'imagePath' : 'assets/images/tourism.jpg',
+        'imagePath' : 'assets/images/etude.jpg',
         'title': 'ETUDE',
         'subtitle': 'Voyage de rêve',
         'description' : 'Réalisez vos rêves de tourisme.',
@@ -89,7 +89,7 @@ class _Dashboard extends State<Dashboard>{
       },
 
       {
-        'imagePath' : 'assets/images/tourism.jpg',
+        'imagePath' : 'assets/images/etude2.jpg',
         'title': 'ETUDE',
         'subtitle': 'Crédit Voyage',
         'description' : 'Réalisez vos rêves de tourisme.',
@@ -113,7 +113,7 @@ class _Dashboard extends State<Dashboard>{
       },
 
       {
-        'imagePath' : 'assets/images/tourism.jpg',
+        'imagePath' : 'assets/images/tourism2.jpg',
         'title': 'TOURISME',
         'subtitle': 'Crédit Voyage',
         'description' : 'Réalisez vos rêves de tourisme.',
@@ -133,7 +133,7 @@ class _Dashboard extends State<Dashboard>{
       },
 
       {
-        'imagePath' : 'assets/images/tourism.jpg',
+        'imagePath' : 'assets/images/bourse.jpg',
         'title': 'BOURSE D\'ETUDE',
         'subtitle': 'BOURSE D\'ETUDE',
         'description' : 'Réalisez vos rêves de tourisme.',
@@ -156,7 +156,7 @@ class _Dashboard extends State<Dashboard>{
       },
 
       {
-        'imagePath' : 'assets/images/tourism.jpg',
+        'imagePath' : 'assets/images/catalogue.jpg',
         'title': 'CATALOGUE',
         'subtitle': 'CATALOGUE',
         'description' : 'Réalisez vos rêves de tourisme.',
@@ -180,7 +180,7 @@ class _Dashboard extends State<Dashboard>{
       },
 
       {
-        'imagePath' : 'assets/images/tourism.jpg',
+        'imagePath' : 'assets/images/visa.jpg',
         'title': 'FACILITATION VISA',
         'subtitle': 'FACILITATION VISA',
         'description' : 'Obtenez votre visa ...',
