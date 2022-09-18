@@ -1,6 +1,7 @@
 import 'package:cool_stepper/cool_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:goplus/widget/backButton.dart';
+import 'package:goplus/widget/cool_steper.dart';
 
 class TourismForm extends StatefulWidget{
   var datas;
@@ -52,18 +53,9 @@ class _TourismForm extends State<TourismForm>{
       ),
     ];
 
-    final stepper = CoolStepper(
-      showErrorSnackbar: false,
-      onCompleted: () {
-        print('Etape terminée!');
-      },
+    final stepper = CoolSteppers(
       steps: steps,
-      config: const CoolStepperConfig(
-        backText: 'PRECEDENT',
-        nextText: 'SUIVANT',
-        stepText: 'ETAPE',
-        ofText: 'SUR'
-      ),
+      onCompleted: (){print('Belhanda');},
     );
 
     return Scaffold(
