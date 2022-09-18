@@ -1,6 +1,7 @@
 import 'package:cool_stepper/cool_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:goplus/widget/backButton.dart';
+import 'package:goplus/widget/buildTextField.dart';
 import 'package:goplus/widget/cool_steper.dart';
 
 class TourismForm extends StatefulWidget{
@@ -61,11 +62,31 @@ class _TourismForm extends State<TourismForm>{
       CoolStep(
         title: 'Voyage de Rêve - Tourisme',
         subtitle: 'Entrez vos coordonnées',
-        content: Container(
-          child: Row(
-            children: [
-            ],
-          ),
+        content: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                BuildTextField(
+                  labelText: 'Name',
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Name is required';
+                    }
+                    return null;
+                  }, context: context,
+                ),
+                BuildTextField(
+                  labelText: 'Email Address',
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Email address is required';
+                    }
+                    return null;
+                  },
+                  context: context,
+                ),
+              ],
+            )
         ),
         validation: () {
           return null;
