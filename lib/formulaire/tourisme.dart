@@ -75,4 +75,41 @@ class _TourismForm extends State<TourismForm>{
       ),
     );
   }
+
+  Widget _buildSelector({
+    BuildContext? context,
+    required String name,
+  }) {
+    final isActive = name == pays;
+
+    return Expanded(
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 200),
+        curve: Curves.easeInOut,
+        decoration: BoxDecoration(
+          color: isActive ? Theme.of(context!).primaryColor : null,
+          border: Border.all(
+            width: 0,
+          ),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: RadioListTile(
+          value: name,
+          activeColor: Colors.white,
+          groupValue: pays,
+          onChanged: (String? v) {
+            setState(() {
+              pays = v;
+            });
+          },
+          title: Text(
+            name,
+            style: TextStyle(
+              color: isActive ? Colors.white : null,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
