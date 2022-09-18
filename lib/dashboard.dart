@@ -41,7 +41,7 @@ class _Dashboard extends State<Dashboard>{
     placeList = [
       {
         'imagePath' : 'assets/images/tourism.jpg',
-        'title': 'VOYAGE DE REVE - TOURISME',
+        'title': 'TOURISME',
         'description' : 'Réalisez vos rêves de tourisme.',
         'status': false,
         'onTap': (){
