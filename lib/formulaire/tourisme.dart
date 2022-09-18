@@ -20,6 +20,14 @@ class _TourismForm extends State<TourismForm>{
   final _formKey = GlobalKey<FormState>();
   String? pays = 'Canada';
 
+  List form1 = [
+    {
+      'labelText': 'Nom',
+      'validator': 'Le nom est requis',
+      'controller': null,
+    }
+  ];
+
   @override
   Widget build(BuildContext context) {
 
@@ -65,27 +73,16 @@ class _TourismForm extends State<TourismForm>{
         content: Form(
             key: _formKey,
             child: Column(
-              children: [
-                BuildTextField(
-                  labelText: 'Name',
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Name is required';
-                    }
-                    return null;
-                  }, context: context,
-                ),
-                BuildTextField(
-                  labelText: 'Email Address',
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Email address is required';
-                    }
-                    return null;
-                  },
-                  context: context,
-                ),
-              ],
+              children: form1.map((e) => BuildTextField(
+                labelText: '${e['labelText']}',
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return '${e['validator']}';
+                  }
+                  return null;
+                }, context: context,
+                controller: e['controller'],
+              )).toList(),
             )
         ),
         validation: () {
