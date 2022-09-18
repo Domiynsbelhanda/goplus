@@ -274,7 +274,7 @@ class _TourismForm extends State<TourismForm>{
           width: double.infinity,
           child: GestureDetector(
               onTap: () {
-                notification_dialog(context);
+                notification_dialog(context, 'Votre rendez-vous a été prise.');
               },
               child: Center(
                   child: Container(
