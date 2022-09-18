@@ -25,6 +25,56 @@ class _TourismForm extends State<TourismForm>{
       'labelText': 'Nom',
       'validator': 'Le nom est requis',
       'controller': null,
+      'keyboardType': TextInputType.name
+    },
+
+    {
+      'labelText': 'Post-Nom',
+      'validator': 'Le post-nom est requis',
+      'controller': null,
+      'keyboardType': TextInputType.name
+    },
+
+    {
+      'labelText': 'Prénom',
+      'validator': 'Le prénom est requis',
+      'controller': null,
+      'keyboardType': TextInputType.name
+    },
+
+    {
+      'labelText': 'Date de naissance',
+      'validator': 'La date de naissance est requise',
+      'controller': null,
+      'keyboardType': TextInputType.datetime
+    },
+
+    {
+      'labelText': 'Adresse Physique',
+      'validator': 'Le post-nom est requis',
+      'controller': null,
+      'keyboardType': TextInputType.text
+    },
+
+    {
+      'labelText': 'Ville',
+      'validator': 'La ville est requise',
+      'controller': null,
+      'keyboardType': TextInputType.name
+    },
+
+    {
+      'labelText': 'Numéro de téléphone',
+      'validator': 'Le numéro de téléphone est requis',
+      'controller': null,
+      'keyboardType': TextInputType.phone
+    },
+
+    {
+      'labelText': 'Adresse Email',
+      'validator': 'L\'adresse email est requise',
+      'controller': null,
+      'keyboardType': TextInputType.emailAddress
     }
   ];
 
@@ -75,6 +125,7 @@ class _TourismForm extends State<TourismForm>{
             child: Column(
               children: form1.map((e) => BuildTextField(
                 labelText: '${e['labelText']}',
+                keyboardType: e['keyboardType'],
                 validator: (value) {
                   if (value!.isEmpty) {
                     return '${e['validator']}';

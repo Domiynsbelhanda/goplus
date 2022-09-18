@@ -5,13 +5,16 @@ class BuildTextField extends StatelessWidget{
   FormFieldValidator<String>? validator;
   TextEditingController? controller;
   BuildContext context;
+  TextInputType? keyboardType;
 
-  BuildTextField({this.labelText, this.validator, this.controller, required this.context});
+
+  BuildTextField({this.labelText, this.validator, this.controller, required this.context, this.keyboardType});
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
       child: TextFormField(
+        keyboardType: keyboardType!,
         decoration: InputDecoration(
           labelText: labelText,
         ),
