@@ -1,8 +1,11 @@
 import 'package:cool_stepper/cool_stepper.dart';
 import 'package:flutter/material.dart';
+import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/gofly/widgets/app_widgets/app_button.dart';
 import 'package:goplus/widget/backButton.dart';
 import 'package:goplus/widget/buildTextField.dart';
 import 'package:goplus/widget/cool_steper.dart';
+import 'package:intl/intl.dart';
 
 class TourismForm extends StatefulWidget{
   var datas;
@@ -19,6 +22,33 @@ class _TourismForm extends State<TourismForm>{
 
   final _formKey = GlobalKey<FormState>();
   String? pays = 'Canada';
+
+  DateTime selectedDate = DateTime.now();
+  bool showDate = false;
+
+  Future<DateTime> _selectDate(BuildContext context) async {
+    final selected = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2021),
+      lastDate: DateTime(2025),
+    );
+    if (selected != null && selected != selectedDate) {
+      setState(() {
+        selectedDate = selected;
+      });
+    }
+    return selectedDate;
+  }
+
+  String getDate() {
+    // ignore: unnecessary_null_comparison
+    if (selectedDate == null) {
+      return 'select date';
+    } else {
+      return DateFormat('d-M-yyyy').format(selectedDate);
+    }
+  }
 
   List form1 = [
     {
@@ -43,7 +73,7 @@ class _TourismForm extends State<TourismForm>{
     },
 
     {
-      'labelText': 'Date de naissance',
+      'labelText': 'Date de naissance (J/M/AAAA)',
       'validator': 'La date de naissance est requise',
       'controller': null,
       'keyboardType': TextInputType.datetime
@@ -139,6 +169,45 @@ class _TourismForm extends State<TourismForm>{
         validation: () {
           return null;
         },
+      ),
+
+      CoolStep(
+        title: 'Voyage de Rêve - Tourisme',
+        subtitle: 'Choissisez une date de rendez-vous',
+        content: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              width: double.infinity,
+              child: GestureDetector(
+                onTap: () {
+                  _selectDate(context);
+                  showDate = true;
+                },
+                child: Center(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryColor,
+                        borderRadius: BorderRadius.circular(8.0)
+                      ),
+                      margin: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(16.0),
+                      child: const Text(
+                          'CHOISIR UNE DATE'
+                      ),
+                    )
+                )
+              ),
+            ),
+
+            showDate ? Center(
+                child: Text('Vous avez choisi le : ${getDate()}'
+                )) : const SizedBox(),
+          ],
+        ),
+        validation: () {
+        return null;
+      },
       ),
     ];
 
