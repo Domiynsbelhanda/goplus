@@ -5,6 +5,7 @@ import 'package:goplus/gofly/widgets/app_widgets/app_button.dart';
 import 'package:goplus/widget/backButton.dart';
 import 'package:goplus/widget/buildTextField.dart';
 import 'package:goplus/widget/cool_steper.dart';
+import 'package:goplus/widget/notification_dialog.dart';
 import 'package:intl/intl.dart';
 
 class TourismForm extends StatefulWidget{
@@ -273,7 +274,7 @@ class _TourismForm extends State<TourismForm>{
           width: double.infinity,
           child: GestureDetector(
               onTap: () {
-
+                notification_dialog(context);
               },
               child: Center(
                   child: Container(
