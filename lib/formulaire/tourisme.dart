@@ -37,6 +37,21 @@ class _TourismForm extends State<TourismForm>{
                 context: context,
                 name: 'DUBAI',
               ),
+              SizedBox(height: 16.0),
+              _buildSelector(
+                context: context,
+                name: 'ESPAGNE',
+              ),
+              SizedBox(height: 16.0),
+              _buildSelector(
+                context: context,
+                name: 'FRANCE',
+              ),
+              SizedBox(height: 16.0),
+              _buildSelector(
+                context: context,
+                name: 'TURQUIE',
+              ),
             ],
           ), validation: () {
               return null;
