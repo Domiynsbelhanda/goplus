@@ -1,5 +1,6 @@
 import 'package:cool_stepper/cool_stepper.dart';
 import 'package:flutter/material.dart';
+import 'package:goplus/widget/backButton.dart';
 
 class TourismForm extends StatefulWidget{
   var datas;
@@ -67,7 +68,18 @@ class _TourismForm extends State<TourismForm>{
 
     return Scaffold(
       body: Container(
-        child: stepper,
+        child: Stack(
+          children: [
+            Container(
+                child: stepper
+            ),
+            Positioned(
+                top: 16,
+                right: 16,
+                child: BackButtons(context)
+            ),
+          ],
+        ),
       ),
     );
   }
