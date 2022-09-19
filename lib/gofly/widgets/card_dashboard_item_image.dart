@@ -20,11 +20,11 @@ class CardPicture extends StatelessWidget {
             Container(
               height: size.height / 1.5,
               padding: EdgeInsets.all(10.0),
-              width: size.width / 1.9,
+              width: size.width / 1.75,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(16.0)),
                 image: DecorationImage(
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fitWidth,
                     image: AssetImage(
                         '${imagePath!}'
                     )
@@ -35,7 +35,7 @@ class CardPicture extends StatelessWidget {
             Container(
               height: size.height / 1.5,
               padding: EdgeInsets.all(10.0),
-              width: size.width / 1.9,
+              width: size.width / 1.75,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(16.0)),
                 gradient: LinearGradient(

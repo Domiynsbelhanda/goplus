@@ -195,48 +195,48 @@ class _Dashboard extends State<Dashboard>{
         }
       },
 
-      {
-        'imagePath' : 'assets/images/reservez-taxi.png',
-        'title': 'RESERVEZ UN TAXI',
-        'subtitle': 'RESERVEZ UN TAXI',
-        'description' : 'Réalisez vos rêves de tourisme.',
-        'status': false,
-        'country' : [
-          'ETUDE',
-          'TOURISME'
-        ],
-        'format': [
-          'AUDIO',
-          'PDF'
-        ],
-        'onTap': (){
-
-        }
-      },
-
-      {
-        'imagePath' : 'assets/images/catalogue.png',
-        'title': 'CATALOGUE',
-        'subtitle': 'CATALOGUE',
-        'description' : 'Réalisez vos rêves de tourisme.',
-        'status': false,
-        'country' : [
-          'GOFLY ETUDE',
-          'VOYAGE DE REVE'
-        ],
-        'format': [
-          'AUDIO',
-          'PDF'
-        ],
-        'onTap': (){
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CatalogueForm(
-                  placeList[7]
-              ))
-          );
-        }
-      },
+      // {
+      //   'imagePath' : 'assets/images/reservez-taxi.png',
+      //   'title': 'RESERVEZ UN TAXI',
+      //   'subtitle': 'RESERVEZ UN TAXI',
+      //   'description' : 'Réalisez vos rêves de tourisme.',
+      //   'status': false,
+      //   'country' : [
+      //     'ETUDE',
+      //     'TOURISME'
+      //   ],
+      //   'format': [
+      //     'AUDIO',
+      //     'PDF'
+      //   ],
+      //   'onTap': (){
+      //
+      //   }
+      // },
+      //
+      // {
+      //   'imagePath' : 'assets/images/catalogue.png',
+      //   'title': 'CATALOGUE',
+      //   'subtitle': 'CATALOGUE',
+      //   'description' : 'Réalisez vos rêves de tourisme.',
+      //   'status': false,
+      //   'country' : [
+      //     'GOFLY ETUDE',
+      //     'VOYAGE DE REVE'
+      //   ],
+      //   'format': [
+      //     'AUDIO',
+      //     'PDF'
+      //   ],
+      //   'onTap': (){
+      //     Navigator.push(
+      //         context,
+      //         MaterialPageRoute(builder: (context) => CatalogueForm(
+      //             placeList[7]
+      //         ))
+      //     );
+      //   }
+      // },
     ];
 
     itemDashboard = placeList;
