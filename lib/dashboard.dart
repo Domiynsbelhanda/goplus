@@ -221,8 +221,8 @@ class _Dashboard extends State<Dashboard>{
         'description' : 'Réalisez vos rêves de tourisme.',
         'status': false,
         'country' : [
-          'ETUDE',
-          'TOURISME'
+          'GOFLY ETUDE',
+          'VOYAGE DE REVE'
         ],
         'format': [
           'AUDIO',
@@ -232,7 +232,7 @@ class _Dashboard extends State<Dashboard>{
           Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => CatalogueForm(
-                  placeList[5]
+                  placeList[7]
               ))
           );
         }
