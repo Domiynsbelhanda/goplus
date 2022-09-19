@@ -3,23 +3,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:goplus/dashboard.dart';
 import 'package:provider/provider.dart';
-import 'package:goplus/gofly/models/locales_provider_model.dart';
-import 'package:goplus/gofly/pages/choose_language_screen.dart';
-import 'package:goplus/gofly/utils/class_builder.dart';
-import 'package:goplus/gofly/widgets/theme_data.dart';
+import 'package:goplus/widget/theme_data.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 void main() async {
-  ClassBuilder.registerClasses();
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(
-        create: (context) => LocalesProviderModel(),
-      )
+    providers: const [
     ],
     child: MyApp(),
   ));

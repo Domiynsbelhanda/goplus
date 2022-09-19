@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:goplus/gofly/utils/app_colors.dart';
+import 'package:goplus/utils/app_colors.dart';
 
 class AppButton extends StatefulWidget {
   var onTap;

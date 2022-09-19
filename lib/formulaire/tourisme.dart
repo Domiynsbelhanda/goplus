@@ -1,8 +1,7 @@
 import 'package:cool_stepper/cool_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:goplus/dashboard.dart';
-import 'package:goplus/gofly/utils/app_colors.dart';
-import 'package:goplus/gofly/widgets/app_widgets/app_button.dart';
+import 'package:goplus/utils/app_colors.dart';
 import 'package:goplus/widget/backButton.dart';
 import 'package:goplus/widget/buildTextField.dart';
 import 'package:goplus/widget/cool_steper.dart';
