@@ -248,18 +248,18 @@ class _Dashboard extends State<Dashboard>{
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-                padding: const EdgeInsets.only(left: 16.0, top: 32.0),
+                padding: const EdgeInsets.only(left: 16.0, top: 32.0, bottom: 16.0),
               child: Text(
                 'GO PLUS',
                 style: TextStyle(
-                  fontSize: size.width / 15,
+                  fontSize: size.width / 10,
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Anton'
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
+              padding: const EdgeInsets.only(left: 16.0, bottom: 24.0),
               child: Row(
                 children: [
                   TabItem(
