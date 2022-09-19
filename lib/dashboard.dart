@@ -42,7 +42,7 @@ class _Dashboard extends State<Dashboard>{
 
     placeList = [
       {
-        'imagePath' : 'assets/images/tourism.jpg',
+        'imagePath' : 'assets/images/voyage-de-reve-etude.png',
         'title': 'TOURISME',
         'subtitle': 'Voyage de rêve',
         'description' : 'Réalisez vos rêves de tourisme.',
@@ -65,7 +65,7 @@ class _Dashboard extends State<Dashboard>{
       },
 
       {
-        'imagePath' : 'assets/images/etude.jpg',
+        'imagePath' : 'assets/images/voyage-de-reve-etude.png',
         'title': 'ETUDE',
         'subtitle': 'Voyage de rêve',
         'description' : 'Réalisez vos rêves de tourisme.',
@@ -89,7 +89,7 @@ class _Dashboard extends State<Dashboard>{
       },
 
       {
-        'imagePath' : 'assets/images/etude2.jpg',
+        'imagePath' : 'assets/images/credit-voyage-etude.png',
         'title': 'ETUDE',
         'subtitle': 'Crédit Voyage',
         'description' : 'Réalisez vos rêves de tourisme.',
@@ -113,7 +113,7 @@ class _Dashboard extends State<Dashboard>{
       },
 
       {
-        'imagePath' : 'assets/images/tourism2.jpg',
+        'imagePath' : 'assets/images/credit-voyage-tourisme.png',
         'title': 'TOURISME',
         'subtitle': 'Crédit Voyage',
         'description' : 'Réalisez vos rêves de tourisme.',
@@ -133,7 +133,7 @@ class _Dashboard extends State<Dashboard>{
       },
 
       {
-        'imagePath' : 'assets/images/bourse.jpg',
+        'imagePath' : 'assets/images/bourse-etude.png',
         'title': 'BOURSE D\'ETUDE',
         'subtitle': 'BOURSE D\'ETUDE',
         'description' : 'Réalisez vos rêves de tourisme.',
@@ -156,7 +156,66 @@ class _Dashboard extends State<Dashboard>{
       },
 
       {
-        'imagePath' : 'assets/images/catalogue.jpg',
+        'imagePath' : 'assets/images/facilitation-visa.png',
+        'title': 'FACILITATION VISA',
+        'subtitle': 'FACILITATION VISA',
+        'description' : 'Obtenez votre visa ...',
+        'status': false,
+        'onTap': (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FacilitationForm(
+                  placeList[5]
+              ))
+          );
+        }
+      },
+
+      {
+        'imagePath' : 'assets/images/question-pour-un-voyage.png',
+        'title': 'QUESTIONS POUR UN VOYAGE',
+        'subtitle': 'QUESTIONS POUR UN VOYAGE',
+        'description' : 'Réalisez vos rêves de tourisme.',
+        'status': false,
+        'country' : [
+          'ETUDE',
+          'TOURISME'
+        ],
+        'format': [
+          'AUDIO',
+          'PDF'
+        ],
+        'onTap': (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CatalogueForm(
+                  placeList[6]
+              ))
+          );
+        }
+      },
+
+      {
+        'imagePath' : 'assets/images/reservez-taxi.png',
+        'title': 'RESERVEZ UN TAXI',
+        'subtitle': 'RESERVEZ UN TAXI',
+        'description' : 'Réalisez vos rêves de tourisme.',
+        'status': false,
+        'country' : [
+          'ETUDE',
+          'TOURISME'
+        ],
+        'format': [
+          'AUDIO',
+          'PDF'
+        ],
+        'onTap': (){
+
+        }
+      },
+
+      {
+        'imagePath' : 'assets/images/catalogue.png',
         'title': 'CATALOGUE',
         'subtitle': 'CATALOGUE',
         'description' : 'Réalisez vos rêves de tourisme.',
@@ -174,22 +233,6 @@ class _Dashboard extends State<Dashboard>{
               context,
               MaterialPageRoute(builder: (context) => CatalogueForm(
                   placeList[5]
-              ))
-          );
-        }
-      },
-
-      {
-        'imagePath' : 'assets/images/visa.jpg',
-        'title': 'FACILITATION VISA',
-        'subtitle': 'FACILITATION VISA',
-        'description' : 'Obtenez votre visa ...',
-        'status': false,
-        'onTap': (){
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => FacilitationForm(
-                  placeList[6]
               ))
           );
         }
@@ -243,67 +286,6 @@ class _Dashboard extends State<Dashboard>{
                       onTap: e['onTap'],
                     ),
                   )).toList(),
-                ),
-              ),
-            ),
-
-            Container(
-              width: size.width,
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20.0, top: 25),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Où Allez-vous?',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 22.0,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5.0),
-                      child: Text(
-                        'Réjoignez votre destination grâce à nos taxis disponibles',
-                        style:
-                        TextStyle(color: Colors.grey, fontSize: 16.0),
-                      ),
-                    ),
-                    SizedBox(height: 10.0),
-                    Container(
-                      margin:
-                      EdgeInsets.only(bottom: 20, top: 20, right: 20),
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: Colors.grey[100],
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey.withOpacity(0.1),
-                                spreadRadius: 1,
-                                blurRadius: 10)
-                          ]),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Entrez votre destination ici',
-                          border: InputBorder.none,
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.search),
-                            onPressed: () {
-                              FocusScope.of(context).unfocus();
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => SetPickupTimeScreen(),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
               ),
             ),

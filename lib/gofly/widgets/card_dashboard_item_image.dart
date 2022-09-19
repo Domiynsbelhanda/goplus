@@ -18,7 +18,7 @@ class CardPicture extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              height: size.width / 1.3,
+              height: size.height / 1.2,
               padding: EdgeInsets.all(10.0),
               width: size.width / 1.9,
               decoration: BoxDecoration(
