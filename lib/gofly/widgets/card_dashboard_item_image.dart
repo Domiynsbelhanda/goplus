@@ -18,7 +18,7 @@ class CardPicture extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              height: size.height / 1.2,
+              height: size.height / 1.5,
               padding: EdgeInsets.all(10.0),
               width: size.width / 1.9,
               decoration: BoxDecoration(
@@ -33,7 +33,7 @@ class CardPicture extends StatelessWidget {
             ),
 
             Container(
-              height: size.width / 1.3,
+              height: size.height / 1.5,
               padding: EdgeInsets.all(10.0),
               width: size.width / 1.9,
               decoration: BoxDecoration(
@@ -53,37 +53,24 @@ class CardPicture extends StatelessWidget {
               ),
             ),
 
-            Positioned(
-              bottom: 0.0,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${title!}',
-                        style: TextStyle(
-                            fontSize: size.width / 25,
-                          color: Colors.white
-                        ),
-                      ),
-
-                      SizedBox(height: 4.0,),
-
-                      Container(
-                        width: size.width / 2.1,
-                        child: Text(
-                          '${description!}',
-                          style: TextStyle(
-                            fontSize: size.width / 30,
-                              color: Colors.white,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                )
-            )
+            // Positioned(
+            //   bottom: 0.0,
+            //     child: Padding(
+            //       padding: EdgeInsets.all(8.0),
+            //       child: Column(
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: [
+            //           Text(
+            //             '${title!}',
+            //             style: TextStyle(
+            //                 fontSize: size.width / 25,
+            //               color: Colors.white
+            //             ),
+            //           )
+            //         ],
+            //       ),
+            //     )
+            // )
           ],
         ),
       );

@@ -22,7 +22,7 @@ class TabItem extends StatelessWidget{
           Text(
             '${title}',
             style: activate ? TextStyle(
-                fontSize: size.width / 25,
+                fontSize: size.width / 20,
                 color: AppColors.primaryColor,
                 fontWeight: FontWeight.bold
             ) : TextStyle(
@@ -32,7 +32,7 @@ class TabItem extends StatelessWidget{
           ),
           activate ? Container(
             height: 4,
-            width: size.width / 15,
+            width: size.width / 3,
             decoration: BoxDecoration(
                 color: AppColors.primaryColor,
                 borderRadius: BorderRadius.circular(2.0)

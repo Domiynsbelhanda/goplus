@@ -42,7 +42,7 @@ class _Dashboard extends State<Dashboard>{
 
     placeList = [
       {
-        'imagePath' : 'assets/images/voyage-de-reve-etude.png',
+        'imagePath' : 'assets/images/voyage-de-reve-tourisme.png',
         'title': 'TOURISME',
         'subtitle': 'Voyage de rêve',
         'description' : 'Réalisez vos rêves de tourisme.',
@@ -264,7 +264,7 @@ class _Dashboard extends State<Dashboard>{
                 children: [
                   TabItem(
                     size: size,
-                    title: 'Nos suggestions',
+                    title: 'Découvrez nos offres',
                     activate: true,
                     onTap: (){
                     },
