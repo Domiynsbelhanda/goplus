@@ -130,9 +130,18 @@ class _TourismForm extends State<TourismForm>{
                 ),
             ).toList(),
           ),
-            validation: () {
-              return null;
-            },
+        validation: () {
+          if(pays! == ''){
+            notification_dialog(
+                context,
+                'Selectionner un pays.',
+                Icons.error,
+                Colors.red,
+                {'label': 'OK', 'onTap': ()=>Navigator.pop(context)});
+            return 'ok ';
+          }
+          return null;
+        },
       ),
 
       CoolStep(
@@ -271,6 +280,8 @@ class _TourismForm extends State<TourismForm>{
               onTap: () {
                 notification_dialog(context,
                     'Votre rendez-vous a été prise.',
+                    Icons.check_circle,
+                    Colors.red,
                   {
                     'label' : 'FERMER',
                     'onTap' : (){

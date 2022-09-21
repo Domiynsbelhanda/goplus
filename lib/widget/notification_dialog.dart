@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goplus/utils/app_colors.dart';
 
-notification_dialog(BuildContext context, String text, var button) {
+notification_dialog(BuildContext context, String text, IconData icons, Color color, var button) {
 
   // set up the button
   Widget okButton = TextButton(
@@ -30,14 +30,14 @@ notification_dialog(BuildContext context, String text, var button) {
         BorderRadius.circular(20.0)),
     child: SizedBox(
       width: width / 1,
-      height: width / 1.3,
+      height: width / 1.2,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children : [
             Icon(
-              Icons.check_circle_outline,
-              color: Colors.green,
+              icons,
+              color: color,
               size: width / 5,
             ),
 

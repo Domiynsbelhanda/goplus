@@ -313,6 +313,8 @@ class _FacilitationForm extends State<FacilitationForm>{
               onTap: () {
                 notification_dialog(context,
                     'Votre rendez-vous a été prise.',
+                    Icons.check_circle,
+                    Colors.green,
                   {
                     'label' : 'FERMER',
                     'onTap' : (){

@@ -167,6 +167,8 @@ class _CatalogueForm extends State<CatalogueForm>{
               onTap: () {
                 notification_dialog(context,
                     'TELECHARGEMENT EN COURS...',
+                    Icons.download_outlined,
+                    Colors.red,
                   {
                     'label' : 'FERMER',
                     'onTap' : (){
