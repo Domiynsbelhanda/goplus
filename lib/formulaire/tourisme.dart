@@ -326,10 +326,26 @@ class _TourismForm extends State<TourismForm>{
           width: double.infinity,
           child: GestureDetector(
               onTap: () {
+                var data = {
+                  "key": widget.datas['key'],
+                  "cname": pays!,
+                  "lastn": nameController.text.trim(),
+                  "midn": lastNameController.text.trim(),
+                  "firstn": prenomController.text.trim(),
+                  "birthdate": naissanceController.text.trim(),
+                  "address": adresseController.text.trim(),
+                  "city": villeController.text.trim(),
+                  "phone": phoneController.text.trim(),
+                  "email": emailController.text.trim(),
+                  "rdvdate": getDate()
+                };
+
+                print(data);
+
                 notification_dialog(context,
                     'Votre rendez-vous a été prise.',
                     Icons.check_circle,
-                    Colors.red,
+                    Colors.green,
                   {
                     'label' : 'FERMER',
                     'onTap' : (){
