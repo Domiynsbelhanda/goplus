@@ -37,6 +37,7 @@ class _Dashboard extends State<Dashboard>{
         'subtitle': 'Voyage de rêve',
         'description' : 'Réalisez vos rêves de tourisme.',
         'status': false,
+        'key': 'form_1',
         'country' : [
           'CANADA',
           'DUBAI',
@@ -60,6 +61,7 @@ class _Dashboard extends State<Dashboard>{
         'subtitle': 'Voyage de rêve',
         'description' : 'Réalisez vos rêves de tourisme.',
         'status': false,
+        'key': 'form_2',
         'country' : [
           'AFRIQUE DU SUD',
           'BIELORUSSIE',
@@ -84,6 +86,7 @@ class _Dashboard extends State<Dashboard>{
         'subtitle': 'Crédit Voyage',
         'description' : 'Réalisez vos rêves de tourisme.',
         'status': false,
+        'key': 'form_3',
         'country' : [
           'BIELORUSSIE',
           'CANADA',
@@ -108,6 +111,7 @@ class _Dashboard extends State<Dashboard>{
         'subtitle': 'Crédit Voyage',
         'description' : 'Réalisez vos rêves de tourisme.',
         'status': false,
+        'key': 'form_4',
         'country' : [
           'DUBAI',
           'CANADA'
@@ -128,6 +132,7 @@ class _Dashboard extends State<Dashboard>{
         'subtitle': 'BOURSE D\'ETUDE',
         'description' : 'Réalisez vos rêves de tourisme.',
         'status': false,
+        'key': 'form_5',
         'country' : [
           'BIELORUSSIE',
           'CANADA',
@@ -151,6 +156,7 @@ class _Dashboard extends State<Dashboard>{
         'subtitle': 'FACILITATION VISA',
         'description' : 'Obtenez votre visa ...',
         'status': false,
+        'key': 'form_6',
         'onTap': (){
           Navigator.push(
               context,
@@ -161,29 +167,29 @@ class _Dashboard extends State<Dashboard>{
         }
       },
 
-      {
-        'imagePath' : 'assets/images/question-pour-un-voyage.png',
-        'title': 'QUESTIONS POUR UN VOYAGE',
-        'subtitle': 'QUESTIONS POUR UN VOYAGE',
-        'description' : 'Réalisez vos rêves de tourisme.',
-        'status': false,
-        'country' : [
-          'ETUDE',
-          'TOURISME'
-        ],
-        'format': [
-          'AUDIO',
-          'PDF'
-        ],
-        'onTap': (){
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CatalogueForm(
-                  placeList[6]
-              ))
-          );
-        }
-      },
+      // {
+      //   'imagePath' : 'assets/images/question-pour-un-voyage.png',
+      //   'title': 'QUESTIONS POUR UN VOYAGE',
+      //   'subtitle': 'QUESTIONS POUR UN VOYAGE',
+      //   'description' : 'Réalisez vos rêves de tourisme.',
+      //   'status': false,
+      //   'country' : [
+      //     'ETUDE',
+      //     'TOURISME'
+      //   ],
+      //   'format': [
+      //     'AUDIO',
+      //     'PDF'
+      //   ],
+      //   'onTap': (){
+      //     Navigator.push(
+      //         context,
+      //         MaterialPageRoute(builder: (context) => CatalogueForm(
+      //             placeList[6]
+      //         ))
+      //     );
+      //   }
+      // },
 
       // {
       //   'imagePath' : 'assets/images/reservez-taxi.png',

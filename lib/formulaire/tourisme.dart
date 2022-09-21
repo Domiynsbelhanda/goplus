@@ -23,14 +23,16 @@ class _TourismForm extends State<TourismForm>{
 
   final _formKey = GlobalKey<FormState>();
   String? pays = '';
+  late String key;
 
-  DateTime selectedDate = DateTime.now();
+  DateTime? selectedDate;
+  String? selectedHoure;
   bool showDate = false;
 
   Future<DateTime> _selectDate(BuildContext context) async {
     final selected = await showDatePicker(
       context: context,
-      initialDate: selectedDate,
+      initialDate: selectedDate!,
       firstDate: DateTime(2021),
       lastDate: DateTime(2025),
     );
@@ -39,7 +41,7 @@ class _TourismForm extends State<TourismForm>{
         selectedDate = selected;
       });
     }
-    return selectedDate;
+    return selectedDate!;
   }
 
   String getDate() {
@@ -47,70 +49,82 @@ class _TourismForm extends State<TourismForm>{
     if (selectedDate == null) {
       return 'select date';
     } else {
-      return DateFormat('d-M-yyyy').format(selectedDate);
+      return DateFormat('d-M-yyyy').format(selectedDate!);
     }
   }
 
-  List form1 = [
-    {
-      'labelText': 'Nom',
-      'validator': 'Le nom est requis',
-      'controller': null,
-      'keyboardType': TextInputType.name
-    },
-
-    {
-      'labelText': 'Post-Nom',
-      'validator': 'Le post-nom est requis',
-      'controller': null,
-      'keyboardType': TextInputType.name
-    },
-
-    {
-      'labelText': 'Prénom',
-      'validator': 'Le prénom est requis',
-      'controller': null,
-      'keyboardType': TextInputType.name
-    },
-
-    {
-      'labelText': 'Date de naissance (J/M/AAAA)',
-      'validator': 'La date de naissance est requise',
-      'controller': null,
-      'keyboardType': TextInputType.datetime
-    },
-
-    {
-      'labelText': 'Adresse Physique',
-      'validator': 'Le post-nom est requis',
-      'controller': null,
-      'keyboardType': TextInputType.text
-    },
-
-    {
-      'labelText': 'Ville',
-      'validator': 'La ville est requise',
-      'controller': null,
-      'keyboardType': TextInputType.name
-    },
-
-    {
-      'labelText': 'Numéro de téléphone',
-      'validator': 'Le numéro de téléphone est requis',
-      'controller': null,
-      'keyboardType': TextInputType.phone
-    },
-
-    {
-      'labelText': 'Adresse Email',
-      'validator': 'L\'adresse email est requise',
-      'controller': null,
-      'keyboardType': TextInputType.emailAddress
-    }
-  ];
+  TextEditingController nameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController prenomController = TextEditingController();
+  TextEditingController naissanceController = TextEditingController();
+  TextEditingController adresseController = TextEditingController();
+  TextEditingController villeController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+
+    key = widget.datas['key'];
+
+    List form1 = [
+      {
+        'labelText': 'Nom',
+        'validator': 'Le nom est requis',
+        'controller': nameController,
+        'keyboardType': TextInputType.name
+      },
+
+      {
+        'labelText': 'Post-Nom',
+        'validator': 'Le post-nom est requis',
+        'controller': lastNameController,
+        'keyboardType': TextInputType.name
+      },
+
+      {
+        'labelText': 'Prénom',
+        'validator': 'Le prénom est requis',
+        'controller': prenomController,
+        'keyboardType': TextInputType.name
+      },
+
+      {
+        'labelText': 'Date de naissance (J/M/AAAA)',
+        'validator': 'La date de naissance est requise',
+        'controller': naissanceController,
+        'keyboardType': TextInputType.datetime
+      },
+
+      {
+        'labelText': 'Adresse Physique',
+        'validator': 'L\'adresse physique est requise',
+        'controller': adresseController,
+        'keyboardType': TextInputType.text
+      },
+
+      {
+        'labelText': 'Ville',
+        'validator': 'La ville est requise',
+        'controller': villeController,
+        'keyboardType': TextInputType.name
+      },
+
+      {
+        'labelText': 'Numéro de téléphone',
+        'validator': 'Le numéro de téléphone est requis',
+        'controller': phoneController,
+        'keyboardType': TextInputType.phone
+      },
+
+      {
+        'labelText': 'Adresse Email',
+        'validator': 'L\'adresse email est requise',
+        'controller': emailController,
+        'keyboardType': TextInputType.emailAddress
+      }
+    ];
+
     List item = widget.datas['country'];
     final steps = [
       CoolStep(
@@ -137,7 +151,7 @@ class _TourismForm extends State<TourismForm>{
                 'Selectionner un pays.',
                 Icons.error,
                 Colors.red,
-                {'label': 'OK', 'onTap': ()=>Navigator.pop(context)});
+                {'label': 'FERMER', 'onTap': ()=>Navigator.pop(context)});
             return 'ok ';
           }
           return null;
@@ -166,6 +180,15 @@ class _TourismForm extends State<TourismForm>{
             )
         ),
         validation: () {
+          if (!_formKey.currentState!.validate()) {
+            notification_dialog(
+                context,
+                'Completez le formulaire.',
+                Icons.error,
+                Colors.red,
+                {'label': 'FERMER', 'onTap': ()=>Navigator.pop(context)});
+            return 'Fill form correctly';
+          }
           return null;
         },
       ),
@@ -207,6 +230,18 @@ class _TourismForm extends State<TourismForm>{
           ],
         ),
         validation: () {
+          if(!showDate){
+            notification_dialog(
+                context,
+                'Selectionner une date de rendez-vous..',
+                Icons.error,
+                Colors.red,
+                {'label': 'FERMER',
+                  'onTap': ()=>Navigator.pop(context)
+                }
+            );
+            return 'Select date';
+          }
         return null;
       },
       ),
@@ -218,53 +253,66 @@ class _TourismForm extends State<TourismForm>{
         subtitle: 'Choissisez une heure de rendez-vous',
         content: Column(
           children: [
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '09h00',
             ),
             SizedBox(height: 16.0),
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '10h00',
             ),
             SizedBox(height: 16.0),
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '11h00',
             ),
             SizedBox(height: 16.0),
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '12h00',
             ),
             SizedBox(height: 16.0),
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '13h00',
             ),
             SizedBox(height: 16.0),
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '14h00',
             ),
             SizedBox(height: 16.0),
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '15h00',
             ),
             SizedBox(height: 16.0),
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '16h00',
             ),
             SizedBox(height: 16.0),
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '17h00',
             ),
           ],
-        ), validation: () {
-        return null;
+        ),
+        validation: () {
+          if(selectedHoure == null){
+            notification_dialog(
+                context,
+                'Selectionner une heure de rendez-vous..',
+                Icons.error,
+                Colors.red,
+                {'label': 'FERMER',
+                  'onTap': ()=>Navigator.pop(context)
+                }
+            );
+            return 'erreur';
+          }
+          return null;
       },
       ),
 
@@ -362,6 +410,43 @@ class _TourismForm extends State<TourismForm>{
           onChanged: (String? v) {
             setState(() {
               pays = v;
+            });
+          },
+          title: Text(
+            name,
+            style: TextStyle(
+              color: isActive ? Colors.white : null,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHour({
+    BuildContext? context,
+    required String name,
+  }) {
+    final isActive = name == selectedHoure;
+
+    return Container(
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 200),
+        curve: Curves.easeInOut,
+        decoration: BoxDecoration(
+          color: isActive ? Colors.black : null,
+          border: Border.all(
+            width: 0,
+          ),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: RadioListTile(
+          value: name,
+          activeColor: Colors.white,
+          groupValue: selectedHoure,
+          onChanged: (String? v) {
+            setState(() {
+              selectedHoure = v!;
             });
           },
           title: Text(
