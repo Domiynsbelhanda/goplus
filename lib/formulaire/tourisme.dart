@@ -1,12 +1,14 @@
 import 'package:cool_stepper/cool_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:goplus/dashboard.dart';
+import 'package:goplus/services/formulaireRequest.dart';
 import 'package:goplus/utils/app_colors.dart';
 import 'package:goplus/widget/backButton.dart';
 import 'package:goplus/widget/buildTextField.dart';
 import 'package:goplus/widget/cool_steper.dart';
 import 'package:goplus/widget/notification_dialog.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class TourismForm extends StatefulWidget{
   var datas;
@@ -337,26 +339,28 @@ class _TourismForm extends State<TourismForm>{
                   "city": villeController.text.trim(),
                   "phone": phoneController.text.trim(),
                   "email": emailController.text.trim(),
-                  "rdvdate": getDate()
+                  "rdvdate": '10/05/2020'
                 };
 
-                print(data);
+                print('oklm');
 
-                notification_dialog(context,
-                    'Votre rendez-vous a été prise.',
-                    Icons.check_circle,
-                    Colors.green,
-                  {
-                    'label' : 'FERMER',
-                    'onTap' : (){
-                      Navigator.pushAndRemoveUntil(context,
-                          MaterialPageRoute(
-                              builder: (context)=> Dashboard()
-                          ), (route) => false);
-                    }
+                Provider.of<Datas>(context, listen: false).formulaire(context, data);
 
-                  }
-                );
+                // notification_dialog(context,
+                //     'Votre rendez-vous a été prise.',
+                //     Icons.check_circle,
+                //     Colors.green,
+                //   {
+                //     'label' : 'FERMER',
+                //     'onTap' : (){
+                //       Navigator.pushAndRemoveUntil(context,
+                //           MaterialPageRoute(
+                //               builder: (context)=> Dashboard()
+                //           ), (route) => false);
+                //     }
+                //
+                //   }
+                // );
               },
               child: Center(
                   child: Container(
