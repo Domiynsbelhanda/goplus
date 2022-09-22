@@ -2,29 +2,34 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart' as Dio;
+import '../dashboard.dart';
+import '../widget/notification_dialog.dart';
 import 'dio.dart';
 
 class Datas extends ChangeNotifier{
 
   void formulaire(BuildContext context, var data) async {
-    print('${data}');
     try{
-      var datas = {
-        "key": " form_1",
-        "cname": "ESPAGNE",
-        "lastn": "KIELO",
-        "midn": "LING ELA",
-        "firstn": "RUDDY",
-        "birthdate": "01-01-1990",
-        "address": "24, avenue des Usines ",
-        "city": "Lubumbashi",
-        "phone": "970015005",
-        "email": "kielo@google.com",
-        "rdvdate": "10-03-2023"
-      };
-      Dio.Response response = await dio()!.post('/v1/', data: jsonEncode(datas));
-      var dats = jsonDecode(jsonEncode(response.data));
-      print('${response.data}');
+      Dio.Response response = await dio()!.post('/v1/', data: jsonEncode(data));
+      Map<String, dynamic> dats = jsonDecode(response.data);
+
+      notification_dialog(context,
+          '${dats['message']}',
+          Icons.check_circle,
+          Colors.green,
+        {
+          'label' : 'FERMER',
+          'onTap' : (){
+            Navigator.pushAndRemoveUntil(context,
+                MaterialPageRoute(
+                    builder: (context)=> Dashboard()
+                ), (route) => false);
+          }
+
+        },
+        15,
+        false
+      );
       notifyListeners();
     } catch(e){
       print('Paille ${e}');

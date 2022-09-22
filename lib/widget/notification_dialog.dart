@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:goplus/utils/app_colors.dart';
 
-notification_dialog(BuildContext context, String text, IconData icons, Color color, var button) {
+notification_dialog(
+    BuildContext context,
+    String text,
+    IconData icons,
+    Color color,
+    var button,
+    double fontSize,
+    bool barriere) {
 
   // set up the button
   Widget okButton = TextButton(
@@ -30,7 +37,7 @@ notification_dialog(BuildContext context, String text, IconData icons, Color col
         BorderRadius.circular(20.0)),
     child: SizedBox(
       width: width / 1,
-      height: width / 1.2,
+      height: width / 1.1,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -48,8 +55,8 @@ notification_dialog(BuildContext context, String text, IconData icons, Color col
               child: Text(
                 '${text}',
                 style: TextStyle(
-                  fontSize: width / 15,
-                  color: Colors.green,
+                  fontSize: fontSize,
+                  color: Colors.black,
                 )
               ),
             ),
@@ -66,6 +73,7 @@ notification_dialog(BuildContext context, String text, IconData icons, Color col
   // show the dialog
   showDialog(
     context: context,
+    barrierDismissible: barriere,
     builder: (BuildContext context) {
       return alert;
     },

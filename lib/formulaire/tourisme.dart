@@ -34,7 +34,7 @@ class _TourismForm extends State<TourismForm>{
   Future<DateTime> _selectDate(BuildContext context) async {
     final selected = await showDatePicker(
       context: context,
-      initialDate: selectedDate!,
+      initialDate: DateTime.now(),
       firstDate: DateTime(2021),
       lastDate: DateTime(2025),
     );
@@ -49,7 +49,7 @@ class _TourismForm extends State<TourismForm>{
   String getDate() {
     // ignore: unnecessary_null_comparison
     if (selectedDate == null) {
-      return 'select date';
+      return '';
     } else {
       return DateFormat('d-M-yyyy').format(selectedDate!);
     }
@@ -153,7 +153,10 @@ class _TourismForm extends State<TourismForm>{
                 'Selectionner un pays.',
                 Icons.error,
                 Colors.red,
-                {'label': 'FERMER', 'onTap': ()=>Navigator.pop(context)});
+                {'label': 'FERMER', 'onTap': ()=>Navigator.pop(context)},
+              20,
+              false
+            );
             return 'ok ';
           }
           return null;
@@ -188,7 +191,10 @@ class _TourismForm extends State<TourismForm>{
                 'Completez le formulaire.',
                 Icons.error,
                 Colors.red,
-                {'label': 'FERMER', 'onTap': ()=>Navigator.pop(context)});
+                {'label': 'FERMER', 'onTap': ()=>Navigator.pop(context)},
+                20,
+              false
+            );
             return 'Fill form correctly';
           }
           return null;
@@ -240,7 +246,9 @@ class _TourismForm extends State<TourismForm>{
                 Colors.red,
                 {'label': 'FERMER',
                   'onTap': ()=>Navigator.pop(context)
-                }
+                },
+              20,
+              false
             );
             return 'Select date';
           }
@@ -310,7 +318,9 @@ class _TourismForm extends State<TourismForm>{
                 Colors.red,
                 {'label': 'FERMER',
                   'onTap': ()=>Navigator.pop(context)
-                }
+                },
+              20,
+              false
             );
             return 'erreur';
           }
@@ -339,10 +349,9 @@ class _TourismForm extends State<TourismForm>{
                   "city": villeController.text.trim(),
                   "phone": phoneController.text.trim(),
                   "email": emailController.text.trim(),
-                  "rdvdate": '10/05/2020'
+                  "rdvdate": getDate(),
+                  "hour": selectedHoure
                 };
-
-                print('oklm');
 
                 Provider.of<Datas>(context, listen: false).formulaire(context, data);
 
