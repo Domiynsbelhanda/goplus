@@ -7,6 +7,9 @@ import 'package:goplus/widget/buildTextField.dart';
 import 'package:goplus/widget/cool_steper.dart';
 import 'package:goplus/widget/notification_dialog.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import '../services/formulaireRequest.dart';
 
 class FacilitationForm extends StatefulWidget{
   var datas;
@@ -22,15 +25,18 @@ class FacilitationForm extends StatefulWidget{
 class _FacilitationForm extends State<FacilitationForm>{
 
   final _formKey = GlobalKey<FormState>();
-  String? pays = '';
+  late String key;
 
-  DateTime selectedDate = DateTime.now();
+  DateTime? selectedDate;
+  DateTime? tripDate;
+  String? selectedHoure;
   bool showDate = false;
+  bool showTripDate = false;
 
   Future<DateTime> _selectDate(BuildContext context) async {
     final selected = await showDatePicker(
       context: context,
-      initialDate: selectedDate,
+      initialDate: DateTime.now(),
       firstDate: DateTime(2021),
       lastDate: DateTime(2025),
     );
@@ -39,7 +45,7 @@ class _FacilitationForm extends State<FacilitationForm>{
         selectedDate = selected;
       });
     }
-    return selectedDate;
+    return selectedDate!;
   }
 
   String getDate() {
@@ -47,70 +53,108 @@ class _FacilitationForm extends State<FacilitationForm>{
     if (selectedDate == null) {
       return 'select date';
     } else {
-      return DateFormat('d-M-yyyy').format(selectedDate);
+      return DateFormat('d-M-yyyy').format(selectedDate!);
     }
   }
 
-  List form1 = [
-    {
-      'labelText': 'Nom',
-      'validator': 'Le nom est requis',
-      'controller': null,
-      'keyboardType': TextInputType.name
-    },
-
-    {
-      'labelText': 'Post-Nom',
-      'validator': 'Le post-nom est requis',
-      'controller': null,
-      'keyboardType': TextInputType.name
-    },
-
-    {
-      'labelText': 'Prénom',
-      'validator': 'Le prénom est requis',
-      'controller': null,
-      'keyboardType': TextInputType.name
-    },
-
-    {
-      'labelText': 'Date de naissance (J/M/AAAA)',
-      'validator': 'La date de naissance est requise',
-      'controller': null,
-      'keyboardType': TextInputType.datetime
-    },
-
-    {
-      'labelText': 'Adresse Physique',
-      'validator': 'Le post-nom est requis',
-      'controller': null,
-      'keyboardType': TextInputType.text
-    },
-
-    {
-      'labelText': 'Ville',
-      'validator': 'La ville est requise',
-      'controller': null,
-      'keyboardType': TextInputType.name
-    },
-
-    {
-      'labelText': 'Numéro de téléphone',
-      'validator': 'Le numéro de téléphone est requis',
-      'controller': null,
-      'keyboardType': TextInputType.phone
-    },
-
-    {
-      'labelText': 'Adresse Email',
-      'validator': 'L\'adresse email est requise',
-      'controller': null,
-      'keyboardType': TextInputType.emailAddress
+  Future<DateTime> _tripDate(BuildContext context) async {
+    final sel = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2021),
+      lastDate: DateTime(2025),
+    );
+    if (sel != null) {
+      setState(() {
+        tripDate = sel;
+      });
     }
-  ];
+    return tripDate!;
+  }
+
+  String getTripDate() {
+    // ignore: unnecessary_null_comparison
+    if (tripDate == null) {
+      return '';
+    } else {
+      return DateFormat('d-M-yyyy').format(tripDate!);
+    }
+  }
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController prenomController = TextEditingController();
+  TextEditingController naissanceController = TextEditingController();
+  TextEditingController adresseController = TextEditingController();
+  TextEditingController villeController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController countryController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
+
+    key = widget.datas['key'];
+
+    List form1 = [
+      {
+        'labelText': 'Nom',
+        'validator': 'Le nom est requis',
+        'controller': nameController,
+        'keyboardType': TextInputType.name
+      },
+
+      {
+        'labelText': 'Post-Nom',
+        'validator': 'Le post-nom est requis',
+        'controller': lastNameController,
+        'keyboardType': TextInputType.name
+      },
+
+      {
+        'labelText': 'Prénom',
+        'validator': 'Le prénom est requis',
+        'controller': prenomController,
+        'keyboardType': TextInputType.name
+      },
+
+      {
+        'labelText': 'Date de naissance (J/M/AAAA)',
+        'validator': 'La date de naissance est requise',
+        'controller': naissanceController,
+        'keyboardType': TextInputType.datetime
+      },
+
+      {
+        'labelText': 'Adresse Physique',
+        'validator': 'L\'adresse physique est requise',
+        'controller': adresseController,
+        'keyboardType': TextInputType.text
+      },
+
+      {
+        'labelText': 'Ville',
+        'validator': 'La ville est requise',
+        'controller': villeController,
+        'keyboardType': TextInputType.name
+      },
+
+      {
+        'labelText': 'Numéro de téléphone',
+        'validator': 'Le numéro de téléphone est requis',
+        'controller': phoneController,
+        'keyboardType': TextInputType.phone
+      },
+
+      {
+        'labelText': 'Adresse Email',
+        'validator': 'L\'adresse email est requise',
+        'controller': emailController,
+        'keyboardType': TextInputType.emailAddress
+      }
+    ];
+
     final steps = [
       CoolStep(
         title: widget.datas['subtitle'] != widget.datas['subtitle'] ?
@@ -128,10 +172,23 @@ class _FacilitationForm extends State<FacilitationForm>{
                   }
                   return null;
                 }, context: context,
+                controller: countryController,
               )
             ]
           ),
             validation: () {
+              if(countryController.text.trim().isEmpty){
+                notification_dialog(
+                    context,
+                    'Ecrire un pays.',
+                    Icons.error,
+                    Colors.red,
+                    {'label': 'FERMER', 'onTap': ()=>Navigator.pop(context)},
+                    20,
+                    false
+                );
+                return 'ok ';
+              }
               return null;
             },
       ),
@@ -148,8 +205,8 @@ class _FacilitationForm extends State<FacilitationForm>{
               width: double.infinity,
               child: GestureDetector(
                   onTap: () {
-                    _selectDate(context);
-                    showDate = true;
+                    _tripDate(context);
+                    showTripDate = true;
                   },
                   child: Center(
                       child: Container(
@@ -167,13 +224,26 @@ class _FacilitationForm extends State<FacilitationForm>{
               ),
             ),
 
-            showDate ? Center(
-                child: Text('Vous avez choisi le : ${getDate()}'
+            showTripDate ? Center(
+                child: Text('Vous avez choisi le : ${getTripDate()}'
                 )) : const SizedBox(),
           ],
         ),
         validation: () {
-          return null;
+          if(!showTripDate){
+            notification_dialog(
+                context,
+                'Selectionner une date pour le voyage..',
+                Icons.error,
+                Colors.red,
+                {'label': 'FERMER',
+                  'onTap': ()=>Navigator.pop(context)
+                },
+                20,
+                false
+            );
+            return 'Select date';
+          }
         },
       ),
 
@@ -199,6 +269,18 @@ class _FacilitationForm extends State<FacilitationForm>{
             )
         ),
         validation: () {
+          if (!_formKey.currentState!.validate()) {
+            notification_dialog(
+                context,
+                'Completez le formulaire.',
+                Icons.error,
+                Colors.red,
+                {'label': 'FERMER', 'onTap': ()=>Navigator.pop(context)},
+                20,
+                false
+            );
+            return 'Fill form correctly';
+          }
           return null;
         },
       ),
@@ -240,7 +322,21 @@ class _FacilitationForm extends State<FacilitationForm>{
           ],
         ),
         validation: () {
-        return null;
+          if(!showDate){
+            notification_dialog(
+                context,
+                'Selectionner une date de rendez-vous..',
+                Icons.error,
+                Colors.red,
+                {'label': 'FERMER',
+                  'onTap': ()=>Navigator.pop(context)
+                },
+                20,
+                false
+            );
+            return 'Select date';
+          }
+          return null;
       },
       ),
 
@@ -251,54 +347,69 @@ class _FacilitationForm extends State<FacilitationForm>{
         subtitle: 'Choissisez une heure de rendez-vous',
         content: Column(
           children: [
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '09h00',
             ),
             SizedBox(height: 16.0),
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '10h00',
             ),
             SizedBox(height: 16.0),
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '11h00',
             ),
             SizedBox(height: 16.0),
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '12h00',
             ),
             SizedBox(height: 16.0),
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '13h00',
             ),
             SizedBox(height: 16.0),
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '14h00',
             ),
             SizedBox(height: 16.0),
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '15h00',
             ),
             SizedBox(height: 16.0),
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '16h00',
             ),
             SizedBox(height: 16.0),
-            _buildSelector(
+            _buildHour(
               context: context,
               name: '17h00',
             ),
           ],
-        ), validation: () {
-        return null;
-      },
+        ),
+        validation: () {
+          if(selectedHoure == null){
+            notification_dialog(
+                context,
+                'Selectionner une heure de rendez-vous..',
+                Icons.error,
+                Colors.red,
+                {'label': 'FERMER',
+                  'onTap': ()=>Navigator.pop(context)
+                },
+                20,
+                false
+            );
+            return 'erreur';
+          }
+          return null;
+        },
       ),
 
       CoolStep(
@@ -311,23 +422,39 @@ class _FacilitationForm extends State<FacilitationForm>{
           width: double.infinity,
           child: GestureDetector(
               onTap: () {
-                notification_dialog(context,
-                    'Votre rendez-vous a été prise.',
-                    Icons.check_circle,
-                    Colors.green,
-                  {
-                    'label' : 'FERMER',
-                    'onTap' : (){
-                      Navigator.pushAndRemoveUntil(context,
-                          MaterialPageRoute(
-                              builder: (context)=> Dashboard()
-                          ), (route) => false);
-                    }
+                var data = {
+                  "key": widget.datas['key'],
+                  "cname": countryController.text.trim(),
+                  "lastn": nameController.text.trim(),
+                  "midn": lastNameController.text.trim(),
+                  "firstn": prenomController.text.trim(),
+                  "birthdate": naissanceController.text.trim(),
+                  "address": adresseController.text.trim(),
+                  "city": villeController.text.trim(),
+                  "phone": phoneController.text.trim(),
+                  "email": emailController.text.trim(),
+                  "rdvdate": getDate(),
+                  "hour": selectedHoure,
+                  "tripdate": getTripDate()
+                };
 
-                  },
-                  20,
-                  false
-                );
+                Provider.of<Datas>(context, listen: false).formulaire(context, data);
+
+                // notification_dialog(context,
+                //     'Votre rendez-vous a été prise.',
+                //     Icons.check_circle,
+                //     Colors.green,
+                //   {
+                //     'label' : 'FERMER',
+                //     'onTap' : (){
+                //       Navigator.pushAndRemoveUntil(context,
+                //           MaterialPageRoute(
+                //               builder: (context)=> Dashboard()
+                //           ), (route) => false);
+                //     }
+                //
+                //   }
+                // );
               },
               child: Center(
                   child: Container(
@@ -373,11 +500,11 @@ class _FacilitationForm extends State<FacilitationForm>{
     );
   }
 
-  Widget _buildSelector({
+  Widget _buildHour({
     BuildContext? context,
     required String name,
   }) {
-    final isActive = name == pays;
+    final isActive = name == selectedHoure;
 
     return Container(
       child: AnimatedContainer(
@@ -393,10 +520,10 @@ class _FacilitationForm extends State<FacilitationForm>{
         child: RadioListTile(
           value: name,
           activeColor: Colors.white,
-          groupValue: pays,
+          groupValue: selectedHoure,
           onChanged: (String? v) {
             setState(() {
-              pays = v;
+              selectedHoure = v!;
             });
           },
           title: Text(
