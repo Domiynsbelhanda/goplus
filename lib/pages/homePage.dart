@@ -29,7 +29,7 @@ class _HomePage extends State<HomePage>{
               child: Text(
                 'Où Allez-vous?',
                 style: TextStyle(
-                  fontFamily: 'Montserrat',
+                  fontFamily: 'Poppins',
                   fontSize: size.width / 20
                 )
               ),
@@ -40,7 +40,7 @@ class _HomePage extends State<HomePage>{
               child: Text(
                   'Nos taxis vous y conduirons en toute sécurité et convivialité à bord.',
                   style: TextStyle(
-                      fontFamily: 'Montserrat',
+                      fontFamily: 'Poppins',
                       fontSize: size.width / 25
                   )
               ),
