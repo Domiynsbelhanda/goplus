@@ -10,14 +10,30 @@ class HomePage extends StatefulWidget{
 }
 
 class _HomePage extends State<HomePage>{
+
+  late Size size;
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             LogoText(),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: Text(
+                'Où Allez-vous?',
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontSize: size.width / 20
+                )
+              ),
+            )
           ],
         ),
       ),
