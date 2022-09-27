@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goplus/widget/buildTextField.dart';
 import 'package:goplus/widget/logo_text.dart';
 
 class HomePage extends StatefulWidget{
@@ -12,6 +13,7 @@ class HomePage extends StatefulWidget{
 class _HomePage extends State<HomePage>{
 
   late Size size;
+  TextEditingController destinationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,6 @@ class _HomePage extends State<HomePage>{
               child: Text(
                 'Où Allez-vous?',
                 style: TextStyle(
-                  fontFamily: 'Poppins',
                   fontSize: size.width / 20
                 )
               ),
@@ -40,9 +41,24 @@ class _HomePage extends State<HomePage>{
               child: Text(
                   'Nos taxis vous y conduirons en toute sécurité et convivialité à bord.',
                   style: TextStyle(
-                      fontFamily: 'Poppins',
                       fontSize: size.width / 25
                   )
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0),
+              child: BuildTextField(
+                  labelText: 'Entrez votre destination',
+                  context: context,
+                  keyboardType: TextInputType.text,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Entrez une place';
+                    }
+                    return null;
+                  },
+                controller: destinationController,
               ),
             )
           ],

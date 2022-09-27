@@ -16,6 +16,18 @@ class BuildTextField extends StatelessWidget{
       child: TextFormField(
         keyboardType: keyboardType!,
         decoration: InputDecoration(
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: Colors.grey,
+                width: 2.0
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: Colors.black,
+                width: 2.0
+            ),
+          ),
           labelText: labelText,
         ),
         validator: validator,
