@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goplus/widget/buildTextField.dart';
 import 'package:goplus/widget/logo_text.dart';
+import 'package:goplus/widget/notification_dialog.dart';
 
 class HomePage extends StatefulWidget{
   @override
@@ -56,7 +57,21 @@ class _HomePage extends State<HomePage>{
                 suffixIcon: {
                     'icon': Icons.search,
                     'onTap': (){
-                      print('object');
+                      String? destination = destinationController.text.trim();
+                      if(destination.isEmpty){
+                        notification_dialog(
+                            context,
+                            'Veuillez tapez le nom du lieu où vous voulez vous rendre.',
+                            Icons.map_outlined,
+                            Colors.blueAccent,
+                            {
+                              'label': 'FERMER',
+                              'onTap': ()=> Navigator.pop(context)
+                            },
+                            20,
+                            false);
+                        return;
+                      }
                     },
                 },
                 controller: destinationController,
