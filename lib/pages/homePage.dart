@@ -3,6 +3,8 @@ import 'package:goplus/widget/buildTextField.dart';
 import 'package:goplus/widget/logo_text.dart';
 import 'package:goplus/widget/notification_dialog.dart';
 
+import '../formulaire/dashboard.dart';
+
 class HomePage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -32,7 +34,8 @@ class _HomePage extends State<HomePage>{
               child: Text(
                 'Où Allez-vous?',
                 style: TextStyle(
-                  fontSize: size.width / 20
+                  fontSize: size.width / 20,
+                  fontFamily: 'Anton'
                 )
               ),
             ),
@@ -76,7 +79,28 @@ class _HomePage extends State<HomePage>{
                 },
                 controller: destinationController,
               ),
-            )
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: GestureDetector(
+                onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Dashboard()
+                    )
+                  );
+                },
+                child: Text(
+                    'GO FLY SERVICES',
+                    style: TextStyle(
+                        fontSize: size.width / 20,
+                        fontFamily: 'Anton'
+                    )
+                ),
+              )
+            ),
           ],
         ),
       ),
