@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goplus/widget/logo_text.dart';
 
 class HomePage extends StatefulWidget{
   @override
@@ -12,6 +13,14 @@ class _HomePage extends State<HomePage>{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold();
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            LogoText(),
+          ],
+        ),
+      ),
+    );
   }
 }
