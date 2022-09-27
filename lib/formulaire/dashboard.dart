@@ -20,18 +20,9 @@ class _Dashboard extends State<Dashboard>{
 
   late Size size;
 
-  late List itemDashboard;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
-
-    itemDashboard = dashboardFormulaire(context);
     // TODO: implement build
     return Scaffold(
       body: SingleChildScrollView(
@@ -47,7 +38,7 @@ class _Dashboard extends State<Dashboard>{
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: itemDashboard.map((e) => Padding(
+                  children: dashboardFormulaire(context).map((e) => Padding(
                     padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                     child: CardPicture(
                       imagePath: '${e['imagePath']}',
