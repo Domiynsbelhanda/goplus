@@ -3,8 +3,8 @@ import 'package:goplus/formulaire/facilitation.dart';
 import 'package:goplus/widget/card_dashboard_item_image.dart';
 import 'package:goplus/widget/tab_item_dashboard.dart';
 
-import 'formulaire/catalogue.dart';
-import 'formulaire/tourisme.dart';
+import 'catalogue.dart';
+import 'tourisme.dart';
 
 class Dashboard extends StatefulWidget{
   @override

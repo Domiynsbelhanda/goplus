@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:goplus/dashboard.dart';
+import 'package:goplus/formulaire/dashboard.dart';
+import 'package:goplus/pages/homePage.dart';
 import 'package:goplus/services/formulaireRequest.dart';
 import 'package:provider/provider.dart';
 import 'package:goplus/widget/theme_data.dart';
@@ -48,7 +49,7 @@ class _MyApp extends State<MyApp>{
         Locale('lg', ''),
       ],
       home: AnimatedSplashScreen(
-        nextScreen: Dashboard(), //Dashboard(), //Dashboard(), //
+        nextScreen: HomePage(),
         duration: 2500,
         splash: "assets/icon/white-text.png",
         backgroundColor : Color(0xFFFFD80E),

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart' as Dio;
-import '../dashboard.dart';
+import '../formulaire/dashboard.dart';
 import '../widget/notification_dialog.dart';
 import 'dio.dart';
 
