@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goplus/formulaire/facilitation.dart';
 import 'package:goplus/widget/card_dashboard_item_image.dart';
+import 'package:goplus/widget/logo_text.dart';
 import 'package:goplus/widget/tab_item_dashboard.dart';
 
 import 'catalogue.dart';
@@ -243,31 +244,9 @@ class _Dashboard extends State<Dashboard>{
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-                padding: const EdgeInsets.only(left: 16.0, top: 32.0, bottom: 16.0),
-              child: Text(
-                'GO PLUS',
-                style: TextStyle(
-                  fontSize: size.width / 10,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: 'Anton'
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0, bottom: 24.0),
-              child: Row(
-                children: [
-                  TabItem(
-                    size: size,
-                    title: 'Découvrez nos offres',
-                    activate: true,
-                    onTap: (){
-                    },
-                  )
-                ],
-              ),
-            ),
+
+            LogoText(),
+
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SingleChildScrollView(
