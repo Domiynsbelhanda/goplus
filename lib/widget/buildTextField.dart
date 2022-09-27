@@ -6,9 +6,10 @@ class BuildTextField extends StatelessWidget{
   TextEditingController? controller;
   BuildContext context;
   TextInputType? keyboardType;
+  var suffixIcon;
 
 
-  BuildTextField({this.labelText, this.validator, this.controller, required this.context, this.keyboardType});
+  BuildTextField({this.labelText, this.validator, this.controller, required this.context, this.keyboardType, this.suffixIcon});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,19 +17,25 @@ class BuildTextField extends StatelessWidget{
       child: TextFormField(
         keyboardType: keyboardType!,
         decoration: InputDecoration(
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(
                 color: Colors.grey,
                 width: 2.0
             ),
           ),
-          enabledBorder: OutlineInputBorder(
+          enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(
                 color: Colors.black,
                 width: 2.0
             ),
           ),
           labelText: labelText,
+          suffixIcon: suffixIcon != null ? GestureDetector(
+            onTap: suffixIcon['onTap'],
+            child: Icon(
+                suffixIcon['icon']
+            ),
+          ) : const SizedBox()
         ),
         validator: validator,
         controller: controller,

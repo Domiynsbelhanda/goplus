@@ -52,12 +52,13 @@ class _HomePage extends State<HomePage>{
                   labelText: 'Entrez votre destination',
                   context: context,
                   keyboardType: TextInputType.text,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Entrez une place';
-                    }
-                    return null;
-                  },
+                  validator: null,
+                suffixIcon: {
+                    'icon': Icons.search,
+                    'onTap': (){
+                      print('object');
+                    },
+                },
                 controller: destinationController,
               ),
             )
