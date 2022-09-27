@@ -33,6 +33,17 @@ class _HomePage extends State<HomePage>{
                   fontSize: size.width / 20
                 )
               ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+              child: Text(
+                  'Nos taxis vous y conduirons en toute sécurité et convivialité à bord.',
+                  style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: size.width / 25
+                  )
+              ),
             )
           ],
         ),
