@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart';
 import 'package:goplus/taxi/screens/mapsPickLocation.dart';
@@ -21,6 +22,7 @@ class _HomePage extends State<HomePage>{
   late Size size;
   TextEditingController destinationController = TextEditingController();
   TextEditingController departController = TextEditingController();
+  PickResult? selectedPlace;
 
   @override
   Widget build(BuildContext context) {
@@ -138,10 +140,10 @@ class _HomePage extends State<HomePage>{
                         return PlacePicker(
                           resizeToAvoidBottomInset: false, // only works on fullscreen, less flickery
                           apiKey: 'AIzaSyAFtipYv6W0AWKFWsipPRhrgRdPHF5MOvk',
-                          hintText: "Find a place ...",
-                          searchingText: "Please wait ...",
-                          selectText: "Select place",
-                          outsideOfPickAreaText: "Place not in area",
+                          hintText: "Trouvez un lieu ...",
+                          searchingText: "Veuillez patienter ...",
+                          selectText: "Choisir une place",
+                          outsideOfPickAreaText: "Pas de lieu trouvée.",
                           initialPosition: LatLng(37.43296265331129, -122.08832357078792),
                           useCurrentLocation: true,
                           selectInitialPosition: true,
@@ -150,23 +152,19 @@ class _HomePage extends State<HomePage>{
                           zoomGesturesEnabled: true,
                           zoomControlsEnabled: true,
                           onMapCreated: (GoogleMapController controller) {
-                            print("Map created");
                           },
                           onPlacePicked: (PickResult result) {
-                            print(
-                                "Place picked: ${result.formattedAddress}");
                             setState(() {
+                              selectedPlace = result;
                               Navigator.of(context).pop();
                             });
                           },
                           onMapTypeChanged: (MapType mapType) {
-                            print(
-                                "Map type changed to ${mapType.toString()}");
                           },
                           forceSearchOnZoomChanged: true,
                           automaticallyImplyAppBarLeading: false,
                           autocompleteLanguage: "ko",
-                          region: 'au',
+                          region: 'cd',
                           pickArea: CircleArea(
                             center: LatLng(37.43296265331129, -122.08832357078792),
                             radius: 300,
@@ -175,7 +173,6 @@ class _HomePage extends State<HomePage>{
                             strokeWidth: 2,
                           ),
                           selectedPlaceWidgetBuilder: (_, selectedPlace, state, isSearchBarFocused) {
-                            print("state: $state, isSearchBarFocused: $isSearchBarFocused");
                             return isSearchBarFocused
                                 ? Container()
                                 : FloatingCard(
@@ -187,11 +184,8 @@ class _HomePage extends State<HomePage>{
                               child: state == SearchingState.Searching
                                   ? Center(child: CircularProgressIndicator())
                                   : ElevatedButton(
-                                child: Text("Pick Here"),
+                                child: Text("Choisir"),
                                 onPressed: () {
-                                  // IMPORTANT: You MUST manage selectedPlace data yourself as using this build will not invoke onPlacePicker as
-                                  //            this will override default 'Select here' Button.
-                                  print("do something with [selectedPlace] data");
                                   Navigator.of(context).pop();
                                 },
                               ),
@@ -199,9 +193,17 @@ class _HomePage extends State<HomePage>{
                           },
                           pinBuilder: (context, state) {
                             if (state == PinState.Idle) {
-                              return Icon(Icons.favorite_border);
+                              return Icon(
+                                FontAwesomeIcons.solidHandPointDown,
+                                size: 50,
+                                color: Colors.blueAccent,
+                              );
                             } else {
-                              return Icon(Icons.favorite);
+                              return Icon(
+                                FontAwesomeIcons.solidHandPointDown,
+                                size: 50,
+                                color: Colors.blueAccent,
+                              );
                             }
                           },
                           // introModalWidgetBuilder: (context,  close) {
