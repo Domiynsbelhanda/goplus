@@ -17,133 +17,55 @@ class PickLocation extends StatefulWidget{
 class _PickLocation extends State<PickLocation>{
 
   PickResult? selectedPlace;
-  bool showPlacePickerInContainer = false;
-  bool showGoogleMapInContainer = false;
   String androidApiKey = 'AIzaSyAFtipYv6W0AWKFWsipPRhrgRdPHF5MOvk';
   String iosApiKey = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Google Map Place Picker Demo"),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Platform.isAndroid && !showPlacePickerInContainer
-                  ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Switch(value: AndroidGoogleMapsFlutter.useAndroidViewSurface, onChanged: (value) {
-                    setState(() {
-                      showGoogleMapInContainer = false;
-                      AndroidGoogleMapsFlutter.useAndroidViewSurface = value;
-                    });
-                  }),
-                  Text("Use Hybrid Composition"),
-                ],
-              )
-                  : Container(),
-              !showPlacePickerInContainer
-                  ? ElevatedButton(
-                child: Text("Load Place Picker"),
-                onPressed: () {
-
-                },
-              )
-                  : Container(),
-              !showPlacePickerInContainer
-                  ? ElevatedButton(
-                child: Text("Load Place Picker in Container"),
-                onPressed: () {
-                  setState(() {
-                    showPlacePickerInContainer = true;
-                  });
-                },
-              )
-                  : Container(
-                  width: MediaQuery.of(context).size.width * 0.75,
-                  height: MediaQuery.of(context).size.height * 0.35,
-                  child: PlacePicker(
-                      forceAndroidLocationManager: true,
-                      apiKey: Platform.isAndroid
-                          ? androidApiKey
-                          : iosApiKey,
-                      hintText: "Find a place ...",
-                      searchingText: "Please wait ...",
-                      selectText: "Select place",
-                      initialPosition: LatLng(37.43296265331129, -122.08832357078792),
-                      useCurrentLocation: true,
-                      selectInitialPosition: true,
-                      usePinPointingSearch: true,
-                      usePlaceDetailSearch: true,
-                      zoomGesturesEnabled: true,
-                      zoomControlsEnabled: true,
-                      onPlacePicked: (PickResult result) {
-                        setState(() {
-                          selectedPlace = result;
-                          showPlacePickerInContainer = false;
-                        });
-                      },
-                      onTapBack: () {
-                        setState(() {
-                          showPlacePickerInContainer = false;
-                        });
-                      })),
-              selectedPlace == null
-                  ? Container()
-                  : Text(
-                '${selectedPlace!.formattedAddress}'
-              ),
-              selectedPlace == null
-                  ? Container()
-                  : Text('(lat : ${selectedPlace!.geometry!.location.lat.toString()}'
-                      ', lng : ${selectedPlace!.geometry!.location.lng.toString()})'),
-              //
-              showPlacePickerInContainer
-                  ? Container()
-                  : ElevatedButton(
-                child: Text("Toggle Google Map w/o Provider"),
-                onPressed: () {
-                  setState(() {
-                    showGoogleMapInContainer = !showGoogleMapInContainer;
-                  });
-                },
-              ),
-              !showGoogleMapInContainer
-                  ? Container()
-                  : Container(
-                  width: MediaQuery.of(context).size.width * 0.75,
-                  height: MediaQuery.of(context).size.height * 0.25,
-                  child: GoogleMap(
-                    zoomGesturesEnabled: false,
-                    zoomControlsEnabled: false,
-                    myLocationButtonEnabled: false,
-                    compassEnabled: false,
-                    mapToolbarEnabled: false,
-                    initialCameraPosition: new CameraPosition(target: LatLng(37.43296265331129, -122.08832357078792), zoom: 15),
-                    mapType: MapType.normal,
-                    myLocationEnabled: true,
-                    onMapCreated: (GoogleMapController controller) {
+      body: Container(
+        child: Stack(
+          children: [
+            Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: PlacePicker(
+                    forceAndroidLocationManager: true,
+                    apiKey: androidApiKey,
+                    hintText: "Trouver une place",
+                    searchingText: "Veuillez patienter ...",
+                    selectText: "Selectionner une place",
+                    initialPosition: LatLng(37.43296265331129, -122.08832357078792),
+                    useCurrentLocation: true,
+                    selectInitialPosition: true,
+                    usePinPointingSearch: true,
+                    usePlaceDetailSearch: true,
+                    zoomGesturesEnabled: true,
+                    zoomControlsEnabled: true,
+                    forceSearchOnZoomChanged: true,
+                    automaticallyImplyAppBarLeading: false,
+                    autocompleteLanguage: "fr",
+                    region: 'cd',
+                    pickArea: CircleArea(
+                      center: LatLng(37.43296265331129, -122.08832357078792),
+                      radius: 300,
+                      fillColor: Colors.lightGreen.withGreen(255).withAlpha(32),
+                      strokeColor: Colors.lightGreen.withGreen(255).withAlpha(192),
+                      strokeWidth: 2,
+                    ),
+                    onPlacePicked: (PickResult result) {
+                      setState(() {
+                        selectedPlace = result;
+                      });
                     },
-                    onCameraIdle: () {
-                    },
-                    onCameraMoveStarted: () {
-                    },
-                    onCameraMove: (CameraPosition position) {
-                    },
-                  )
-              ),
-              !showGoogleMapInContainer
-                  ? Container()
-                  : TextField(
-              ),
-              // #endregion
-            ],
-          ),
-        ));
+                    onTapBack: () {
+                      setState(() {
+                        Navigator.pop(context);
+                      });
+                    })),
+          ],
+        )
+      )
+    );
   }
 }
