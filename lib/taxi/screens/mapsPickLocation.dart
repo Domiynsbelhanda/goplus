@@ -8,6 +8,9 @@ import 'package:google_maps_place_picker_mb/src/google_map_place_picker.dart'; /
 import 'dart:io' show Platform;
 
 class PickLocation extends StatefulWidget{
+  String? place;
+  PickLocation({this.place});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -33,7 +36,7 @@ class _PickLocation extends State<PickLocation>{
                 child: PlacePicker(
                     forceAndroidLocationManager: true,
                     apiKey: androidApiKey,
-                    hintText: "Trouver une place",
+                    hintText: widget.place != null ? '${widget.place}' : "Trouver une place",
                     searchingText: "Veuillez patienter ...",
                     selectText: "Selectionner une place",
                     initialPosition: LatLng(37.43296265331129, -122.08832357078792),
@@ -52,13 +55,13 @@ class _PickLocation extends State<PickLocation>{
                         return const Icon(
                           FontAwesomeIcons.solidHandPointDown,
                           size: 50,
-                          color: Colors.blueAccent,
+                          color: Colors.red,
                         );
                       } else {
                         return const Icon(
                           FontAwesomeIcons.solidHandPointDown,
                           size: 50,
-                          color: Colors.blueAccent,
+                          color: Colors.red,
                         );
                       }
                     },

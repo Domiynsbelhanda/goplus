@@ -6,6 +6,7 @@ import 'package:goplus/taxi/screens/mapsPickLocation.dart';
 import 'package:goplus/widget/buildTextField.dart';
 import 'package:goplus/widget/logo_text.dart';
 import 'package:goplus/widget/notification_dialog.dart';
+import 'package:goplus/widget/red_button.dart';
 
 import '../formulaire/dashboard.dart';
 
@@ -54,7 +55,7 @@ class _HomePage extends State<HomePage>{
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+                      padding: const EdgeInsets.only(left: 16.0, top: 16.0, bottom: 16.0),
                       child: Text(
                           'Nos taxis vous y conduirons en toute sécurité et convivialité à bord.',
                           style: TextStyle(
@@ -88,6 +89,15 @@ class _HomePage extends State<HomePage>{
                                   false);
                               return;
                             }
+
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PickLocation(
+                                      place: destinationController.text.trim()
+                                    )
+                                )
+                            );
                           },
                         },
                         controller: destinationController,
@@ -138,22 +148,12 @@ class _HomePage extends State<HomePage>{
 
             Padding(
               padding: const EdgeInsets.only(left: 16.0),
-              child: GestureDetector(
-                onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PickLocation()
-                    )
-                  );
-                },
-                child: Text(
-                    'GO FLY SERVICES',
-                    style: TextStyle(
-                        fontSize: size.width / 20,
-                        fontFamily: 'Anton'
-                    )
-                ),
+              child: Text(
+                  'GO FLY SERVICES',
+                  style: TextStyle(
+                      fontSize: size.width / 20,
+                      fontFamily: 'Anton'
+                  )
               )
             ),
           ],
