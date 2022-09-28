@@ -11,6 +11,9 @@ import 'package:goplus/widget/red_button.dart';
 import '../formulaire/dashboard.dart';
 
 class HomePage extends StatefulWidget{
+  PickResult? destination;
+  HomePage({this.destination});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -28,6 +31,7 @@ class _HomePage extends State<HomePage>{
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
+    selectedPlace = widget.destination;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -104,12 +108,13 @@ class _HomePage extends State<HomePage>{
                       ),
                     ),
 
+                    selectedPlace != null ?
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
                       child: Text(
-                        '${selectedPlace != null ? selectedPlace!.name : 'Veuillez selectionner une place'}'
+                        '${selectedPlace!.name} - ${selectedPlace!.formattedAddress}'
                       ),
-                    ),
+                    ) : SizedBox(),
 
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0, right: 16.0),
