@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -46,6 +47,21 @@ class _PickLocation extends State<PickLocation>{
                     automaticallyImplyAppBarLeading: false,
                     autocompleteLanguage: "fr",
                     region: 'cd',
+                    pinBuilder: (context, state) {
+                      if (state == PinState.Idle) {
+                        return const Icon(
+                          FontAwesomeIcons.solidHandPointDown,
+                          size: 50,
+                          color: Colors.blueAccent,
+                        );
+                      } else {
+                        return const Icon(
+                          FontAwesomeIcons.solidHandPointDown,
+                          size: 50,
+                          color: Colors.blueAccent,
+                        );
+                      }
+                    },
                     pickArea: CircleArea(
                       center: LatLng(37.43296265331129, -122.08832357078792),
                       radius: 300,
