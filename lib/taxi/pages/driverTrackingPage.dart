@@ -7,7 +7,7 @@ import 'package:goplus/widget/notification_dialog.dart';
 
 import '../../utils/datas.dart';
 
-const double ZOOM = 18;
+const double ZOOM = 19;
 
 class DriverTrackingPage extends StatefulWidget{
   LatLng depart;
@@ -84,7 +84,15 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                     '${data[i].get('profpic')}'
                                   ),
                                 ),
-                                Text('${data[i].get('firstn')} ${data[i].get('lastn')} ${data[i].get('midn')}')
+                                Text(
+                                    '${data[i].get('firstn')} ${data[i].get('lastn')} ${data[i].get('midn')}',
+                                  style: TextStyle(
+                                    fontSize: 20.0
+                                  ),
+                                ),
+                                Text(
+                                  'A ${calculateDistance(widget.depart, latLng).toStringAsFixed(2)} mètre(s)'
+                                )
                               ],
                             ),
                           );
