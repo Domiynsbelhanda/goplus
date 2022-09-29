@@ -57,8 +57,8 @@ dependencies:
   cool_stepper: ^1.2.1
   dio: ^4.0.6
   font_awesome_flutter: ^10.2.1
-  firebase_core:
-  cloud_firestore:
+  firebase_core: ^1.23.0
+  cloud_firestore: ^3.4.9
   location: ^4.4.0
 
 dev_dependencies:
