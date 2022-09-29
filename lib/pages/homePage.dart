@@ -7,6 +7,7 @@ import 'package:goplus/widget/logo_text.dart';
 import 'package:goplus/widget/mini_card_picture.dart';
 import 'package:goplus/widget/notification_dialog.dart';
 
+import '../utils/app_colors.dart';
 import '../utils/datas.dart';
 import '../widget/card_dashboard_item_image.dart';
 
@@ -180,6 +181,51 @@ class _HomePage extends State<HomePage>{
                         ),
                       ),
                     ) : SizedBox(),
+
+
+                    selectedPlace != null ?
+                    Padding(
+                        padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
+                        child: GestureDetector(
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) => PickLocation(
+                                    place: selectedPlace,
+                                    destination: false,
+                                  )
+                              ),
+                            );
+                          },
+                          child: Container(
+                            height: size.width / 7,
+                            decoration: BoxDecoration(
+                              color: AppColors.primaryColor,
+                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(
+                                    color: Colors.black,
+                                    width: 2
+                                )
+                            ),
+                            child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'TROUVEZ UN TAXI',
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                            ),
+                          ),
+                        )
+                    )
+                        : SizedBox(),
                   ],
                 ),
               ),
@@ -197,7 +243,7 @@ class _HomePage extends State<HomePage>{
             ),
 
             Padding(
-                padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+                padding: const EdgeInsets.only(left: 16.0, top: 16.0, bottom: 16.0),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
