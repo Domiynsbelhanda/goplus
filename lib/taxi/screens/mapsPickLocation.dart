@@ -23,7 +23,7 @@ class _PickLocation extends State<PickLocation>{
   String androidApiKey = 'AIzaSyAFtipYv6W0AWKFWsipPRhrgRdPHF5MOvk';
   GoogleMapController? mapController; //contrller for Google map
   CameraPosition? cameraPosition;
-  LatLng startLocation = LatLng(myPosition!.latitude, myPosition!.longitude);
+  LatLng startLocation = LatLng(-11.6565, 27.4782);
   String location = "Chercher un lieu";
   LatLng? selectedPlace;
   LatLng? departPlace;

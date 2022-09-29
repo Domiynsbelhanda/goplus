@@ -1,7 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:goplus/widget/notification_dialog.dart';
 
 import '../../utils/datas.dart';
 
@@ -23,7 +25,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
 
   static GoogleMapController? _googleMapController;
   Set<Marker> markers = Set();
-
   late BitmapDescriptor markerbitmap;
 
   @override
@@ -49,39 +50,38 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
             markers.clear();
             //Extract the location from document
             var data = snapshot.data!.docs;
-            data.map((value) => () async{
-                double latitude = value.get('latitude');
-                double longitude = value.get('longitude');
-                GeoPoint location = GeoPoint(latitude, longitude);
+            for(var i = 0; i < data.length; i++){
+              double latitude = data[i].get('latitude');
+              double longitude = data[i].get('longitude');
+              GeoPoint location = GeoPoint(latitude, longitude);
 
-                // Check if location is valid
-                if (location == null) {
-                  return Text("There was no location data");
-                }
-                final latLng = LatLng(location.latitude, location.longitude);
+              // Check if location is valid
+              if (location == null) {
+                return Text("There was no location data");
+              }
+              final latLng = LatLng(location.latitude, location.longitude);
 
-                // Add new marker with markerId.
-                markers
-                    .add(
-                    Marker(
+              // Add new marker with markerId.
+              markers
+                  .add(
+                  Marker(
+                    markerId: MarkerId("location"),
+                    position: latLng,
+                    icon: markerbitmap,
+                  )
+              );
 
-                      markerId: MarkerId("location"),
-                      position: latLng,
-                      icon: markerbitmap,
-                    )
-                );
-            });
-
-            _googleMapController?.animateCamera(CameraUpdate.newCameraPosition(
-              CameraPosition(
-                target: LatLng(myPosition!.latitude, myPosition!.longitude),
-                zoom: ZOOM,
-              ),
-            ));
+              _googleMapController?.animateCamera(CameraUpdate.newCameraPosition(
+                CameraPosition(
+                  target: latLng,
+                  zoom: ZOOM,
+                ),
+              ));
+            }
 
             return GoogleMap(
               initialCameraPosition: CameraPosition(
-                  target: LatLng(myPosition!.latitude, myPosition!.longitude),
+                  target: LatLng(-11.6565, 27.4782),
                 zoom: ZOOM
               ),
               // Markers to be pointed
