@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goplus/widget/notification_dialog.dart';
 
 import '../../utils/datas.dart';
+import '../../widget/app_button.dart';
 
 const double ZOOM = 19;
 
@@ -92,6 +93,23 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                 ),
                                 Text(
                                   'A ${calculateDistance(widget.depart, latLng).toStringAsFixed(2)} mètre(s)'
+                                ),
+
+                                SizedBox(height: 16.0,),
+
+                                AppButton(
+                                  name: 'RESERVER',
+                                  onTap: (){
+                                    Navigator.pop(context);
+                                    FirebaseFirestore.instance.collection('drivers').doc(data[i].id).update({
+                                      'ride': true,
+                                      'depart_longitude': widget.depart.longitude,
+                                      'depart_latitude': widget.depart.latitude,
+                                      'destination_longitude': widget.destination.longitude,
+                                      'destination_latitude': widget.destination.latitude,
+                                      'distance': calculateDistance(widget.depart, latLng).toStringAsFixed(2)
+                                    });
+                                  },
                                 )
                               ],
                             ),
