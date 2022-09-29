@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-const double ZOOM = 1;
+const double ZOOM = 15;
 
 class DriverTrackingPage extends StatefulWidget{
   @override
@@ -16,6 +16,20 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
 
   static GoogleMapController? _googleMapController;
   Set<Marker> markers = Set();
+
+  late BitmapDescriptor markerbitmap;
+
+  @override
+  void initState() {
+    readBitconMarker();
+  }
+
+  readBitconMarker() async {
+    markerbitmap = await BitmapDescriptor.fromAssetImage(
+      ImageConfiguration(),
+      "assets/images/car_android.png",
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +56,13 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
 
             // Add new marker with markerId.
             markers
-                .add(Marker(markerId: MarkerId("location"), position: latLng));
+                .add(
+                Marker(
+                    markerId: MarkerId("location"),
+                    position: latLng,
+                  icon: markerbitmap,
+                )
+            );
 
             // If google map is already created then update camera position with animation
             _googleMapController?.animateCamera(CameraUpdate.newCameraPosition(
@@ -54,7 +74,9 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
 
             return GoogleMap(
               initialCameraPosition: CameraPosition(
-                  target: LatLng(location.latitude, location.longitude)),
+                  target: LatLng(location.latitude, location.longitude),
+                zoom: ZOOM
+              ),
               // Markers to be pointed
               markers: markers,
               onMapCreated: (controller) {
