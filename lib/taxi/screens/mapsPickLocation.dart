@@ -3,11 +3,13 @@ import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
+import 'package:goplus/pages/homePage.dart';
 import 'package:goplus/utils/datas.dart';
 
 class PickLocation extends StatefulWidget{
+  bool destination;
   LatLng? place;
-  PickLocation({this.place});
+  PickLocation({this.place, required this.destination});
 
   @override
   State<StatefulWidget> createState() {
@@ -24,6 +26,16 @@ class _PickLocation extends State<PickLocation>{
   LatLng startLocation = LatLng(myPosition!.latitude, myPosition!.longitude);
   String location = "Chercher un lieu";
   LatLng? selectedPlace;
+  LatLng? departPlace;
+  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+
+
+  @override
+  void initState() {
+    if(widget.place != null){
+      selectedPlace = widget.place;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +52,25 @@ class _PickLocation extends State<PickLocation>{
                 zoom: 14.0, //initial zoom level
               ),
               mapType: MapType.normal, //map type
+              markers: Set<Marker>.of(markers.values),
               onTap: (LatLng position){
+
+                var markerIdVal = 'ma destination';
+                final MarkerId markerId = MarkerId(markerIdVal);
+
+                // creating a new MARKER
+                final Marker marker = Marker(
+                  markerId: markerId,
+                  position: position,
+                  infoWindow: InfoWindow(title: markerIdVal, snippet: '*'),
+                );
                 setState(() {
-                  selectedPlace = position;
+                  if(widget.destination){
+                    selectedPlace = position;
+                  } else {
+                    departPlace = position;
+                  }
+                  markers[markerId] = marker;
                 });
               },
               onMapCreated: (controller) { //method called when map is created
@@ -60,12 +88,17 @@ class _PickLocation extends State<PickLocation>{
                   padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
                   child: GestureDetector(
                     onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => PickLocation()
-                        ),
-                      );
+                      if(selectedPlace != null){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => HomePage(
+                                destination: selectedPlace,
+                                depart: departPlace,
+                              )
+                          ),
+                        );
+                      }
                     },
                     child: Container(
                       height: MediaQuery.of(context).size.width / 7,
@@ -86,8 +119,14 @@ class _PickLocation extends State<PickLocation>{
                                     Icons.map_outlined
                                 ),
                                 SizedBox(width: 4.0,),
+                                widget.destination ?
                                 Text(
-                                  selectedPlace == null ? 'Cliquez sur votre destination' : 'VALIDEZ VOTRE CHOIX',
+                                  selectedPlace == null
+                                      ? 'Cliquez sur votre destination' : 'VALIDEZ VOTRE CHOIX',
+                                  textAlign: TextAlign.left,
+                                ) : Text(
+                                  departPlace == null
+                                      ? 'Cliquez sur le point de départ' : 'VALIDEZ VOTRE CHOIX',
                                   textAlign: TextAlign.left,
                                 ),
                               ],

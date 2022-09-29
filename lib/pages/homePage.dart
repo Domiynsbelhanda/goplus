@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/formulaire/dashboard.dart';
 import 'package:goplus/taxi/screens/mapsPickLocation.dart';
 import 'package:goplus/widget/buildTextField.dart';
@@ -10,8 +11,9 @@ import '../utils/datas.dart';
 import '../widget/card_dashboard_item_image.dart';
 
 class HomePage extends StatefulWidget{
-  var destination;
-  HomePage({this.destination});
+  LatLng? destination;
+  LatLng? depart;
+  HomePage({this.destination, this.depart});
 
   @override
   State<StatefulWidget> createState() {
@@ -23,14 +25,14 @@ class HomePage extends StatefulWidget{
 class _HomePage extends State<HomePage>{
 
   late Size size;
-  TextEditingController destinationController = TextEditingController();
-  TextEditingController departController = TextEditingController();
-  var selectedPlace;
+  LatLng? selectedPlace;
+  LatLng? depart;
 
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
     selectedPlace = widget.destination;
+    depart = widget.depart;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -74,7 +76,10 @@ class _HomePage extends State<HomePage>{
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (BuildContext context) => PickLocation()
+                                  builder: (BuildContext context) =>
+                                      PickLocation(
+                                        destination: true,
+                                      )
                               ),
                           );
                         },
@@ -112,7 +117,67 @@ class _HomePage extends State<HomePage>{
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
                       child: Text(
-                        '${selectedPlace!.name} - ${selectedPlace!.formattedAddress}'
+                        '${selectedPlace!.latitude} - ${selectedPlace!.longitude}',
+                        style: TextStyle(
+                          fontSize: 12
+                        ),
+                      ),
+                    ) : SizedBox(),
+
+                    selectedPlace != null ?
+                    Padding(
+                        padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
+                        child: GestureDetector(
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) => PickLocation(
+                                    place: selectedPlace,
+                                    destination: false,
+                                  )
+                              ),
+                            );
+                          },
+                          child: Container(
+                            height: size.width / 7,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(
+                                    color: Colors.black,
+                                    width: 2
+                                )
+                            ),
+                            child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                          Icons.map_rounded
+                                      ),
+                                      SizedBox(width: 4.0,),
+                                      Text(
+                                        'Selectionner lieu de départ',
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                            ),
+                          ),
+                        )
+                    )
+                        : SizedBox(),
+
+                    depart != null ?
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+                      child: Text(
+                        '${depart!.latitude} - ${depart!.longitude}',
+                        style: TextStyle(
+                            fontSize: 12
+                        ),
                       ),
                     ) : SizedBox(),
                   ],
