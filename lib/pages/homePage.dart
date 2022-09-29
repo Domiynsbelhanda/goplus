@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:goplus/formulaire/dashboard.dart';
 import 'package:goplus/taxi/screens/mapsPickLocation.dart';
 import 'package:goplus/widget/buildTextField.dart';
 import 'package:goplus/widget/logo_text.dart';
+import 'package:goplus/widget/mini_card_picture.dart';
 import 'package:goplus/widget/notification_dialog.dart';
+
+import '../utils/datas.dart';
+import '../widget/card_dashboard_item_image.dart';
 
 class HomePage extends StatefulWidget{
   var destination;
@@ -154,6 +159,31 @@ class _HomePage extends State<HomePage>{
                       fontFamily: 'Anton'
                   )
               )
+            ),
+
+            Padding(
+                padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: dashboardFormulaire(context).map((e) => Padding(
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                      child: MiniCardPicture(
+                        imagePath: '${e['imagePath']}',
+                        title: '${e['title']}',
+                        description: '${e['description']}',
+                        onTap: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Dashboard()
+                              )
+                          );
+                        },
+                      ),
+                    )).toList(),
+                  ),
+                ),
             ),
           ],
         ),

@@ -50,7 +50,7 @@ class _MyApp extends State<MyApp>{
         Locale('lg', ''),
       ],
       home: AnimatedSplashScreen(
-        nextScreen: DriverTracker(),//HomePage(),
+        nextScreen: HomePage(),
         duration: 2500,
         splash: "assets/icon/white-text.png",
         backgroundColor : Color(0xFFFFD80E),
