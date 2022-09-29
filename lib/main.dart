@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:goplus/formulaire/dashboard.dart';
 import 'package:goplus/pages/homePage.dart';
 import 'package:goplus/services/formulaireRequest.dart';
+import 'package:goplus/taxi/screens/driver_tracker.dart';
 import 'package:provider/provider.dart';
 import 'package:goplus/widget/theme_data.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
@@ -49,7 +50,7 @@ class _MyApp extends State<MyApp>{
         Locale('lg', ''),
       ],
       home: AnimatedSplashScreen(
-        nextScreen: HomePage(),
+        nextScreen: DriverTracker(),//HomePage(),
         duration: 2500,
         splash: "assets/icon/white-text.png",
         backgroundColor : Color(0xFFFFD80E),
