@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart';
 import 'package:goplus/taxi/screens/mapsPickLocation.dart';
 import 'package:goplus/widget/buildTextField.dart';
 import 'package:goplus/widget/logo_text.dart';
 import 'package:goplus/widget/notification_dialog.dart';
-import 'package:goplus/widget/red_button.dart';
-
-import '../formulaire/dashboard.dart';
 
 class HomePage extends StatefulWidget{
-  PickResult? destination;
+  var destination;
   HomePage({this.destination});
 
   @override
@@ -26,7 +20,7 @@ class _HomePage extends State<HomePage>{
   late Size size;
   TextEditingController destinationController = TextEditingController();
   TextEditingController departController = TextEditingController();
-  PickResult? selectedPlace;
+  var selectedPlace;
 
   @override
   Widget build(BuildContext context) {

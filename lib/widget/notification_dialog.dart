@@ -4,11 +4,11 @@ import 'package:goplus/utils/app_colors.dart';
 notification_dialog(
     BuildContext context,
     String text,
-    IconData icons,
-    Color color,
+    IconData? icons,
+    Color? color,
     var button,
-    double fontSize,
-    bool barriere) {
+    double? fontSize,
+    bool? barriere) {
 
   // set up the button
   Widget okButton = TextButton(
@@ -73,7 +73,7 @@ notification_dialog(
   // show the dialog
   showDialog(
     context: context,
-    barrierDismissible: barriere,
+    barrierDismissible: barriere!,
     builder: (BuildContext context) {
       return alert;
     },

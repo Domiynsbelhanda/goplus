@@ -46,7 +46,9 @@ dependencies:
   provider: ^6.0.3
   google_maps_flutter: ^2.1.12
   geolocator: ^9.0.1
-  google_maps_place_picker_mb: ^2.0.0-mb.22
+  flutter_google_places_hoc081098:
+  google_api_headers:
+  google_maps_webservice:
   date_format: ^2.0.6
   fl_chart: ^0.55.1
   image_picker: ^0.8.5+3
@@ -55,6 +57,9 @@ dependencies:
   cool_stepper: ^1.2.1
   dio: ^4.0.6
   font_awesome_flutter: ^10.2.1
+  firebase_core:
+  cloud_firestore:
+  location: ^4.4.0
 
 dev_dependencies:
   flutter_test:
