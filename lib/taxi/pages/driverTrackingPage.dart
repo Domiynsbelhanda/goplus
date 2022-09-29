@@ -3,6 +3,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../utils/datas.dart';
+
 const double ZOOM = 20;
 
 class DriverTrackingPage extends StatefulWidget{
@@ -19,16 +21,10 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   Set<Marker> markers = Set();
 
   late BitmapDescriptor markerbitmap;
-  Position? myPosition;
 
   @override
   void initState() {
     readBitconMarker();
-    readPosition();
-  }
-
-  readPosition() async{
-    myPosition = await determinePosition();
   }
 
   readBitconMarker() async {
@@ -36,29 +32,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
       ImageConfiguration(),
       "assets/images/car_android.png",
     );
-  }
-
-  Future<Position> determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-    return await Geolocator.getCurrentPosition();
   }
 
   @override

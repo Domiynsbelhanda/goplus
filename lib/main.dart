@@ -5,6 +5,7 @@ import 'package:goplus/formulaire/dashboard.dart';
 import 'package:goplus/pages/homePage.dart';
 import 'package:goplus/services/formulaireRequest.dart';
 import 'package:goplus/taxi/screens/driver_tracker.dart';
+import 'package:goplus/utils/datas.dart';
 import 'package:provider/provider.dart';
 import 'package:goplus/widget/theme_data.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
@@ -35,6 +36,7 @@ class _MyApp extends State<MyApp>{
 
   @override
   Widget build(BuildContext context) {
+    determinePosition();
     // TODO: implement build
     return MaterialApp(
       debugShowCheckedModeBanner: false,

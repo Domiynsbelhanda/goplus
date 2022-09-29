@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
-import 'package:goplus/pages/homePage.dart';
-
-import 'package:goplus/widget/app_button.dart';
-
-import '../../widget/notification_dialog.dart';
+import 'package:goplus/utils/datas.dart';
 
 class PickLocation extends StatefulWidget{
-  String? place;
+  LatLng? place;
   PickLocation({this.place});
 
   @override
@@ -27,8 +21,9 @@ class _PickLocation extends State<PickLocation>{
   String androidApiKey = 'AIzaSyAFtipYv6W0AWKFWsipPRhrgRdPHF5MOvk';
   GoogleMapController? mapController; //contrller for Google map
   CameraPosition? cameraPosition;
-  LatLng startLocation = LatLng(27.6602292, 85.308027);
-  String location = "Search Location";
+  LatLng startLocation = LatLng(myPosition!.latitude, myPosition!.longitude);
+  String location = "Chercher un lieu";
+  LatLng? selectedPlace;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +40,11 @@ class _PickLocation extends State<PickLocation>{
                 zoom: 14.0, //initial zoom level
               ),
               mapType: MapType.normal, //map type
+              onTap: (LatLng position){
+                setState(() {
+                  selectedPlace = position;
+                });
+              },
               onMapCreated: (controller) { //method called when map is created
                 setState(() {
                   mapController = controller;
@@ -52,7 +52,52 @@ class _PickLocation extends State<PickLocation>{
               },
             ),
 
-
+            Positioned(
+              bottom: 16.0,
+              left: 0,
+              right: 0,
+              child : Padding(
+                  padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => PickLocation()
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: MediaQuery.of(context).size.width / 7,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(
+                              color: Colors.black,
+                              width: 2
+                          )
+                      ),
+                      child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Icon(
+                                    Icons.map_outlined
+                                ),
+                                SizedBox(width: 4.0,),
+                                Text(
+                                  selectedPlace == null ? 'Cliquez sur votre destination' : 'VALIDEZ VOTRE CHOIX',
+                                  textAlign: TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          )
+                      ),
+                    ),
+                  )
+              ),
+            ),
 
             //search autoconplete input
             Positioned(  //search input bar

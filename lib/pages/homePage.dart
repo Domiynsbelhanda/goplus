@@ -68,43 +68,44 @@ class _HomePage extends State<HomePage>{
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0),
-                      child: BuildTextField(
-                        labelText: 'Entrez votre destination',
-                        context: context,
-                        keyboardType: TextInputType.text,
-                        validator: null,
-                        suffixIcon: {
-                          'icon': Icons.search,
-                          'onTap': (){
-                            String? destination = destinationController.text.trim();
-                            if(destination.isEmpty){
-                              notification_dialog(
-                                  context,
-                                  'Veuillez tapez le nom du lieu où vous voulez vous rendre.',
-                                  Icons.map_outlined,
-                                  Colors.blueAccent,
-                                  {
-                                    'label': 'FERMER',
-                                    'onTap': ()=> Navigator.pop(context)
-                                  },
-                                  20,
-                                  false);
-                              return;
-                            }
-
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => PickLocation(
-                                      place: destinationController.text.trim()
-                                    )
-                                )
-                            );
-                          },
+                      padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) => PickLocation()
+                              ),
+                          );
                         },
-                        controller: destinationController,
-                      ),
+                        child: Container(
+                          height: size.width / 7,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              border: Border.all(
+                                  color: Colors.black,
+                                  width: 2
+                              )
+                          ),
+                          child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                        Icons.map_outlined
+                                    ),
+                                    SizedBox(width: 4.0,),
+                                    Text(
+                                      'Selectionner votre destination',
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  ],
+                                ),
+                              )
+                          ),
+                        ),
+                      )
                     ),
 
                     selectedPlace != null ?
@@ -114,37 +115,6 @@ class _HomePage extends State<HomePage>{
                         '${selectedPlace!.name} - ${selectedPlace!.formattedAddress}'
                       ),
                     ) : SizedBox(),
-
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                      child: BuildTextField(
-                        labelText: 'Entrez votre point de départ',
-                        context: context,
-                        keyboardType: TextInputType.text,
-                        validator: null,
-                        suffixIcon: {
-                          'icon': Icons.search,
-                          'onTap': (){
-                            String? depart = departController.text.trim();
-                            if(depart.isEmpty){
-                              notification_dialog(
-                                  context,
-                                  'Veuillez tapez le nom du lieu où vous voulez vous rendre.',
-                                  Icons.map_outlined,
-                                  Colors.blueAccent,
-                                  {
-                                    'label': 'FERMER',
-                                    'onTap': ()=> Navigator.pop(context)
-                                  },
-                                  20,
-                                  false);
-                              return;
-                            }
-                          },
-                        },
-                        controller: departController,
-                      ),
-                    ),
                   ],
                 ),
               ),
