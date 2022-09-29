@@ -8,6 +8,10 @@ import '../../utils/datas.dart';
 const double ZOOM = 20;
 
 class DriverTrackingPage extends StatefulWidget{
+  LatLng depart;
+  LatLng destination;
+  DriverTrackingPage({required this.depart, required this.destination});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState

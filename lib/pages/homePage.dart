@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/formulaire/dashboard.dart';
+import 'package:goplus/taxi/pages/driverTrackingPage.dart';
 import 'package:goplus/taxi/screens/mapsPickLocation.dart';
 import 'package:goplus/widget/buildTextField.dart';
 import 'package:goplus/widget/logo_text.dart';
@@ -191,9 +192,9 @@ class _HomePage extends State<HomePage>{
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (BuildContext context) => PickLocation(
-                                    place: selectedPlace,
-                                    destination: false,
+                                  builder: (BuildContext context) => DriverTrackingPage(
+                                    depart: depart!,
+                                    destination: selectedPlace!,
                                   )
                               ),
                             );

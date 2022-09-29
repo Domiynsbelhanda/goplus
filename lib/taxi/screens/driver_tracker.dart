@@ -14,14 +14,13 @@ class _DriverTracker extends State<DriverTracker>{
       body: FutureBuilder(
         future: Firebase.initializeApp(),
         builder: (context, snapshot) {
-          if (snapshot.hasError) return Text("Ugh oh! Something went wrong");
-
-          if (!snapshot.hasData) return Text("Got no data :(");
-
-          if (snapshot.hasData &&
-              snapshot.connectionState == ConnectionState.done)
-            return DriverTrackingPage();
-
+          // if (snapshot.hasError) return Text("Ugh oh! Something went wrong");
+          //
+          // if (!snapshot.hasData) return Text("Got no data :(");
+          //
+          // if (snapshot.hasData &&
+          //     snapshot.connectionState == ConnectionState.done)
+          //
           return Text("Loading please...");
         },
       ),
