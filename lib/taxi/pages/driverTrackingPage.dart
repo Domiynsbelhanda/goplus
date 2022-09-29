@@ -7,7 +7,7 @@ import 'package:goplus/widget/notification_dialog.dart';
 
 import '../../utils/datas.dart';
 
-const double ZOOM = 20;
+const double ZOOM = 18;
 
 class DriverTrackingPage extends StatefulWidget{
   LatLng depart;
@@ -26,6 +26,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   static GoogleMapController? _googleMapController;
   Set<Marker> markers = Set();
   late BitmapDescriptor markerbitmap;
+  LatLng position = LatLng(-11.6565, 27.4782);
+  double? distance;
 
   @override
   void initState() {
@@ -44,7 +46,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
     // TODO: implement build
     return SafeArea(
       child: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection("location").snapshots(),
+        stream: FirebaseFirestore.instance.collection("drivers").snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
             markers.clear();
@@ -68,27 +70,54 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                     markerId: MarkerId("location"),
                     position: latLng,
                     icon: markerbitmap,
+                    onTap: (){
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return Container(
+                            child: Column(
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.all(16.0),
+                                  height: MediaQuery.of(context).size.width / 2.5,
+                                  child: Image.network(
+                                    '${data[i].get('profpic')}'
+                                  ),
+                                ),
+                                Text('${data[i].get('firstn')} ${data[i].get('lastn')} ${data[i].get('midn')}')
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    }
                   )
               );
 
-              _googleMapController?.animateCamera(CameraUpdate.newCameraPosition(
-                CameraPosition(
-                  target: latLng,
-                  zoom: ZOOM,
-                ),
-              ));
+              position = latLng;
             }
 
-            return GoogleMap(
-              initialCameraPosition: CameraPosition(
-                  target: LatLng(-11.6565, 27.4782),
-                zoom: ZOOM
+            _googleMapController?.animateCamera(CameraUpdate.newCameraPosition(
+              CameraPosition(
+                target: position,
+                zoom: ZOOM,
               ),
-              // Markers to be pointed
-              markers: markers,
-              onMapCreated: (controller) {
-                _googleMapController = controller;
-              },
+            ));
+
+            return Stack(
+              children: [
+                GoogleMap(
+                  initialCameraPosition: CameraPosition(
+                      target: position,
+                    zoom: ZOOM
+                  ),
+                  // Markers to be pointed
+                  markers: markers,
+                  onMapCreated: (controller) {
+                    _googleMapController = controller;
+                  },
+                ),
+              ],
             );
           }
           return Center(
