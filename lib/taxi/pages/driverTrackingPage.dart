@@ -41,6 +41,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   @override
   void initState() {
     readBitconMarker();
+    getMyPosition();
   }
 
   getMyPosition() async {
@@ -49,20 +50,23 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
 
       CameraPosition cameraPosition = new CameraPosition(
         target: LatLng(value.latitude, value.longitude),
-        zoom: 15,
+        zoom: 13,
       );
 
-      circles = Set.from([Circle(
-        circleId: CircleId('1'),
-        center: LatLng(value.latitude, value.longitude),
-        radius: 4000,
-      )]);
+
 
       final GoogleMapController controller = await _controller.future;
       controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
 
       setState(() {
-        position = LatLng(value.latitude, value.longitude);
+        circles = Set.from([Circle(
+          strokeColor: Colors.lightBlueAccent,
+          fillColor: Colors.blueAccent.withOpacity(0.5),
+          circleId: CircleId('1'),
+          center: LatLng(value.latitude, value.longitude),
+          radius: 3700,
+        )]);
+
         markers.add(
             Marker(
               markerId: MarkerId("1"),
