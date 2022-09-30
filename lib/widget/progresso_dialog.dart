@@ -3,66 +3,77 @@ import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:goplus/utils/app_colors.dart';
 
 progresso_dialog(
-    BuildContext context,
+    BuildContext contexts,
     String text,) {
-  // set up the button
-  Widget okButton = TextButton(
-    child: Container(
-      padding: const EdgeInsets.all(16.0),
-        decoration: BoxDecoration(
-          color: AppColors.primaryColor,
-          borderRadius: BorderRadius.circular(8.0)
-        ),
-        child: Text(
-            'ANNULER',
-          style: TextStyle(
-            color: Colors.black
-          ),
-        )
-    ),
-    onPressed: (){
-      Navigator.pop(context);
-    },
-  );
 
-  double width = MediaQuery.of(context).size.width;
-
-  // set up the AlertDialog
-  Dialog alert = Dialog(
-    shape: RoundedRectangleBorder(
-        borderRadius:
-        BorderRadius.circular(20.0)),
-    child: SizedBox(
-      width: width / 1,
-      height: width / 1.1,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children : [
-            TimerCountdown(
-              format: CountDownTimerFormat.daysHoursMinutesSeconds,
-              endTime: DateTime.now().add(
-                Duration(
-                  seconds: 35,
-                ),
-              ),
-              onEnd: () {
-                Navigator.pop(context);
-              },
-            ),
-            okButton
-          ]
-        )
-      ),
-    ),
-  );
+  double width = MediaQuery.of(contexts).size.width;
 
   // show the dialog
   showDialog(
-    context: context,
+    context: contexts,
     barrierDismissible: false,
     builder: (BuildContext context) {
-      return alert;
+      return Dialog(
+        shape: RoundedRectangleBorder(
+            borderRadius:
+            BorderRadius.circular(20.0)),
+        child: SizedBox(
+          width: width / 1,
+          height: width /1.5,
+          child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                  children : [
+                    Text(
+                        'En attente de la réponse',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+
+                    TimerCountdown(
+                      secondsDescription: 'Secondes',
+                      timeTextStyle: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold
+                      ),
+                      format: CountDownTimerFormat.secondsOnly,
+                      endTime: DateTime.now().add(
+                        Duration(
+                          seconds: 35,
+                        ),
+                      ),
+                      onEnd: () {
+                        print('text end by Belhanda');
+                        Navigator.pop(context);
+                      },
+                    ),
+
+                    TextButton(
+                      child: Container(
+                          padding: const EdgeInsets.all(16.0),
+                          decoration: BoxDecoration(
+                              color: AppColors.primaryColor,
+                              borderRadius: BorderRadius.circular(8.0)
+                          ),
+                          child: Text(
+                            'ANNULER VOTRE COMMANDE',
+                            style: TextStyle(
+                                color: Colors.black
+                            ),
+                          )
+                      ),
+                      onPressed: (){
+                        Navigator.pop(context);
+                      },
+                    )
+                  ]
+              )
+          ),
+        ),
+      );
     },
   );
 }

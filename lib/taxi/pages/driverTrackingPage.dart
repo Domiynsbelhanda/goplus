@@ -8,6 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goplus/utils/app_colors.dart';
 import 'package:goplus/widget/backButton.dart';
+import 'package:goplus/widget/progresso_dialog.dart';
 import 'package:goplus/widget/theme_data.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -396,19 +397,23 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
             AppButton(
               name: 'RESERVER',
               onTap: (){
-                FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
-                  'online': false,
-                  'ride': true
+                progresso_dialog(context, data.id);
+                setState(() {
+                  index = null;
                 });
-                FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses').add({
-                  'status': 'pending',
-                  'depart_longitude': widget.depart.longitude,
-                  'depart_latitude': widget.depart.latitude,
-                  'destination_longitude': widget.destination.longitude,
-                  'destination_latitude': widget.destination.latitude,
-                  'distance': calculateDistance(widget.depart, position!).toStringAsFixed(2),
-                  'user_id': '996852377'
-                });
+                // FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
+                //   'online': false,
+                //   'ride': true
+                // });
+                // FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses').add({
+                //   'status': 'pending',
+                //   'depart_longitude': widget.depart.longitude,
+                //   'depart_latitude': widget.depart.latitude,
+                //   'destination_longitude': widget.destination.longitude,
+                //   'destination_latitude': widget.destination.latitude,
+                //   'distance': calculateDistance(widget.depart, position!).toStringAsFixed(2),
+                //   'user_id': '996852377'
+                // });
               },
             ),
           ],
