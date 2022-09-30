@@ -401,19 +401,21 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                 setState(() {
                   index = null;
                 });
-                // FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
-                //   'online': false,
-                //   'ride': true
-                // });
-                // FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses').add({
-                //   'status': 'pending',
-                //   'depart_longitude': widget.depart.longitude,
-                //   'depart_latitude': widget.depart.latitude,
-                //   'destination_longitude': widget.destination.longitude,
-                //   'destination_latitude': widget.destination.latitude,
-                //   'distance': calculateDistance(widget.depart, position!).toStringAsFixed(2),
-                //   'user_id': '996852377'
-                // });
+                FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
+                  'online': false,
+                  'ride': true
+                });
+                FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses')
+                    .doc('courses')
+                    .set({
+                  'status': 'pending',
+                  'depart_longitude': widget.depart.longitude,
+                  'depart_latitude': widget.depart.latitude,
+                  'destination_longitude': widget.destination.longitude,
+                  'destination_latitude': widget.destination.latitude,
+                  'distance': calculateDistance(widget.depart, position!).toStringAsFixed(2),
+                  'user_id': '996852377'
+                });
               },
             ),
           ],

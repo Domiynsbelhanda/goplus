@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:goplus/utils/app_colors.dart';
@@ -46,7 +47,12 @@ progresso_dialog(
                         ),
                       ),
                       onEnd: () {
-                        print('text end by Belhanda');
+                        FirebaseFirestore.instance.collection('drivers').doc(text).update({
+                          'online': true,
+                          'ride': false
+                        });
+                        FirebaseFirestore.instance.collection('drivers').doc(text).collection('courses')
+                            .doc('courses').delete();
                         Navigator.pop(context);
                       },
                     ),
@@ -66,6 +72,12 @@ progresso_dialog(
                           )
                       ),
                       onPressed: (){
+                        FirebaseFirestore.instance.collection('drivers').doc(text).update({
+                          'online': true,
+                          'ride': false
+                        });
+                        FirebaseFirestore.instance.collection('drivers').doc(text).collection('courses')
+                        .doc('courses').delete();
                         Navigator.pop(context);
                       },
                     )
