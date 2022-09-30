@@ -9,7 +9,7 @@ import '../formulaire/tourisme.dart';
 
 Position? myPosition;
 
-determinePosition() async {
+Future<Position> getUserCurrentLocation() async {
   bool serviceEnabled;
   LocationPermission permission;
   serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -29,7 +29,7 @@ determinePosition() async {
     return Future.error(
         'Location permissions are permanently denied, we cannot request permissions.');
   }
-  myPosition = await Geolocator.getCurrentPosition();
+  return await Geolocator.getCurrentPosition();
 }
 
 double calculateDistance(LatLng latLng1, LatLng latLng2){

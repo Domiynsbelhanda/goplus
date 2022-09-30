@@ -36,7 +36,6 @@ class _MyApp extends State<MyApp>{
 
   @override
   Widget build(BuildContext context) {
-    determinePosition();
     // TODO: implement build
     return MaterialApp(
       debugShowCheckedModeBanner: false,

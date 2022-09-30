@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -25,8 +27,13 @@ class DriverTrackingPage extends StatefulWidget{
 
 class _DriverTrackingPage extends State<DriverTrackingPage>{
 
-  static GoogleMapController? _googleMapController;
+  Completer<GoogleMapController> _controller = Completer();
+  static const CameraPosition _kPosition = CameraPosition(
+    target: LatLng(-11.6565, 27.4782),
+    zoom: 14.4746,
+  );
   Set<Marker> markers = Set();
+  Set<Circle> circles = Set();
   late BitmapDescriptor markerbitmap;
   LatLng position = LatLng(-11.6565, 27.4782);
   double? distance;
@@ -34,6 +41,39 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   @override
   void initState() {
     readBitconMarker();
+  }
+
+  getMyPosition() async {
+    getUserCurrentLocation().then((value) async {
+      position = LatLng(value.latitude, value.longitude);
+
+      CameraPosition cameraPosition = new CameraPosition(
+        target: LatLng(value.latitude, value.longitude),
+        zoom: 15,
+      );
+
+      circles = Set.from([Circle(
+        circleId: CircleId('1'),
+        center: LatLng(value.latitude, value.longitude),
+        radius: 4000,
+      )]);
+
+      final GoogleMapController controller = await _controller.future;
+      controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+
+      setState(() {
+        position = LatLng(value.latitude, value.longitude);
+        markers.add(
+            Marker(
+              markerId: MarkerId("1"),
+              position: LatLng(value.latitude, value.longitude),
+              infoWindow: InfoWindow(
+                title: 'Votre Position',
+              ),
+            )
+        );
+      });
+    });
   }
 
   readBitconMarker() async {
@@ -124,13 +164,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               position = latLng;
             }
 
-            _googleMapController?.animateCamera(CameraUpdate.newCameraPosition(
-              CameraPosition(
-                target: position,
-                zoom: ZOOM,
-              ),
-            ));
-
             return Stack(
               children: [
                 GoogleMap(
@@ -140,8 +173,9 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   ),
                   // Markers to be pointed
                   markers: markers,
-                  onMapCreated: (controller) {
-                    _googleMapController = controller;
+                  circles: circles,
+                  onMapCreated: (GoogleMapController controller){
+                    _controller.complete(controller);
                   },
                 ),
 
