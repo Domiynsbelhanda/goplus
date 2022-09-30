@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -40,6 +41,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   late BitmapDescriptor pinner;
   LatLng? position;
   double? distance;
+  int? index;
 
   @override
   void initState() {
@@ -139,12 +141,9 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                           position: latLng,
                           icon: markerbitmap,
                           onTap: (){
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (context) {
-                                return showDriver(data[i]);
-                              },
-                            );
+                            setState(() {
+                              index = i;
+                            });
                           }
                       )
                   );
@@ -182,7 +181,67 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                     right: 16,
                     top: 16,
                     child: BackButtons(context),
-                  )
+                  ),
+
+                  Positioned(
+                    bottom: 16,
+                    left: 16.0,
+                    child: Container(
+                      height: MediaQuery.of(context).size.width / 3,
+                      width: MediaQuery.of(context).size.width / 3,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black,
+                            blurRadius: 10.0,
+                            offset: Offset.fromDirection(2)
+                          )
+                        ]
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/Svg/toyota.svg',
+                            ),
+                            SizedBox(height: 10.0),
+                            Flexible(
+                              child: Text(
+                                "TAXI Mini",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(
+                                "4 personnes",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(
+                                "5\$/h",
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  index != null ?
+                  Positioned(
+                    bottom: 16.0,
+                    left: 0,
+                    right: 0,
+                    child: showDriver(data[index!]),
+                  ) : SizedBox(),
                 ],
               );
             }
@@ -195,47 +254,89 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   }
 
   Widget showDriver(data){
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.all(16.0),
-            height: MediaQuery.of(context).size.width / 2.5,
-            child: Image.network(
-                '${data.get('profpic')}'
-            ),
-          ),
-          Text(
-            '${data.get('firstn')} ${data.get('lastn')} ${data.get('midn')}',
-            style: TextStyle(
-                fontSize: 20.0
-            ),
-          ),
-          Text(
-              'A ${calculateDistance(widget.depart, position!).toStringAsFixed(2)} mètre(s)'
-          ),
+    return Padding(
+      padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+      child: Container(
+        padding: const EdgeInsets.all(16.0),
+        height: MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width * 0.8,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(24)
+        ),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SvgPicture.asset(
+                  'assets/Svg/toyota.svg',
+                  width: 84,
+                  height: 60,
+                  fit: BoxFit.fitWidth,
+                ),
+                SizedBox(width: 16.0),
+                Column(
+                  children: const [
+                    Text(
+                      "TAXI Mini",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
 
-          SizedBox(height: 16.0,),
+                    Text(
+                      "4 personnes",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
 
-          AppButton(
-            name: 'RESERVER',
-            onTap: (){
-              FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
-                'online': false,
-                'ride': true
-              });
-              FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses').add({
-                'status': 'pending',
-                'depart_longitude': widget.depart.longitude,
-                'depart_latitude': widget.depart.latitude,
-                'destination_longitude': widget.destination.longitude,
-                'destination_latitude': widget.destination.latitude,
-                'distance': calculateDistance(widget.depart, position!).toStringAsFixed(2)
-              });
-              Navigator.pop(context);
-            },
-          )
-        ],
+                    Text(
+                      "5\$/h",
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  ],
+                ),
+              ],
+            ),
+
+            Image.network(
+              '${data.get('profpic')}',
+              height: 124,
+              width: 124,
+            ),
+            // Text(
+            //   '${data.get('firstn')} ${data.get('lastn')} ${data.get('midn')}',
+            //   style: TextStyle(
+            //       fontSize: 20.0
+            //   ),
+            // ),
+            // Text(
+            //     'A ${calculateDistance(widget.depart, position!).toStringAsFixed(2)} mètre(s)'
+            // ),
+            //
+            // SizedBox(height: 16.0,),
+            //
+            // AppButton(
+            //   name: 'RESERVER',
+            //   onTap: (){
+            //     FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
+            //       'online': false,
+            //       'ride': true
+            //     });
+            //     FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses').add({
+            //       'status': 'pending',
+            //       'depart_longitude': widget.depart.longitude,
+            //       'depart_latitude': widget.depart.latitude,
+            //       'destination_longitude': widget.destination.longitude,
+            //       'destination_latitude': widget.destination.latitude,
+            //       'distance': calculateDistance(widget.depart, position!).toStringAsFixed(2),
+            //       'user_id': '996852377'
+            //     });
+            //     Navigator.pop(context);
+            //   },
+            // )
+          ],
+        ),
       ),
     );
   }
