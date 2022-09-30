@@ -37,12 +37,14 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   Set<Marker> markers = Set();
   Set<Circle> circles = Set();
   late BitmapDescriptor markerbitmap;
+  late BitmapDescriptor pinner;
   LatLng? position;
   double? distance;
 
   @override
   void initState() {
     readBitconMarker();
+    readBitconMarkerPinner();
     getMyPosition();
   }
 
@@ -78,6 +80,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               infoWindow: InfoWindow(
                 title: 'Votre Position',
               ),
+              icon: pinner,
             )
         );
       });
@@ -88,6 +91,15 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
     markerbitmap = await BitmapDescriptor.fromAssetImage(
       ImageConfiguration(),
       "assets/images/car_android.png",
+    );
+  }
+
+  readBitconMarkerPinner() async {
+    pinner = await BitmapDescriptor.fromAssetImage(
+      ImageConfiguration(
+
+      ),
+      "assets/icon/pinner.png",
     );
   }
 
