@@ -258,14 +258,26 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
       padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        height: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.width + 44,
         width: MediaQuery.of(context).size.width * 0.8,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(24)
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
+            GestureDetector(
+              child: Icon(
+                Icons.close,
+                color: Colors.black,
+              ),
+              onTap: (){
+                setState(() {
+                  index = null;
+                });
+              },
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -397,9 +409,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   'distance': calculateDistance(widget.depart, position!).toStringAsFixed(2),
                   'user_id': '996852377'
                 });
-                Navigator.pop(context);
               },
-            )
+            ),
           ],
         ),
       ),
