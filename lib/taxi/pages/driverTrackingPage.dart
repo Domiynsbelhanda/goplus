@@ -16,7 +16,7 @@ const double ZOOM = 19;
 class DriverTrackingPage extends StatefulWidget{
   LatLng depart;
   LatLng destination;
-  DriverTrackingPage({required this.depart, required this.destination});
+  DriverTrackingPage({Key? key, required this.depart, required this.destination}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
