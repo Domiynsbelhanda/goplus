@@ -6,7 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goplus/widget/backButton.dart';
-import 'package:goplus/widget/notification_dialog.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../utils/datas.dart';
 import '../../widget/app_button.dart';
@@ -35,7 +35,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   Set<Marker> markers = Set();
   Set<Circle> circles = Set();
   late BitmapDescriptor markerbitmap;
-  LatLng position = LatLng(-11.6565, 27.4782);
+  LatLng? position;
   double? distance;
 
   @override
@@ -46,7 +46,9 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
 
   getMyPosition() async {
     getUserCurrentLocation().then((value) async {
-      position = LatLng(value.latitude, value.longitude);
+      setState(() {
+        position = LatLng(value.latitude, value.longitude);
+      });
 
       CameraPosition cameraPosition = new CameraPosition(
         target: LatLng(value.latitude, value.longitude),
@@ -90,112 +92,118 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   @override
   Widget build(BuildContext context){
     // TODO: implement build
-    return SafeArea(
-      child: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection("drivers").snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasData) {
-            markers.clear();
-            //Extract the location from document
-            var data = snapshot.data!.docs;
-            for(var i = 0; i < data.length; i++){
-              double latitude = data[i].get('latitude');
-              double longitude = data[i].get('longitude');
-              GeoPoint location = GeoPoint(latitude, longitude);
-
-              // Check if location is valid
-              if (location == null) {
-                return Text("There was no location data");
-              }
-              final latLng = LatLng(location.latitude, location.longitude);
-
-              // Add new marker with markerId.
-              markers
-                  .add(
-                  Marker(
-                    markerId: MarkerId("location"),
-                    position: latLng,
-                    icon: markerbitmap,
-                    onTap: (){
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (context) {
-                          return Container(
-                            child: Column(
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.all(16.0),
-                                  height: MediaQuery.of(context).size.width / 2.5,
-                                  child: Image.network(
-                                    '${data[i].get('profpic')}'
-                                  ),
-                                ),
-                                Text(
-                                    '${data[i].get('firstn')} ${data[i].get('lastn')} ${data[i].get('midn')}',
-                                  style: TextStyle(
-                                    fontSize: 20.0
-                                  ),
-                                ),
-                                Text(
-                                  'A ${calculateDistance(widget.depart, latLng).toStringAsFixed(2)} mètre(s)'
-                                ),
-
-                                SizedBox(height: 16.0,),
-
-                                AppButton(
-                                  name: 'RESERVER',
-                                  onTap: (){
-                                    Navigator.pop(context);
-                                    FirebaseFirestore.instance.collection('drivers').doc(data[i].id).update({
-                                      'ride': true,
-                                      'depart_longitude': widget.depart.longitude,
-                                      'depart_latitude': widget.depart.latitude,
-                                      'destination_longitude': widget.destination.longitude,
-                                      'destination_latitude': widget.destination.latitude,
-                                      'distance': calculateDistance(widget.depart, latLng).toStringAsFixed(2)
-                                    });
-                                  },
-                                )
-                              ],
-                            ),
-                          );
-                        },
-                      );
-                    }
-                  )
-              );
-
-              position = latLng;
-            }
-
-            return Stack(
-              children: [
-                GoogleMap(
-                  initialCameraPosition: CameraPosition(
-                      target: position,
-                    zoom: ZOOM
-                  ),
-                  // Markers to be pointed
-                  markers: markers,
-                  circles: circles,
-                  onMapCreated: (GoogleMapController controller){
-                    _controller.complete(controller);
-                  },
-                ),
-
-                Positioned(
-                  right: 16,
-                  top: 16,
-                  child: BackButtons(context),
-                )
-              ],
-            );
-          }
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+    return position == null ? Center(
+      child: LoadingAnimationWidget.twistingDots(
+        leftDotColor: const Color(0xFF1A1A3F),
+        rightDotColor: const Color(0xFFEA3799),
+        size: 200,
       ),
-    );
+    )
+    :SafeArea(
+        child: StreamBuilder(
+          stream: FirebaseFirestore.instance.collection("drivers").snapshots(),
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasData) {
+              //Extract the location from document
+              var data = snapshot.data!.docs;
+              for(var i = 0; i < data.length; i++){
+                double latitude = data[i].get('latitude');
+                double longitude = data[i].get('longitude');
+                GeoPoint location = GeoPoint(latitude, longitude);
+
+                // Check if location is valid
+                if (location == null) {
+                  return Text("There was no location data");
+                }
+                final latLng = LatLng(location.latitude, location.longitude);
+
+                // Add new marker with markerId.
+                markers
+                    .add(
+                    Marker(
+                      markerId: MarkerId("location"),
+                      position: latLng,
+                      icon: markerbitmap,
+                      onTap: (){
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return Container(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.all(16.0),
+                                    height: MediaQuery.of(context).size.width / 2.5,
+                                    child: Image.network(
+                                      '${data[i].get('profpic')}'
+                                    ),
+                                  ),
+                                  Text(
+                                      '${data[i].get('firstn')} ${data[i].get('lastn')} ${data[i].get('midn')}',
+                                    style: TextStyle(
+                                      fontSize: 20.0
+                                    ),
+                                  ),
+                                  Text(
+                                    'A ${calculateDistance(widget.depart, latLng).toStringAsFixed(2)} mètre(s)'
+                                  ),
+
+                                  SizedBox(height: 16.0,),
+
+                                  AppButton(
+                                    name: 'RESERVER',
+                                    onTap: (){
+                                      Navigator.pop(context);
+                                      FirebaseFirestore.instance.collection('drivers').doc(data[i].id).update({
+                                        'ride': true,
+                                        'depart_longitude': widget.depart.longitude,
+                                        'depart_latitude': widget.depart.latitude,
+                                        'destination_longitude': widget.destination.longitude,
+                                        'destination_latitude': widget.destination.latitude,
+                                        'distance': calculateDistance(widget.depart, latLng).toStringAsFixed(2)
+                                      });
+                                    },
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      }
+                    )
+                );
+
+                position = latLng;
+              }
+
+              return Stack(
+                children: [
+                  GoogleMap(
+                    initialCameraPosition: CameraPosition(
+                        target: position!,
+                      zoom: ZOOM
+                    ),
+                    // Markers to be pointed
+                    markers: markers,
+                    circles: circles,
+                    onMapCreated: (GoogleMapController controller){
+                      _controller.complete(controller);
+                    },
+                  ),
+
+                  Positioned(
+                    right: 16,
+                    top: 16,
+                    child: BackButtons(context),
+                  )
+                ],
+              );
+            }
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+        ),
+      );
   }
 }

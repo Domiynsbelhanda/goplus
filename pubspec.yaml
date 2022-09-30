@@ -61,6 +61,7 @@ dependencies:
   cloud_firestore: ^3.4.9
   location: ^4.4.0
   flutter_secure_storage: ^5.1.0
+  loading_animation_widget:
 
 dev_dependencies:
   flutter_test:
