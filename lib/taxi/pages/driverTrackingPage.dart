@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:goplus/utils/app_colors.dart';
 import 'package:goplus/widget/backButton.dart';
+import 'package:goplus/widget/theme_data.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../utils/datas.dart';
@@ -94,12 +96,12 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
     // TODO: implement build
     return position == null ? Center(
       child: LoadingAnimationWidget.twistingDots(
-        leftDotColor: const Color(0xFF1A1A3F),
-        rightDotColor: const Color(0xFFEA3799),
-        size: 200,
+        leftDotColor: AppColors.primaryColor,
+        rightDotColor: AppColors.primaryColor,
+        size: 30,
       ),
     )
-    :SafeArea(
+    : SafeArea(
         child: StreamBuilder(
           stream: FirebaseFirestore.instance.collection("drivers").snapshots(),
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
