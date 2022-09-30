@@ -1,15 +1,11 @@
 import 'dart:async';
-
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goplus/utils/app_colors.dart';
 import 'package:goplus/widget/backButton.dart';
 import 'package:goplus/widget/progresso_dialog.dart';
-import 'package:goplus/widget/theme_data.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../utils/datas.dart';
@@ -314,25 +310,25 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
 
             SizedBox(height: 8.0,),
 
-            Text(
+            const Text(
               "- Climatisé \n - Wi-fi à bord \n - Coffre pour 3 valises.",
               overflow: TextOverflow.ellipsis,
             ),
 
-            SizedBox(height: 4.0,),
+            const SizedBox(height: 4.0,),
 
-            Divider(
+            const Divider(
               height: 8.0,
             ),
 
-            SizedBox(height: 4.0,),
+            const SizedBox(height: 4.0,),
 
-            Text(
+            const Text(
               "DETAILS DU CHAUFFEUR",
               overflow: TextOverflow.ellipsis,
             ),
 
-            SizedBox(height: 8.0,),
+            const SizedBox(height: 8.0,),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -343,7 +339,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   width: 100,
                 ),
 
-                SizedBox(
+                const SizedBox(
                   width: 8.0,
                 ),
 
@@ -352,14 +348,14 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   children: [
                     Text(
                       '${data.get('firstn')} ${data.get('lastn')} ${data.get('midn')}',
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 16.0
                       ),
                     ),
-                    SizedBox(height: 8.0,),
+                    const SizedBox(height: 8.0,),
                     Text(
                         'A ${calculateDistance(LatLng(data.get('latitude'), data.get('longitude')), position!).toStringAsFixed(2)} mètre(s)',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14.0
                       ),
                     ),
@@ -368,18 +364,18 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                       onTap: (){},
                       child: Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.whatsapp,
                             color: Colors.green,
                           ),
 
-                          SizedBox(
+                          const SizedBox(
                             width: 4.0,
                           ),
 
                           Text(
                               '+243${data.get('phone')}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 14.0
                             ),
                           )
@@ -392,7 +388,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
             ),
 
 
-            SizedBox(height: 16.0,),
+            const SizedBox(height: 16.0,),
 
             AppButton(
               name: 'RESERVER',
