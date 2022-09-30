@@ -135,7 +135,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   markers
                       .add(
                       Marker(
-                          markerId: MarkerId("location"),
+                          markerId: MarkerId(data[i].id),
                           position: latLng,
                           icon: markerbitmap,
                           onTap: (){
@@ -186,6 +186,9 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                           }
                       )
                   );
+                } else {
+                  markers.clear();
+                  getMyPosition();
                 }
               }
 
