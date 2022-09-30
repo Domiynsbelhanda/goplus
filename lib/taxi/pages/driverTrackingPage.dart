@@ -142,45 +142,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                             showModalBottomSheet(
                               context: context,
                               builder: (context) {
-                                return Container(
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        margin: const EdgeInsets.all(16.0),
-                                        height: MediaQuery.of(context).size.width / 2.5,
-                                        child: Image.network(
-                                            '${data[i].get('profpic')}'
-                                        ),
-                                      ),
-                                      Text(
-                                        '${data[i].get('firstn')} ${data[i].get('lastn')} ${data[i].get('midn')}',
-                                        style: TextStyle(
-                                            fontSize: 20.0
-                                        ),
-                                      ),
-                                      Text(
-                                          'A ${calculateDistance(widget.depart, latLng).toStringAsFixed(2)} mètre(s)'
-                                      ),
-
-                                      SizedBox(height: 16.0,),
-
-                                      AppButton(
-                                        name: 'RESERVER',
-                                        onTap: (){
-                                          Navigator.pop(context);
-                                          FirebaseFirestore.instance.collection('drivers').doc(data[i].id).update({
-                                            'ride': true,
-                                            'depart_longitude': widget.depart.longitude,
-                                            'depart_latitude': widget.depart.latitude,
-                                            'destination_longitude': widget.destination.longitude,
-                                            'destination_latitude': widget.destination.latitude,
-                                            'distance': calculateDistance(widget.depart, latLng).toStringAsFixed(2)
-                                          });
-                                        },
-                                      )
-                                    ],
-                                  ),
-                                );
+                                return showDriver(data[i]);
                               },
                             );
                           }
@@ -188,7 +150,16 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   );
                 } else {
                   markers.clear();
-                  getMyPosition();
+                  markers.add(
+                      Marker(
+                        markerId: MarkerId("1"),
+                        position: position!,
+                        infoWindow: InfoWindow(
+                          title: 'Votre Position',
+                        ),
+                        icon: pinner,
+                      )
+                  );
                 }
               }
 
@@ -221,5 +192,51 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
           },
         ),
       );
+  }
+
+  Widget showDriver(data){
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.all(16.0),
+            height: MediaQuery.of(context).size.width / 2.5,
+            child: Image.network(
+                '${data.get('profpic')}'
+            ),
+          ),
+          Text(
+            '${data.get('firstn')} ${data.get('lastn')} ${data.get('midn')}',
+            style: TextStyle(
+                fontSize: 20.0
+            ),
+          ),
+          Text(
+              'A ${calculateDistance(widget.depart, position!).toStringAsFixed(2)} mètre(s)'
+          ),
+
+          SizedBox(height: 16.0,),
+
+          AppButton(
+            name: 'RESERVER',
+            onTap: (){
+              FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
+                'online': false,
+                'ride': true
+              });
+              FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses').add({
+                'status': 'pending',
+                'depart_longitude': widget.depart.longitude,
+                'depart_latitude': widget.depart.latitude,
+                'destination_longitude': widget.destination.longitude,
+                'destination_latitude': widget.destination.latitude,
+                'distance': calculateDistance(widget.depart, position!).toStringAsFixed(2)
+              });
+              Navigator.pop(context);
+            },
+          )
+        ],
+      ),
+    );
   }
 }
