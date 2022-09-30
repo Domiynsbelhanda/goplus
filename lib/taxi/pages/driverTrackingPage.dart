@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:goplus/widget/backButton.dart';
 import 'package:goplus/widget/notification_dialog.dart';
 
 import '../../utils/datas.dart';
@@ -143,6 +144,12 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                     _googleMapController = controller;
                   },
                 ),
+
+                Positioned(
+                  right: 16,
+                  top: 16,
+                  child: BackButtons(context),
+                )
               ],
             );
           }
