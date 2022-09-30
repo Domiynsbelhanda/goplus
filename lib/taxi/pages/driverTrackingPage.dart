@@ -337,12 +337,10 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Flexible(
-                      child: Text(
-                        '${data.get('firstn')} ${data.get('lastn')} ${data.get('midn')}',
-                        style: TextStyle(
-                            fontSize: 16.0
-                        ),
+                    Text(
+                      '${data.get('firstn')} ${data.get('lastn')} ${data.get('midn')}',
+                      style: TextStyle(
+                          fontSize: 16.0
                       ),
                     ),
                     SizedBox(height: 8.0,),
