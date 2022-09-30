@@ -326,21 +326,31 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               children: [
                 Image.network(
                   '${data.get('profpic')}',
-                  height: 124,
-                  width: 124,
+                  height: 100,
+                  width: 100,
+                ),
+
+                SizedBox(
+                  width: 8.0,
                 ),
 
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      '${data.get('firstn')} ${data.get('lastn')} ${data.get('midn')}',
-                      style: TextStyle(
-                          fontSize: 20.0
+                    Flexible(
+                      child: Text(
+                        '${data.get('firstn')} ${data.get('lastn')} ${data.get('midn')}',
+                        style: TextStyle(
+                            fontSize: 16.0
+                        ),
                       ),
                     ),
                     SizedBox(height: 8.0,),
                     Text(
-                        'A ${calculateDistance(LatLng(data.get('latitude'), data.get('longitude')), position!).toStringAsFixed(2)} mètre(s)'
+                        'A ${calculateDistance(LatLng(data.get('latitude'), data.get('longitude')), position!).toStringAsFixed(2)} mètre(s)',
+                      style: TextStyle(
+                        fontSize: 14.0
+                      ),
                     ),
 
                     GestureDetector(
@@ -359,7 +369,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                           Text(
                               '+243${data.get('phone')}',
                             style: TextStyle(
-                              fontSize: 18.0
+                              fontSize: 14.0
                             ),
                           )
                         ],
@@ -370,28 +380,28 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               ],
             ),
 
-            //
-            // SizedBox(height: 16.0,),
-            //
-            // AppButton(
-            //   name: 'RESERVER',
-            //   onTap: (){
-            //     FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
-            //       'online': false,
-            //       'ride': true
-            //     });
-            //     FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses').add({
-            //       'status': 'pending',
-            //       'depart_longitude': widget.depart.longitude,
-            //       'depart_latitude': widget.depart.latitude,
-            //       'destination_longitude': widget.destination.longitude,
-            //       'destination_latitude': widget.destination.latitude,
-            //       'distance': calculateDistance(widget.depart, position!).toStringAsFixed(2),
-            //       'user_id': '996852377'
-            //     });
-            //     Navigator.pop(context);
-            //   },
-            // )
+
+            SizedBox(height: 16.0,),
+
+            AppButton(
+              name: 'RESERVER',
+              onTap: (){
+                FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
+                  'online': false,
+                  'ride': true
+                });
+                FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses').add({
+                  'status': 'pending',
+                  'depart_longitude': widget.depart.longitude,
+                  'depart_latitude': widget.depart.latitude,
+                  'destination_longitude': widget.destination.longitude,
+                  'destination_latitude': widget.destination.latitude,
+                  'distance': calculateDistance(widget.depart, position!).toStringAsFixed(2),
+                  'user_id': '996852377'
+                });
+                Navigator.pop(context);
+              },
+            )
           ],
         ),
       ),
