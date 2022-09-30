@@ -299,20 +299,77 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               ],
             ),
 
-            Image.network(
-              '${data.get('profpic')}',
-              height: 124,
-              width: 124,
+            SizedBox(height: 8.0,),
+
+            Text(
+              "- Climatisé \n - Wi-fi à bord \n - Coffre pour 3 valises.",
+              overflow: TextOverflow.ellipsis,
             ),
-            // Text(
-            //   '${data.get('firstn')} ${data.get('lastn')} ${data.get('midn')}',
-            //   style: TextStyle(
-            //       fontSize: 20.0
-            //   ),
-            // ),
-            // Text(
-            //     'A ${calculateDistance(widget.depart, position!).toStringAsFixed(2)} mètre(s)'
-            // ),
+
+            SizedBox(height: 4.0,),
+
+            Divider(
+              height: 8.0,
+            ),
+
+            SizedBox(height: 4.0,),
+
+            Text(
+              "DETAILS DU CHAUFFEUR",
+              overflow: TextOverflow.ellipsis,
+            ),
+
+            SizedBox(height: 8.0,),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Image.network(
+                  '${data.get('profpic')}',
+                  height: 124,
+                  width: 124,
+                ),
+
+                Column(
+                  children: [
+                    Text(
+                      '${data.get('firstn')} ${data.get('lastn')} ${data.get('midn')}',
+                      style: TextStyle(
+                          fontSize: 20.0
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
+                    Text(
+                        'A ${calculateDistance(LatLng(data.get('latitude'), data.get('longitude')), position!).toStringAsFixed(2)} mètre(s)'
+                    ),
+
+                    GestureDetector(
+                      onTap: (){},
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.whatsapp,
+                            color: Colors.green,
+                          ),
+
+                          SizedBox(
+                            width: 4.0,
+                          ),
+
+                          Text(
+                              '+243${data.get('phone')}',
+                            style: TextStyle(
+                              fontSize: 18.0
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+
             //
             // SizedBox(height: 16.0,),
             //
