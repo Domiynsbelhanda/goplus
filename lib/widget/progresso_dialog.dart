@@ -41,7 +41,7 @@ progresso_dialog(
                           fontSize: 25,
                           fontWeight: FontWeight.bold
                       ),
-                      format: CountDownTimerFormat.secondsOnly,
+                      format: CountDownTimerFormat.minutesSeconds,
                       endTime: DateTime.now().add(
                         Duration(
                           minutes: 1,
@@ -55,7 +55,10 @@ progresso_dialog(
                           'ride_view' : false,
                         });
                         FirebaseFirestore.instance.collection('drivers').doc(text).collection('courses')
-                            .doc('courses').delete();
+                            .doc('courses')
+                            .update({
+                          'status': 'cancel',
+                        });
                         Navigator.pop(context);
                       },
                     ),
@@ -80,7 +83,10 @@ progresso_dialog(
                           'ride': false
                         });
                         FirebaseFirestore.instance.collection('drivers').doc(text).collection('courses')
-                        .doc('courses').delete();
+                            .doc('courses')
+                            .update({
+                          'status': 'cancel',
+                        });
                         Navigator.pop(context);
                       },
                     )
