@@ -44,7 +44,7 @@ progresso_dialog(
 
                             Container(
                               width : width / 1.5,
-                              child: Text(
+                              child: const Text(
                                   'Votre commande a été annulée par le client.',
                                   style: TextStyle(
                                     fontSize: 20,
