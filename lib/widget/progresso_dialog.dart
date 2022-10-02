@@ -36,6 +36,7 @@ progresso_dialog(
 
                     TimerCountdown(
                       secondsDescription: 'Secondes',
+                      minutesDescription: 'Minutes',
                       timeTextStyle: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold
@@ -43,13 +44,15 @@ progresso_dialog(
                       format: CountDownTimerFormat.secondsOnly,
                       endTime: DateTime.now().add(
                         Duration(
+                          minutes: 1,
                           seconds: 45,
                         ),
                       ),
                       onEnd: () {
                         FirebaseFirestore.instance.collection('drivers').doc(text).update({
                           'online': true,
-                          'ride': false
+                          'ride': false,
+                          'ride_view' : false,
                         });
                         FirebaseFirestore.instance.collection('drivers').doc(text).collection('courses')
                             .doc('courses').delete();

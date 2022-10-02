@@ -399,7 +399,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                 });
                 FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
                   'online': false,
-                  'ride': true
+                  'ride': true,
+                  'ride_view': false,
                 });
                 FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses')
                     .doc('courses')
