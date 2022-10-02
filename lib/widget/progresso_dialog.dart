@@ -43,7 +43,7 @@ progresso_dialog(
                       format: CountDownTimerFormat.secondsOnly,
                       endTime: DateTime.now().add(
                         Duration(
-                          seconds: 35,
+                          seconds: 45,
                         ),
                       ),
                       onEnd: () {
