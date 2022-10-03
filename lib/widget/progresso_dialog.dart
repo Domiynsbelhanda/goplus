@@ -45,7 +45,7 @@ progresso_dialog(
                             Container(
                               width : width / 1.5,
                               child: const Text(
-                                  'Votre commande a été annulée par le client.',
+                                  'Votre commande a été annulée par le chauffeur.',
                                   style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.black,
@@ -70,9 +70,13 @@ progresso_dialog(
                                   )
                               ),
                               onPressed: (){
-                                FirebaseFirestore.instance.collection('drivers').doc(text).collection('courses')
-                                    .doc('courses')
-                                    .delete();
+                                try{
+                                  FirebaseFirestore.instance.collection('drivers').doc(text).collection('courses')
+                                      .doc('courses')
+                                      .delete();
+                                } catch(e){
+
+                                }
                                 Navigator.pop(context);
                               },
                             )
@@ -126,65 +130,34 @@ progresso_dialog(
                               },
                             ),
 
-                            Row(
-                              children: [
-                                TextButton(
-                                  child: Container(
-                                      padding: const EdgeInsets.all(16.0),
-                                      decoration: BoxDecoration(
-                                          color: AppColors.primaryColor,
-                                          borderRadius: BorderRadius.circular(8.0)
-                                      ),
-                                      child: Text(
-                                        'VOIR',
-                                        style: TextStyle(
-                                            color: Colors.black
-                                        ),
-                                      )
+                            TextButton(
+                              child: Container(
+                                  padding: const EdgeInsets.all(16.0),
+                                  decoration: BoxDecoration(
+                                      color: AppColors.primaryColor,
+                                      borderRadius: BorderRadius.circular(8.0)
                                   ),
-                                  onPressed: (){
-                                    FirebaseFirestore.instance.collection('drivers').doc(text).update({
-                                      'online': true,
-                                      'ride': false
-                                    });
-                                    FirebaseFirestore.instance.collection('drivers').doc(text).collection('courses')
-                                        .doc('courses').delete();
-                                    Navigator.pop(context);
-                                  },
-                                ),
-
-                                const SizedBox(width: 4.0),
-
-                                TextButton(
-                                  child: Container(
-                                      padding: const EdgeInsets.all(16.0),
-                                      decoration: BoxDecoration(
-                                          color: AppColors.primaryColor,
-                                          borderRadius: BorderRadius.circular(8.0)
-                                      ),
-                                      child: Text(
-                                        'REFUSER',
-                                        style: TextStyle(
-                                            color: Colors.black
-                                        ),
-                                      )
-                                  ),
-                                  onPressed: (){
-                                    FirebaseFirestore.instance.collection('drivers').doc(text).update({
-                                      'online': true,
-                                      'ride': false,
-                                      'ride_view': false
-                                    });
-                                    FirebaseFirestore.instance.collection('drivers').doc(text).collection('courses')
-                                        .doc('courses')
-                                        .update({
-                                      'status': 'cancel',
-                                    });
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ],
-                            )
+                                  child: Text(
+                                    'ANNULER VOTRE COMMANDE',
+                                    style: TextStyle(
+                                        color: Colors.black
+                                    ),
+                                  )
+                              ),
+                              onPressed: (){
+                                FirebaseFirestore.instance.collection('drivers').doc(text).update({
+                                  'online': true,
+                                  'ride': false,
+                                  'ride_view': false
+                                });
+                                FirebaseFirestore.instance.collection('drivers').doc(text).collection('courses')
+                                    .doc('courses')
+                                    .update({
+                                  'status': 'cancel',
+                                });
+                                Navigator.pop(context);
+                              },
+                            ),
                           ]
                       )
                   ),
