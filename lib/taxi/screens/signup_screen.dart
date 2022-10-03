@@ -7,8 +7,6 @@ import '../../widget/app_bar.dart';
 import '../../widget/app_button.dart';
 
 class SignupScreen extends StatefulWidget {
-  String phone;
-  SignupScreen({required this.phone});
   @override
   _SignupScreenState createState() => _SignupScreenState();
 }
@@ -24,6 +22,7 @@ class _SignupScreenState extends State<SignupScreen> {
   TextEditingController villeController = TextEditingController();
   TextEditingController genreController = TextEditingController();
   TextEditingController typeController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
   late List input;
 
@@ -36,6 +35,9 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
     input = [
+      {
+        'label': 'Numéro téléphone', 'controller' : phoneController
+      },
       {
         'label': 'Nom', 'controller' : nameController
       },
@@ -130,14 +132,14 @@ class _SignupScreenState extends State<SignupScreen> {
                                 "address": adresseController.text.toString(),
                                 "password": "OdK98@RAM",
                                 "city": villeController.text.toString(),
-                                "phone": widget.phone,
+                                "phone": phoneController.text.toString(),
                                 "gender": genreController.text.toString(),
                                 "profpic": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
                                 "cartype": typeController.text.toString(),
                                 "carpic": "https://firebasestorage.googleapis.com/v0/b/taxigo-e3fcc.appspot.com/o/driver.jpg?alt=media&token=51c634b4-5a95-4607-8f82-27ed1bbb9e05",
                                 "level": "4"
                               };
-                              FirebaseFirestore.instance.collection('drivers').doc(widget.phone).set(data);
+                              FirebaseFirestore.instance.collection('drivers').doc(phoneController.text.toString()).set(data);
 
                               Navigator.push(
                                 context,
