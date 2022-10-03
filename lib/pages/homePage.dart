@@ -201,7 +201,7 @@ class _HomePage extends State<HomePage>{
                             height: size.width / 7,
                             decoration: BoxDecoration(
                               color: AppColors.primaryColor,
-                                borderRadius: BorderRadius.circular(4),
+                                borderRadius: BorderRadius.circular(48),
                                 border: Border.all(
                                     color: Colors.black,
                                     width: 2
@@ -212,10 +212,15 @@ class _HomePage extends State<HomePage>{
                                   padding: const EdgeInsets.all(8.0),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
+                                    children: const [
                                       Text(
                                         'TROUVEZ UN TAXI',
                                         textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontFamily: 'Anton',
+                                          color: Colors.white,
+                                          fontSize: 24
+                                        ),
                                       ),
                                     ],
                                   ),
