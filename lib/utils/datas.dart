@@ -47,6 +47,7 @@ List dashboardFormulaire(BuildContext context){
   placeList = [
     {
       'imagePath' : 'assets/images/voyage-de-reve-tourisme.png',
+      'mini_imagePath': 'assets/images/mini-bourse.png',
       'title': 'TOURISME',
       'subtitle': 'Voyage de rêve',
       'description' : 'Réalisez vos rêves de tourisme.',
@@ -71,6 +72,7 @@ List dashboardFormulaire(BuildContext context){
 
     {
       'imagePath' : 'assets/images/voyage-de-reve-etude.png',
+      'mini_imagePath': 'assets/images/mini-catalogue.png',
       'title': 'ETUDE',
       'subtitle': 'Voyage de rêve',
       'description' : 'Réalisez vos rêves de tourisme.',
@@ -96,6 +98,7 @@ List dashboardFormulaire(BuildContext context){
 
     {
       'imagePath' : 'assets/images/credit-voyage-etude.png',
+      'mini_imagePath': 'assets/images/mini-demarche.png',
       'title': 'ETUDE',
       'subtitle': 'Crédit Voyage',
       'description' : 'Réalisez vos rêves de tourisme.',
@@ -121,6 +124,7 @@ List dashboardFormulaire(BuildContext context){
 
     {
       'imagePath' : 'assets/images/credit-voyage-tourisme.png',
+      'mini_imagePath': 'assets/images/mini-qpuv.png',
       'title': 'TOURISME',
       'subtitle': 'Crédit Voyage',
       'description' : 'Réalisez vos rêves de tourisme.',
@@ -142,6 +146,7 @@ List dashboardFormulaire(BuildContext context){
 
     {
       'imagePath' : 'assets/images/bourse-etude.png',
+      'mini_imagePath': 'assets/images/mini-bourse.png',
       'title': 'BOURSE D\'ETUDE',
       'subtitle': 'BOURSE D\'ETUDE',
       'description' : 'Réalisez vos rêves de tourisme.',
@@ -166,6 +171,7 @@ List dashboardFormulaire(BuildContext context){
 
     {
       'imagePath' : 'assets/images/facilitation-visa.png',
+      'mini_imagePath': 'assets/images/mini-catalogue.png',
       'title': 'FACILITATION VISA',
       'subtitle': 'FACILITATION VISA',
       'description' : 'Obtenez votre visa ...',

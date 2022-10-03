@@ -241,12 +241,23 @@ class _HomePage extends State<HomePage>{
 
             Padding(
               padding: const EdgeInsets.only(left: 16.0),
-              child: Text(
-                  'GO FLY SERVICES',
-                  style: TextStyle(
-                      fontSize: size.width / 20,
-                      fontFamily: 'Anton'
-                  )
+              child: Row(
+                children: [
+                  Text(
+                      'Tous les services du',
+                      style: TextStyle(
+                          fontSize: size.width / 20,
+                          fontFamily: 'Anton'
+                      )
+                  ),
+                  Text(
+                      ' GO FLY SERVICES',
+                      style: TextStyle(
+                          fontSize: size.width / 20,
+                          fontFamily: 'Anton'
+                      )
+                  ),
+                ],
               )
             ),
 
@@ -258,7 +269,7 @@ class _HomePage extends State<HomePage>{
                     children: dashboardFormulaire(context).map((e) => Padding(
                       padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                       child: MiniCardPicture(
-                        imagePath: '${e['imagePath']}',
+                        imagePath: '${e['mini_imagePath']}',
                         title: '${e['title']}',
                         description: '${e['description']}',
                         onTap: (){
