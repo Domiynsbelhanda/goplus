@@ -202,15 +202,18 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SvgPicture.asset(
-                              'assets/Svg/toyota.svg',
+                            Image.asset(
+                              'assets/images/ist.png',
                             ),
                             SizedBox(height: 10.0),
                             Flexible(
                               child: Text(
                                 "TAXI Mini",
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  fontFamily: 'Anton'
+                                ),
                               ),
                             ),
                             Flexible(
@@ -262,7 +265,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
           borderRadius: BorderRadius.circular(24)
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             GestureDetector(
               child: Icon(
@@ -278,8 +281,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SvgPicture.asset(
-                  'assets/Svg/toyota.svg',
+                Image.asset(
+                  'assets/images/ist.svg',
                   width: 84,
                   height: 60,
                   fit: BoxFit.fitWidth,
@@ -290,13 +293,19 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                     Text(
                       "TAXI Mini",
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Anton'
+                      ),
                     ),
 
                     Text(
                       "4 personnes",
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                        fontFamily: 'Anton',
+                      ),
                     ),
 
                     Text(

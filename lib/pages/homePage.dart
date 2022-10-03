@@ -182,7 +182,7 @@ class _HomePage extends State<HomePage>{
                     ) : SizedBox(),
 
 
-                    selectedPlace != null ?
+                    selectedPlace != null && depart != null ?
                     Padding(
                         padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
                         child: GestureDetector(
@@ -228,6 +228,10 @@ class _HomePage extends State<HomePage>{
                   ],
                 ),
               ),
+            ),
+
+            const SizedBox(
+              height: 48.0
             ),
 
             Padding(

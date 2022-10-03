@@ -68,10 +68,9 @@ class _PickLocation extends State<PickLocation>{
             Marker(
               markerId: MarkerId("1"),
               position: LatLng(value.latitude, value.longitude),
-              infoWindow: InfoWindow(
+              infoWindow: const InfoWindow(
                 title: 'Votre Position',
-              ),
-              icon: pinner,
+              )
             )
         );
       });
@@ -116,7 +115,6 @@ class _PickLocation extends State<PickLocation>{
                 var markerIdVal = 'ma destination';
                 final MarkerId markerId = MarkerId(markerIdVal);
 
-                // creating a new MARKER
                 final Marker marker = Marker(
                   markerId: markerId,
                   position: position,
