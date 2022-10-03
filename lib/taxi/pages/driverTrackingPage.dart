@@ -68,7 +68,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
         circles = Set.from([Circle(
           strokeColor: Colors.red,
           strokeWidth: 2,
-          fillColor: Colors.red.withOpacity(0.5),
+          fillColor: Colors.red.withOpacity(0.2),
           circleId: CircleId('1'),
           center: LatLng(value.latitude, value.longitude),
           radius: 3700,
@@ -226,11 +226,11 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   ),
 
                   index != null ?
-                  Positioned(
-                    bottom: 16.0,
-                    left: 0,
-                    right: 0,
-                    child: showDriver(data[index!]),
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.center,
+                        child: showDriver(data[index!])
+                    ),
                   ) : SizedBox(),
                 ],
               );
@@ -273,7 +273,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               children: [
                 Image.asset(
                   'assets/images/ist.png',
-                  width: 100,
+                  width: 120,
                   height: 60,
                   fit: BoxFit.fitHeight,
                 ),
