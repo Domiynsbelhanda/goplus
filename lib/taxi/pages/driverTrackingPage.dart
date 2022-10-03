@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goplus/utils/app_colors.dart';
 import 'package:goplus/widget/backButton.dart';
+import 'package:goplus/widget/bottom_type_car.dart';
 import 'package:goplus/widget/progresso_dialog.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -184,54 +185,39 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   Positioned(
                     bottom: 16,
                     left: 16.0,
-                    child: Container(
-                      height: MediaQuery.of(context).size.width / 3,
-                      width: MediaQuery.of(context).size.width / 3,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black,
-                            blurRadius: 10.0,
-                            offset: Offset.fromDirection(2)
-                          )
-                        ]
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              'assets/images/ist.png',
-                            ),
-                            SizedBox(height: 10.0),
-                            Flexible(
-                              child: Text(
-                                "TAXI Mini",
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  fontFamily: 'Anton'
-                                ),
-                              ),
-                            ),
-                            Flexible(
-                              child: Text(
-                                "4 personnes",
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                            Flexible(
-                              child: Text(
-                                "5\$/h",
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            )
-                          ],
-                        ),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Row(
+                        children: [
+                          BottomTypeCar(
+                            image: 'assets/images/ist.png',
+                            type: 'TAXI Mini',
+                            place: '4 personnes',
+                            prices: '5\$/h',
+                          ),
+
+                          const SizedBox(
+                            width: 16.0,
+                          ),
+
+                          BottomTypeCar(
+                            image: 'assets/images/berline.png',
+                            type: 'Berline VIP',
+                            place: '4 personnes',
+                            prices: '10\$/h',
+                          ),
+
+                          const SizedBox(
+                            width: 16.0,
+                          ),
+
+                          BottomTypeCar(
+                            image: 'assets/images/van.png',
+                            type: 'Taxi Bus',
+                            place: '20 personnes',
+                            prices: '2\$/h',
+                          ),
+                        ],
                       ),
                     ),
                   ),
