@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
 import 'package:google_api_headers/google_api_headers.dart';
@@ -5,6 +7,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:goplus/pages/homePage.dart';
 import 'package:goplus/utils/datas.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+import '../../utils/app_colors.dart';
 
 class PickLocation extends StatefulWidget{
   bool destination;
@@ -21,38 +26,91 @@ class PickLocation extends StatefulWidget{
 class _PickLocation extends State<PickLocation>{
 
   String androidApiKey = 'AIzaSyAFtipYv6W0AWKFWsipPRhrgRdPHF5MOvk';
-  GoogleMapController? mapController; //contrller for Google map
-  CameraPosition? cameraPosition;
-  LatLng startLocation = LatLng(-11.6565, 27.4782);
+  Completer<GoogleMapController> _controller = Completer();
+  static const CameraPosition _kPosition = CameraPosition(
+    target: LatLng(-11.6565, 27.4782),
+    zoom: 14.4746,
+  );
+  Set<Marker> markers = Set();
   String location = "Chercher un lieu";
   LatLng? selectedPlace;
   LatLng? departPlace;
-  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
-
+  late BitmapDescriptor pinner;
+  LatLng? position;
 
   @override
   void initState() {
     if(widget.place != null){
       selectedPlace = widget.place;
     }
+    readBitconMarkerPinner();
+    getMyPosition();
+  }
+
+  getMyPosition() async {
+    getUserCurrentLocation().then((value) async {
+      setState(() {
+        position = LatLng(value.latitude, value.longitude);
+      });
+
+      CameraPosition cameraPosition = new CameraPosition(
+        target: LatLng(value.latitude, value.longitude),
+        zoom: 13,
+      );
+
+
+
+      final GoogleMapController controller = await _controller.future;
+      controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+
+      setState(() {
+        markers.add(
+            Marker(
+              markerId: MarkerId("1"),
+              position: LatLng(value.latitude, value.longitude),
+              infoWindow: InfoWindow(
+                title: 'Votre Position',
+              ),
+              icon: pinner,
+            )
+        );
+      });
+    });
+  }
+
+  readBitconMarkerPinner() async {
+    pinner = await BitmapDescriptor.fromAssetImage(
+      ImageConfiguration(
+
+      ),
+      "assets/icon/pinner.png",
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+        body: position == null ? Center(
+      child: LoadingAnimationWidget.twistingDots(
+        leftDotColor: AppColors.primaryColor,
+        rightDotColor: AppColors.primaryColor,
+        size: 30,
+      ),
+    )
+        :
+      Container(
         child: Stack(
           children: [
             GoogleMap( //Map widget from google_maps_flutter package
               zoomGesturesEnabled: true,
               myLocationEnabled: true,
               myLocationButtonEnabled: true,
-              initialCameraPosition: CameraPosition( //innital position in map
-                target: startLocation, //initial position
-                zoom: 14.0, //initial zoom level
+              initialCameraPosition: CameraPosition(
+                  target: position!,
+                  zoom: 15
               ),
               mapType: MapType.normal, //map type
-              markers: Set<Marker>.of(markers.values),
+              markers: markers,
               onTap: (LatLng position){
 
                 var markerIdVal = 'ma destination';
@@ -62,7 +120,7 @@ class _PickLocation extends State<PickLocation>{
                 final Marker marker = Marker(
                   markerId: markerId,
                   position: position,
-                  infoWindow: InfoWindow(title: markerIdVal, snippet: '*'),
+                  icon: pinner,
                 );
                 setState(() {
                   if(widget.destination){
@@ -70,12 +128,12 @@ class _PickLocation extends State<PickLocation>{
                   } else {
                     departPlace = position;
                   }
-                  markers[markerId] = marker;
+                  markers.add(marker);
                 });
               },
               onMapCreated: (controller) { //method called when map is created
                 setState(() {
-                  mapController = controller;
+                  _controller.complete(controller);
                 });
               },
             ),
@@ -173,9 +231,13 @@ class _PickLocation extends State<PickLocation>{
                         final lang = geometry.location.lng;
                         var newlatlang = LatLng(lat, lang);
 
+                        CameraPosition cameraPosition = new CameraPosition(
+                          target: newlatlang,
+                          zoom: 13,
+                        );
 
-                        //move map camera to selected place with animation
-                        mapController?.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: newlatlang, zoom: 17)));
+                        final GoogleMapController controller = await _controller.future;
+                        controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
                       }
                     },
                     child:Padding(
