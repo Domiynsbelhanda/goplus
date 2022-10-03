@@ -1,7 +1,6 @@
-
 import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:label_marker/label_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -20,7 +19,7 @@ class GoogleMapsPolylines extends StatefulWidget {
 
 class _Poly extends State<GoogleMapsPolylines> {
 
-  GoogleMapController? _controller;
+  Completer<GoogleMapController> _controller = Completer();
   Location _location = Location();
   CameraPosition _kGoogle = const CameraPosition(
     target: LatLng(19.0759837, 72.8776559),
@@ -33,35 +32,20 @@ class _Poly extends State<GoogleMapsPolylines> {
   // list of locations to display polylines
   late List<LatLng> latLen;
 
-  void _onMapCreated (_cntlr) async
-  {
-    _controller = _cntlr;
-    BitmapDescriptor markerbitmap = await BitmapDescriptor.fromAssetImage(
+  BitmapDescriptor? markerbitmap;
+
+  void readBitmap() async {
+    markerbitmap = await BitmapDescriptor.fromAssetImage(
       ImageConfiguration(),
       "assets/images/car_android.png",
     );
-
-    setState(() {
-      _markers.add(
-          Marker( //add start location marker
-            markerId: MarkerId('Ma Position'),
-            position: latLen[0], //position of marker
-            infoWindow: InfoWindow( //popup info
-              title: 'Ma Position',
-              snippet: 'Moi',
-            ),
-            icon: markerbitmap, //Icon for Marker
-          )
-      );
-
-      position = latLen[0];
-    });
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    readBitmap();
 
     latLen = [
       widget.position,
@@ -75,14 +59,14 @@ class _Poly extends State<GoogleMapsPolylines> {
     );
 
     // declared for loop for various locations
-    for(int i=0; i<latLen.length; i++){
+    for(int i=1; i<latLen.length; i++){
       _markers.add(
         // added markers
           Marker(
               markerId: MarkerId(i.toString()),
               position: latLen[i],
               infoWindow: InfoWindow(
-                title: '${i + 1} ${i == 0 ? 'Driver' : i == 1 ? 'Lieu de ramassage' : i == 2 ? 'Destination du client' : ''}',
+                title: i == 1 ? 'Lieu de ramassage' : i == 2 ? 'Destination du client' : '',
                 snippet: '',
               )
           )
@@ -105,16 +89,47 @@ class _Poly extends State<GoogleMapsPolylines> {
     return Scaffold(
       body: Container(
         child: SafeArea(
-          child: GoogleMap(
-            initialCameraPosition: _kGoogle,
-            mapType: MapType.normal,
-            markers: _markers,
-            myLocationEnabled: true,
-            myLocationButtonEnabled: true,
-            compassEnabled: true,
-            polylines: _polyline,
-            onMapCreated: _onMapCreated,
-          ),
+          child : StreamBuilder(
+          stream: FirebaseFirestore.instance.collection("drivers").doc(widget.id).snapshots(),
+          builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+            var data = snapshot.data!.data() as Map<String, dynamic>;
+            _markers.clear();
+            _markers.add(
+                Marker(
+                  markerId: MarkerId('DriverPosition'),
+                  position: LatLng(data['latitude'], data['longitude']),
+                  infoWindow: const InfoWindow(
+                    title: 'Driver Position',
+                    snippet: '',
+                  ),
+                  icon: markerbitmap!,
+                )
+            );
+
+            return GoogleMap(
+              initialCameraPosition: _kGoogle,
+              mapType: MapType.normal,
+              markers: _markers,
+              myLocationEnabled: true,
+              myLocationButtonEnabled: true,
+              compassEnabled: true,
+              polylines: _polyline,
+              onMapCreated: (ctrl){
+                ctrl.animateCamera(
+                    CameraUpdate.newCameraPosition(
+                        CameraPosition(
+                            target: LatLng(
+                              data['latitude'],
+                              data['longitude']
+                            ),
+                            zoom: 17)
+                      //17 is new zoom level
+                    )
+                );
+                _controller.complete(ctrl);
+              },
+            );
+          })
         ),
       ),
     );
