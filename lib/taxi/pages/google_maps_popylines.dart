@@ -33,42 +33,28 @@ class _Poly extends State<GoogleMapsPolylines> {
   // list of locations to display polylines
   late List<LatLng> latLen;
 
-  void _onMapCreated(_cntlr)
+  void _onMapCreated (_cntlr) async
   {
     _controller = _cntlr;
-    _location.onLocationChanged.listen((l) async {
-      position = LatLng(l.latitude!, l.longitude!);
-      FirebaseFirestore.instance.collection('drivers').doc(widget.id!).update({
-        'longitude': l.longitude,
-        'latitude' : l.latitude
-      });
-      BitmapDescriptor markerbitmap = await BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(),
-        "assets/images/car_android.png",
+    BitmapDescriptor markerbitmap = await BitmapDescriptor.fromAssetImage(
+      ImageConfiguration(),
+      "assets/images/car_android.png",
+    );
+
+    setState(() {
+      _markers.add(
+          Marker( //add start location marker
+            markerId: MarkerId('Ma Position'),
+            position: latLen[0], //position of marker
+            infoWindow: InfoWindow( //popup info
+              title: 'Ma Position',
+              snippet: 'Moi',
+            ),
+            icon: markerbitmap, //Icon for Marker
+          )
       );
 
-      setState(() {
-        _markers.add(
-            Marker( //add start location marker
-              markerId: MarkerId('Ma Position'),
-              position: LatLng(l.latitude!, l.longitude!), //position of marker
-              infoWindow: InfoWindow( //popup info
-                title: 'Ma Position',
-                snippet: 'Moi',
-              ),
-              icon: markerbitmap, //Icon for Marker
-            )
-        );
-
-        position = LatLng(l.latitude!, l.longitude!);
-      });
-
-
-      _controller!.animateCamera(
-        CameraUpdate.newCameraPosition(
-          CameraPosition(target: LatLng(l.latitude!, l.longitude!),zoom: 15),
-        ),
-      );
+      position = latLen[0];
     });
   }
 
@@ -96,7 +82,7 @@ class _Poly extends State<GoogleMapsPolylines> {
               markerId: MarkerId(i.toString()),
               position: latLen[i],
               infoWindow: InfoWindow(
-                title: '${i + 1} ${i == 0 ? 'Votre Position' : i == 1 ? 'Lieu de ramassage' : i == 2 ? 'Destination du client' : ''}',
+                title: '${i + 1} ${i == 0 ? 'Driver' : i == 1 ? 'Lieu de ramassage' : i == 2 ? 'Destination du client' : ''}',
                 snippet: '',
               )
           )
