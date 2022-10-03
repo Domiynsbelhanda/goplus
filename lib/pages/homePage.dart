@@ -4,6 +4,7 @@ import 'package:goplus/formulaire/dashboard.dart';
 import 'package:goplus/taxi/pages/driverTrackingPage.dart';
 import 'package:goplus/taxi/screens/driver_tracker.dart';
 import 'package:goplus/taxi/screens/mapsPickLocation.dart';
+import 'package:goplus/taxi/screens/signup_screen.dart';
 import 'package:goplus/widget/logo_text.dart';
 import 'package:goplus/widget/mini_card_picture.dart';
 
@@ -297,6 +298,23 @@ class _HomePage extends State<HomePage>{
                     )
                   ],
                 )
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0, top: 16.0, bottom: 16.0),
+              child: MiniCardPicture(
+                imagePath: 'assets/images/driver.png',
+                title: 'Devenir chauffeur',
+                description: 'Voulez-vous devenir chauffeur?',
+                onTap: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SignupScreen()
+                      )
+                  );
+                },
+              ),
             ),
           ],
         ),
