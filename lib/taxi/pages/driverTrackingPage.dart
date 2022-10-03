@@ -393,7 +393,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
             AppButton(
               name: 'RESERVER',
               onTap: (){
-                progresso_dialog(context, data.id, position!);
+                progresso_dialog(context, data.id, LatLng(data.get('latitude'), data.get('longitude')));
                 setState(() {
                   index = null;
                 });
