@@ -17,13 +17,13 @@ class BottomTypeCar extends StatelessWidget{
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8.0),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black,
-                blurRadius: 3.0,
-                offset: Offset.fromDirection(2)
-            )
-          ]
+          // boxShadow: [
+          //   BoxShadow(
+          //       color: Colors.black,
+          //       blurRadius: 1.0,
+          //       offset: Offset.fromDirection(2)
+          //   )
+          // ]
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),

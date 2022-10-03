@@ -185,39 +185,42 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   Positioned(
                     bottom: 16,
                     left: 16.0,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: Row(
-                        children: [
-                          BottomTypeCar(
-                            image: 'assets/images/ist.png',
-                            type: 'TAXI Mini',
-                            place: '4 personnes',
-                            prices: '5\$/h',
-                          ),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            BottomTypeCar(
+                              image: 'assets/images/ist.png',
+                              type: 'TAXI Mini',
+                              place: '4 personnes',
+                              prices: '5\$/h',
+                            ),
 
-                          const SizedBox(
-                            width: 16.0,
-                          ),
+                            const SizedBox(
+                              width: 16.0,
+                            ),
 
-                          BottomTypeCar(
-                            image: 'assets/images/berline.png',
-                            type: 'Berline VIP',
-                            place: '4 personnes',
-                            prices: '10\$/h',
-                          ),
+                            BottomTypeCar(
+                              image: 'assets/images/berline.png',
+                              type: 'Berline VIP',
+                              place: '4 personnes',
+                              prices: '10\$/h',
+                            ),
 
-                          const SizedBox(
-                            width: 16.0,
-                          ),
+                            const SizedBox(
+                              width: 16.0,
+                            ),
 
-                          BottomTypeCar(
-                            image: 'assets/images/van.png',
-                            type: 'Taxi Bus',
-                            place: '20 personnes',
-                            prices: '2\$/h',
-                          ),
-                        ],
+                            BottomTypeCar(
+                              image: 'assets/images/van.png',
+                              type: 'Taxi Bus',
+                              place: '20 personnes',
+                              prices: '2\$/h',
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -245,7 +248,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
       padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        height: MediaQuery.of(context).size.width + 44,
+        height: MediaQuery.of(context).size.width + 66,
         width: MediaQuery.of(context).size.width * 0.8,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -269,10 +272,10 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image.asset(
-                  'assets/images/ist.svg',
-                  width: 84,
+                  'assets/images/ist.png',
+                  width: 100,
                   height: 60,
-                  fit: BoxFit.fitWidth,
+                  fit: BoxFit.fitHeight,
                 ),
                 SizedBox(width: 16.0),
                 Column(
@@ -329,10 +332,18 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Image.network(
-                  '${data.get('profpic')}',
-                  height: 100,
+                Container(
+                  height: 120,
                   width: 100,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(60),
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        '${data.get('profpic')}',
+                      ),
+                      fit: BoxFit.fitWidth,
+                    )
+                  ),
                 ),
 
                 const SizedBox(
@@ -343,7 +354,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${data.get('firstn')} ${data.get('lastn')} ${data.get('midn')}',
+                      '${data.get('firstn')} ${data.get('midn')}',
                       style: const TextStyle(
                           fontSize: 16.0
                       ),
