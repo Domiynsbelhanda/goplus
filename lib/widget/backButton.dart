@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goplus/pages/homePage.dart';
 
 class BackButtons extends StatelessWidget{
   BackButtons(this.context);
@@ -56,7 +57,14 @@ class CloseButtons extends StatelessWidget{
     size = MediaQuery.of(context).size;
     // TODO: implement build
     return GestureDetector(
-      onTap: ()=>Navigator.pop(context),
+      onTap: ()=>Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  HomePage()
+          ),
+              (Route<dynamic> route) => false
+      ),
       child: Container(
         height: size.width / 10,
         width: size.width / 10,

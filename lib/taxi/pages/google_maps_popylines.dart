@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
+import '../../widget/backButton.dart';
+
 class GoogleMapsPolylines extends StatefulWidget {
   LatLng origine;
   LatLng destination;
@@ -88,48 +90,58 @@ class _Poly extends State<GoogleMapsPolylines> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: SafeArea(
-          child : StreamBuilder(
-          stream: FirebaseFirestore.instance.collection("drivers").doc(widget.id).snapshots(),
-          builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-            var data = snapshot.data!.data() as Map<String, dynamic>;
-            _markers.clear();
-            _markers.add(
-                Marker(
-                  markerId: MarkerId('DriverPosition'),
-                  position: LatLng(data['latitude'], data['longitude']),
-                  infoWindow: const InfoWindow(
-                    title: 'Driver Position',
-                    snippet: '',
-                  ),
-                  icon: markerbitmap!,
-                )
-            );
-
-            return GoogleMap(
-              initialCameraPosition: _kGoogle,
-              mapType: MapType.normal,
-              markers: _markers,
-              myLocationEnabled: true,
-              myLocationButtonEnabled: true,
-              compassEnabled: true,
-              polylines: _polyline,
-              onMapCreated: (ctrl){
-                ctrl.animateCamera(
-                    CameraUpdate.newCameraPosition(
-                        CameraPosition(
-                            target: LatLng(
-                              data['latitude'],
-                              data['longitude']
-                            ),
-                            zoom: 17)
-                      //17 is new zoom level
+        child: Stack(
+          children: [
+            SafeArea(
+              child : StreamBuilder(
+              stream: FirebaseFirestore.instance.collection("drivers").doc(widget.id).snapshots(),
+              builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                var data = snapshot.data!.data() as Map<String, dynamic>;
+                _markers.clear();
+                _markers.add(
+                    Marker(
+                      markerId: MarkerId('DriverPosition'),
+                      position: LatLng(data['latitude'], data['longitude']),
+                      infoWindow: const InfoWindow(
+                        title: 'Driver Position',
+                        snippet: '',
+                      ),
+                      icon: markerbitmap!,
                     )
                 );
-                _controller.complete(ctrl);
-              },
-            );
-          })
+
+                return GoogleMap(
+                  initialCameraPosition: _kGoogle,
+                  mapType: MapType.normal,
+                  markers: _markers,
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: true,
+                  compassEnabled: true,
+                  polylines: _polyline,
+                  onMapCreated: (ctrl){
+                    ctrl.animateCamera(
+                        CameraUpdate.newCameraPosition(
+                            CameraPosition(
+                                target: LatLng(
+                                  data['latitude'],
+                                  data['longitude']
+                                ),
+                                zoom: 17)
+                          //17 is new zoom level
+                        )
+                    );
+                    _controller.complete(ctrl);
+                  },
+                );
+              })
+            ),
+
+            Positioned(
+              right: 16,
+              top: 16,
+              child: CloseButtons(context),
+            ),
+          ],
         ),
       ),
     );

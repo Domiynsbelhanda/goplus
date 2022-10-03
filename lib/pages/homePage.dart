@@ -4,14 +4,11 @@ import 'package:goplus/formulaire/dashboard.dart';
 import 'package:goplus/taxi/pages/driverTrackingPage.dart';
 import 'package:goplus/taxi/screens/driver_tracker.dart';
 import 'package:goplus/taxi/screens/mapsPickLocation.dart';
-import 'package:goplus/widget/buildTextField.dart';
 import 'package:goplus/widget/logo_text.dart';
 import 'package:goplus/widget/mini_card_picture.dart';
-import 'package:goplus/widget/notification_dialog.dart';
 
 import '../utils/app_colors.dart';
 import '../utils/datas.dart';
-import '../widget/card_dashboard_item_image.dart';
 
 class HomePage extends StatefulWidget{
   LatLng? destination;
