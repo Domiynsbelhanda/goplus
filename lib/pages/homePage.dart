@@ -86,7 +86,7 @@ class _HomePage extends State<HomePage>{
                         child: Container(
                           height: size.width / 7,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.circular(48),
                               border: Border.all(
                                   color: Colors.black,
                                   width: 2
@@ -142,7 +142,7 @@ class _HomePage extends State<HomePage>{
                           child: Container(
                             height: size.width / 7,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4),
+                                borderRadius: BorderRadius.circular(48),
                                 border: Border.all(
                                     color: Colors.black,
                                     width: 2
