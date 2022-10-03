@@ -236,7 +236,7 @@ class _HomePage extends State<HomePage>{
             ),
 
             const SizedBox(
-              height: 48.0
+              height: 36.0
             ),
 
             Padding(
@@ -246,8 +246,7 @@ class _HomePage extends State<HomePage>{
                   Text(
                       'Tous les services du',
                       style: TextStyle(
-                          fontSize: size.width / 20,
-                          fontFamily: 'Anton'
+                          fontSize: size.width / 20
                       )
                   ),
                   Text(
@@ -284,6 +283,20 @@ class _HomePage extends State<HomePage>{
                     )).toList(),
                   ),
                 ),
+            ),
+
+            Padding(
+                padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
+                child: Row(
+                  children: [
+                    Text(
+                        'Offres sur mesures',
+                        style: TextStyle(
+                            fontSize: size.width / 20
+                        )
+                    )
+                  ],
+                )
             ),
           ],
         ),
