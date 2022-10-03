@@ -89,7 +89,7 @@ class _HomePage extends State<HomePage>{
                               borderRadius: BorderRadius.circular(48),
                               border: Border.all(
                                   color: Colors.black,
-                                  width: 2
+                                  width: 0.5
                               )
                           ),
                           child: Center(
@@ -145,7 +145,7 @@ class _HomePage extends State<HomePage>{
                                 borderRadius: BorderRadius.circular(48),
                                 border: Border.all(
                                     color: Colors.black,
-                                    width: 2
+                                    width: 0.5
                                 )
                             ),
                             child: Center(
@@ -204,7 +204,7 @@ class _HomePage extends State<HomePage>{
                                 borderRadius: BorderRadius.circular(48),
                                 border: Border.all(
                                     color: Colors.black,
-                                    width: 2
+                                    width: 0.5
                                 )
                             ),
                             child: Center(

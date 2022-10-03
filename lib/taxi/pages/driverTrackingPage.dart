@@ -65,8 +65,9 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
 
       setState(() {
         circles = Set.from([Circle(
-          strokeColor: Colors.lightBlueAccent,
-          fillColor: Colors.blueAccent.withOpacity(0.5),
+          strokeColor: Colors.red,
+          strokeWidth: 2,
+          fillColor: Colors.red.withOpacity(0.5),
           circleId: CircleId('1'),
           center: LatLng(value.latitude, value.longitude),
           radius: 3700,
