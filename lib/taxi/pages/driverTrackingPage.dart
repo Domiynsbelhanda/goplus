@@ -393,7 +393,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
             AppButton(
               name: 'RESERVER',
               onTap: (){
-                progresso_dialog(context, data.id);
+                progresso_dialog(context, data.id, position!);
                 setState(() {
                   index = null;
                 });

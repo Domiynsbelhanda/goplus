@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/utils/app_colors.dart';
+
+import '../taxi/pages/google_maps_popylines.dart';
 
 progresso_dialog(
     BuildContext contexts,
-    String text,) {
+    String text, LatLng position) {
 
   double width = MediaQuery.of(contexts).size.width;
 
@@ -84,7 +87,70 @@ progresso_dialog(
                       )
                   ),
                 );
-              } else {
+              } else if (data['status'] == 'accept'){
+                return SizedBox(
+                  width: width / 1,
+                  height: width / 1.1,
+                  child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                          children : [
+                            Icon(
+                              Icons.check_circle,
+                              color: Colors.green,
+                              size: width / 4,
+                            ),
+
+                            SizedBox(height: 16.0),
+
+                            Container(
+                              width : width / 1.5,
+                              child: const Text(
+                                  'Votre commande a été acceptée.',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                  )
+                              ),
+                            ),
+
+                            SizedBox(height: 16.0),
+
+                            TextButton(
+                              child: Container(
+                                  padding: const EdgeInsets.all(16.0),
+                                  decoration: BoxDecoration(
+                                      color: AppColors.primaryColor,
+                                      borderRadius: BorderRadius.circular(8.0)
+                                  ),
+                                  child: Text(
+                                    'SUIVRE LE CHAUFEUR',
+                                    style: TextStyle(
+                                        color: Colors.black
+                                    ),
+                                  )
+                              ),
+                              onPressed: (){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            GoogleMapsPolylines(
+                                              destination: LatLng(data['destination_latitude'], data['destination_longitude']),
+                                              origine: LatLng(data['depart_latitude'], data['depart_longitude']),
+                                              position: position,
+                                              id: text,
+                                            )
+                                    )
+                                );
+                              },
+                            )
+                          ]
+                      )
+                  ),
+                );
+              }
+              else {
                 return SizedBox(
                   width: width / 1,
                   height: width /1.3,

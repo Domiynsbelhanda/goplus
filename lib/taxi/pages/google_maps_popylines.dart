@@ -1,33 +1,76 @@
+
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:label_marker/label_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 
 class GoogleMapsPolylines extends StatefulWidget {
   LatLng origine;
   LatLng destination;
   LatLng position;
+  String? id;
 
-  GoogleMapsPolylines({Key? key, required this.origine, required this.destination, required this.position}) : super(key: key);
+  GoogleMapsPolylines({Key? key, this.id, required this.origine, required this.destination, required this.position}) : super(key: key);
 
   @override
   _Poly createState() => _Poly();
 }
 
 class _Poly extends State<GoogleMapsPolylines> {
-  // created controller to display Google Maps
-  Completer<GoogleMapController> _controller = Completer();
-  //on below line we have set the camera position
+
+  GoogleMapController? _controller;
+  Location _location = Location();
   CameraPosition _kGoogle = const CameraPosition(
     target: LatLng(19.0759837, 72.8776559),
     zoom: 14,
   );
-
+  late LatLng position;
   final Set<Marker> _markers = {};
   final Set<Polyline> _polyline = {};
 
   // list of locations to display polylines
   late List<LatLng> latLen;
+
+  void _onMapCreated(_cntlr)
+  {
+    _controller = _cntlr;
+    _location.onLocationChanged.listen((l) async {
+      position = LatLng(l.latitude!, l.longitude!);
+      FirebaseFirestore.instance.collection('drivers').doc(widget.id!).update({
+        'longitude': l.longitude,
+        'latitude' : l.latitude
+      });
+      BitmapDescriptor markerbitmap = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(),
+        "assets/images/car_android.png",
+      );
+
+      setState(() {
+        _markers.add(
+            Marker( //add start location marker
+              markerId: MarkerId('Ma Position'),
+              position: LatLng(l.latitude!, l.longitude!), //position of marker
+              infoWindow: InfoWindow( //popup info
+                title: 'Ma Position',
+                snippet: 'Moi',
+              ),
+              icon: markerbitmap, //Icon for Marker
+            )
+        );
+
+        position = LatLng(l.latitude!, l.longitude!);
+      });
+
+
+      _controller!.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(target: LatLng(l.latitude!, l.longitude!),zoom: 15),
+        ),
+      );
+    });
+  }
 
   @override
   void initState() {
@@ -47,21 +90,15 @@ class _Poly extends State<GoogleMapsPolylines> {
 
     // declared for loop for various locations
     for(int i=0; i<latLen.length; i++){
-      _markers.addLabelMarker(
+      _markers.add(
         // added markers
-          LabelMarker(
-            label: '${i + 1} ${i == 0 ? 'Votre Position' : i == 1 ? 'Lieu de ramassage' : i == 2 ? 'Destination du client' : ''}',
-            textStyle: TextStyle(
-                color: Colors.white,
-                fontSize: 50.0
-            ),
-            markerId: MarkerId(i.toString()),
-            position: latLen[i],
-            infoWindow: InfoWindow(
-              title: 'TRAJET',
-              snippet: '',
-            ),
-            icon: BitmapDescriptor.defaultMarker,
+          Marker(
+              markerId: MarkerId(i.toString()),
+              position: latLen[i],
+              infoWindow: InfoWindow(
+                title: '${i + 1} ${i == 0 ? 'Votre Position' : i == 1 ? 'Lieu de ramassage' : i == 2 ? 'Destination du client' : ''}',
+                snippet: '',
+              )
           )
       );
       setState(() {
@@ -91,7 +128,7 @@ class _Poly extends State<GoogleMapsPolylines> {
             compassEnabled: true,
             polylines: _polyline,
             onMapCreated: (GoogleMapController controller){
-              _controller.complete(controller);
+              _controller = controller;
             },
           ),
         ),
