@@ -287,7 +287,7 @@ class _HomePage extends State<HomePage>{
             ),
 
             Padding(
-                padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
+                padding: const EdgeInsets.only(left: 16.0, bottom: 16.0, top: 16.0),
                 child: Row(
                   children: [
                     Text(
@@ -301,7 +301,7 @@ class _HomePage extends State<HomePage>{
             ),
 
             Padding(
-              padding: const EdgeInsets.only(left: 16.0, top: 16.0, bottom: 16.0),
+              padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
               child: MiniCardPicture(
                 imagePath: 'assets/images/driver.png',
                 title: 'Devenir chauffeur',

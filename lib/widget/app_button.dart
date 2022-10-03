@@ -21,13 +21,11 @@ class _AppButtonState extends State<AppButton> {
         margin: const EdgeInsets.symmetric(horizontal: 15),
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(size.height * 0.035),
-            boxShadow: [
-              BoxShadow(color: Colors.grey, blurRadius: 3, spreadRadius: 1)
-            ]),
+            borderRadius: BorderRadius.circular(16),
+        ),
         child: Material(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(size.height * 0.035),
+            borderRadius: BorderRadius.circular(16),
           ),
           clipBehavior: Clip.antiAlias,
           child: MaterialButton(
@@ -39,8 +37,9 @@ class _AppButtonState extends State<AppButton> {
             child: Text(
               widget.name!,
               style: TextStyle(
-                color: Colors.black,
-                fontSize: 18,
+                color: Colors.white,
+                fontSize: 25,
+                fontFamily: 'Anton',
                 fontWeight: FontWeight.w500,
               ),
             ),
