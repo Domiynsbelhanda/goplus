@@ -216,7 +216,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                             BottomTypeCar(
                               image: 'assets/images/van.png',
                               type: 'Taxi Bus',
-                              place: '20 personnes',
+                              place: '8 personnes',
                               prices: '2\$/h',
                             ),
                           ],

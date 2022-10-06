@@ -12,7 +12,7 @@ class BottomTypeCar extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      height: MediaQuery.of(context).size.width / 2.6,
+      height: MediaQuery.of(context).size.width / 2.5,
       width: MediaQuery.of(context).size.width / 2.6,
       decoration: BoxDecoration(
           color: Colors.white,
