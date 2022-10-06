@@ -117,7 +117,6 @@ class _Poly extends State<GoogleMapsPolylines> {
                   myLocationEnabled: true,
                   myLocationButtonEnabled: true,
                   compassEnabled: true,
-                  polylines: _polyline,
                   onMapCreated: (ctrl){
                     ctrl.animateCamera(
                         CameraUpdate.newCameraPosition(
