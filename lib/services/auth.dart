@@ -155,6 +155,7 @@ class Auth extends ChangeNotifier{
     try{
       Dio.Response response = await dio()!.post('', data: jsonEncode(data));
       Map<String, dynamic> datas = jsonDecode(response.data);
+      storeToken(token: data['phone']);
       notifyListeners();
       Navigator.pop(context);
       return datas['code'];

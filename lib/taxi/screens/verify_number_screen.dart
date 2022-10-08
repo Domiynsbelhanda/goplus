@@ -151,6 +151,14 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                       .then((value){
                           if(value == 'KO'){
                             Navigator.pop(context);
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      HomePage()
+                              ),
+                            );
                           }
                       });
                     }
