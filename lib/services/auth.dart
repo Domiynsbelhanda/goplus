@@ -28,7 +28,6 @@ class Auth extends ChangeNotifier{
       if(response.statusCode == 200){
         var res = jsonDecode(response.data);
         if(res['code'] == "OTP"){
-          String token = res['token'].toString();
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: creds['phone']))
           );
@@ -78,18 +77,60 @@ class Auth extends ChangeNotifier{
 
   void register ({required Map cred, required BuildContext context}) async {
 
+    notification_loader(context, (){});
+
     try {
       Dio.Response response = await dio()!.post('', data: cred);
       if(response.statusCode == 200){
         var res = jsonDecode(response.data);
-        if(res['code'] == 1){
-          String token = res['token'].toString();
+        if(res['code'] == "OTP"){
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: cred['phone']))
+          );
+        } else if(res['NOK']){
+          notification_dialog(
+              context,
+              'Vérifiez votre mot de passe',
+              Icons.error,
+              Colors.red,
+              {'label': 'REESAYEZ', "onTap": (){
+                Navigator.pop(context);
+              }},
+              20,
+              false);
+        } else if (res['KO']){
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const UserSignupScreen())
+          );
         } else {
-          // showAlertDialog(context, 'Authentification', '${res['data'].toString()}');
+          notification_dialog(
+              context,
+              'Une erreur c\'est produite.',
+              Icons.error,
+              Colors.red,
+              {'label': 'REESAYEZ', "onTap": (){
+                Navigator.pop(context);
+                Navigator.pop(context);
+              }},
+              20,
+              false);
         }
       }
     } catch (e){
-      // showAlertDialog(context, 'Authentification', '${e.toString()}');
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: cred['phone']))
+      );
+      // notification_dialog(
+      //     context,
+      //     'Une erreur c\'est produite.',
+      //     Icons.error,
+      //     Colors.red,
+      //     {'label': 'FERMER', "onTap": (){
+      //       Navigator.pop(context);
+      //       Navigator.pop(context);
+      //     }},
+      //     20,
+      //     false);
     }
   }
 

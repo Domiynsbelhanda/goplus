@@ -136,7 +136,6 @@ class _SignupScreenState extends State<UserSignupScreen> {
                       AppButton(
                           name: 'S\'INSRIRE',
                           onTap: (){
-                            notification_loader(context, (){});
                             if(formkey.currentState!.validate()){
                               var data = {
                                 "key": "create_user",
@@ -153,7 +152,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                 "level": "3"
                               };
 
-                              // Provider.of<Auth>(context, listen: false).register(context: context, cred: data);
+                              Provider.of<Auth>(context, listen: false).register(context: context, cred: data);
                               //
                               // FirebaseFirestore.instance.collection('drivers').doc(phoneController.text.toString()).set(data);
                               //
