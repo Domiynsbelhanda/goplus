@@ -122,8 +122,8 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                       width: size.width,
                       child: TextFormField(
                         validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Entrez un mot de passe';
+                          if (value!.isEmpty || value!.length < 6) {
+                            return 'Entrez un mot de passe valide';
                           }
                           return null;
                         },
