@@ -6,9 +6,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goplus/utils/app_colors.dart';
 import 'package:goplus/widget/backButton.dart';
 import 'package:goplus/widget/bottom_type_car.dart';
+import 'package:goplus/widget/notification_loader.dart';
 import 'package:goplus/widget/progresso_dialog.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:provider/provider.dart';
 
+import '../../services/auth.dart';
 import '../../utils/datas.dart';
 import '../../widget/app_button.dart';
 
@@ -400,25 +403,30 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
             AppButton(
               name: 'RESERVER',
               onTap: (){
-                progresso_dialog(context, data.id, LatLng(data.get('latitude'), data.get('longitude')));
-                setState(() {
-                  index = null;
-                });
-                FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
-                  'online': false,
-                  'ride': true,
-                  'ride_view': false,
-                });
-                FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses')
-                    .doc('courses')
-                    .set({
-                  'status': 'pending',
-                  'depart_longitude': widget.depart.longitude,
-                  'depart_latitude': widget.depart.latitude,
-                  'destination_longitude': widget.destination.longitude,
-                  'destination_latitude': widget.destination.latitude,
-                  'distance': calculateDistance(widget.depart, position!).toStringAsFixed(2),
-                  'user_id': '996852377'
+                notification_loader(context, (){});
+
+                Provider.of<Auth>(context, listen: false).getToken().then((value){
+                  Navigator.pop(context);
+                  progresso_dialog(context, data.id, LatLng(data.get('latitude'), data.get('longitude')));
+                  setState(() {
+                    index = null;
+                  });
+                  FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
+                    'online': false,
+                    'ride': true,
+                    'ride_view': false,
+                  });
+                  FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses')
+                      .doc('courses')
+                      .set({
+                    'status': 'pending',
+                    'depart_longitude': widget.depart.longitude,
+                    'depart_latitude': widget.depart.latitude,
+                    'destination_longitude': widget.destination.longitude,
+                    'destination_latitude': widget.destination.latitude,
+                    'distance': calculateDistance(widget.depart, position!).toStringAsFixed(2),
+                    'user_id': value!
+                  });
                 });
               },
             ),

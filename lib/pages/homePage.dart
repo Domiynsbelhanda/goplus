@@ -3,7 +3,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/formulaire/dashboard.dart';
 import 'package:goplus/screens/enter_phone_number_screen.dart';
 import 'package:goplus/services/auth.dart';
-import 'package:goplus/taxi/pages/driverTrackingPage.dart';
 import 'package:goplus/taxi/screens/driver_tracker.dart';
 import 'package:goplus/taxi/screens/mapsPickLocation.dart';
 import 'package:goplus/taxi/screens/signup_screen.dart';
@@ -137,11 +136,11 @@ class _HomePage extends State<HomePage>{
                       padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
                       child: Text(
                         '${selectedPlace!.latitude} - ${selectedPlace!.longitude}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12
                         ),
                       ),
-                    ) : SizedBox(),
+                    ) : const SizedBox(),
 
                     selectedPlace != null ?
                     Padding(
@@ -171,7 +170,7 @@ class _HomePage extends State<HomePage>{
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Row(
-                                    children: [
+                                    children: const [
                                       Icon(
                                           Icons.map_rounded
                                       ),
@@ -187,18 +186,18 @@ class _HomePage extends State<HomePage>{
                           ),
                         )
                     )
-                        : SizedBox(),
+                        : const SizedBox(),
 
                     depart != null ?
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
                       child: Text(
                         '${depart!.latitude} - ${depart!.longitude}',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 12
                         ),
                       ),
-                    ) : SizedBox(),
+                    ) : const SizedBox(),
 
 
                     selectedPlace != null && depart != null ?

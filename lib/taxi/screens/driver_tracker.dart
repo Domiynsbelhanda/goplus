@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/taxi/pages/driverTrackingPage.dart';
 
+import '../../screens/loadingAnimationWidget.dart';
+
 class DriverTracker extends StatefulWidget{
   LatLng depart;
   LatLng destination;
-  DriverTracker({required this.depart, required this.destination});
+  DriverTracker({Key? key, required this.depart, required this.destination}) : super(key: key);
   @override
   State<DriverTracker> createState() => _DriverTracker();
 }
@@ -29,7 +31,7 @@ class _DriverTracker extends State<DriverTracker>{
               destination: widget.destination,
             );
 
-          return Text("Loading please...");
+          return LoadingWidget();
         },
       ),
     );
