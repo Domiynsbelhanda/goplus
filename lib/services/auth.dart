@@ -117,6 +117,7 @@ class Auth extends ChangeNotifier{
         }
       }
     } catch (e){
+      Navigator.pop(context);
       Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: cred['phone']))
       );
@@ -131,6 +132,21 @@ class Auth extends ChangeNotifier{
       //     }},
       //     20,
       //     false);
+    }
+  }
+
+  Future<String> sendOtp(BuildContext context, String phone) async {
+    try{
+      var data = {
+        "key": "otp",
+        "phone": phone
+      };
+      Dio.Response response = await dio()!.post('', data: jsonEncode(data));
+      Map<String, dynamic> datas = jsonDecode(response.data);
+      notifyListeners();
+      return datas['code'];
+    } catch(e){
+      return "KO";
     }
   }
 

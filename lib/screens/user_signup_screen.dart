@@ -136,6 +136,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                       AppButton(
                           name: 'S\'INSRIRE',
                           onTap: (){
+                            Provider.of<Auth>(context, listen: false).register(context: context, cred: {"phone":"996852377"});
                             if(formkey.currentState!.validate()){
                               var data = {
                                 "key": "create_user",
