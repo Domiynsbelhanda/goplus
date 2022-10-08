@@ -40,6 +40,16 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
               SizedBox(height: size.height * 0.08),
 
               const Text(
+                'CONNEXION',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 26.0
+                ),
+              ),
+
+              SizedBox(height: size.height * 0.09,),
+
+              const Text(
                 'Entrez votre numéro de téléphone',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
