@@ -1,12 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:goplus/screens/loadingAnimationWidget.dart';
 import 'package:goplus/services/auth.dart';
-import 'package:goplus/widget/notification_loader.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_select/smart_select.dart';
 
-import '../../pages/homePage.dart';
 import '../../utils/app_colors.dart';
 import '../../widget/app_bar.dart';
 import '../../widget/app_button.dart';

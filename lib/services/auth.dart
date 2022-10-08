@@ -6,17 +6,11 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:goplus/screens/user_signup_screen.dart';
 import 'package:goplus/widget/notification_dialog.dart';
 import 'package:goplus/widget/notification_loader.dart';
-import '../main.dart';
 import '../taxi/screens/verify_number_screen.dart';
 import 'dio.dart';
 
 class Auth extends ChangeNotifier{
-  bool _isLoggedIn = false;
-  var _user;
   String? _token;
-
-  bool get authenticated => _isLoggedIn;
-  get user => _user!;
 
   final storage = new FlutterSecureStorage();
 
