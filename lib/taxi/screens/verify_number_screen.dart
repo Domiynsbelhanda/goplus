@@ -6,6 +6,7 @@ import '../../services/auth.dart';
 import '../../utils/app_colors.dart';
 import '../../widget/app_bar.dart';
 import '../../widget/app_button.dart';
+import '../../widget/notification_dialog.dart';
 import '../../widget/notification_loader.dart';
 import '../../widget/otp_text_field.dart';
 
@@ -75,7 +76,16 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                               if(value == 'KO'){
                                 Navigator.pop(context);
                               } else {
-
+                                notification_dialog(
+                                    context,
+                                    'Une erreur c\'est produite.',
+                                    Icons.error,
+                                    Colors.red,
+                                    {'label': 'FERMER', "onTap": (){
+                                      Navigator.pop(context);
+                                    }},
+                                    20,
+                                    false);
                               }
                             });
                           },
@@ -142,9 +152,11 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                     notification_loader(context, (){});
                     if(otp != null){
                       var data = {
-                        'key': "rotp",
-                        'code': otp!,
-                        'phone': widget.phone
+                        'key': "create_user",
+                        'action': "rotp",
+                        'otp': otp!,
+                        'phone': widget.phone,
+                        "level": 3
                       };
 
                       Provider.of<Auth>(context, listen: false).checkOtp(context, data)

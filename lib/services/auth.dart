@@ -79,7 +79,6 @@ class Auth extends ChangeNotifier{
       if(response.statusCode == 200){
         var res = jsonDecode(response.data);
         if(res['code'] == "OTP"){
-          FirebaseFirestore.instance.collection('clients').doc(cred['phone']).set(cred);
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: cred['phone']))
           );
@@ -121,7 +120,6 @@ class Auth extends ChangeNotifier{
           Colors.red,
           {'label': 'FERMER', "onTap": (){
             Navigator.pop(context);
-            Navigator.pop(context);
           }},
           20,
           false);
@@ -134,19 +132,18 @@ class Auth extends ChangeNotifier{
         "key": "otp",
         "phone": phone
       };
-      Dio.Response response = await dio()!.post('', data: jsonEncode(data));
+      Dio.Response response = await dio()!.post('/v1/', data: jsonEncode(data));
       Map<String, dynamic> datas = jsonDecode(response.data);
       notifyListeners();
-      Navigator.pop(context);
       return datas['code'];
     } catch(e){
-      return "KO";
+      return "KO $e";
     }
   }
 
   Future<String> checkOtp(BuildContext context, var data) async {
     try{
-      Dio.Response response = await dio()!.post('', data: jsonEncode(data));
+      Dio.Response response = await dio()!.post('/v1/', data: jsonEncode(data));
       Map<String, dynamic> datas = jsonDecode(response.data);
       storeToken(token: data['phone']);
       notifyListeners();
