@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:goplus/formulaire/dashboard.dart';
 import 'package:goplus/pages/homePage.dart';
+import 'package:goplus/services/auth.dart';
 import 'package:goplus/services/formulaireRequest.dart';
 import 'package:goplus/taxi/screens/driver_tracker.dart';
 import 'package:goplus/utils/datas.dart';
@@ -17,7 +18,8 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (context)=> Datas())
+      ChangeNotifierProvider(create: (context)=> Datas()),
+      ChangeNotifierProvider(create: (context)=> Auth())
     ],
     child: MyApp(),
   ));

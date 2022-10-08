@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/formulaire/dashboard.dart';
+import 'package:goplus/services/auth.dart';
 import 'package:goplus/taxi/pages/driverTrackingPage.dart';
 import 'package:goplus/taxi/screens/driver_tracker.dart';
 import 'package:goplus/taxi/screens/mapsPickLocation.dart';
 import 'package:goplus/taxi/screens/signup_screen.dart';
 import 'package:goplus/widget/logo_text.dart';
 import 'package:goplus/widget/mini_card_picture.dart';
+import 'package:provider/provider.dart';
 
 import '../utils/app_colors.dart';
 import '../utils/datas.dart';
@@ -70,48 +72,54 @@ class _HomePage extends State<HomePage>{
                       ),
                     ),
 
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
-                      child: GestureDetector(
-                        onTap: (){
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      PickLocation(
-                                        destination: true,
-                                      )
+                    FutureBuilder(
+                      future: Provider.of<Auth>(context,listen: false).getToken(),
+                      builder: (context, snapshot) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
+                          child: GestureDetector(
+                            onTap: (){
+                              print('snapshot donne : $snapshot');
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (BuildContext context) =>
+                              //             PickLocation(
+                              //               destination: true,
+                              //             )
+                              //     ),
+                              // );
+                            },
+                            child: Container(
+                              height: size.width / 7,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(48),
+                                  border: Border.all(
+                                      color: Colors.black,
+                                      width: 0.5
+                                  )
                               ),
-                          );
-                        },
-                        child: Container(
-                          height: size.width / 7,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(48),
-                              border: Border.all(
-                                  color: Colors.black,
-                                  width: 0.5
-                              )
-                          ),
-                          child: Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                        Icons.map_outlined
+                              child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: const [
+                                        Icon(
+                                            Icons.map_outlined
+                                        ),
+                                        SizedBox(width: 4.0,),
+                                        Text(
+                                          'Selectionner votre destination',
+                                          textAlign: TextAlign.left,
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(width: 4.0,),
-                                    Text(
-                                      'Selectionner votre destination',
-                                      textAlign: TextAlign.left,
-                                    ),
-                                  ],
-                                ),
-                              )
-                          ),
-                        ),
-                      )
+                                  )
+                              ),
+                            ),
+                          )
+                        );
+                      }
                     ),
 
                     selectedPlace != null ?
