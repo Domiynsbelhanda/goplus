@@ -79,7 +79,9 @@ class _HomePage extends State<HomePage>{
                           padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
                           child: GestureDetector(
                             onTap: (){
-                              print('snapshot donne : $snapshot');
+                              if(snapshot.data == null){
+
+                              }
                               // Navigator.push(
                               //     context,
                               //     MaterialPageRoute(

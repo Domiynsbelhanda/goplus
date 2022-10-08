@@ -38,6 +38,7 @@ class Auth extends ChangeNotifier{
 
   void storeToken({required String token}) async{
     this.storage.write(key: 'token', value: token);
+    notifyListeners();
   }
 
   Future<String?> getToken() async{
@@ -57,9 +58,7 @@ class Auth extends ChangeNotifier{
   }
 
   void cleanUp() async {
-    this._user = null;
-    this._isLoggedIn = false;
-    this._token = null;
     await storage.delete(key: 'token');
+    notifyListeners();
   }
 }
