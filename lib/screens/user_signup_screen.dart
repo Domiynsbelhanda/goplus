@@ -25,6 +25,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
   TextEditingController genreController = TextEditingController();
   TextEditingController typeController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   late List input;
 
@@ -38,7 +39,10 @@ class _SignupScreenState extends State<UserSignupScreen> {
     size = MediaQuery.of(context).size;
     input = [
       {
-        'label': 'Numéro téléphone', 'controller' : phoneController
+        'label': 'Numéro téléphone', 'controller' : phoneController, 'input': TextInputType.phone
+      },
+      {
+        'label': 'Mot de passe', 'controller' : passwordController, 'input': TextInputType.visiblePassword
       },
       {
         'label': 'Nom', 'controller' : nameController
@@ -50,19 +54,11 @@ class _SignupScreenState extends State<UserSignupScreen> {
         'label': 'Prénom', 'controller' : prenomController
       },
       {
-        'label': 'Adresse', 'controller' : adresseController
+        'label': 'Adresse', 'controller' : adresseController, 'input': TextInputType.streetAddress
       },
       {
         'label': 'Ville', 'controller' : villeController
       },
-      {
-        'label': 'Genre',
-        'controller' : genreController
-      },
-      {
-        'label': 'Type de voiture',
-        'controller' : typeController
-      }
     ];
     return Scaffold(
       backgroundColor: Colors.white,
@@ -78,9 +74,9 @@ class _SignupScreenState extends State<UserSignupScreen> {
                 SizedBox(
                   height: size.height * 0.03,
                 ),
-                Container(
+                SizedBox(
                   width: size.width,
-                  child: Text(
+                  child: const Text(
                     'Inscription',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -88,10 +84,10 @@ class _SignupScreenState extends State<UserSignupScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20.0),
-                Container(
+                const SizedBox(height: 20.0),
+                SizedBox(
                   width: size.width * 0.6,
-                  child: Text(
+                  child: const Text(
                     'Créer votre compte pour utilisateur.',
                     style: TextStyle(color: Colors.grey),
                   ),
@@ -111,7 +107,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                               return null;
                             },
                             cursorColor: AppColors.primaryColor,
-                            keyboardType: TextInputType.name,
+                            keyboardType: e['input'] == null ? TextInputType.name : e['input'],
                             controller: e['controller'],
                             decoration: InputDecoration(
                                 hintText: '${e['label']}',
