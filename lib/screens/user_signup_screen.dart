@@ -132,27 +132,22 @@ class _SignupScreenState extends State<UserSignupScreen> {
                       AppButton(
                           name: 'S\'INSRIRE',
                           onTap: (){
-                            Provider.of<Auth>(context, listen: false).register(context: context, cred: {"phone":"996852377"});
                             if(formkey.currentState!.validate()){
                               var data = {
                                 "key": "create_user",
-                                "action": "user",
+                                "action": "client",
                                 "lastn": prenomController.text.toString(),
                                 "midn": postNomController.text.toString(),
                                 "firstn": nameController.text.toString(),
                                 "address": adresseController.text.toString(),
-                                "pass": passwordController.text.trim(),
+                                "password": passwordController.text.trim(),
                                 "city": villeController.text.toString(),
                                 "phone": phoneController.text.toString(),
-                                "gender": value,
-                                "profpic": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-                                "level": "3"
+                                "gender": value
                               };
 
                               Provider.of<Auth>(context, listen: false).register(context: context, cred: data);
-                              //
-                              // FirebaseFirestore.instance.collection('drivers').doc(phoneController.text.toString()).set(data);
-                              //
+
                               // Navigator.push(
                               //   context,
                               //   MaterialPageRoute(

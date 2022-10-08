@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart' as Dio;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -14,7 +15,7 @@ class Auth extends ChangeNotifier{
 
   final storage = new FlutterSecureStorage();
 
-  void login ({required Map creds, required BuildContext context}) async {
+  void login ({required Map<String, dynamic> creds, required BuildContext context}) async {
     notification_loader(context, (){});
 
     try {
@@ -22,6 +23,7 @@ class Auth extends ChangeNotifier{
       if(response.statusCode == 200){
         var res = jsonDecode(response.data);
         if(res['code'] == "OTP"){
+          FirebaseFirestore.instance.collection('clients').doc(creds['phone']).set(creds);
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: creds['phone']))
           );
