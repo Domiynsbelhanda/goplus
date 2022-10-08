@@ -7,32 +7,36 @@ class LoadingWidget extends StatelessWidget{
 
   late Size size;
 
+  LoadingWidget({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
 
     size = MediaQuery.of(context).size;
 
-    return SizedBox(
-      height: size.height,
-      width: size.width,
+    return Scaffold(
+      body: SizedBox(
+        height: size.height,
+        width: size.width,
 
-      child : Stack(
-        children: [
-          LoadingAnimationWidget.twistingDots(
-            leftDotColor: AppColors.primaryColor,
-            rightDotColor: AppColors.primaryColor,
-            size: 30,
-          ),
-
-          Positioned(
-            bottom: size.height / 2 - 30,
-            child: Text(
-              'Veuillez patienter'
+        child : Stack(
+          children: [
+            LoadingAnimationWidget.twistingDots(
+              leftDotColor: AppColors.primaryColor,
+              rightDotColor: AppColors.primaryColor,
+              size: 30,
             ),
-          )
-        ],
-      )
+
+            Positioned(
+              bottom: size.height / 2 - 30,
+              child: Text(
+                'Veuillez patienter'
+              ),
+            )
+          ],
+        )
+      ),
     );
   }
 }

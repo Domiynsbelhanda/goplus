@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:goplus/screens/loadingAnimationWidget.dart';
+import 'package:goplus/services/auth.dart';
+import 'package:provider/provider.dart';
 import 'package:smart_select/smart_select.dart';
 
 import '../../pages/homePage.dart';
@@ -23,8 +26,6 @@ class _SignupScreenState extends State<UserSignupScreen> {
   TextEditingController prenomController = TextEditingController();
   TextEditingController adresseController = TextEditingController();
   TextEditingController villeController = TextEditingController();
-  TextEditingController genreController = TextEditingController();
-  TextEditingController typeController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -134,37 +135,39 @@ class _SignupScreenState extends State<UserSignupScreen> {
                       AppButton(
                           name: 'S\'INSRIRE',
                           onTap: (){
+                            LoadingWidget();
                             if(formkey.currentState!.validate()){
                               var data = {
-                                "key": "hailing",
-                                "action": "create_user",
-                                "lastn": nameController.text.toString(),
+                                "key": "create_user",
+                                "action": "user",
+                                "lastn": prenomController.text.toString(),
                                 "midn": postNomController.text.toString(),
-                                "firstn": prenomController.text.toString(),
+                                "firstn": nameController.text.toString(),
                                 "address": adresseController.text.toString(),
-                                "password": "OdK98@RAM",
+                                "pass": passwordController.text.trim(),
                                 "city": villeController.text.toString(),
                                 "phone": phoneController.text.toString(),
-                                "gender": genreController.text.toString(),
+                                "gender": value,
                                 "profpic": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-                                "cartype": typeController.text.toString(),
-                                "carpic": "https://firebasestorage.googleapis.com/v0/b/taxigo-e3fcc.appspot.com/o/driver.jpg?alt=media&token=51c634b4-5a95-4607-8f82-27ed1bbb9e05",
-                                "level": "4"
+                                "level": "3"
                               };
-                              FirebaseFirestore.instance.collection('drivers').doc(phoneController.text.toString()).set(data);
 
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => HomePage(),
-                                ),
-                              );
+                              // Provider.of<Auth>(context, listen: false).register(context: context, cred: data);
+                              //
+                              // FirebaseFirestore.instance.collection('drivers').doc(phoneController.text.toString()).set(data);
+                              //
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (_) => HomePage(),
+                              //   ),
+                              // );
                             }
                           }),
                     ],
                   ),
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
               ],
             ),
           ),
