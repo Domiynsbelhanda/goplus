@@ -7,6 +7,8 @@ import '../../widget/app_bar.dart';
 import '../../widget/app_button.dart';
 
 class UserSignupScreen extends StatefulWidget {
+  const UserSignupScreen({Key? key}) : super(key: key);
+
   @override
   _SignupScreenState createState() => _SignupScreenState();
 }
@@ -90,7 +92,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                 Container(
                   width: size.width * 0.6,
                   child: Text(
-                    'Créer votre compte pour chauffeur.',
+                    'Créer votre compte pour utilisateur.',
                     style: TextStyle(color: Colors.grey),
                   ),
                 ),

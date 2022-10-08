@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goplus/screens/user_signup_screen.dart';
 import 'package:provider/provider.dart';
 import '../services/auth.dart';
 import '../utils/app_colors.dart';
@@ -174,7 +175,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
-                                  PhoneNumberScreen()
+                                  const UserSignupScreen()
                           ),
                         );
                       },
