@@ -6,6 +6,7 @@ import '../../services/auth.dart';
 import '../../utils/app_colors.dart';
 import '../../widget/app_bar.dart';
 import '../../widget/app_button.dart';
+import '../../widget/notification_loader.dart';
 import '../../widget/otp_text_field.dart';
 
 class VerifyNumberScreen extends StatefulWidget {
@@ -68,7 +69,14 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                         width: size.width,
                         child: GestureDetector(
                           onTap: (){
-                            Provider.of<Auth>(context, listen: false).sendOtp(context, widget.phone);
+                            notification_loader(context, (){});
+                            Provider.of<Auth>(context, listen: false).sendOtp(context, widget.phone).then((value){
+                              if(value == 'KO'){
+                                Navigator.pop(context);
+                              } else {
+
+                              }
+                            });
                           },
                           child: const Text(
                             'CLIQUEZ ICI POUR ENOVYEZ LE CODE',
