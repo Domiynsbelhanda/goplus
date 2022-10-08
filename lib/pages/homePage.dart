@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/formulaire/dashboard.dart';
+import 'package:goplus/screens/enter_phone_number_screen.dart';
 import 'package:goplus/services/auth.dart';
 import 'package:goplus/taxi/pages/driverTrackingPage.dart';
 import 'package:goplus/taxi/screens/driver_tracker.dart';
@@ -80,17 +81,24 @@ class _HomePage extends State<HomePage>{
                           child: GestureDetector(
                             onTap: (){
                               if(snapshot.data == null){
-
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            PhoneNumberScreen()
+                                    ),
+                                );
+                              } else {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          PickLocation(
+                                            destination: true,
+                                          )
+                                  ),
+                                );
                               }
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (BuildContext context) =>
-                              //             PickLocation(
-                              //               destination: true,
-                              //             )
-                              //     ),
-                              // );
                             },
                             child: Container(
                               height: size.width / 7,
