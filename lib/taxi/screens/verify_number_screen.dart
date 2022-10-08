@@ -21,6 +21,7 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
   late Size size;
   late String code;
   late bool onEditing = false;
+  String? otp;
 
   @override
   void initState() {
@@ -96,8 +97,16 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                 Center(
                   child: OTPTextField(
                     fieldStyle: FieldStyle.box,
-                    onChanged: (val) {},
-                    onCompleted: (val) {},
+                    onChanged: (val) {
+                      setState(() {
+                        otp = val;
+                      });
+                    },
+                    onCompleted: (val) {
+                      setState(() {
+                        otp = val;
+                      });
+                    },
                     width: size.width * 0.75,
                     fieldWidth: size.width * 0.16,
                   ),
@@ -130,6 +139,22 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                 AppButton(
                   name: 'VERIFIEZ',
                   onTap: () async{
+                    notification_loader(context, (){});
+                    if(otp != null){
+                      var data = {
+                        'key': "rotp",
+                        'code': otp!,
+                        'phone': widget.phone
+                      };
+
+                      Provider.of<Auth>(context, listen: false).checkOtp(context, data)
+                      .then((value){
+                          if(value == 'KO'){
+                            Navigator.pop(context);
+                          }
+                      });
+                    }
+
                     // var ref = firestore.collection('drivers');
                     // var doc = await ref.doc(widget.phone).get();
                     // if(doc.exists){

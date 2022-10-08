@@ -151,6 +151,18 @@ class Auth extends ChangeNotifier{
     }
   }
 
+  Future<String> checkOtp(BuildContext context, var data) async {
+    try{
+      Dio.Response response = await dio()!.post('', data: jsonEncode(data));
+      Map<String, dynamic> datas = jsonDecode(response.data);
+      notifyListeners();
+      Navigator.pop(context);
+      return datas['code'];
+    } catch(e){
+      return "KO";
+    }
+  }
+
   void storeToken({required String token}) async{
     this.storage.write(key: 'token', value: token);
     notifyListeners();
