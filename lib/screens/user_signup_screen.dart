@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:goplus/screens/loadingAnimationWidget.dart';
 import 'package:goplus/services/auth.dart';
+import 'package:goplus/widget/notification_loader.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_select/smart_select.dart';
 
@@ -135,7 +136,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                       AppButton(
                           name: 'S\'INSRIRE',
                           onTap: (){
-                            LoadingWidget();
+                            notification_loader(context, (){});
                             if(formkey.currentState!.validate()){
                               var data = {
                                 "key": "create_user",

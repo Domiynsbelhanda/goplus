@@ -22,16 +22,22 @@ class LoadingWidget extends StatelessWidget{
 
         child : Stack(
           children: [
-            LoadingAnimationWidget.twistingDots(
-              leftDotColor: AppColors.primaryColor,
-              rightDotColor: AppColors.primaryColor,
-              size: 30,
+            Align(
+              alignment: Alignment.center,
+              child: LoadingAnimationWidget.twistingDots(
+                leftDotColor: AppColors.primaryColor,
+                rightDotColor: AppColors.primaryColor,
+                size: 30,
+              ),
             ),
 
-            Positioned(
-              bottom: size.height / 2 - 30,
-              child: Text(
-                'Veuillez patienter'
+            const Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: EdgeInsets.only(top : 96.0),
+                child: Text(
+                  'Veuillez patienter'
+                ),
               ),
             )
           ],
