@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_select/smart_select.dart';
 
 import '../../pages/homePage.dart';
 import '../../utils/app_colors.dart';
@@ -28,6 +29,12 @@ class _SignupScreenState extends State<UserSignupScreen> {
   TextEditingController passwordController = TextEditingController();
 
   late List input;
+
+  String value = 'H';
+  List<S2Choice<String>> options = [
+    S2Choice<String>(value: 'h', title: 'Homme'),
+    S2Choice<String>(value: 'f', title: 'Femme'),
+  ];
 
   @override
   void initState() {
@@ -114,6 +121,13 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                 contentPadding: EdgeInsets.all(15.0)),
                           );
                         }).toList()
+                      ),
+
+                      SmartSelect<String>.single(
+                          title: 'Genre',
+                          value: value,
+                          choiceItems: options,
+                          onChange: (state) => setState(() => value = state.value)
                       ),
 
                       SizedBox(height: size.height * 0.07),
