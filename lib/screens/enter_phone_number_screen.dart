@@ -165,6 +165,28 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                         }
                       },
                     ),
+
+                    const SizedBox(height: 16.0,),
+
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  PhoneNumberScreen()
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'Pas de compte? Créez en un.',
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+
                     SizedBox(height: size.height * 0.1),
                   ],
                 ),
