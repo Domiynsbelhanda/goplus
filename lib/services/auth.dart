@@ -23,7 +23,6 @@ class Auth extends ChangeNotifier{
       if(response.statusCode == 200){
         var res = jsonDecode(response.data);
         if(res['code'] == "OTP"){
-          FirebaseFirestore.instance.collection('clients').doc(creds['phone']).set(creds);
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: creds['phone']))
           );
@@ -71,15 +70,16 @@ class Auth extends ChangeNotifier{
     }
   }
 
-  void register ({required Map cred, required BuildContext context}) async {
+  void register ({required Map<String, dynamic> cred, required BuildContext context}) async {
 
     notification_loader(context, (){});
 
     try {
-      Dio.Response response = await dio()!.post('', data: cred);
+      Dio.Response response = await dio()!.post('/v1/', data: cred);
       if(response.statusCode == 200){
         var res = jsonDecode(response.data);
         if(res['code'] == "OTP"){
+          FirebaseFirestore.instance.collection('clients').doc(cred['phone']).set(cred);
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: cred['phone']))
           );
@@ -114,20 +114,17 @@ class Auth extends ChangeNotifier{
       }
     } catch (e){
       Navigator.pop(context);
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: cred['phone']))
-      );
-      // notification_dialog(
-      //     context,
-      //     'Une erreur c\'est produite.',
-      //     Icons.error,
-      //     Colors.red,
-      //     {'label': 'FERMER', "onTap": (){
-      //       Navigator.pop(context);
-      //       Navigator.pop(context);
-      //     }},
-      //     20,
-      //     false);
+      notification_dialog(
+          context,
+          'Une erreur c\'est produite. $e',
+          Icons.error,
+          Colors.red,
+          {'label': 'FERMER', "onTap": (){
+            Navigator.pop(context);
+            Navigator.pop(context);
+          }},
+          20,
+          false);
     }
   }
 
