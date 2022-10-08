@@ -114,18 +114,17 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
 
                       Provider.of<Auth>(context, listen: false).checkOtp(context, data)
                       .then((value){
-                        print('$value');
-                          // if(value == 'KO'){
-                          //   Navigator.pop(context);
-                          // } else {
-                          //   Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (BuildContext context) =>
-                          //             HomePage()
-                          //     ),
-                          //   );
-                          // }
+                          if(value == 'OK'){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      HomePage()
+                              ),
+                            );
+                          } else {
+                            Navigator.pop(context);
+                          }
                       });
                     }
 
