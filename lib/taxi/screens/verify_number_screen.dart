@@ -23,6 +23,7 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
   late String code;
   late bool onEditing = false;
   String? otp;
+  int nb = 0;
 
   @override
   void initState() {
@@ -51,54 +52,6 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                   ),
                 ),
                 SizedBox(height: 8.0,),
-
-                FutureBuilder(
-                    future: Provider.of<Auth>(context, listen: false).sendOtp(context, widget.phone),
-                    builder: (context, snapshot){
-
-                      if(snapshot.data == 'OK'){
-                        return Container(
-                          width: size.width,
-                          child: const Text(
-                            'Vous avez 2 minutes pour confirmer votre numéro.',
-                            style: TextStyle(
-                              color: AppColors.primaryColor,
-                            ),
-                          ),
-                        );
-                      }
-                      return Container(
-                        width: size.width,
-                        child: GestureDetector(
-                          onTap: (){
-                            notification_loader(context, (){});
-                            Provider.of<Auth>(context, listen: false).sendOtp(context, widget.phone).then((value){
-                              if(value == 'KO'){
-                                Navigator.pop(context);
-                              } else {
-                                notification_dialog(
-                                    context,
-                                    'Une erreur c\'est produite.',
-                                    Icons.error,
-                                    Colors.red,
-                                    {'label': 'FERMER', "onTap": (){
-                                      Navigator.pop(context);
-                                    }},
-                                    20,
-                                    false);
-                              }
-                            });
-                          },
-                          child: const Text(
-                            'CLIQUEZ ICI POUR ENOVYEZ LE CODE',
-                            style: TextStyle(
-                              color: AppColors.primaryColor,
-                            ),
-                          ),
-                        )
-                      );
-                    }
-                ),
 
                 SizedBox(height: size.height * 0.02),
                 SizedBox(
@@ -161,17 +114,18 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
 
                       Provider.of<Auth>(context, listen: false).checkOtp(context, data)
                       .then((value){
-                          if(value == 'KO'){
-                            Navigator.pop(context);
-                          } else {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      HomePage()
-                              ),
-                            );
-                          }
+                        print('$value');
+                          // if(value == 'KO'){
+                          //   Navigator.pop(context);
+                          // } else {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (BuildContext context) =>
+                          //             HomePage()
+                          //     ),
+                          //   );
+                          // }
                       });
                     }
 

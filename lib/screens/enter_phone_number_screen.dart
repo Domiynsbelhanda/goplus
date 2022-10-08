@@ -144,8 +144,10 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                       onTap: () async {
                         if (formkey.currentState!.validate()){
                           var data = {
-                            'key': 'otp',
-                            'phone': phoneController.text.trim()
+                            "key": "check_user",
+                            "action": "client",
+                            "phone": phoneController.text.trim(),
+                            "pass": passwordController.text.trim()
                           };
                           Provider.of<Auth>(context, listen: false).login(context: context, creds: data);
                           // var ref = FirebaseFirestore.instance.collection('drivers');

@@ -19,9 +19,9 @@ class Auth extends ChangeNotifier{
     notification_loader(context, (){});
 
     try {
-      Dio.Response response = await dio()!.post('', data: creds);
+      Dio.Response response = await dio()!.post('/v1/', data: creds);
+      var res = jsonDecode(response.data);
       if(response.statusCode == 200){
-        var res = jsonDecode(response.data);
         if(res['code'] == "OTP"){
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: creds['phone']))
@@ -76,40 +76,40 @@ class Auth extends ChangeNotifier{
 
     try {
       Dio.Response response = await dio()!.post('/v1/', data: cred);
-      if(response.statusCode == 200){
-        var res = jsonDecode(response.data);
-        if(res['code'] == "OTP"){
+      var res = jsonDecode(response.data);
+      if(res['code'] == "OTP"){
+        sendOtp(context, cred['phone']).then((value){
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: cred['phone']))
           );
-        } else if(res['NOK']){
-          notification_dialog(
-              context,
-              'Vérifiez votre mot de passe',
-              Icons.error,
-              Colors.red,
-              {'label': 'REESAYEZ', "onTap": (){
-                Navigator.pop(context);
-              }},
-              20,
-              false);
-        } else if (res['KO']){
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const UserSignupScreen())
-          );
-        } else {
-          notification_dialog(
-              context,
-              'Une erreur c\'est produite.',
-              Icons.error,
-              Colors.red,
-              {'label': 'REESAYEZ', "onTap": (){
-                Navigator.pop(context);
-                Navigator.pop(context);
-              }},
-              20,
-              false);
-        }
+        });
+      } else if(res['code'] == "NOK"){
+        notification_dialog(
+            context,
+            'Vérifiez votre mot de passe',
+            Icons.error,
+            Colors.red,
+            {'label': 'REESAYEZ', "onTap": (){
+              Navigator.pop(context);
+            }},
+            20,
+            false);
+      } else if (res['code'] == "KO"){
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: cred['phone']))
+        );
+      } else {
+        notification_dialog(
+            context,
+            'Une erreur c\'est produite.',
+            Icons.error,
+            Colors.red,
+            {'label': 'REESAYEZ', "onTap": (){
+              Navigator.pop(context);
+              Navigator.pop(context);
+            }},
+            20,
+            false);
       }
     } catch (e){
       Navigator.pop(context);
@@ -145,7 +145,7 @@ class Auth extends ChangeNotifier{
     try{
       Dio.Response response = await dio()!.post('/v1/', data: jsonEncode(data));
       Map<String, dynamic> datas = jsonDecode(response.data);
-      storeToken(token: data['phone']);
+      // storeToken(token: data['phone']);
       notifyListeners();
       Navigator.pop(context);
       return datas['code'];
