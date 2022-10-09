@@ -406,26 +406,33 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                 notification_loader(context, (){});
 
                 Provider.of<Auth>(context, listen: false).getToken().then((value){
-                  Navigator.pop(context);
-                  progresso_dialog(context, data.id, LatLng(data.get('latitude'), data.get('longitude')));
-                  setState(() {
-                    index = null;
-                  });
-                  FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
-                    'online': false,
-                    'ride': true,
-                    'ride_view': false,
-                  });
-                  FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses')
-                      .doc('courses')
-                      .set({
-                    'status': 'pending',
-                    'depart_longitude': widget.depart.longitude,
-                    'depart_latitude': widget.depart.latitude,
-                    'destination_longitude': widget.destination.longitude,
-                    'destination_latitude': widget.destination.latitude,
-                    'distance': calculateDistance(widget.depart, position!).toStringAsFixed(2),
-                    'user_id': value!
+                  Provider.of<Auth>(context, listen: false).getSid().then((val){
+                    if(val != null){
+                      Navigator.pop(context);
+                      progresso_dialog(context, data.id, LatLng(data.get('latitude'), data.get('longitude')));
+                      setState(() {
+                        index = null;
+                      });
+                      FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
+                        'online': false,
+                        'ride': true,
+                        'ride_view': false,
+                      });
+                      FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses')
+                          .doc('courses')
+                          .set({
+                        'status': 'pending',
+                        'depart_longitude': widget.depart.longitude,
+                        'depart_latitude': widget.depart.latitude,
+                        'destination_longitude': widget.destination.longitude,
+                        'destination_latitude': widget.destination.latitude,
+                        'distance': calculateDistance(widget.depart, position!).toStringAsFixed(2),
+                        'user_id': value!,
+                        'sid_user': val
+                      });
+                    } else {
+
+                    }
                   });
                 });
               },

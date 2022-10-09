@@ -23,6 +23,7 @@ class Auth extends ChangeNotifier{
       var res = jsonDecode(response.data);
       if(response.statusCode == 200){
         if(res['code'] == "OTP"){
+          this.storage.write(key: 'sid', value: res['sid']);
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: creds['phone']))
           );
@@ -78,6 +79,7 @@ class Auth extends ChangeNotifier{
       Dio.Response response = await dio()!.post('/v1/', data: cred);
       var res = jsonDecode(response.data);
       if(res['code'] == "OTP"){
+        this.storage.write(key: 'sid', value: res['sid']);
         sendOtp(context, cred['phone']).then((value){
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: cred['phone']))
@@ -161,6 +163,10 @@ class Auth extends ChangeNotifier{
 
   Future<String?> getToken() async{
     return await storage.read(key: 'token');
+  }
+
+  Future<String?> getSid() async{
+    return await storage.read(key: 'sid');
   }
 
   void logout() async{
