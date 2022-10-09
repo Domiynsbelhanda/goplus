@@ -57,7 +57,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
         position = LatLng(value.latitude, value.longitude);
       });
 
-      CameraPosition cameraPosition = new CameraPosition(
+      CameraPosition cameraPosition = CameraPosition(
         target: LatLng(value.latitude, value.longitude),
         zoom: 13,
       );
@@ -234,11 +234,11 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                       alignment: Alignment.center,
                         child: showDriver(data[index!])
                     ),
-                  ) : SizedBox(),
+                  ) : const SizedBox(),
                 ],
               );
             }
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           },
@@ -342,7 +342,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                     borderRadius: BorderRadius.circular(60),
                     image: DecorationImage(
                       image: NetworkImage(
-                        '${data.get('profpic')}',
+                        'https://firebasestorage.googleapis.com/v0/b/taxigo-e3fcc.appspot.com/o/profile.jpg?alt=media&token=609b45f5-2f3c-4edb-b5f4-c041b9eb0457',
                       ),
                       fit: BoxFit.fitWidth,
                     )
