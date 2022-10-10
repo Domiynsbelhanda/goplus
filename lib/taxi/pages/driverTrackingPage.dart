@@ -123,6 +123,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
               var data = snapshot.data!.docs;
+              markers.clear();
               for(var i = 0; i < data.length; i++){
                 if(data[i].get('online')){
                   double latitude = data[i].get('latitude');
@@ -150,7 +151,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                       )
                   );
                 } else {
-                  markers.clear();
                   markers.add(
                       Marker(
                         markerId: MarkerId("1"),
@@ -340,7 +340,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   width: 100,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(60),
-                    image: DecorationImage(
+                    image: const DecorationImage(
                       image: NetworkImage(
                         'https://firebasestorage.googleapis.com/v0/b/taxigo-e3fcc.appspot.com/o/profile.jpg?alt=media&token=609b45f5-2f3c-4edb-b5f4-c041b9eb0457',
                       ),
