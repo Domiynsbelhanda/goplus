@@ -72,64 +72,50 @@ class _HomePage extends State<HomePage>{
                       ),
                     ),
 
-                    FutureBuilder(
-                      future: Provider.of<Auth>(context,listen: false).getToken(),
-                      builder: (context, snapshot) {
-                        return Padding(
-                          padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
-                          child: GestureDetector(
-                            onTap: (){
-                              if(snapshot.data == null){
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            PhoneNumberScreen()
-                                    ),
-                                );
-                              } else {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          PickLocation(
-                                            destination: true,
-                                          )
-                                  ),
-                                );
-                              }
-                            },
-                            child: Container(
-                              height: size.width / 7,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(48),
-                                  border: Border.all(
-                                      color: Colors.black,
-                                      width: 0.5
-                                  )
-                              ),
-                              child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: const [
-                                        Icon(
-                                            Icons.map_outlined
-                                        ),
-                                        SizedBox(width: 4.0,),
-                                        Text(
-                                          'Selectionner votre destination',
-                                          textAlign: TextAlign.left,
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                              ),
+                Padding(
+                    padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
+                    child: GestureDetector(
+                      onTap: (){
+
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    PickLocation(
+                                      destination: true,
+                                    )
                             ),
-                          )
-                        );
-                      }
-                    ),
+                          );
+                      },
+                      child: Container(
+                        height: size.width / 7,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(48),
+                            border: Border.all(
+                                color: Colors.black,
+                                width: 0.5
+                            )
+                        ),
+                        child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: const [
+                                  Icon(
+                                      Icons.map_outlined
+                                  ),
+                                  SizedBox(width: 4.0,),
+                                  Text(
+                                    'Selectionner votre destination',
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ],
+                              ),
+                            )
+                        ),
+                      ),
+                    )
+                ),
 
                     selectedPlace != null ?
                     Padding(
