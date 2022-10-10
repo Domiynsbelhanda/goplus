@@ -27,11 +27,17 @@ class Auth extends ChangeNotifier{
               MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: creds['phone']))
           );
         } else if(res['code'] == 'NOK'){
-          sendOtp(context, creds['phone']).then((value){
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: creds['phone']))
-            );
-          });
+          notification_dialog(
+              context,
+              'Mot de passe incorrect, veuillez réessayez.',
+              Icons.error,
+              Colors.red,
+              {'label': 'REESAYEZ', "onTap": (){
+                Navigator.pop(context);
+                Navigator.pop(context);
+              }},
+              20,
+              false);
         } else if (res['code'] == 'KO'){
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const UserSignupScreen())
