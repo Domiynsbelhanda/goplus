@@ -23,22 +23,16 @@ class Auth extends ChangeNotifier{
       var res = jsonDecode(response.data);
       if(response.statusCode == 200){
         if(res['code'] == "OTP"){
-          this.storage.write(key: 'sid', value: res['sid']);
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: creds['phone']))
           );
-        } else if(res['NOK']){
-          notification_dialog(
-              context,
-              'Vérifiez votre mot de passe',
-              Icons.error,
-              Colors.red,
-              {'label': 'REESAYEZ', "onTap": (){
-                Navigator.pop(context);
-              }},
-              20,
-              false);
-        } else if (res['KO']){
+        } else if(res['code'] == 'NOK'){
+          sendOtp(context, creds['phone']).then((value){
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: creds['phone']))
+            );
+          });
+        } else if (res['code'] == 'KO'){
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const UserSignupScreen())
           );
@@ -79,7 +73,6 @@ class Auth extends ChangeNotifier{
       Dio.Response response = await dio()!.post('/v1/', data: cred);
       var res = jsonDecode(response.data);
       if(res['code'] == "OTP"){
-        this.storage.write(key: 'sid', value: res['sid']);
         sendOtp(context, cred['phone']).then((value){
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: cred['phone']))
@@ -147,9 +140,12 @@ class Auth extends ChangeNotifier{
     try{
       Dio.Response response = await dio()!.post('/v1/', data: jsonEncode(data));
       Map<String, dynamic> datas = jsonDecode(response.data);
-      storeToken(token: data['phone']);
       notifyListeners();
       Navigator.pop(context);
+      if(datas['code'] == 'OK'){
+        this.storage.write(key: 'sid', value: data['sid']);
+        storeToken(token: data['phone']);
+      }
       return datas['code'];
     } catch(e){
       return "KO";
