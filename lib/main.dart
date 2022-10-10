@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:goplus/formulaire/dashboard.dart';
 import 'package:goplus/pages/homePage.dart';
+import 'package:goplus/screens/IntroScreen.dart';
 import 'package:goplus/screens/enter_phone_number_screen.dart';
 import 'package:goplus/services/auth.dart';
 import 'package:goplus/services/formulaireRequest.dart';
@@ -54,16 +55,7 @@ class _MyApp extends State<MyApp>{
         Locale('lg', ''),
       ],
       home: AnimatedSplashScreen(
-        nextScreen: FutureBuilder(
-            future: Provider.of<Auth>(context,listen: false).getToken(),
-            builder: (context, snapshot) {
-              if(snapshot.data == null){
-                return const PhoneNumberScreen();
-              } else {
-                return HomePage();
-              }
-            }
-        ),
+        nextScreen: IntroScreen(),
         duration: 2500,
         splash: "assets/icon/white-text.png",
         backgroundColor : Color(0xFFFFD80E),
