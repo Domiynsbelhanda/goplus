@@ -143,7 +143,7 @@ class Auth extends ChangeNotifier{
       notifyListeners();
       Navigator.pop(context);
       if(datas['code'] == 'OK'){
-        this.storage.write(key: 'sid', value: data['sid']);
+        this.storage.write(key: 'sid', value: datas['sid']);
         storeToken(token: data['phone']);
       }
       return datas['code'];
