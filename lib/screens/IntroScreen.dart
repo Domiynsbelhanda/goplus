@@ -148,7 +148,26 @@ class _IntroScreenState extends State<IntroScreen> {
                         children: [
                           GestureDetector(
                             onTap: () {
-
+                              Provider.of<Auth>(context,listen: false).getToken()
+                                  .then((value){
+                                if(value == null){
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) =>
+                                        const PhoneNumberScreen(),
+                                      )
+                                  );
+                                } else {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) =>
+                                            HomePage(),
+                                      )
+                                  );
+                                }
+                              });
                             },
                             child: Text(
                               "Ignorer",
