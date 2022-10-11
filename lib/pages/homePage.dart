@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/formulaire/dashboard.dart';
 import 'package:goplus/screens/enter_phone_number_screen.dart';
@@ -10,6 +11,7 @@ import 'package:goplus/widget/logo_text.dart';
 import 'package:goplus/widget/mini_card_picture.dart';
 import 'package:provider/provider.dart';
 
+import '../main.dart';
 import '../utils/app_colors.dart';
 import '../utils/datas.dart';
 
@@ -42,7 +44,38 @@ class _HomePage extends State<HomePage>{
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            LogoText(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                LogoText(),
+
+                Container(
+                  height: 48,
+                  width: 48,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(48.0)
+                  ),
+                  child: IconButton(
+                    onPressed: () async {
+                      final storage = const FlutterSecureStorage();
+                      await storage.delete(key: 'token');
+                      await storage.delete(key: 'sid');
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => MyApp()
+                          ),
+                              (Route<dynamic> route) => false
+                      );
+                    },
+                    icon: Icon(
+                      Icons.logout,
+                    ),
+                  ),
+                ),
+              ],
+            ),
 
             Padding(
               padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
@@ -52,7 +85,7 @@ class _HomePage extends State<HomePage>{
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+                      padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0),
                       child: Text(
                           'Où Allez-vous?',
                           style: TextStyle(
