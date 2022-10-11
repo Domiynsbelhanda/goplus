@@ -44,7 +44,10 @@ class _SignupScreenState extends State<UserSignupScreen> {
     size = MediaQuery.of(context).size;
     input = [
       {
-        'label': 'Numéro téléphone', 'controller' : phoneController, 'input': TextInputType.phone
+        'label': 'Numéro téléphone',
+        'controller' : phoneController,
+        'input': TextInputType.phone,
+        'max': 9
       },
       {
         'label': 'Mot de passe', 'controller' : passwordController, 'input': TextInputType.visiblePassword
@@ -112,6 +115,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                               return null;
                             },
                             cursorColor: AppColors.primaryColor,
+                            maxLength: e['max'] == null ? null : e['max'],
                             keyboardType: e['input'] == null ? TextInputType.name : e['input'],
                             controller: e['controller'],
                             decoration: InputDecoration(
