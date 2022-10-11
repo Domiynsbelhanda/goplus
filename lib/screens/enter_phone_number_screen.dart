@@ -105,6 +105,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                               }
                               return null;
                             },
+                            maxLength: 9,
                             keyboardType: TextInputType.number,
                             cursorColor: AppColors.primaryColor,
                             controller: phoneController,
