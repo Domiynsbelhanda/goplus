@@ -54,7 +54,7 @@ class _MyApp extends State<MyApp>{
         nextScreen: FutureBuilder(
           future: Provider.of<Auth>(context,listen: false).getToken(),
           builder: (context, snapshot){
-            if(snapshot == null){
+            if(!snapshot.hasData){
               return const PhoneNumberScreen();
             } else {
               return HomePage();
