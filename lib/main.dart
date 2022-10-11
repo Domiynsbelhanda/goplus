@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:goplus/formulaire/dashboard.dart';
 import 'package:goplus/pages/homePage.dart';
-import 'package:goplus/screens/IntroScreen.dart';
 import 'package:goplus/screens/enter_phone_number_screen.dart';
 import 'package:goplus/services/auth.dart';
 import 'package:goplus/services/formulaireRequest.dart';
-import 'package:goplus/taxi/screens/driver_tracker.dart';
-import 'package:goplus/utils/datas.dart';
 import 'package:provider/provider.dart';
 import 'package:goplus/widget/theme_data.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
@@ -55,7 +51,16 @@ class _MyApp extends State<MyApp>{
         Locale('lg', ''),
       ],
       home: AnimatedSplashScreen(
-        nextScreen: IntroScreen(),
+        nextScreen: FutureBuilder(
+          future: Provider.of<Auth>(context,listen: false).getToken(),
+          builder: (context, snapshot){
+            if(snapshot == null){
+              return const PhoneNumberScreen();
+            } else {
+              return HomePage();
+            }
+          }
+        ),
         duration: 2500,
         splash: "assets/icon/white-text.png",
         backgroundColor : Color(0xFFFFD80E),
