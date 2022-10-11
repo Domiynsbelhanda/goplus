@@ -107,6 +107,46 @@ class _SignupScreenState extends State<UserSignupScreen> {
                     children: [
                       Column(
                         children: input.map((e){
+                          if(e['max'] != null){
+                            return Row(
+                              children: [
+                                Container(
+                                  alignment: Alignment.center,
+                                  height: size.height * 0.06,
+                                  width: size.height * 0.08,
+                                  margin: const EdgeInsets.only(right: 15),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: AppColors.primaryColor,
+                                      )),
+                                  child: const Text(
+                                    "+243",
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: size.width / 1.4,
+                                  child: TextFormField(
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return '${e['label']} incorect';
+                                      }
+                                      return null;
+                                    },
+                                    cursorColor: AppColors.primaryColor,
+                                    maxLength: e['max'] == null ? null : e['max'],
+                                    keyboardType: e['input'] == null ? TextInputType.name : e['input'],
+                                    controller: e['controller'],
+                                    decoration: InputDecoration(
+                                        hintText: '${e['label']}',
+                                        contentPadding: EdgeInsets.all(15.0)),
+                                  ),
+                                )
+                              ],
+                            );
+                          }
                           return TextFormField(
                             validator: (value) {
                               if (value!.isEmpty) {
