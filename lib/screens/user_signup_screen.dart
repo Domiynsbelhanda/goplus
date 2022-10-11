@@ -19,10 +19,10 @@ class _SignupScreenState extends State<UserSignupScreen> {
   final formkey = GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
-  TextEditingController postNomController = TextEditingController();
+  // TextEditingController postNomController = TextEditingController();
   TextEditingController prenomController = TextEditingController();
-  TextEditingController adresseController = TextEditingController();
-  TextEditingController villeController = TextEditingController();
+  // TextEditingController adresseController = TextEditingController();
+  // TextEditingController villeController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -52,18 +52,18 @@ class _SignupScreenState extends State<UserSignupScreen> {
       {
         'label': 'Nom', 'controller' : nameController
       },
-      {
-        'label': 'PostNom', 'controller' : postNomController
-      },
+      // {
+      //   'label': 'PostNom', 'controller' : postNomController
+      // },
       {
         'label': 'Prénom', 'controller' : prenomController
       },
-      {
-        'label': 'Adresse', 'controller' : adresseController, 'input': TextInputType.streetAddress
-      },
-      {
-        'label': 'Ville', 'controller' : villeController
-      },
+      // {
+      //   'label': 'Adresse', 'controller' : adresseController, 'input': TextInputType.streetAddress
+      // },
+      // {
+      //   'label': 'Ville', 'controller' : villeController
+      // },
     ];
     return Scaffold(
       backgroundColor: Colors.white,
@@ -121,12 +121,12 @@ class _SignupScreenState extends State<UserSignupScreen> {
                         }).toList()
                       ),
 
-                      SmartSelect<String>.single(
-                          title: 'Genre',
-                          value: value,
-                          choiceItems: options,
-                          onChange: (state) => setState(() => value = state.value)
-                      ),
+                      // SmartSelect<String>.single(
+                      //     title: 'Genre',
+                      //     value: value,
+                      //     choiceItems: options,
+                      //     onChange: (state) => setState(() => value = state.value)
+                      // ),
 
                       SizedBox(height: size.height * 0.07),
                       AppButton(
@@ -137,13 +137,9 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                 "key": "create_user",
                                 "action": "client",
                                 "lastn": prenomController.text.toString(),
-                                "midn": postNomController.text.toString(),
                                 "firstn": nameController.text.toString(),
-                                "address": adresseController.text.toString(),
                                 "password": passwordController.text.trim(),
-                                "city": villeController.text.toString(),
                                 "phone": phoneController.text.toString(),
-                                "gender": value
                               };
 
                               Provider.of<Auth>(context, listen: false).register(context: context, cred: data);
