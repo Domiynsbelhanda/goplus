@@ -28,7 +28,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
 
   late List input;
 
-  String value = 'H';
+  String value = 'h';
   List<S2Choice<String>> options = [
     S2Choice<String>(value: 'h', title: 'Homme'),
     S2Choice<String>(value: 'f', title: 'Femme'),
@@ -165,12 +165,12 @@ class _SignupScreenState extends State<UserSignupScreen> {
                         }).toList()
                       ),
 
-                      // SmartSelect<String>.single(
-                      //     title: 'Genre',
-                      //     value: value,
-                      //     choiceItems: options,
-                      //     onChange: (state) => setState(() => value = state.value)
-                      // ),
+                      SmartSelect<String>.single(
+                          title: 'Genre',
+                          value: value,
+                          choiceItems: options,
+                          onChange: (state) => setState(() => value = state.value)
+                      ),
 
                       SizedBox(height: size.height * 0.07),
                       AppButton(
@@ -184,6 +184,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                 "firstn": nameController.text.toString(),
                                 "password": passwordController.text.trim(),
                                 "phone": phoneController.text.toString(),
+                                "gender": value
                               };
 
                               Provider.of<Auth>(context, listen: false).register(context: context, cred: data);
