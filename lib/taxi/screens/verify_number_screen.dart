@@ -102,7 +102,7 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                 AppButton(
                   name: 'VERIFIEZ',
                   onTap: () async{
-                    notification_loader(context, "Checking en cours", (){});
+                    notification_loader(context, "Vérifiation OTP en cours...", (){});
                     if(otp != null){
                       var data = {
                         'key': "create_user",
@@ -114,6 +114,7 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
 
                       Provider.of<Auth>(context, listen: false).checkOtp(context, data)
                       .then((value){
+                        Navigator.pop(context);
                           if(value == 'OK'){
                             Navigator.push(
                               context,
@@ -123,7 +124,16 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                               ),
                             );
                           } else {
-                            Navigator.pop(context);
+                            notification_dialog(
+                                context,
+                                'Vérification échouée, cliquez sur renvoyer.',
+                                Icons.error,
+                                Colors.red,
+                                {'label': 'FERMER', "onTap": (){
+                                  Navigator.pop(context);
+                                }},
+                                20,
+                                false);
                           }
                       });
                     }
