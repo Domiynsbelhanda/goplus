@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:goplus/services/auth.dart';
+import 'package:goplus/widget/notification_loader.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_select/smart_select.dart';
 
 import '../../utils/app_colors.dart';
 import '../../widget/app_bar.dart';
 import '../../widget/app_button.dart';
+import '../taxi/screens/verify_number_screen.dart';
+import '../widget/notification_dialog.dart';
 
 class UserSignupScreen extends StatefulWidget {
   const UserSignupScreen({Key? key}) : super(key: key);
@@ -177,6 +180,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                           name: 'S\'INSRIRE',
                           onTap: (){
                             if(formkey.currentState!.validate()){
+                              notification_loader(context, 'Inscription en Cours', (){});
                               var data = {
                                 "key": "create_user",
                                 "action": "client",
@@ -187,7 +191,59 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                 "gender": value
                               };
 
-                              Provider.of<Auth>(context, listen: false).register(context: context, cred: data);
+                              Provider.of<Auth>(context, listen: false)
+                                  .register(context: context, cred: data).then((value){
+                                    Navigator.pop(context);
+                                    if(value['code'] == 'OTP'){
+                                      Provider.of<Auth>(context, listen: false)
+                                          .sendOtp(context, phoneController.text.trim())
+                                          .then((value){
+                                          if(value == "KO"){
+
+                                          } else {
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (context)
+                                                    => VerifyNumberScreen(phone: phoneController.text.trim()))
+                                            );
+                                          }
+                                      });
+                                    } else if(value['code'] == "NOK"){
+                                      notification_dialog(
+                                          context,
+                                          'Vérifiez votre mot de passe',
+                                          Icons.error,
+                                          Colors.red,
+                                          {'label': 'REESAYEZ', "onTap": (){
+                                            Navigator.pop(context);
+                                          }},
+                                          20,
+                                          false);
+                                    } else if(value['code'] == 'KO'){
+                                      notification_dialog(
+                                          context,
+                                          'Votre numéro est en attente de validation.',
+                                          Icons.error,
+                                          Colors.red,
+                                          {'label': 'FERMER', "onTap": (){
+                                            Navigator.pop(context);
+                                            Navigator.pop(context);
+                                          }},
+                                          20,
+                                          false);
+                                    } else {
+                                      notification_dialog(
+                                          context,
+                                          'Une erreur c\'est produite.',
+                                          Icons.error,
+                                          Colors.red,
+                                          {'label': 'FERMER', "onTap": (){
+                                            Navigator.pop(context);
+                                          }},
+                                          20,
+                                          false);
+                                    }
+                              });
 
                               // Navigator.push(
                               //   context,
