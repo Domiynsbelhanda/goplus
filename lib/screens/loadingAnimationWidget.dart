@@ -5,9 +5,9 @@ import '../utils/app_colors.dart';
 
 class LoadingWidget extends StatefulWidget{
 
-  String? message;
+  String message;
 
-  LoadingWidget({Key? key, this.message}) : super(key: key);
+  LoadingWidget({Key? key, required this.message}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -25,7 +25,7 @@ class _LoadingWidget extends State<LoadingWidget>{
   Widget build(BuildContext context) {
 
     size = MediaQuery.of(context).size;
-    message = widget.message!;
+    message = widget.message;
 
     return Scaffold(
       body: SizedBox(

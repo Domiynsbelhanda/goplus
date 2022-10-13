@@ -31,7 +31,7 @@ class _DriverTracker extends State<DriverTracker>{
               destination: widget.destination,
             );
 
-          return LoadingWidget();
+          return LoadingWidget(message: '',);
         },
       ),
     );

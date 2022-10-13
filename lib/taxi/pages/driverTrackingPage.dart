@@ -403,7 +403,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
             AppButton(
               name: 'RESERVER',
               onTap: (){
-                notification_loader(context, (){});
+                notification_loader(context, "Reservation en cours", (){});
 
                 Provider.of<Auth>(context, listen: false).getToken().then((value){
                   Provider.of<Auth>(context, listen: false).getSid().then((val){

@@ -102,7 +102,7 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                 AppButton(
                   name: 'VERIFIEZ',
                   onTap: () async{
-                    notification_loader(context, (){});
+                    notification_loader(context, "Checking en cours", (){});
                     if(otp != null){
                       var data = {
                         'key': "create_user",

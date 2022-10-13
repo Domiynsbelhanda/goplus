@@ -147,7 +147,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                       name: 'CONNEXION',
                       onTap: () async {
                         if (formkey.currentState!.validate()){
-                          notification_loader(context, (){});
+                          notification_loader(context, "Connexion en cours", (){});
                           var data = {
                             "key": "check_user",
                             "action": "client",

@@ -34,8 +34,6 @@ class Auth extends ChangeNotifier{
 
   void register ({required Map<String, dynamic> cred, required BuildContext context}) async {
 
-    notification_loader(context, (){});
-
     try {
       Dio.Response response = await dio()!.post('/v1/', data: cred);
       var res = jsonDecode(response.data);
