@@ -13,13 +13,14 @@ class Auth extends ChangeNotifier{
 
   final storage = new FlutterSecureStorage();
 
-  void login ({required Map<String, dynamic> creds, required BuildContext context}) async {
+  Future<Map<String, dynamic>> login ({required Map<String, dynamic> creds, required BuildContext context}) async {
     notification_loader(context, (){});
 
     try {
       Dio.Response response = await dio()!.post('/v1/', data: creds);
-      var res = jsonDecode(response.data);
+      Map<String, dynamic> res = jsonDecode(response.data);
       if(response.statusCode == 200){
+        return res;
         if(res['code'] == "OTP"){
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: creds['phone']))
@@ -53,8 +54,16 @@ class Auth extends ChangeNotifier{
               20,
               false);
         }
+      } else {
+        return {
+          'code': "NULL"
+        };
       }
     } catch (e){
+      return {
+        'code': "ERROR",
+        'error': e
+      };
       notification_dialog(
           context,
           'Une erreur c\'est produite.',
