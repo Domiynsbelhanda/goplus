@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:goplus/screens/loadingAnimationWidget.dart';
 import 'package:location/location.dart';
 
 import '../../widget/backButton.dart';
@@ -93,6 +94,11 @@ class _Poly extends State<GoogleMapsPolylines> {
         child : StreamBuilder(
             stream: FirebaseFirestore.instance.collection("drivers").doc(widget.id).snapshots(),
             builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+
+              if(!snapshot.hasData){
+                return LoadingWidget(message: "Chargement en cours...");
+              }
+
               var data = snapshot.data!.data() as Map<String, dynamic>;
               _markers.clear();
               _markers.add(

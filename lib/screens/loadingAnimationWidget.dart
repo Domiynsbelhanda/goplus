@@ -49,9 +49,11 @@ class _LoadingWidget extends State<LoadingWidget>{
                   padding: EdgeInsets.only(top : 96.0),
                   child: message != null ?
                   Text(
-                       'Veuillez patienter\n${message}'
+                       'Veuillez patienter\n${message}',
+                    textAlign: TextAlign.center
                   ) : const Text(
-                    'Veuillez patienter.'
+                    'Veuillez patienter.',
+                      textAlign: TextAlign.center
                   ),
                 ),
               )
