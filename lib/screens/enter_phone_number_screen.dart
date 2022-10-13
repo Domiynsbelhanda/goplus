@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:goplus/screens/user_signup_screen.dart';
+import 'package:goplus/widget/notification_loader.dart';
 import 'package:provider/provider.dart';
 import '../services/auth.dart';
+import '../taxi/screens/verify_number_screen.dart';
 import '../utils/app_colors.dart';
 import '../widget/app_bar.dart';
 import '../widget/app_button.dart';
+import '../widget/notification_dialog.dart';
 
 class PhoneNumberScreen extends StatefulWidget {
   const PhoneNumberScreen({Key? key}) : super(key: key);
@@ -144,13 +147,67 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                       name: 'CONNEXION',
                       onTap: () async {
                         if (formkey.currentState!.validate()){
+                          notification_loader(context, (){});
                           var data = {
                             "key": "check_user",
                             "action": "client",
                             "phone": phoneController.text.trim(),
                             "pass": passwordController.text.trim()
                           };
-                          Provider.of<Auth>(context, listen: false).login(context: context, creds: data);
+                          Provider.of<Auth>(context, listen: false)
+                              .login(context: context, creds: data).then((value){
+                            Navigator.pop(context);
+                            if(value['code'] == 'OTP'){
+                              Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (context) =>
+                                      VerifyNumberScreen(phone: phoneController.text.trim()))
+                              );
+                            } else if (value['code'] == 'NOK'){
+                              notification_dialog(
+                                  context,
+                                  'Mot de passe incorrect, veuillez réessayez.',
+                                  Icons.error,
+                                  Colors.red,
+                                  {'label': 'REESAYEZ', "onTap": (){
+                                    Navigator.pop(context);
+                                  }},
+                                  20,
+                                  false);
+                            } else if(value['code'] == 'NULL'){
+                              notification_dialog(
+                                  context,
+                                  'Une erreur c\'est produite.',
+                                  Icons.error,
+                                  Colors.red,
+                                  {'label': 'REESAYEZ', "onTap": (){
+                                    Navigator.pop(context);
+                                  }},
+                                  20,
+                                  false);
+                            } else if(value['code'] == 'ERROR'){
+                              notification_dialog(
+                                  context,
+                                  'Une erreur c\'est produite.',
+                                  Icons.error,
+                                  Colors.red,
+                                  {'label': 'FERMER', "onTap": (){
+                                    Navigator.pop(context);
+                                  }},
+                                  20,
+                                  false);
+                            } else {
+                              notification_dialog(
+                                  context,
+                                  'Une erreur c\'est produite.',
+                                  Icons.error,
+                                  Colors.red,
+                                  {'label': 'REESAYEZ', "onTap": (){
+                                    Navigator.pop(context);
+                                  }},
+                                  20,
+                                  false);
+                            }
+                          });
                           // var ref = FirebaseFirestore.instance.collection('drivers');
                           // var doc = await ref.doc(phoneController.text.trim()).get();
                           // if(doc.exists){

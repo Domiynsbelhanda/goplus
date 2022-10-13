@@ -14,46 +14,11 @@ class Auth extends ChangeNotifier{
   final storage = new FlutterSecureStorage();
 
   Future<Map<String, dynamic>> login ({required Map<String, dynamic> creds, required BuildContext context}) async {
-    notification_loader(context, (){});
-
     try {
       Dio.Response response = await dio()!.post('/v1/', data: creds);
       Map<String, dynamic> res = jsonDecode(response.data);
       if(response.statusCode == 200){
         return res;
-        if(res['code'] == "OTP"){
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => VerifyNumberScreen(phone: creds['phone']))
-          );
-        } else if(res['code'] == 'NOK'){
-          notification_dialog(
-              context,
-              'Mot de passe incorrect, veuillez réessayez.',
-              Icons.error,
-              Colors.red,
-              {'label': 'REESAYEZ', "onTap": (){
-                Navigator.pop(context);
-                Navigator.pop(context);
-              }},
-              20,
-              false);
-        } else if (res['code'] == 'KO'){
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const UserSignupScreen())
-          );
-        } else {
-          notification_dialog(
-              context,
-              'Une erreur c\'est produite.',
-              Icons.error,
-              Colors.red,
-              {'label': 'REESAYEZ', "onTap": (){
-                Navigator.pop(context);
-                Navigator.pop(context);
-              }},
-              20,
-              false);
-        }
       } else {
         return {
           'code': "NULL"
@@ -64,17 +29,6 @@ class Auth extends ChangeNotifier{
         'code': "ERROR",
         'error': e
       };
-      notification_dialog(
-          context,
-          'Une erreur c\'est produite.',
-          Icons.error,
-          Colors.red,
-          {'label': 'FERMER', "onTap": (){
-            Navigator.pop(context);
-            Navigator.pop(context);
-          }},
-          20,
-          false);
     }
   }
 
