@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart' as Dio;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -11,7 +10,6 @@ import '../taxi/screens/verify_number_screen.dart';
 import 'dio.dart';
 
 class Auth extends ChangeNotifier{
-  String? _token;
 
   final storage = new FlutterSecureStorage();
 
@@ -169,18 +167,6 @@ class Auth extends ChangeNotifier{
 
   Future<String?> getSid() async{
     return await storage.read(key: 'sid');
-  }
-
-  void logout() async{
-    try {
-      Dio.Response response = await dio()!.get('/user/revoke',
-          options: Dio.Options(headers: {'Authorization': 'Bearer $_token'})
-      );
-      cleanUp();
-      notifyListeners();
-    } catch (e){
-
-    }
   }
 
   void cleanUp() async {
