@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/formulaire/dashboard.dart';
+import 'package:goplus/screens/quizwebview.dart';
 import 'package:goplus/taxi/screens/driver_tracker.dart';
 import 'package:goplus/taxi/screens/mapsPickLocation.dart';
 import 'package:goplus/widget/logo_text.dart';
@@ -334,18 +335,41 @@ class _HomePage extends State<HomePage>{
 
             Padding(
               padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
-              child: MiniCardPicture(
-                imagePath: 'assets/images/driver.png',
-                title: 'Devenir chauffeur',
-                description: 'Voulez-vous devenir chauffeur?',
-                onTap: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => SignupScreen()
-                      )
-                  );
-                },
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    MiniCardPicture(
+                      imagePath: 'assets/images/driver.png',
+                      title: 'Devenir chauffeur',
+                      description: 'Voulez-vous devenir chauffeur?',
+                      onTap: (){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignupScreen()
+                            )
+                        );
+                      },
+                    ),
+
+                    const SizedBox(width: 16.0),
+
+                    MiniCardPicture(
+                      imagePath: 'assets/images/driver.png',
+                      title: 'GO FLY QUIZ',
+                      description: 'Jouez et essayez de gagner',
+                      onTap: (){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => QuizWebView()
+                            )
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

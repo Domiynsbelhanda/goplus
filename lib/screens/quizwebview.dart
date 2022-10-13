@@ -24,11 +24,19 @@ class _QuizWebView extends State<QuizWebView> {
           child: Stack(
             children: [
               WebViewX(
-                initialContent: 'https://domiyns.com/',
+                initialContent: 'https://go-plus.info/open/qcm',
                 initialSourceType: SourceType.url,
                 onWebViewCreated: (controller) => webviewController = controller,
                 width: size.width,
                 height: size.height,
+              ),
+
+              const Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding: EdgeInsets.all(4.0),
+                  child: CloseButton(),
+                ),
               )
             ],
           ),
