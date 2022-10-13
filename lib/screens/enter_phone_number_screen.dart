@@ -156,13 +156,30 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                           };
                           Provider.of<Auth>(context, listen: false)
                               .login(context: context, creds: data).then((value){
+                                print('values donne $value');
                             Navigator.pop(context);
                             if(value['code'] == 'OTP'){
                               Navigator.of(context).push(
                                   MaterialPageRoute(builder: (context) =>
                                       VerifyNumberScreen(phone: phoneController.text.trim()))
                               );
-                            } else if (value['code'] == 'NOK'){
+                            } if(value['code'] == 'KO'){
+                                  notification_dialog(
+                                      context,
+                                      'Vous n\'avez pas de compte, créez en un.',
+                                      Icons.person,
+                                      Colors.red,
+                                      {'label': 'CREER', "onTap": (){
+                                        Navigator.pop(context);
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(builder: (context) =>
+                                                const UserSignupScreen())
+                                        );
+                                      }},
+                                      20,
+                                      false);
+                                }
+                              else if (value['code'] == 'NOK'){
                               notification_dialog(
                                   context,
                                   'Mot de passe incorrect, veuillez réessayez.',
