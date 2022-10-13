@@ -42,7 +42,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   LatLng? position;
   double? distance;
   int? index;
-  String carType = "0";
+  String carType = "1";
 
   @override
   void initState() {
@@ -126,30 +126,32 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               markers.clear();
               for(var i = 0; i < data.length; i++){
                 if(data[i].get('online')){
-                  double latitude = data[i].get('latitude');
-                  double longitude = data[i].get('longitude');
-                  GeoPoint location = GeoPoint(latitude, longitude);
+                  if(data[i].get('cartype') == carType){
+                    double latitude = data[i].get('latitude');
+                    double longitude = data[i].get('longitude');
+                    GeoPoint location = GeoPoint(latitude, longitude);
 
-                  // Check if location is valid
-                  if (location == null) {
-                    return Text("There was no location data");
+                    // Check if location is valid
+                    if (location == null) {
+                      return Text("There was no location data");
+                    }
+                    final latLng = LatLng(location.latitude, location.longitude);
+
+                    // Add new marker with markerId.
+                    markers
+                        .add(
+                        Marker(
+                            markerId: MarkerId(data[i].id),
+                            position: latLng,
+                            icon: markerbitmap,
+                            onTap: (){
+                              setState(() {
+                                index = i;
+                              });
+                            }
+                        )
+                    );
                   }
-                  final latLng = LatLng(location.latitude, location.longitude);
-
-                  // Add new marker with markerId.
-                  markers
-                      .add(
-                      Marker(
-                          markerId: MarkerId(data[i].id),
-                          position: latLng,
-                          icon: markerbitmap,
-                          onTap: (){
-                            setState(() {
-                              index = i;
-                            });
-                          }
-                      )
-                  );
                 } else {
                   markers.add(
                       Marker(
