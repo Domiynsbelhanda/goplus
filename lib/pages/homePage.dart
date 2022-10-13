@@ -456,7 +456,7 @@ class _HomePage extends State<HomePage>{
                     const SizedBox(width: 16.0),
 
                     MiniCardPicture(
-                      imagePath: 'assets/images/driver.png',
+                      imagePath: 'assets/images/mini-qpuv.png',
                       title: 'GO FLY QUIZ',
                       description: 'Jouez et essayez de gagner',
                       onTap: (){
