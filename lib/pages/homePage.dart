@@ -29,6 +29,7 @@ class _HomePage extends State<HomePage>{
   late Size size;
   LatLng? selectedPlace;
   LatLng? depart;
+  bool menuDepart = false;
 
   @override
   Widget build(BuildContext context) {
@@ -102,20 +103,13 @@ class _HomePage extends State<HomePage>{
                       ),
                     ),
 
-                Padding(
+                    Padding(
                     padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
                     child: GestureDetector(
                       onTap: (){
-
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    PickLocation(
-                                      destination: true,
-                                    )
-                            ),
-                          );
+                        setState(() {
+                          menuDepart = !menuDepart;
+                        });
                       },
                       child: Container(
                         height: size.width / 7,
@@ -146,6 +140,97 @@ class _HomePage extends State<HomePage>{
                       ),
                     )
                 ),
+
+                    menuDepart ?
+                    Padding(
+                      padding: const EdgeInsets.only(left: 64.0, right: 64.0, bottom: 16.0),
+                      child: Column(
+                        children: [
+                          GestureDetector(
+                            onTap: (){
+                              setState(() {
+                                menuDepart = !menuDepart;
+                              });
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        PickLocation(
+                                          destination: true,
+                                        )
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: size.width / 8,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(48),
+                                  border: Border.all(
+                                      color: Colors.black,
+                                      width: 0.5
+                                  )
+                              ),
+                              child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: const [
+                                        Icon(
+                                            Icons.map_outlined
+                                        ),
+                                        SizedBox(width: 4.0,),
+                                        Text(
+                                          'Choisir sur la carte',
+                                          textAlign: TextAlign.left,
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                              ),
+                            ),
+                          ),
+
+                          const SizedBox(height: 8.0),
+
+                          GestureDetector(
+                            onTap: (){
+                              setState(() {
+                                menuDepart = !menuDepart;
+                                selectedPlace = const LatLng(-4.3884214, 15.4416188);
+                              });
+                            },
+                            child: Container(
+                              height: size.width / 7,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(48),
+                                  border: Border.all(
+                                      color: Colors.black,
+                                      width: 0.5
+                                  )
+                              ),
+                              child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: const [
+                                        Icon(
+                                            Icons.map_outlined
+                                        ),
+                                        SizedBox(width: 4.0,),
+                                        Text(
+                                          'Aéroport de N\'djili',
+                                          textAlign: TextAlign.left,
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ) : const SizedBox(),
 
                     selectedPlace != null ?
                     Padding(
