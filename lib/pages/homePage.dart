@@ -29,13 +29,16 @@ class _HomePage extends State<HomePage>{
   late Size size;
   LatLng? selectedPlace;
   LatLng? depart;
+  LatLng airport = const LatLng(-4.3884214, 15.4416188);
   bool menuDepart = false;
+  bool checkairport = false;
 
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
     selectedPlace = widget.destination;
     depart = widget.depart;
+
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -109,6 +112,7 @@ class _HomePage extends State<HomePage>{
                       onTap: (){
                         setState(() {
                           menuDepart = !menuDepart;
+
                         });
                       },
                       child: Container(
@@ -150,6 +154,7 @@ class _HomePage extends State<HomePage>{
                             onTap: (){
                               setState(() {
                                 menuDepart = !menuDepart;
+                                checkairport = false;
                               });
 
                               Navigator.push(
@@ -197,7 +202,7 @@ class _HomePage extends State<HomePage>{
                             onTap: (){
                               setState(() {
                                 menuDepart = !menuDepart;
-                                selectedPlace = const LatLng(-4.3884214, 15.4416188);
+                                checkairport = true;
                               });
                             },
                             child: Container(
@@ -232,6 +237,7 @@ class _HomePage extends State<HomePage>{
                       ),
                     ) : const SizedBox(),
 
+                    !checkairport ?
                     selectedPlace != null ?
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
@@ -241,7 +247,16 @@ class _HomePage extends State<HomePage>{
                           fontSize: 12
                         ),
                       ),
-                    ) : const SizedBox(),
+                    ) : const SizedBox()
+                        : const Padding(
+                      padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+                      child: Text(
+                        'Aeroport de NDJILI',
+                        style: TextStyle(
+                            fontSize: 12
+                        ),
+                      ),
+                    ),
 
                     selectedPlace != null ?
                     Padding(
@@ -311,7 +326,7 @@ class _HomePage extends State<HomePage>{
                               MaterialPageRoute(
                                   builder: (BuildContext context) => DriverTracker(
                                     depart: depart!,
-                                    destination: selectedPlace!,
+                                    destination: checkairport ? airport : selectedPlace!,
                                   )
                               ),
                             );
@@ -348,7 +363,7 @@ class _HomePage extends State<HomePage>{
                           ),
                         )
                     )
-                        : SizedBox(),
+                        : const SizedBox(),
                   ],
                 ),
               ),
