@@ -7,7 +7,8 @@ class BottomTypeCar extends StatelessWidget{
   String place;
   String prices;
   Function() onTap;
-  BottomTypeCar({required this.image, required this.type, required this.place, required this.prices, required this.onTap});
+  bool active;
+  BottomTypeCar({required this.image, required this.type, required this.place, required this.prices, required this.onTap, required this.active});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class BottomTypeCar extends StatelessWidget{
         height: MediaQuery.of(context).size.width / 2.5,
         width: MediaQuery.of(context).size.width / 2.6,
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: active ? Colors.blue.withOpacity(.5) : Colors.white,
             borderRadius: BorderRadius.circular(8.0),
             // boxShadow: [
             //   BoxShadow(
