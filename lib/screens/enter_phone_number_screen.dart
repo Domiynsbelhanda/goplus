@@ -156,7 +156,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                           };
                           Provider.of<Auth>(context, listen: false)
                               .login(context: context, creds: data).then((value){
-                                print('values donne $value');
                             Navigator.pop(context);
                             if(value['code'] == 'OTP'){
                               Navigator.of(context).push(
