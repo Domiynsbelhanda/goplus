@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:goplus/screens/loadingAnimationWidget.dart';
 import 'package:goplus/utils/app_colors.dart';
 
 import '../taxi/pages/google_maps_popylines.dart';
@@ -26,6 +27,11 @@ progresso_dialog(
                 .doc(text).collection('courses').doc('courses').snapshots(),
             builder:
                 (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+              
+              
+              if(!snapshot.hasData){
+                return LoadingWidget(message: "Recherche d'un taxi disponible...");
+              }
 
               Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
 
