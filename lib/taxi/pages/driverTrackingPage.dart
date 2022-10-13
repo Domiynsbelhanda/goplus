@@ -199,6 +199,12 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                               type: 'TAXI Mini',
                               place: '4 personnes',
                               prices: '5\$/h',
+                              onTap: (){
+                                setState(() {
+                                  carType = "1";
+                                });
+                              },
+                              active: carType == "1",
                             ),
 
                             const SizedBox(
@@ -210,6 +216,12 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                               type: 'Berline VIP',
                               place: '4 personnes',
                               prices: '10\$/h',
+                              onTap: (){
+                                setState(() {
+                                  carType = "2";
+                                });
+                              },
+                              active: carType == "2",
 
                             ),
 
@@ -222,6 +234,12 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                               type: 'Taxi Bus',
                               place: '8 personnes',
                               prices: '2\$/h',
+                              onTap: (){
+                                setState(() {
+                                  carType = "3";
+                                });
+                              },
+                              active: carType == "3",
                             ),
                           ],
                         ),
