@@ -2,16 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/formulaire/dashboard.dart';
-import 'package:goplus/screens/enter_phone_number_screen.dart';
-import 'package:goplus/services/auth.dart';
 import 'package:goplus/taxi/screens/driver_tracker.dart';
 import 'package:goplus/taxi/screens/mapsPickLocation.dart';
-import 'package:goplus/taxi/screens/signup_screen.dart';
 import 'package:goplus/widget/logo_text.dart';
 import 'package:goplus/widget/mini_card_picture.dart';
-import 'package:provider/provider.dart';
-
 import '../main.dart';
+import '../screens/signup_screen.dart';
 import '../utils/app_colors.dart';
 import '../utils/datas.dart';
 
