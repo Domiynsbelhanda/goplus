@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goplus/utils/app_colors.dart';
@@ -43,6 +42,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   LatLng? position;
   double? distance;
   int? index;
+  String carType = "0";
 
   @override
   void initState() {
@@ -68,20 +68,20 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
       controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
 
       setState(() {
-        circles = Set.from([Circle(
+        circles = {Circle(
           strokeColor: Colors.red,
           strokeWidth: 2,
           fillColor: Colors.red.withOpacity(0.2),
           circleId: CircleId('1'),
           center: LatLng(value.latitude, value.longitude),
           radius: 3700,
-        )]);
+        )};
 
         markers.add(
             Marker(
-              markerId: MarkerId("1"),
+              markerId: const MarkerId("1"),
               position: LatLng(value.latitude, value.longitude),
-              infoWindow: InfoWindow(
+              infoWindow: const InfoWindow(
                 title: 'Votre Position',
               ),
               icon: pinner,
@@ -210,6 +210,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                               type: 'Berline VIP',
                               place: '4 personnes',
                               prices: '10\$/h',
+
                             ),
 
                             const SizedBox(
