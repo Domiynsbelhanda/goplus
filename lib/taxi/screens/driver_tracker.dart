@@ -26,11 +26,13 @@ class _DriverTracker extends State<DriverTracker>{
           if (!snapshot.hasData) return Text("Got no data :(");
 
           if (snapshot.hasData &&
-              snapshot.connectionState == ConnectionState.done)
+              snapshot.connectionState == ConnectionState.done) {
             return DriverTrackingPage(
               depart: widget.depart,
               destination: widget.destination,
+              airport: widget.airport,
             );
+          }
 
           return LoadingWidget(message: '',);
         },

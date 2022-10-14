@@ -19,7 +19,8 @@ const double ZOOM = 19;
 class DriverTrackingPage extends StatefulWidget{
   LatLng depart;
   LatLng destination;
-  DriverTrackingPage({Key? key, required this.depart, required this.destination}) : super(key: key);
+  bool airport;
+  DriverTrackingPage({Key? key, required this.depart, required this.destination, required this.airport}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -449,7 +450,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                         'destination_latitude': widget.destination.latitude,
                         'distance': calculateDistance(widget.depart, position!).toStringAsFixed(2),
                         'user_id': value!,
-                        'sid_user': val
+                        'sid_user': val,
+                        'airport': widget.airport
                       });
                     } else {
 
