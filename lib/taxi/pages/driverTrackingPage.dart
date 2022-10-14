@@ -451,7 +451,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                         'distance': calculateDistance(widget.depart, position!).toStringAsFixed(2),
                         'user_id': value!,
                         'sid_user': val,
-                        'airport': widget.airport
+                        'airport': widget.airport,
+                        'carType': carType
                       });
                     } else {
 
