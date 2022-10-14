@@ -8,7 +8,8 @@ import '../../screens/loadingAnimationWidget.dart';
 class DriverTracker extends StatefulWidget{
   LatLng depart;
   LatLng destination;
-  DriverTracker({Key? key, required this.depart, required this.destination}) : super(key: key);
+  bool airport;
+  DriverTracker({Key? key, required this.depart, required this.destination, required this.airport}) : super(key: key);
   @override
   State<DriverTracker> createState() => _DriverTracker();
 }

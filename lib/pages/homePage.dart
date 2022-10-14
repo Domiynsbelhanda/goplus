@@ -327,6 +327,7 @@ class _HomePage extends State<HomePage>{
                                   builder: (BuildContext context) => DriverTracker(
                                     depart: depart!,
                                     destination: checkairport ? airport : selectedPlace!,
+                                    airport: checkairport,
                                   )
                               ),
                             );
