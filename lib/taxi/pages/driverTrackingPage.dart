@@ -201,7 +201,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                               image: 'assets/images/ist.png',
                               type: 'TAXI Mini',
                               place: '4 personnes',
-                              prices: '5\$/h',
+                              prices: widget.airport ? '42\$' : '7\$ / 30 Min',
                               onTap: (){
                                 setState(() {
                                   carType = "1";
@@ -218,7 +218,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                               image: 'assets/images/berline.png',
                               type: 'Berline VIP',
                               place: '4 personnes',
-                              prices: '10\$/h',
+                              prices: widget.airport ? '52\$' : '12\$ / 30 Min',
                               onTap: (){
                                 setState(() {
                                   carType = "2";
@@ -236,7 +236,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                               image: 'assets/images/van.png',
                               type: 'Taxi Bus',
                               place: '8 personnes',
-                              prices: '2\$/h',
+                              prices: widget.airport ? '102\$' : '27\$ / 30 Min',
                               onTap: (){
                                 setState(() {
                                   carType = "3";
