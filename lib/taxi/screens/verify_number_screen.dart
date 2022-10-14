@@ -11,8 +11,9 @@ import '../../widget/notification_loader.dart';
 import '../../widget/otp_text_field.dart';
 
 class VerifyNumberScreen extends StatefulWidget {
+  bool register;
   String phone;
-  VerifyNumberScreen({Key? key, required this.phone}) : super(key: key);
+  VerifyNumberScreen({Key? key, required this.phone, required this.register}) : super(key: key);
 
   @override
   _VerifyNumberState createState() => _VerifyNumberState();
@@ -23,7 +24,6 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
   late String code;
   late bool onEditing = false;
   String? otp;
-  int nb = 0;
 
   @override
   void initState() {
@@ -101,40 +101,66 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                 const SizedBox(height: 20),
                 AppButton(
                   name: 'VERIFIEZ',
+                  color: AppColors.primaryColor,
                   onTap: () async{
-                    notification_loader(context, "Vérifiation OTP en cours...", (){});
+                    notification_loader(context, 'Vérification OTP en cours...', (){});
                     if(otp != null){
-                      var data = {
-                        'key': "create_user",
-                        'action': "rotp",
-                        'otp': otp!,
-                        'phone': widget.phone,
-                        "level": 3
-                      };
+                      var data;
+                      if(widget.register){
+                        data = {
+                          'key': "create_user",
+                          'action': "rotp",
+                          'otp': otp!,
+                          'phone': widget.phone,
+                          "level": "4"
+                        };
+                      } else {
+                        data = {
+                          'key': "check_user",
+                          'action': "rotp",
+                          'otp': otp!,
+                          'phone': widget.phone,
+                          "level": "4"
+                        };
+                      }
 
                       Provider.of<Auth>(context, listen: false).checkOtp(context, data)
-                      .then((value){
-                        Navigator.pop(context);
-                          if(value == 'OK'){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      HomePage()
-                              ),
-                            );
-                          } else {
-                            notification_dialog(
-                                context,
-                                'Vérification échouée, cliquez sur renvoyer.',
-                                Icons.error,
-                                Colors.red,
-                                {'label': 'FERMER', "onTap": (){
-                                  Navigator.pop(context);
-                                }},
-                                20,
-                                false);
-                          }
+                          .then((value){
+                        if(value['code'] == 'KO'){
+                          Navigator.pop(context);
+                        } else {
+                          var checkSid = {
+                            'key': "check_user",
+                            'action': "sid",
+                            'sid': value['sid'],
+                            "level": "4"
+                          };
+                          Provider.of<Auth>(context, listen: false).checkSID(context, checkSid).then(
+                                  (sid){
+
+                                if(sid['code'] == 'OK'){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            HomePage()
+                                    ),
+                                  );
+                                } else {
+                                  notification_dialog(
+                                      context,
+                                      'Votre compte n\'est pas actif, contactez GO PLUS.',
+                                      Icons.error,
+                                      Colors.red,
+                                      {'label': 'REESAYEZ', "onTap": (){
+                                        Navigator.pop(context);
+                                      }},
+                                      20,
+                                      false);
+                                }
+
+                              });
+                        }
                       });
                     }
 

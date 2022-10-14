@@ -67,19 +67,33 @@ class Auth extends ChangeNotifier{
     }
   }
 
-  Future<String> checkOtp(BuildContext context, var data) async {
+  Future<Map<String, dynamic>> checkOtp(BuildContext context, var data) async {
     try{
       Dio.Response response = await dio()!.post('/v1/', data: jsonEncode(data));
       Map<String, dynamic> datas = jsonDecode(response.data);
       notifyListeners();
-      Navigator.pop(context);
       if(datas['code'] == 'OK'){
         this.storage.write(key: 'sid', value: datas['sid']);
         storeToken(token: data['phone']);
       }
-      return datas['code'];
+      return datas;
     } catch(e){
-      return "KO";
+      return {
+        'code': "KO"
+      };
+    }
+  }
+
+  Future<Map<String, dynamic>> checkSID(BuildContext context, var data) async {
+    try{
+      Dio.Response response = await dio()!.post('/v1/', data: jsonEncode(data));
+      Map<String, dynamic> datas = jsonDecode(response.data);
+      notifyListeners();
+      return datas;
+    } catch(e){
+      return {
+        'code': "KO"
+      };
     }
   }
 
