@@ -249,7 +249,7 @@ class _HomePage extends State<HomePage>{
                       ),
                     ) : const SizedBox()
                         : const Padding(
-                      padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+                      padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
                       child: Text(
                         'Aeroport de NDJILI',
                         style: TextStyle(
@@ -457,7 +457,21 @@ class _HomePage extends State<HomePage>{
                     const SizedBox(width: 16.0),
 
                     MiniCardPicture(
-                      imagePath: 'assets/images/mini-qpuv.png',
+                      imagePath: 'assets/images/aeroport.png',
+                      title: 'VOYAGE VERS L\'AEROPORT',
+                      description: '',
+                      onTap: (){
+                        setState(() {
+                          menuDepart = !menuDepart;
+                          checkairport = true;
+                        });
+                      },
+                    ),
+
+                    const SizedBox(width: 16.0),
+
+                    MiniCardPicture(
+                      imagePath: 'assets/images/qcm.png',
                       title: 'GO FLY QUIZ',
                       description: 'Jouez et essayez de gagner',
                       onTap: (){
