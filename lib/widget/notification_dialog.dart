@@ -48,10 +48,11 @@ notification_dialog(
               size: width / 5,
             ),
 
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
 
             Container(
               width : width / 1.5,
+              height: width / 2.7,
               child: Text(
                 '${text}',
                 style: TextStyle(

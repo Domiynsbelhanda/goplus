@@ -52,7 +52,8 @@ class Auth extends ChangeNotifier{
   Future<String> sendOtp(BuildContext context, String phone) async {
     try{
       var data = {
-        "key": "otp",
+        "key": "create_user",
+        "action": "otp",
         "phone": phone
       };
       Dio.Response response = await dio()!.post('/v1/', data: jsonEncode(data));

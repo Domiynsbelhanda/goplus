@@ -152,11 +152,12 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                             "key": "check_user",
                             "action": "client",
                             "phone": phoneController.text.trim(),
-                            "pass": passwordController.text.trim()
+                            "password": passwordController.text.trim()
                           };
                           Provider.of<Auth>(context, listen: false)
                               .login(context: context, creds: data).then((value){
                             Navigator.pop(context);
+
                             if(value['code'] == 'OTP'){
                               Navigator.of(context).push(
                                   MaterialPageRoute(builder: (context) =>
@@ -169,14 +170,14 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                             } else if(value['code'] == 'KO'){
                                   notification_dialog(
                                       context,
-                                      'Vous n\'avez pas de compte, créez en un.',
+                                      "Votre compte n'exsite pas, creez en un.",
                                       Icons.person,
                                       Colors.red,
-                                      {'label': 'CREER', "onTap": (){
+                                      {'label': "S'INSCRIRE", "onTap": (){
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (_) => const UserSignupScreen()
+                                              builder: (_) => const UserSignupScreen()
                                           ),
                                         );
                                       }
@@ -187,18 +188,19 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                               else if (value['code'] == 'NOK'){
                               notification_dialog(
                                   context,
-                                  'Mot de passe incorrect, veuillez réessayez.',
-                                  Icons.error,
+                                  "Coordonée incorrect.",
+                                  Icons.person,
                                   Colors.red,
-                                  {'label': 'REESAYEZ', "onTap": (){
+                                  {'label': "FERMER", "onTap": (){
                                     Navigator.pop(context);
-                                  }},
+                                  }
+                                  },
                                   20,
                                   false);
                             } else if(value['code'] == 'NULL'){
                               notification_dialog(
                                   context,
-                                  'Une erreur c\'est produite.',
+                                  'Une erreur c\'est produite. ${value['error']}',
                                   Icons.error,
                                   Colors.red,
                                   {'label': 'REESAYEZ', "onTap": (){
@@ -209,7 +211,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                             } else if(value['code'] == 'ERROR'){
                               notification_dialog(
                                   context,
-                                  'Une erreur c\'est produite.',
+                                  'Une erreur c\'est produite. ${value['error']}',
                                   Icons.error,
                                   Colors.red,
                                   {'label': 'FERMER', "onTap": (){

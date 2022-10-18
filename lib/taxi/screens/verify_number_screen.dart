@@ -82,7 +82,7 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                   child: const Center(
                     child: Text.rich(
                       TextSpan(
-                        text: 'Vous n\'avez pas réçu de code?',
+                        text: 'Vous n\'avez pas réçu de code? ',
                         style: TextStyle(
                           color: Colors.grey,
                         ),
@@ -112,7 +112,7 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                           'action': "rotp",
                           'otp': otp!,
                           'phone': widget.phone,
-                          "level": "4"
+                          "level": "3"
                         };
                       } else {
                         data = {
@@ -120,46 +120,33 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                           'action': "rotp",
                           'otp': otp!,
                           'phone': widget.phone,
-                          "level": "4"
+                          "level": "3"
                         };
                       }
 
                       Provider.of<Auth>(context, listen: false).checkOtp(context, data)
                           .then((value){
+                        Navigator.pop(context);
                         if(value['code'] == 'KO'){
-                          Navigator.pop(context);
+                          notification_dialog(
+                              context,
+                              'Erreur OTP, veuillez recommencer.',
+                              Icons.error,
+                              Colors.red,
+                              {'label': 'FERMER', "onTap": (){
+                                Navigator.pop(context);
+                              }},
+                              20,
+                              false
+                          );
                         } else {
-                          var checkSid = {
-                            'key': "check_user",
-                            'action': "sid",
-                            'sid': value['sid'],
-                            "level": "4"
-                          };
-                          Provider.of<Auth>(context, listen: false).checkSID(context, checkSid).then(
-                                  (sid){
-
-                                if(sid['code'] == 'OK'){
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            HomePage()
-                                    ),
-                                  );
-                                } else {
-                                  notification_dialog(
-                                      context,
-                                      'Votre compte n\'est pas actif, contactez GO PLUS.',
-                                      Icons.error,
-                                      Colors.red,
-                                      {'label': 'REESAYEZ', "onTap": (){
-                                        Navigator.pop(context);
-                                      }},
-                                      20,
-                                      false);
-                                }
-
-                              });
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    HomePage()
+                            ),
+                          );
                         }
                       });
                     }
