@@ -3,10 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart' as Dio;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:goplus/screens/user_signup_screen.dart';
-import 'package:goplus/widget/notification_dialog.dart';
-import 'package:goplus/widget/notification_loader.dart';
-import '../taxi/screens/verify_number_screen.dart';
 import 'dio.dart';
 
 class Auth extends ChangeNotifier{
@@ -21,7 +17,8 @@ class Auth extends ChangeNotifier{
         return res;
       } else {
         return {
-          'code': "NULL"
+          'code': "NULL",
+          'error': response.statusCode
         };
       }
     } catch (e){

@@ -166,7 +166,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                       )
                                   )
                               );
-                            } if(value['code'] == 'KO'){
+                            } else if(value['code'] == 'KO'){
                                   notification_dialog(
                                       context,
                                       'Vous n\'avez pas de compte, créez en un.',
@@ -218,14 +218,14 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                             } else {
                               notification_dialog(
                                   context,
-                                  'Une erreur c\'est produite.',
+                                  'Une erreur c\'est produite. ${value['error']}',
                                   Icons.error,
                                   Colors.red,
-                                  {'label': 'REESAYEZ', "onTap": (){
+                                  {'label': 'FERMER', "onTap": (){
                                     Navigator.pop(context);
                                   }},
                                   20,
-                                  false);
+                                  true);
                             }
                           });
                           // var ref = FirebaseFirestore.instance.collection('drivers');
