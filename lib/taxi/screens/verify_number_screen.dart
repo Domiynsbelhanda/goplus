@@ -108,8 +108,8 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                       var data;
                       if(widget.register){
                         data = {
-                          'key': "check_user",
-                          'action': "otp",
+                          'key': "create_user",
+                          'action': "rotp",
                           'otp': otp!,
                           'phone': widget.phone,
                           "level": "3"
@@ -128,28 +128,37 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                           .then((value){
                         Navigator.pop(context);
 
-                        print('Value donne : ${value}');
-                        // if(value['code'] == 'KO'){
-                        //   notification_dialog(
-                        //       context,
-                        //       'Erreur OTP, veuillez recommencer.',
-                        //       Icons.error,
-                        //       Colors.red,
-                        //       {'label': 'FERMER', "onTap": (){
-                        //         Navigator.pop(context);
-                        //       }},
-                        //       20,
-                        //       false
-                        //   );
-                        // } else {
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (BuildContext context) =>
-                        //             HomePage()
-                        //     ),
-                        //   );
-                        // }
+                        if(value['code'] == 'KO'){
+                          notification_dialog(
+                              context,
+                              'Erreur OTP, veuillez recommencer.',
+                              Icons.error,
+                              Colors.red,
+                              {'label': 'FERMER', "onTap": (){
+                                Navigator.pop(context);
+                              }},
+                              20,
+                              false
+                          );
+                        } else {
+                          notification_dialog(
+                              context,
+                              '${value['message']}',
+                              Icons.verified,
+                              Colors.red,
+                              {'label': 'SUIVANT', "onTap": (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          HomePage()
+                                  ),
+                                );
+                              }},
+                              20,
+                              false
+                          );
+                        }
                       });
                     }
 

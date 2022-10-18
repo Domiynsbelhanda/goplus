@@ -193,6 +193,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
 
                               Provider.of<Auth>(context, listen: false)
                                   .register(context: context, cred: data).then((value){
+
                                     Navigator.pop(context);
 
                                     if(value['code'] == '400'){
