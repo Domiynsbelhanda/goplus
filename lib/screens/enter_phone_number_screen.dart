@@ -173,12 +173,14 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                       Icons.person,
                                       Colors.red,
                                       {'label': 'CREER', "onTap": (){
-                                        Navigator.pop(context);
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(builder: (context) =>
-                                                const UserSignupScreen())
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) => const UserSignupScreen()
+                                          ),
                                         );
-                                      }},
+                                      }
+                                      },
                                       20,
                                       false);
                                 }
