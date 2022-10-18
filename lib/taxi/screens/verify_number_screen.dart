@@ -108,8 +108,8 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                       var data;
                       if(widget.register){
                         data = {
-                          'key': "create_user",
-                          'action': "rotp",
+                          'key': "check_user",
+                          'action': "otp",
                           'otp': otp!,
                           'phone': widget.phone,
                           "level": "3"
@@ -127,27 +127,29 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                       Provider.of<Auth>(context, listen: false).checkOtp(context, data)
                           .then((value){
                         Navigator.pop(context);
-                        if(value['code'] == 'KO'){
-                          notification_dialog(
-                              context,
-                              'Erreur OTP, veuillez recommencer.',
-                              Icons.error,
-                              Colors.red,
-                              {'label': 'FERMER', "onTap": (){
-                                Navigator.pop(context);
-                              }},
-                              20,
-                              false
-                          );
-                        } else {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    HomePage()
-                            ),
-                          );
-                        }
+
+                        print('Value donne : ${value}');
+                        // if(value['code'] == 'KO'){
+                        //   notification_dialog(
+                        //       context,
+                        //       'Erreur OTP, veuillez recommencer.',
+                        //       Icons.error,
+                        //       Colors.red,
+                        //       {'label': 'FERMER', "onTap": (){
+                        //         Navigator.pop(context);
+                        //       }},
+                        //       20,
+                        //       false
+                        //   );
+                        // } else {
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (BuildContext context) =>
+                        //             HomePage()
+                        //     ),
+                        //   );
+                        // }
                       });
                     }
 

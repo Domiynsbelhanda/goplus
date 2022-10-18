@@ -195,68 +195,47 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                   .register(context: context, cred: data).then((value){
                                     Navigator.pop(context);
 
-                                    notification_dialog(
-                                        context,
-                                        'Vérifiez votre mot de passe ${value}',
-                                        Icons.error,
-                                        Colors.red,
-                                        {'label': 'REESAYEZ', "onTap": (){
-                                          Navigator.pop(context);
-                                        }},
-                                        20,
-                                        false);
-
-                                    // if(value['code'] == 'OTP'){
-                                    //   Provider.of<Auth>(context, listen: false)
-                                    //       .sendOtp(context, phoneController.text.trim())
-                                    //       .then((value){
-                                    //       if(value == "KO"){
-                                    //
-                                    //       } else {
-                                    //         Navigator.of(context).push(
-                                    //             MaterialPageRoute(
-                                    //                 builder: (context)
-                                    //                 => VerifyNumberScreen(
-                                    //                   register: true,
-                                    //                     phone: phoneController.text.trim())
-                                    //             )
-                                    //         );
-                                    //       }
-                                    //   });
-                                    // } else if(value['code'] == "NOK"){
-                                    //   notification_dialog(
-                                    //       context,
-                                    //       'Vérifiez votre mot de passe',
-                                    //       Icons.error,
-                                    //       Colors.red,
-                                    //       {'label': 'REESAYEZ', "onTap": (){
-                                    //         Navigator.pop(context);
-                                    //       }},
-                                    //       20,
-                                    //       false);
-                                    // } else if(value['code'] == 'KO'){
-                                    //   notification_dialog(
-                                    //       context,
-                                    //       'Votre numéro est en attente de validation.',
-                                    //       Icons.error,
-                                    //       Colors.red,
-                                    //       {'label': 'FERMER', "onTap": (){
-                                    //         Navigator.pop(context);
-                                    //       }},
-                                    //       20,
-                                    //       false);
-                                    // } else {
-                                    //   notification_dialog(
-                                    //       context,
-                                    //       'Une erreur c\'est produite.',
-                                    //       Icons.error,
-                                    //       Colors.red,
-                                    //       {'label': 'FERMER', "onTap": (){
-                                    //         Navigator.pop(context);
-                                    //       }},
-                                    //       20,
-                                    //       false);
-                                    // }
+                                    if(value['code'] == '400'){
+                                      notification_dialog(
+                                          context,
+                                          '${value['message']}',
+                                          Icons.error,
+                                          Colors.red,
+                                          {'label': 'FERMER', "onTap": (){
+                                            Navigator.pop(context);
+                                          }},
+                                          20,
+                                          false);
+                                    } else if(value['code'] == "OTP"){
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context)
+                                              => VerifyNumberScreen(
+                                                  register: true,
+                                                  phone: phoneController.text.trim())
+                                          )
+                                      );
+                                    } else if(value['code'] == 'KO'){
+                                      Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (context)
+                                                          => VerifyNumberScreen(
+                                                            register: true,
+                                                              phone: phoneController.text.trim())
+                                                      )
+                                                  );
+                                    } else {
+                                      notification_dialog(
+                                          context,
+                                          '${value['error']}',
+                                          Icons.error,
+                                          Colors.red,
+                                          {'label': 'FERMER', "onTap": (){
+                                            Navigator.pop(context);
+                                          }},
+                                          20,
+                                          false);
+                                    }
                               });
 
                               // Navigator.push(
