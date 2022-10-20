@@ -6,10 +6,8 @@ import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:goplus/pages/homePage.dart';
+import 'package:goplus/screens/loadingAnimationWidget.dart';
 import 'package:goplus/utils/datas.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-
-import '../../utils/app_colors.dart';
 
 class PickLocation extends StatefulWidget{
   bool destination;
@@ -89,13 +87,7 @@ class _PickLocation extends State<PickLocation>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: position == null ? Center(
-      child: LoadingAnimationWidget.twistingDots(
-        leftDotColor: AppColors.primaryColor,
-        rightDotColor: AppColors.primaryColor,
-        size: 30,
-      ),
-    )
+        body: position == null ? LoadingWidget(message: 'Chargement de la carte en cours...')
         :
       Container(
         child: Stack(
@@ -171,10 +163,10 @@ class _PickLocation extends State<PickLocation>{
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               children: [
-                                Icon(
+                                const Icon(
                                     Icons.map_outlined
                                 ),
-                                SizedBox(width: 4.0,),
+                                const SizedBox(width: 4.0,),
                                 widget.destination ?
                                 Text(
                                   selectedPlace == null

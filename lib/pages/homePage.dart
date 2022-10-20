@@ -258,7 +258,7 @@ class _HomePage extends State<HomePage>{
                       ),
                     ),
 
-                    selectedPlace != null ?
+                    selectedPlace != null || airport != null ?
                     Padding(
                         padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
                         child: GestureDetector(
@@ -267,7 +267,7 @@ class _HomePage extends State<HomePage>{
                               context,
                               MaterialPageRoute(
                                   builder: (BuildContext context) => PickLocation(
-                                    place: selectedPlace,
+                                    place: checkairport ? airport : selectedPlace,
                                     destination: false,
                                   )
                               ),

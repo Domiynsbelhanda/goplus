@@ -20,6 +20,17 @@ class _LoadingWidget extends State<LoadingWidget>{
 
   late Size size;
   late String message;
+  bool _showWidget = false;
+
+
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 3)).then((value) {
+      setState(() {
+        _showWidget = true;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +63,41 @@ class _LoadingWidget extends State<LoadingWidget>{
                        'Veuillez patienter\n${message}',
                     textAlign: TextAlign.center
                   ) : const Text(
-                    'Veuillez patienter.',
+                    'Veuillez patienter...',
                       textAlign: TextAlign.center
                   ),
                 ),
-              )
+              ),
+
+              _showWidget ? Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom : 16.0),
+                  child: Row(
+                    children: [
+                      const Text(
+                          'Connection lente ...'
+                      ),
+
+                      TextButton(
+                          onPressed: (){
+                            Navigator.pop(context);
+                          },
+                          child: const Text(
+                            'CLIQUEZ ICI',
+                            style: TextStyle(
+                              color: Colors.yellow
+                            ),
+                          )
+                      ),
+
+                      const Text(
+                          'pour fermer et reesayez.'
+                      ),
+                    ]
+                  )
+                ),
+              ) : const SizedBox()
             ],
           )
       ),

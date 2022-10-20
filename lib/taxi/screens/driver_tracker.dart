@@ -34,7 +34,9 @@ class _DriverTracker extends State<DriverTracker>{
             );
           }
 
-          return LoadingWidget(message: '',);
+          return LoadingWidget(
+            message: 'Changement en cours ...',
+          );
         },
       ),
     );

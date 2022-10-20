@@ -2,12 +2,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:goplus/utils/app_colors.dart';
+import 'package:goplus/screens/loadingAnimationWidget.dart';
 import 'package:goplus/widget/backButton.dart';
 import 'package:goplus/widget/bottom_type_car.dart';
 import 'package:goplus/widget/notification_loader.dart';
 import 'package:goplus/widget/progresso_dialog.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../services/auth.dart';
@@ -111,13 +110,9 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   @override
   Widget build(BuildContext context){
     // TODO: implement build
-    return position == null ? Center(
-      child: LoadingAnimationWidget.twistingDots(
-        leftDotColor: AppColors.primaryColor,
-        rightDotColor: AppColors.primaryColor,
-        size: 30,
-      ),
-    )
+    return position == null ? LoadingWidget(
+        message: 'Changement de la carte en cours...',
+      )
     : SafeArea(
         child: StreamBuilder(
           stream: FirebaseFirestore.instance.collection("drivers").snapshots(),
@@ -260,8 +255,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                 ],
               );
             }
-            return const Center(
-              child: CircularProgressIndicator(),
+            return LoadingWidget(
+              message: 'Changement de la carte en cours...',
             );
           },
         ),
