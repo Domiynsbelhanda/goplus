@@ -196,7 +196,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
 
                                     Navigator.pop(context);
 
-                                    if(value['code'] == '400'){
+                                    if(value['code'].toString() == '400'){
                                       notification_dialog(
                                           context,
                                           '${value['message']}',
@@ -214,6 +214,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                               => VerifyNumberScreen(
                                                   register: true,
                                                   phone: phoneController.text.trim())
+                                                  
                                           )
                                       );
                                     } else if(value['code'] == 'KO'){

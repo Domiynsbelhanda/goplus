@@ -143,9 +143,9 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                         } else {
                           notification_dialog(
                               context,
-                              '${value['message']}',
+                              "Vous êtes connectés.",
                               Icons.verified,
-                              Colors.red,
+                              Colors.green,
                               {'label': 'SUIVANT', "onTap": (){
                                 Navigator.push(
                                   context,
