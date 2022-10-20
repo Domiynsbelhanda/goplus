@@ -29,9 +29,13 @@ class _LoadingWidget extends State<LoadingWidget>{
     message = widget.message;
 
     Future.delayed(const Duration(seconds: 15)).then((value) {
-      setState(() {
+      try{
+        setState(() {
+          _showWidget = true;
+        });
+      } catch(e){
         _showWidget = true;
-      });
+      }
     });
 
     return Scaffold(
