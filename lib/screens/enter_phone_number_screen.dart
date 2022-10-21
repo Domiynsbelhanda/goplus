@@ -159,13 +159,13 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                             Navigator.pop(context);
 
                             if(value['code'] == 'OTP'){
-                              Navigator.of(context).push(
-                                  MaterialPageRoute(builder: (context) =>
-                                      VerifyNumberScreen(
-                                          phone: phoneController.text.trim(),
-                                        register: false,
-                                      )
-                                  )
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => VerifyNumberScreen(
+                                        register: true,
+                                        phone: phoneController.text.trim())
+                                ),
                               );
                             } else if(value['code'] == 'KO'){
                                   notification_dialog(

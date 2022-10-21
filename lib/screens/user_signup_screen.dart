@@ -208,24 +208,23 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                           20,
                                           false);
                                     } else if(value['code'] == "OTP"){
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context)
-                                              => VerifyNumberScreen(
-                                                  register: true,
-                                                  phone: phoneController.text.trim())
-                                                  
-                                          )
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => VerifyNumberScreen(
+                                                register: true,
+                                                phone: phoneController.text.trim())
+                                        ),
                                       );
                                     } else if(value['code'] == 'KO'){
-                                      Navigator.of(context).push(
-                                                      MaterialPageRoute(
-                                                          builder: (context)
-                                                          => VerifyNumberScreen(
-                                                            register: true,
-                                                              phone: phoneController.text.trim())
-                                                      )
-                                                  );
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => VerifyNumberScreen(
+                                                register: true,
+                                                phone: phoneController.text.trim())
+                                        ),
+                                      );
                                     } else {
                                       notification_dialog(
                                           context,

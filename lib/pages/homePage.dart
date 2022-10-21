@@ -7,6 +7,7 @@ import 'package:goplus/taxi/screens/driver_tracker.dart';
 import 'package:goplus/taxi/screens/mapsPickLocation.dart';
 import 'package:goplus/widget/logo_text.dart';
 import 'package:goplus/widget/mini_card_picture.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../main.dart';
 import '../screens/signup_screen.dart';
 import '../utils/app_colors.dart';
@@ -32,6 +33,31 @@ class _HomePage extends State<HomePage>{
   LatLng airport = const LatLng(-4.3884214, 15.4416188);
   bool menuDepart = false;
   bool checkairport = false;
+
+
+  @override
+  void initState() {
+    requestPermission();
+  }
+
+  void requestPermission() async{
+    if(await Permission.location.serviceStatus.isEnabled){
+      var status = await Permission.location.status;
+      if(status.isGranted){
+
+      } else if(status.isDenied) {
+        Map<Permission, PermissionStatus> status = await [
+          Permission.location
+        ].request();
+      }
+    } else {
+
+    }
+
+    if(await Permission.location.isPermanentlyDenied){
+      openAppSettings();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
