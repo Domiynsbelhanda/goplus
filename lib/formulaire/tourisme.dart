@@ -1,6 +1,5 @@
 import 'package:cool_stepper/cool_stepper.dart';
 import 'package:flutter/material.dart';
-import 'package:goplus/formulaire/dashboard.dart';
 import 'package:goplus/services/formulaireRequest.dart';
 import 'package:goplus/utils/app_colors.dart';
 import 'package:goplus/widget/backButton.dart';
@@ -151,8 +150,8 @@ class _TourismForm extends State<TourismForm>{
             notification_dialog(
                 context,
                 'Selectionner un pays.',
-                Icons.error,
-                Colors.red,
+                Icons.warning,
+                Colors.yellow,
                 {'label': 'FERMER', 'onTap': ()=>Navigator.pop(context)},
               20,
               false
@@ -189,8 +188,8 @@ class _TourismForm extends State<TourismForm>{
             notification_dialog(
                 context,
                 'Completez le formulaire.',
-                Icons.error,
-                Colors.red,
+                Icons.warning,
+                Colors.yellow,
                 {'label': 'FERMER', 'onTap': ()=>Navigator.pop(context)},
                 20,
               false
@@ -242,8 +241,8 @@ class _TourismForm extends State<TourismForm>{
             notification_dialog(
                 context,
                 'Selectionner une date de rendez-vous..',
-                Icons.error,
-                Colors.red,
+                Icons.warning,
+                Colors.yellow,
                 {'label': 'FERMER',
                   'onTap': ()=>Navigator.pop(context)
                 },
@@ -314,8 +313,8 @@ class _TourismForm extends State<TourismForm>{
             notification_dialog(
                 context,
                 'Selectionner une heure de rendez-vous..',
-                Icons.error,
-                Colors.red,
+                Icons.warning,
+                Colors.yellow,
                 {'label': 'FERMER',
                   'onTap': ()=>Navigator.pop(context)
                 },

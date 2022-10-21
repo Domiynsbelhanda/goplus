@@ -190,7 +190,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                   context,
                                   "Coordonée incorrect.",
                                   Icons.person,
-                                  Colors.red,
+                                  Colors.yellow,
                                   {'label': "FERMER", "onTap": (){
                                     Navigator.pop(context);
                                   }
@@ -201,8 +201,8 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                               notification_dialog(
                                   context,
                                   'Une erreur c\'est produite. ${value['error']}',
-                                  Icons.error,
-                                  Colors.red,
+                                  Icons.warning,
+                                  Colors.yellow,
                                   {'label': 'REESAYEZ', "onTap": (){
                                     Navigator.pop(context);
                                   }},
@@ -212,8 +212,8 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                               notification_dialog(
                                   context,
                                   'Une erreur c\'est produite. ${value['error']}',
-                                  Icons.error,
-                                  Colors.red,
+                                  Icons.warning,
+                                  Colors.yellow,
                                   {'label': 'FERMER', "onTap": (){
                                     Navigator.pop(context);
                                   }},
@@ -223,8 +223,8 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                               notification_dialog(
                                   context,
                                   'Une erreur c\'est produite. ${value['error']}',
-                                  Icons.error,
-                                  Colors.red,
+                                  Icons.warning,
+                                  Colors.yellow,
                                   {'label': 'FERMER', "onTap": (){
                                     Navigator.pop(context);
                                   }},
