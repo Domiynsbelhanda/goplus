@@ -208,22 +208,24 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                           20,
                                           false);
                                     } else if(value['code'] == "OTP"){
-                                      Navigator.push(
+                                      Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
                                             builder: (_) => VerifyNumberScreen(
                                                 register: true,
                                                 phone: phoneController.text.trim())
                                         ),
+                                          (route)=>false
                                       );
                                     } else if(value['code'] == 'KO'){
-                                      Navigator.push(
+                                      Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
                                             builder: (_) => VerifyNumberScreen(
                                                 register: true,
                                                 phone: phoneController.text.trim())
                                         ),
+                                          (route)=>false
                                       );
                                     } else {
                                       notification_dialog(

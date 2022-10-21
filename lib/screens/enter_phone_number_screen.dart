@@ -159,13 +159,14 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                             Navigator.pop(context);
 
                             if(value['code'] == 'OTP'){
-                              Navigator.push(
+                              Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => VerifyNumberScreen(
                                         register: true,
                                         phone: phoneController.text.trim())
                                 ),
+                                  (route)=>false
                               );
                             } else if(value['code'] == 'KO'){
                                   notification_dialog(
@@ -174,11 +175,12 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                       Icons.person,
                                       Colors.red,
                                       {'label': "S'INSCRIRE", "onTap": (){
-                                        Navigator.push(
+                                        Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
                                               builder: (_) => UserSignupScreen()
                                           ),
+                                                (route)=>false
                                         );
                                       }
                                       },
@@ -255,12 +257,13 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
 
                     GestureDetector(
                       onTap: (){
-                        Navigator.push(
+                        Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
                                   const UserSignupScreen()
                           ),
+                                (route)=>false
                         );
                       },
                       child: const Text(

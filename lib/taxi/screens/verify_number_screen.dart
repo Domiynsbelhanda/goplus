@@ -147,12 +147,13 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                               Icons.verified,
                               Colors.green,
                               {'label': 'SUIVANT', "onTap": (){
-                                Navigator.push(
+                                Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
                                           HomePage()
                                   ),
+                                        (route)=>false
                                 );
                               }},
                               20,
