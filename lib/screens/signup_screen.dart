@@ -244,14 +244,14 @@ class _SignupScreenState extends State<SignupScreen> {
                                       Icons.error,
                                       Colors.red,
                                       {'label': 'Suivant', "onTap": (){
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context)
-                                                => DriverVerifyNumberScreen(
-                                                  phone: phoneController.text.trim()
-                                                )
 
-                                            )
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) => DriverVerifyNumberScreen(
+                                                  phone: phoneController.text.trim()
+                                              )
+                                          ),
                                         );
                                       }},
                                       20,
