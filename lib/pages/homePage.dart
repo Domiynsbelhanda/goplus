@@ -267,19 +267,39 @@ class _HomePage extends State<HomePage>{
                     selectedPlace != null ?
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-                      child: Text(
-                        '${selectedPlace!.latitude} - ${selectedPlace!.longitude}',
-                        style: const TextStyle(
-                          fontSize: 12
+                      child: Card(
+                        elevation: 2.0,
+                        child: SizedBox(
+                          width: size.width,
+                          child: Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Text(
+                                '${selectedPlace!.latitude} - ${selectedPlace!.longitude}',
+                              style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                      )
                     ) : const SizedBox()
-                        : const Padding(
-                      padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-                      child: Text(
-                        'Aeroport de NDJILI',
-                        style: TextStyle(
-                            fontSize: 12
+                        : Padding(
+                      padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+                      child: Card(
+                        elevation: 2.0,
+                        child: SizedBox(
+                          width: size.width,
+                          child: const Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Text(
+                              'Lieu : Aeroport de NDJILI',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -333,10 +353,20 @@ class _HomePage extends State<HomePage>{
                     depart != null ?
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-                      child: Text(
-                        '${depart!.latitude} - ${depart!.longitude}',
-                        style: const TextStyle(
-                            fontSize: 12
+                      child: Card(
+                        elevation: 2.0,
+                        child: SizedBox(
+                          width: size.width,
+                          child: Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Text(
+                              '${depart!.latitude} - ${depart!.longitude}',
+                              style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ) : const SizedBox(),
