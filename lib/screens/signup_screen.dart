@@ -9,6 +9,7 @@ import '../utils/app_colors.dart';
 import '../widget/app_bar.dart';
 import '../widget/app_button.dart';
 import '../widget/notification_dialog.dart';
+import 'driver_verify_number_screen.dart';
 
 class SignupScreen extends StatefulWidget {
 
@@ -239,11 +240,19 @@ class _SignupScreenState extends State<SignupScreen> {
                                 if(res['code'] == "OTP"){
                                   notification_dialog(
                                       context,
-                                      'Votre compte a été créer, vouos receverez une notification de confirmation de votre compte.',
+                                      "Cliquez sur Suivant pour vérifiez votre numéro de téléphone.",
                                       Icons.error,
                                       Colors.red,
-                                      {'label': 'FERMER', "onTap": (){
-                                        Navigator.pop(context);
+                                      {'label': 'Suivant', "onTap": (){
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context)
+                                                => DriverVerifyNumberScreen(
+                                                  phone: phoneController.text.trim()
+                                                )
+
+                                            )
+                                        );
                                       }},
                                       20,
                                       false);
