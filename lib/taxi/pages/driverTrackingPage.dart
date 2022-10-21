@@ -186,6 +186,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   Positioned(
                     bottom: 16,
                     left: 16.0,
+                    right: 58.0,
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       child: SingleChildScrollView(

@@ -16,10 +16,10 @@ class BottomTypeCar extends StatelessWidget{
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: MediaQuery.of(context).size.width / 2.5,
+        height: MediaQuery.of(context).size.width / 2.3,
         width: MediaQuery.of(context).size.width / 2.6,
         decoration: BoxDecoration(
-            color: active ? Colors.blue.withOpacity(.5) : Colors.white,
+            color: active ? Colors.yellow.withOpacity(.5) : Colors.white,
             borderRadius: BorderRadius.circular(8.0),
             // boxShadow: [
             //   BoxShadow(

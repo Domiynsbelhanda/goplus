@@ -177,7 +177,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (_) => const UserSignupScreen()
+                                              builder: (_) => UserSignupScreen()
                                           ),
                                         );
                                       }
