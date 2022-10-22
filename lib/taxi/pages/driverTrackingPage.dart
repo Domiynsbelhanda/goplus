@@ -4,7 +4,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:goplus/pages/homePage.dart';
 import 'package:goplus/screens/loadingAnimationWidget.dart';
 import 'package:goplus/widget/backButton.dart';
 import 'package:goplus/widget/bottom_type_car.dart';
@@ -17,7 +16,7 @@ import '../../services/auth.dart';
 import '../../utils/datas.dart';
 import '../../widget/app_button.dart';
 
-const double ZOOM = 13;
+const double ZOOM = 19;
 
 class DriverTrackingPage extends StatefulWidget{
   LatLng depart;
@@ -52,12 +51,13 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   void initState() {
     readBitconMarker();
     readBitconMarkerPinner();
+    getMyPosition();
   }
 
   void data(LatLng value) async{
     CameraPosition cameraPosition = CameraPosition(
       target: LatLng(value.latitude, value.longitude),
-      zoom: ZOOM,
+      zoom: 13,
     );
 
 
@@ -88,6 +88,16 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
     });
   }
 
+  getMyPosition() async {
+    getUserCurrentLocation().then((value) async {
+      setState(() {
+        position = LatLng(value.latitude, value.longitude);
+
+        data(position!);
+      });
+    });
+  }
+
   readBitconMarker() async {
     markerbitmap = await BitmapDescriptor.fromAssetImage(
       ImageConfiguration(),
@@ -108,170 +118,156 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   @override
   Widget build(BuildContext context){
     // TODO: implement build
-    return FutureBuilder<Position>(
-      future: getUserCurrentLocation(),
-      builder: (context, snapshot) {
+    return position == null ?
+    LoadingWidget(message: 'Changement de votre position',)
+    : SafeArea(
+      child: StreamBuilder(
+        stream: FirebaseFirestore.instance.collection("drivers").snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasData) {
+            var data = snapshot.data!.docs;
+            markers.clear();
+            for(var i = 0; i < data.length; i++){
+              if(data[i].get('online')){
+                if(data[i].get('cartype') == carType){
+                  double latitude = data[i].get('latitude');
+                  double longitude = data[i].get('longitude');
+                  GeoPoint location = GeoPoint(latitude, longitude);
 
-        if(!snapshot.hasData){
-          return LoadingWidget(message: "Changement de votre position en cours...");
-        }
-
-        position = LatLng(snapshot.data!.latitude, snapshot.data!.longitude);
-
-        data(position!);
-
-        EasyLoading.dismiss();
-
-        return SafeArea(
-            child: StreamBuilder(
-              stream: FirebaseFirestore.instance.collection("drivers").snapshots(),
-              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasData) {
-                  var data = snapshot.data!.docs;
-                  markers.clear();
-                  for(var i = 0; i < data.length; i++){
-                    if(data[i].get('online')){
-                      if(data[i].get('cartype') == carType){
-                        double latitude = data[i].get('latitude');
-                        double longitude = data[i].get('longitude');
-                        GeoPoint location = GeoPoint(latitude, longitude);
-
-                        // Check if location is valid
-                        if (location == null) {
-                          return Text("There was no location data");
-                        }
-                        final latLng = LatLng(location.latitude, location.longitude);
-
-                        // Add new marker with markerId.
-                        markers
-                            .add(
-                            Marker(
-                                markerId: MarkerId(data[i].id),
-                                position: latLng,
-                                icon: markerbitmap,
-                                onTap: (){
-                                  setState(() {
-                                    index = i;
-                                  });
-                                }
-                            )
-                        );
-                      }
-                    } else {
-                      markers.add(
-                          Marker(
-                            markerId: MarkerId("1"),
-                            position: position!,
-                            infoWindow: InfoWindow(
-                              title: 'Votre Position',
-                            ),
-                            icon: pinner,
-                          )
-                      );
-                    }
+                  // Check if location is valid
+                  if (location == null) {
+                    return Text("There was no location data");
                   }
+                  final latLng = LatLng(location.latitude, location.longitude);
 
-                  return Stack(
-                    children: [
-                      GoogleMap(
-                        initialCameraPosition: CameraPosition(
-                            target: position!,
-                          zoom: ZOOM
-                        ),
-                        // Markers to be pointed
-                        markers: markers,
-                        circles: circles,
-                        onMapCreated: (GoogleMapController controller){
-                          _controller.complete(controller);
-                        },
-                      ),
-
-                      Positioned(
-                        right: 16,
-                        top: 16,
-                        child: BackButtons(context),
-                      ),
-
-                      Positioned(
-                        bottom: 16,
-                        left: 16.0,
-                        right: 58.0,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                BottomTypeCar(
-                                  image: 'assets/images/ist.png',
-                                  type: 'TAXI Mini',
-                                  place: '4 personnes',
-                                  prices: widget.airport ? '40\$' : '10\$ / 30 Min',
-                                  onTap: (){
-                                    setState(() {
-                                      carType = "1";
-                                    });
-                                  },
-                                  active: carType == "1",
-                                ),
-
-                                const SizedBox(
-                                  width: 16.0,
-                                ),
-
-                                BottomTypeCar(
-                                  image: 'assets/images/berline.png',
-                                  type: 'Berline VIP',
-                                  place: '4 personnes',
-                                  prices: widget.airport ? '55\$' : '12\$ / 30 Min',
-                                  onTap: (){
-                                    setState(() {
-                                      carType = "2";
-                                    });
-                                  },
-                                  active: carType == "2",
-
-                                ),
-
-                                const SizedBox(
-                                  width: 16.0,
-                                ),
-
-                                BottomTypeCar(
-                                  image: 'assets/images/van.png',
-                                  type: 'Taxi Bus',
-                                  place: '8 personnes',
-                                  prices: widget.airport ? '95\$' : '14\$ / 30 Min',
-                                  onTap: (){
-                                    setState(() {
-                                      carType = "3";
-                                    });
-                                  },
-                                  active: carType == "3",
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      index != null ?
-                      Positioned.fill(
-                        child: Align(
-                          alignment: Alignment.center,
-                            child: showDriver(data[index!])
-                        ),
-                      ) : const SizedBox(),
-                    ],
+                  // Add new marker with markerId.
+                  markers
+                      .add(
+                      Marker(
+                          markerId: MarkerId(data[i].id),
+                          position: latLng,
+                          icon: markerbitmap,
+                          onTap: (){
+                            setState(() {
+                              index = i;
+                            });
+                          }
+                      )
                   );
                 }
-                return LoadingWidget(
-                  message: 'Changement de la carte en cours...',
+              } else {
+                markers.add(
+                    Marker(
+                      markerId: MarkerId("1"),
+                      position: position!,
+                      infoWindow: InfoWindow(
+                        title: 'Votre Position',
+                      ),
+                      icon: pinner,
+                    )
                 );
-              },
-            ),
+              }
+            }
+
+            return Stack(
+              children: [
+                GoogleMap(
+                  initialCameraPosition: CameraPosition(
+                      target: position!,
+                      zoom: ZOOM
+                  ),
+                  // Markers to be pointed
+                  markers: markers,
+                  circles: circles,
+                  onMapCreated: (GoogleMapController controller){
+                    _controller.complete(controller);
+                  },
+                ),
+
+                Positioned(
+                  right: 16,
+                  top: 16,
+                  child: BackButtons(context),
+                ),
+
+                Positioned(
+                  bottom: 16,
+                  left: 16.0,
+                  right: 58.0,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          BottomTypeCar(
+                            image: 'assets/images/ist.png',
+                            type: 'TAXI Mini',
+                            place: '4 personnes',
+                            prices: widget.airport ? '40\$' : '10\$ / 30 Min',
+                            onTap: (){
+                              setState(() {
+                                carType = "1";
+                              });
+                            },
+                            active: carType == "1",
+                          ),
+
+                          const SizedBox(
+                            width: 16.0,
+                          ),
+
+                          BottomTypeCar(
+                            image: 'assets/images/berline.png',
+                            type: 'Berline VIP',
+                            place: '4 personnes',
+                            prices: widget.airport ? '55\$' : '12\$ / 30 Min',
+                            onTap: (){
+                              setState(() {
+                                carType = "2";
+                              });
+                            },
+                            active: carType == "2",
+
+                          ),
+
+                          const SizedBox(
+                            width: 16.0,
+                          ),
+
+                          BottomTypeCar(
+                            image: 'assets/images/van.png',
+                            type: 'Taxi Bus',
+                            place: '8 personnes',
+                            prices: widget.airport ? '95\$' : '14\$ / 30 Min',
+                            onTap: (){
+                              setState(() {
+                                carType = "3";
+                              });
+                            },
+                            active: carType == "3",
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+
+                index != null ?
+                Positioned.fill(
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: showDriver(data[index!])
+                  ),
+                ) : const SizedBox(),
+              ],
+            );
+          }
+          return LoadingWidget(
+            message: 'Changement de la carte en cours...',
           );
-      }
+        },
+      ),
     );
   }
 
@@ -304,34 +300,42 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image.asset(
-                  'assets/images/ist.png',
+                  data.get('cartype') == "1" ?
+                  'assets/images/ist.png' : data.get('cartype') == "2" ?
+                  'assets/images/berline.png' : 'assets/images/van.png' ,
                   width: 120,
                   height: 60,
                   fit: BoxFit.fitHeight,
                 ),
-                SizedBox(width: 16.0),
+                const SizedBox(width: 16.0),
                 Column(
-                  children: const [
+                  children: [
                     Text(
-                      "TAXI Mini",
+                      data.get('cartype') == "1" ?
+                      'TAXI Mini' : data.get('cartype') == "2" ?
+                      'Berline VIP' : 'TAXI Bus',
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Anton'
                       ),
                     ),
 
                     Text(
-                      "4 personnes",
+                      data.get('cartype') == "1" ?
+                      '4 personnes' : data.get('cartype') == "2" ?
+                      '4 personnes' : '8 personnes',
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontWeight: FontWeight.w500,
                         fontFamily: 'Anton',
                       ),
                     ),
 
                     Text(
-                      "5\$/h",
+                      data.get('cartype') == "1" ?
+                      '10\$ / 30 Min' : data.get('cartype') == "2" ?
+                      '12\$ / 30 Min' : '14\$ / 30 Min',
                       overflow: TextOverflow.ellipsis,
                     )
                   ],
