@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:goplus/pages/homePage.dart';
+import 'package:goplus/widget/show_loader.dart';
 import 'package:provider/provider.dart';
 
 import '../../services/auth.dart';
@@ -42,7 +44,6 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                APPBAR(),
                 SizedBox(height: size.height * 0.08),
                 Text(
                   'Vérification du numéro de téléphone \n+243${widget.phone}',
@@ -103,7 +104,7 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                   name: 'VERIFIEZ',
                   color: AppColors.primaryColor,
                   onTap: () async{
-                    notification_loader(context, 'Vérification OTP en cours...', (){});
+                    showLoader("Vérification OTP en cours\nVeuillez patienter...");
                     if(otp != null){
                       var data;
                       if(widget.register){
@@ -126,7 +127,7 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
 
                       Provider.of<Auth>(context, listen: false).checkOtp(context, data)
                           .then((value){
-                        Navigator.pop(context);
+                        EasyLoading.dismiss();
 
                         if(value['code'] == 'KO'){
                           notification_dialog(
