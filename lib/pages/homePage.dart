@@ -175,87 +175,6 @@ class _HomePage extends State<HomePage>{
                     )
                 ),
 
-                    Padding(
-                      padding: const EdgeInsets.only(left: 64.0, right: 64.0, bottom: 16.0),
-                      child: Column(
-                        children: [
-                          GestureDetector(
-                            onTap: (){
-                              setState(() {
-                                checkairport = false;
-                              });
-
-
-                            },
-                            child: Container(
-                              height: size.width / 8,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(48),
-                                  border: Border.all(
-                                      color: Colors.black,
-                                      width: 0.5
-                                  )
-                              ),
-                              child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: const [
-                                        Icon(
-                                            Icons.map_outlined
-                                        ),
-                                        SizedBox(width: 4.0,),
-                                        Text(
-                                          'Choisir sur la carte',
-                                          textAlign: TextAlign.left,
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                              ),
-                            ),
-                          ),
-
-                          const SizedBox(height: 8.0),
-
-                          GestureDetector(
-                            onTap: (){
-                              setState(() {
-                                checkairport = true;
-                              });
-                            },
-                            child: Container(
-                              height: size.width / 7,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(48),
-                                  border: Border.all(
-                                      color: Colors.black,
-                                      width: 0.5
-                                  )
-                              ),
-                              child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: const [
-                                        Icon(
-                                            Icons.map_outlined
-                                        ),
-                                        SizedBox(width: 4.0,),
-                                        Text(
-                                          'Aéroport de N\'djili',
-                                          textAlign: TextAlign.left,
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-
                     !checkairport ?
                     selectedPlace != null ?
                     Padding(
@@ -286,7 +205,7 @@ class _HomePage extends State<HomePage>{
                           child: const Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Text(
-                              'Lieu : Aeroport de NDJILI',
+                              'Départ : Aeroport de NDJILI',
                               style: TextStyle(
                                   fontSize: 12,
                                 fontWeight: FontWeight.bold
@@ -353,7 +272,7 @@ class _HomePage extends State<HomePage>{
                           child: Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Text(
-                              '${depart!.latitude} - ${depart!.longitude}',
+                              'Départ : ${depart!.latitude} - ${depart!.longitude}',
                               style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold
