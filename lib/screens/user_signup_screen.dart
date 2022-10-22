@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:goplus/services/auth.dart';
-import 'package:goplus/widget/notification_loader.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_select/smart_select.dart';
 
 import '../../utils/app_colors.dart';
-import '../../widget/app_bar.dart';
 import '../../widget/app_button.dart';
 import '../taxi/screens/verify_number_screen.dart';
 import '../widget/notification_dialog.dart';
+import '../widget/show_loader.dart';
 
 class UserSignupScreen extends StatefulWidget {
   const UserSignupScreen({Key? key}) : super(key: key);
@@ -81,7 +81,6 @@ class _SignupScreenState extends State<UserSignupScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                APPBAR(),
                 SizedBox(
                   height: size.height * 0.03,
                 ),
@@ -180,7 +179,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                           name: 'S\'INSRIRE',
                           onTap: (){
                             if(formkey.currentState!.validate()){
-                              notification_loader(context, 'Inscription en Cours', (){});
+                              showLoader("Inscription en cours\nVeuillez patienter...");
                               var data = {
                                 "key": "create_user",
                                 "action": "client",
@@ -194,7 +193,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                               Provider.of<Auth>(context, listen: false)
                                   .register(context: context, cred: data).then((value){
 
-                                    Navigator.pop(context);
+                                    EasyLoading.dismiss();
 
                                     if(value['code'].toString() == '400'){
                                       notification_dialog(

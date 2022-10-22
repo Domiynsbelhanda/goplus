@@ -42,7 +42,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              APPBAR(),
               SizedBox(height: size.height * 0.08),
 
               const Text(
