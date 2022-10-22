@@ -3,13 +3,13 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/formulaire/dashboard.dart';
 import 'package:goplus/screens/quizwebview.dart';
-import 'package:goplus/taxi/screens/driver_tracker.dart';
 import 'package:goplus/taxi/screens/mapsPickLocation.dart';
 import 'package:goplus/widget/logo_text.dart';
 import 'package:goplus/widget/mini_card_picture.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../main.dart';
 import '../screens/signup_screen.dart';
+import '../taxi/pages/driverTrackingPage.dart';
 import '../utils/app_colors.dart';
 import '../utils/datas.dart';
 
@@ -292,7 +292,7 @@ class _HomePage extends State<HomePage>{
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (BuildContext context) => DriverTracker(
+                                  builder: (BuildContext context) => DriverTrackingPage(
                                     depart: depart!,
                                     destination: checkairport ? airport : selectedPlace!,
                                     airport: checkairport,

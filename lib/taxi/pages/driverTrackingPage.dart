@@ -111,21 +111,9 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
     return FutureBuilder<Position>(
       future: getUserCurrentLocation(),
       builder: (context, snapshot) {
+
         if(!snapshot.hasData){
-          showLoader('Chargement de votre position\nVeuillez patienter...');
-          Future.delayed(const Duration(seconds: 30)).then((value) {
-            EasyLoading.dismiss();
-            showLoader("Chargement de votre position\nChargement lente... \nVérifiez si votre localisation est activée et recommencer");
-            Future.delayed(const Duration(seconds: 15)).then((value) {
-              EasyLoading.dismiss();
-              Navigator.pushAndRemoveUntil(
-                  context, 
-                  MaterialPageRoute(builder: (context)=>HomePage()),
-                      (route) => false
-              );
-            });
-          });
-          return SafeArea(child: Container());
+          return LoadingWidget(message: "Changement de votre position en cours...");
         }
 
         position = LatLng(snapshot.data!.latitude, snapshot.data!.longitude);
