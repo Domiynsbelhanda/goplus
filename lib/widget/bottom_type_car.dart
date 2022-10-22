@@ -17,7 +17,7 @@ class BottomTypeCar extends StatelessWidget{
       onTap: onTap,
       child: Container(
         height: MediaQuery.of(context).size.width / 2.3,
-        width: MediaQuery.of(context).size.width / 2.6,
+        width: MediaQuery.of(context).size.width / 2.8,
         decoration: BoxDecoration(
             color: active ? Colors.yellow.withOpacity(.5) : Colors.white,
             borderRadius: BorderRadius.circular(8.0),
