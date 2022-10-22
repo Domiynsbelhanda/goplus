@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:goplus/pages/homePage.dart';
 import 'package:goplus/screens/enter_phone_number_screen.dart';
@@ -21,6 +22,22 @@ void main() async {
     ],
     child: MyApp(),
   ));
+  configLoading();
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.dark
+    ..indicatorSize = 45.0
+    ..radius = 10.0
+    ..progressColor = Colors.yellow
+    ..backgroundColor = Colors.black
+    ..indicatorColor = Colors.yellow
+    ..textColor = Colors.yellow
+    ..maskColor = Colors.blue.withOpacity(0.5)
+    ..userInteractions = false
+    ..dismissOnTap = false;
 }
 
 class MyApp extends StatefulWidget{
@@ -50,6 +67,7 @@ class _MyApp extends State<MyApp>{
         Locale('fr', ''),
         Locale('lg', ''),
       ],
+      builder: EasyLoading.init(),
       home: AnimatedSplashScreen(
         nextScreen: FutureBuilder(
           future: Provider.of<Auth>(context,listen: false).getToken(),
