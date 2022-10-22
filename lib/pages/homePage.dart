@@ -184,9 +184,9 @@ class _HomePage extends State<HomePage>{
                         child: SizedBox(
                           width: size.width,
                           child: Padding(
-                            padding: EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(16.0),
                             child: Text(
-                                '${selectedPlace!.latitude} - ${selectedPlace!.longitude}',
+                                'Départ : \n     Longitude: ${selectedPlace!.latitude} \n     Latitude : ${selectedPlace!.longitude}',
                               style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold
@@ -272,7 +272,7 @@ class _HomePage extends State<HomePage>{
                           child: Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Text(
-                              'Départ : ${depart!.latitude} - ${depart!.longitude}',
+                              'Arrivée : \n     Longitude :${depart!.latitude} \n     Latitude : ${depart!.longitude}',
                               style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold
