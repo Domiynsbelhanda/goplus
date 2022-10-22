@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:goplus/screens/user_signup_screen.dart';
-import 'package:goplus/widget/notification_loader.dart';
+import 'package:goplus/widget/show_loader.dart';
+// import 'package:goplus/widget/notification_loader.dart';
 import 'package:provider/provider.dart';
 import '../services/auth.dart';
 import '../taxi/screens/verify_number_screen.dart';
@@ -147,7 +149,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                       name: 'CONNEXION',
                       onTap: () async {
                         if (formkey.currentState!.validate()){
-                          notification_loader(context, "Connexion en cours", (){});
+                          showLoader('Connexion en cours\nVeuillez patienter...');
                           var data = {
                             "key": "check_user",
                             "action": "client",
@@ -156,9 +158,8 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                           };
                           Provider.of<Auth>(context, listen: false)
                               .login(context: context, creds: data).then((value){
-                            Navigator.pop(context);
-
-                            if(value['code'] == 'OTP'){
+                                EasyLoading.dismiss();
+                                if(value['code'] == 'OTP'){
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
@@ -178,7 +179,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                         Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (_) => UserSignupScreen()
+                                              builder: (_) => const UserSignupScreen()
                                           ),
                                                 (route)=>false
                                         );
