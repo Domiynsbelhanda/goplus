@@ -332,7 +332,14 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                       ),
                     ),
 
+                    widget.airport ?
                     Text(
+                      data.get('cartype') == "1" ?
+                      '40\$' : data.get('cartype') == "2" ?
+                      '55\$' : '95\$',
+                      overflow: TextOverflow.ellipsis,
+                    )
+                    :Text(
                       data.get('cartype') == "1" ?
                       '10\$ / 30 Min' : data.get('cartype') == "2" ?
                       '12\$ / 30 Min' : '14\$ / 30 Min',
