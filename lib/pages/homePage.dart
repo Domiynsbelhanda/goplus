@@ -31,7 +31,6 @@ class _HomePage extends State<HomePage>{
   LatLng? selectedPlace;
   LatLng? depart;
   LatLng airport = const LatLng(-4.3884214, 15.4416188);
-  bool menuDepart = false;
   bool checkairport = false;
 
 
@@ -136,10 +135,15 @@ class _HomePage extends State<HomePage>{
                     padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
                     child: GestureDetector(
                       onTap: (){
-                        setState(() {
-                          menuDepart = !menuDepart;
-
-                        });
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  PickLocation(
+                                    destination: true,
+                                  )
+                          ),
+                        );
                       },
                       child: Container(
                         height: size.width / 7,
@@ -171,7 +175,6 @@ class _HomePage extends State<HomePage>{
                     )
                 ),
 
-                    menuDepart ?
                     Padding(
                       padding: const EdgeInsets.only(left: 64.0, right: 64.0, bottom: 16.0),
                       child: Column(
@@ -179,19 +182,10 @@ class _HomePage extends State<HomePage>{
                           GestureDetector(
                             onTap: (){
                               setState(() {
-                                menuDepart = !menuDepart;
                                 checkairport = false;
                               });
 
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        PickLocation(
-                                          destination: true,
-                                        )
-                                ),
-                              );
+
                             },
                             child: Container(
                               height: size.width / 8,
@@ -227,7 +221,6 @@ class _HomePage extends State<HomePage>{
                           GestureDetector(
                             onTap: (){
                               setState(() {
-                                menuDepart = !menuDepart;
                                 checkairport = true;
                               });
                             },
@@ -261,7 +254,7 @@ class _HomePage extends State<HomePage>{
                           )
                         ],
                       ),
-                    ) : const SizedBox(),
+                    )
 
                     !checkairport ?
                     selectedPlace != null ?
@@ -518,7 +511,6 @@ class _HomePage extends State<HomePage>{
                       description: '',
                       onTap: (){
                         setState(() {
-                          menuDepart = !menuDepart;
                           checkairport = true;
                         });
                       },
