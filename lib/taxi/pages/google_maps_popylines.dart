@@ -202,12 +202,15 @@ class _Poly extends State<GoogleMapsPolylines> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      '${data['firstn']} ${data['midn']}',
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Anton'
+                    Container(
+                      width: (MediaQuery.of(context).size.width * 0.8) - 120 - 40,
+                      child: Text(
+                        '${data['firstn']} ${data['midn']}',
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Anton'
+                        ),
                       ),
                     ),
 
