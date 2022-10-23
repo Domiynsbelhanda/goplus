@@ -286,7 +286,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
       padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        height: MediaQuery.of(context).size.width + 66,
+        height: MediaQuery.of(context).size.width + 120,
         width: MediaQuery.of(context).size.width * 0.8,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -362,8 +362,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
 
             SizedBox(height: 8.0,),
 
-            const Text(
-              "- Climatisé \n - Wi-fi à bord \n - Coffre pour 3 valises.",
+            Text(
+              "- Climatisé \n - Wi-fi à bord \n - Coffre pour 3 valises. \n - Couleur : ${data.get('colour')}",
               overflow: TextOverflow.ellipsis,
             ),
 
