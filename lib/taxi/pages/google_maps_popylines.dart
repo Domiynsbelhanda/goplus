@@ -123,8 +123,6 @@ class _Poly extends State<GoogleMapsPolylines> {
                     (BuildContext context, AsyncSnapshot<DocumentSnapshot> courses) {
 
                       var donnees = courses.data!.data() as Map<String, dynamic>;
-
-                      print('$donnees');
                       return Stack(
                         children: [
                           SafeArea(
@@ -180,7 +178,7 @@ class _Poly extends State<GoogleMapsPolylines> {
       padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        height: MediaQuery.of(context).size.width / 1.7,
+        height: MediaQuery.of(context).size.width / 1.77,
         width: MediaQuery.of(context).size.width * 0.8,
         decoration: BoxDecoration(
             color: Colors.white,
@@ -198,7 +196,7 @@ class _Poly extends State<GoogleMapsPolylines> {
                   'assets/images/berline.png' : 'assets/images/van.png' ,
                   width: 120,
                   height: 60,
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.fitWidth,
                 ),
                 const SizedBox(width: 16.0),
                 Column(
@@ -214,11 +212,10 @@ class _Poly extends State<GoogleMapsPolylines> {
                     ),
 
                     Text(
-                      'est à ${calculateDistance(LatLng(data['latitude'], data['longitude']), LatLng(datas['destination_latitude'], datas['destination_longitude'])).toStringAsFixed(2)} M',
+                      "- Couleur : ${data['colour']} \n- Plaque : ${data['carplate']}",
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: MediaQuery.of(context).size.width / 25
+                      style: const TextStyle(
+                        fontSize: 13
                       ),
                     ),
                   ],
@@ -226,14 +223,18 @@ class _Poly extends State<GoogleMapsPolylines> {
               ],
             ),
 
-            const SizedBox(height: 8.0,),
+            const SizedBox(height: 16,),
 
             Text(
-              "- Couleur : ${data['colour']} \n- Plaque : ${data['carplate']}",
+              'est à ${calculateDistance(LatLng(data['latitude'], data['longitude']), LatLng(datas['depart_latitude'], datas['depart_longitude'])).toStringAsFixed(2)} mètre (s) du lieu de départ.',
               overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: MediaQuery.of(context).size.width / 25
+              ),
             ),
 
-            const SizedBox(height: 4.0,),
+            const SizedBox(height: 16.0,),
 
             AppButton(
               name: 'APPELER ',
