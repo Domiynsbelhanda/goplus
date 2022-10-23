@@ -67,6 +67,7 @@ dependencies:
   smart_select: ^4.3.2
   flutter_easyloading: ^3.0.5
   vibration: ^1.7.5
+  url_launcher: ^6.1.5
   webviewx:
 
 dev_dependencies:

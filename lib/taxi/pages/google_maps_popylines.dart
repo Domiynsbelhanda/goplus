@@ -228,7 +228,7 @@ class _Poly extends State<GoogleMapsPolylines> {
             const SizedBox(height: 8.0,),
 
             Text(
-              "- Couleur : ${data['colour']} \n - Plaque : ${data['carplate']}",
+              "- Couleur : ${data['colour']} \n- Plaque : ${data['carplate']}",
               overflow: TextOverflow.ellipsis,
             ),
 
