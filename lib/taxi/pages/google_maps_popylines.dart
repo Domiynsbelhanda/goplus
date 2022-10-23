@@ -226,7 +226,7 @@ class _Poly extends State<GoogleMapsPolylines> {
             const SizedBox(height: 16,),
 
             Text(
-              'est à ${calculateDistance(LatLng(data['latitude'], data['longitude']), LatLng(datas['depart_latitude'], datas['depart_longitude'])).toStringAsFixed(2)} mètre (s) du lieu de départ.',
+              'est à ${calculateDistance(LatLng(data['latitude'], data['longitude']), LatLng(datas['depart_latitude'], datas['depart_longitude'])).toStringAsFixed(2)} m du lieu de départ.',
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                   fontWeight: FontWeight.w500,
