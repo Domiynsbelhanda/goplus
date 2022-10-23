@@ -7,6 +7,7 @@ import 'package:goplus/screens/loadingAnimationWidget.dart';
 import 'package:location/location.dart';
 
 import '../../utils/datas.dart';
+import '../../widget/app_button.dart';
 import '../../widget/backButton.dart';
 
 class GoogleMapsPolylines extends StatefulWidget {
@@ -178,7 +179,7 @@ class _Poly extends State<GoogleMapsPolylines> {
       padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        height: MediaQuery.of(context).size.width + 120,
+        height: MediaQuery.of(context).size.width / 1.7,
         width: MediaQuery.of(context).size.width * 0.8,
         decoration: BoxDecoration(
             color: Colors.white,
@@ -200,11 +201,10 @@ class _Poly extends State<GoogleMapsPolylines> {
                 ),
                 const SizedBox(width: 16.0),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      data['cartype'] == "1" ?
-                      'TAXI Mini' : data['cartype'] == "2" ?
-                      'Berline VIP' : 'TAXI Bus',
+                      '${data['firstn']} ${data['midn']}',
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                           fontWeight: FontWeight.bold,
@@ -213,35 +213,19 @@ class _Poly extends State<GoogleMapsPolylines> {
                     ),
 
                     Text(
-                      data['cartype'] == "1" ?
-                      '4 personnes' : data['cartype'] == "2" ?
-                      '4 personnes' : '8 personnes',
+                      'est à ${calculateDistance(LatLng(data['latitude'], data['longitude']), LatLng(datas['destination_latitude'], datas['destination_longitude'])).toStringAsFixed(2)} M',
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontFamily: 'Anton',
+                        fontSize: MediaQuery.of(context).size.width / 25
                       ),
                     ),
-
-                    datas['airport'] ?
-                    Text(
-                      data['cartype'] == "1" ?
-                      '40\$' : data['cartype'] == "2" ?
-                      '55\$' : '95\$',
-                      overflow: TextOverflow.ellipsis,
-                    )
-                        :Text(
-                      data['cartype'] == "1" ?
-                      '10\$ par heure' : data['cartype'] == "2" ?
-                      '12\$ par heure' : '14\$ par heure',
-                      overflow: TextOverflow.ellipsis,
-                    )
                   ],
                 ),
               ],
             ),
 
-            SizedBox(height: 8.0,),
+            const SizedBox(height: 8.0,),
 
             Text(
               "- Couleur : ${data['colour']} \n - Plaque : ${data['carplate']}",
@@ -250,84 +234,11 @@ class _Poly extends State<GoogleMapsPolylines> {
 
             const SizedBox(height: 4.0,),
 
-            const Divider(
-              height: 8.0,
-            ),
+            AppButton(
+              name: 'APPELER ',
+              onTap: (){
 
-            const SizedBox(height: 4.0,),
-
-            const Text(
-              "DETAILS DU CHAUFFEUR",
-              overflow: TextOverflow.ellipsis,
-            ),
-
-            const SizedBox(height: 8.0,),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  height: 120,
-                  width: 100,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(60),
-                      image: const DecorationImage(
-                        image: NetworkImage(
-                          'https://firebasestorage.googleapis.com/v0/b/taxigo-e3fcc.appspot.com/o/profile.jpg?alt=media&token=609b45f5-2f3c-4edb-b5f4-c041b9eb0457',
-                        ),
-                        fit: BoxFit.fitWidth,
-                      )
-                  ),
-                ),
-
-                const SizedBox(
-                  width: 8.0,
-                ),
-
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${data['firstn']} ${data['midn']}',
-                      style: const TextStyle(
-                          fontSize: 16.0
-                      ),
-                    ),
-
-                    GestureDetector(
-                      onTap: (){},
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.whatsapp,
-                            color: Colors.green,
-                          ),
-
-                          const SizedBox(
-                            width: 4.0,
-                          ),
-
-                          Text(
-                            '+243${data['phone']}',
-                            style: const TextStyle(
-                                fontSize: 14.0
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-
-                    const SizedBox(height: 8.0,),
-                    Text(
-                      'A ${calculateDistance(LatLng(data['latitude'], data['longitude']), LatLng(datas['destination_latitude'], datas['destination_longitude'])).toStringAsFixed(2)} mètre(s)',
-                      style: const TextStyle(
-                          fontSize: 14.0
-                      ),
-                    ),
-                    
-                  ],
-                )
-              ],
+              },
             ),
           ],
         ),
