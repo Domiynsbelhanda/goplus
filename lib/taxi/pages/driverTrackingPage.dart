@@ -42,16 +42,18 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   Set<Circle> circles = Set();
   late BitmapDescriptor markerbitmap;
   late BitmapDescriptor pinner;
-  LatLng? position;
+  late LatLng position;
   double? distance;
   int? index;
   String carType = "1";
 
   @override
   void initState() {
+    position = widget.depart;
     readBitconMarker();
     readBitconMarkerPinner();
-    getMyPosition();
+    data(position);
+    // getMyPosition();
   }
 
   void data(LatLng value) async{
@@ -78,7 +80,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
       markers.add(
           Marker(
             markerId: const MarkerId("1"),
-            position: LatLng(value.latitude, value.longitude),
+            position: position,
             infoWindow: const InfoWindow(
               title: 'Votre Position',
             ),
@@ -92,8 +94,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
     getUserCurrentLocation().then((value) async {
       setState(() {
         position = LatLng(value.latitude, value.longitude);
-
-        data(position!);
       });
     });
   }
@@ -127,6 +127,16 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
           if (snapshot.hasData) {
             var data = snapshot.data!.docs;
             markers.clear();
+            markers.add(
+                Marker(
+                  markerId: const MarkerId("1"),
+                  position: position,
+                  infoWindow: const InfoWindow(
+                    title: 'Votre Position',
+                  ),
+                  icon: pinner,
+                )
+            );
             for(var i = 0; i < data.length; i++){
               if(data[i].get('online')){
                 if(data[i].get('cartype') == carType){
@@ -159,7 +169,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                 markers.add(
                     Marker(
                       markerId: MarkerId("1"),
-                      position: position!,
+                      position: position,
                       infoWindow: InfoWindow(
                         title: 'Votre Position',
                       ),
@@ -173,7 +183,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               children: [
                 GoogleMap(
                   initialCameraPosition: CameraPosition(
-                      target: position!,
+                      target: position,
                       zoom: ZOOM
                   ),
                   // Markers to be pointed
@@ -404,7 +414,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                     ),
                     const SizedBox(height: 8.0,),
                     Text(
-                        'A ${calculateDistance(LatLng(data.get('latitude'), data.get('longitude')), position!).toStringAsFixed(2)} mètre(s)',
+                        'A ${calculateDistance(LatLng(data.get('latitude'), data.get('longitude')), position).toStringAsFixed(2)} mètre(s)',
                       style: const TextStyle(
                         fontSize: 14.0
                       ),
@@ -466,7 +476,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                         'depart_latitude': widget.depart.latitude,
                         'destination_longitude': widget.destination.longitude,
                         'destination_latitude': widget.destination.latitude,
-                        'distance': calculateDistance(widget.depart, position!).toStringAsFixed(2),
+                        'distance': calculateDistance(widget.depart, position).toStringAsFixed(2),
                         'user_id': value!,
                         'sid_user': val,
                         'airport': widget.airport,

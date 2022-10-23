@@ -92,7 +92,7 @@ class _PickLocation extends State<PickLocation>{
               myLocationEnabled: true,
               myLocationButtonEnabled: true,
               initialCameraPosition: CameraPosition(
-                  target: position!,
+                  target: position,
                   zoom: 15
               ),
               mapType: MapType.normal, //map type
@@ -269,7 +269,7 @@ class _PickLocation extends State<PickLocation>{
 
           position = LatLng(snapshot.data!.latitude, snapshot.data!.longitude);
 
-          assetLocation(position!);
+          assetLocation(position);
 
           return SizedBox(
               child: Stack(
@@ -279,7 +279,7 @@ class _PickLocation extends State<PickLocation>{
                     myLocationEnabled: true,
                     myLocationButtonEnabled: true,
                     initialCameraPosition: CameraPosition(
-                        target: position!,
+                        target: position,
                         zoom: 15
                     ),
                     mapType: MapType.normal, //map type
