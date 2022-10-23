@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/screens/loadingAnimationWidget.dart';
 import 'package:location/location.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../utils/datas.dart';
 import '../../widget/app_button.dart';
@@ -236,13 +237,19 @@ class _Poly extends State<GoogleMapsPolylines> {
 
             AppButton(
               name: 'APPELER ',
-              onTap: (){
-
-              },
+              onTap: ()=>_makePhoneCall('+243${data['phone']}'),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
   }
 }
