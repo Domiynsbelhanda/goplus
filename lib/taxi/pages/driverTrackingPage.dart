@@ -351,8 +351,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                     )
                     :Text(
                       data.get('cartype') == "1" ?
-                      '10\$ / 30 Min' : data.get('cartype') == "2" ?
-                      '12\$ / 30 Min' : '14\$ / 30 Min',
+                      '10\$ / par heure' : data.get('cartype') == "2" ?
+                      '12\$ / par heure' : '14\$ / par heure',
                       overflow: TextOverflow.ellipsis,
                     )
                   ],
