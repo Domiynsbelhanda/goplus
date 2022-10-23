@@ -6,6 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/screens/loadingAnimationWidget.dart';
 import 'package:location/location.dart';
 
+import '../../utils/datas.dart';
 import '../../widget/backButton.dart';
 
 class GoogleMapsPolylines extends StatefulWidget {
@@ -117,9 +118,11 @@ class _Poly extends State<GoogleMapsPolylines> {
                     stream: FirebaseFirestore.instance.collection('drivers')
                         .doc(widget.id).collection('courses').doc('courses').snapshots(),
                     builder:
-                    (BuildContext context, AsyncSnapshot<DocumentSnapshot> snap) {
+                    (BuildContext context, AsyncSnapshot<DocumentSnapshot> courses) {
 
-                      var datas = snap.data!.data() as Map<String, dynamic>;
+                      var donnees = courses.data!.data() as Map<String, dynamic>;
+
+                      print('$donnees');
                       return Stack(
                         children: [
                           SafeArea(
@@ -155,16 +158,10 @@ class _Poly extends State<GoogleMapsPolylines> {
 
                           Positioned(
                               bottom: 32,
-                              left: 16,
-                              child: Container(
-                                width: MediaQuery.of(context).size.width / 1.5,
-                                decoration: const BoxDecoration(
-                                    color: Colors.white
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: showDriver(datas)
-                                ),
+                              right: 16,
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: showDriver(data, donnees)
                               )
                           ),
                         ],
@@ -176,7 +173,7 @@ class _Poly extends State<GoogleMapsPolylines> {
     );
   }
 
-  Widget showDriver(data){
+  Widget showDriver(data, datas){
     return Padding(
       padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Container(
@@ -194,8 +191,8 @@ class _Poly extends State<GoogleMapsPolylines> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image.asset(
-                  data.get('cartype') == "1" ?
-                  'assets/images/ist.png' : data.get('cartype') == "2" ?
+                  data['cartype'] == "1" ?
+                  'assets/images/ist.png' : data['cartype'] == "2" ?
                   'assets/images/berline.png' : 'assets/images/van.png' ,
                   width: 120,
                   height: 60,
@@ -205,8 +202,8 @@ class _Poly extends State<GoogleMapsPolylines> {
                 Column(
                   children: [
                     Text(
-                      data.get('cartype') == "1" ?
-                      'TAXI Mini' : data.get('cartype') == "2" ?
+                      data['cartype'] == "1" ?
+                      'TAXI Mini' : data['cartype'] == "2" ?
                       'Berline VIP' : 'TAXI Bus',
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -216,8 +213,8 @@ class _Poly extends State<GoogleMapsPolylines> {
                     ),
 
                     Text(
-                      data.get('cartype') == "1" ?
-                      '4 personnes' : data.get('cartype') == "2" ?
+                      data['cartype'] == "1" ?
+                      '4 personnes' : data['cartype'] == "2" ?
                       '4 personnes' : '8 personnes',
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -226,17 +223,17 @@ class _Poly extends State<GoogleMapsPolylines> {
                       ),
                     ),
 
-                    data.get('airport') ?
+                    datas['airport'] ?
                     Text(
-                      data.get('cartype') == "1" ?
-                      '40\$' : data.get('cartype') == "2" ?
+                      data['cartype'] == "1" ?
+                      '40\$' : data['cartype'] == "2" ?
                       '55\$' : '95\$',
                       overflow: TextOverflow.ellipsis,
                     )
                         :Text(
-                      data.get('cartype') == "1" ?
-                      '10\$ / 30 Min' : data.get('cartype') == "2" ?
-                      '12\$ / 30 Min' : '14\$ / 30 Min',
+                      data['cartype'] == "1" ?
+                      '10\$ par heure' : data['cartype'] == "2" ?
+                      '12\$ par heure' : '14\$ par heure',
                       overflow: TextOverflow.ellipsis,
                     )
                   ],
@@ -247,7 +244,7 @@ class _Poly extends State<GoogleMapsPolylines> {
             SizedBox(height: 8.0,),
 
             Text(
-              "- Climatisé \n - Wi-fi à bord \n - Coffre pour 3 valises. \n - Couleur : ${data.get('colour')}",
+              "- Couleur : ${data['colour']} \n - Plaque : ${data['carplate']}",
               overflow: TextOverflow.ellipsis,
             ),
 
@@ -291,7 +288,7 @@ class _Poly extends State<GoogleMapsPolylines> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${data.get('firstn')} ${data.get('midn')}',
+                      '${data['firstn']} ${data['midn']}',
                       style: const TextStyle(
                           fontSize: 16.0
                       ),
@@ -311,14 +308,23 @@ class _Poly extends State<GoogleMapsPolylines> {
                           ),
 
                           Text(
-                            '+243${data.get('phone')}',
+                            '+243${data['phone']}',
                             style: const TextStyle(
                                 fontSize: 14.0
                             ),
                           )
                         ],
                       ),
-                    )
+                    ),
+
+                    const SizedBox(height: 8.0,),
+                    Text(
+                      'A ${calculateDistance(LatLng(data['latitude'], data['longitude']), LatLng(datas['destination_latitude'], datas['destination_longitude'])).toStringAsFixed(2)} mètre(s)',
+                      style: const TextStyle(
+                          fontSize: 14.0
+                      ),
+                    ),
+                    
                   ],
                 )
               ],

@@ -170,7 +170,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                     Marker(
                       markerId: MarkerId("1"),
                       position: position,
-                      infoWindow: InfoWindow(
+                      infoWindow: const InfoWindow(
                         title: 'Votre Position',
                       ),
                       icon: pinner,
