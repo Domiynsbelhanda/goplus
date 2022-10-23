@@ -158,7 +158,7 @@ class _Poly extends State<GoogleMapsPolylines> {
                           ),
 
                           Positioned(
-                              bottom: 32,
+                              bottom: 0,
                               right: 16,
                               child: Padding(
                                 padding: const EdgeInsets.all(16.0),
