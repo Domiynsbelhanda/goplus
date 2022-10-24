@@ -202,7 +202,7 @@ class _Poly extends State<GoogleMapsPolylines> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
+                    SizedBox(
                       width: (MediaQuery.of(context).size.width * 0.8) - 120 - 40,
                       child: Text(
                         '${data['firstn']} ${data['midn']}',

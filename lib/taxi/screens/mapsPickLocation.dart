@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
-import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -11,9 +9,6 @@ import 'package:google_maps_webservice/places.dart';
 import 'package:goplus/pages/homePage.dart';
 import 'package:goplus/screens/loadingAnimationWidget.dart';
 import 'package:goplus/utils/datas.dart';
-import 'package:goplus/widget/app_button.dart';
-
-import '../../widget/show_loader.dart';
 
 class PickLocation extends StatefulWidget{
   bool destination;
@@ -40,7 +35,7 @@ class _PickLocation extends State<PickLocation>{
   LatLng? selectedPlace;
   LatLng? departPlace;
   late BitmapDescriptor pinner;
-  LatLng position = const LatLng(-11.6480959, 27.4755775);
+  LatLng position = const LatLng(-4.4005633, 15.2758414);//const LatLng(-11.6480959, 27.4755775);
 
   @override
   void initState() {
