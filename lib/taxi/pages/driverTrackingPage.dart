@@ -454,7 +454,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
             AppButton(
               name: 'RESERVER',
               onTap: (){
-                notification_loader(context, "Reservation en cours", (){});
+                // notification_loader(context, "Reservation en cours", (){});
 
                 var don = {
                   "key": "ride",
@@ -463,50 +463,50 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                 };
 
                 Provider.of<Auth>(context, listen: false).checkSID(context, don).then((sms){
-                  notification_dialog(
-                      context,
-                      "${sms}",
-                      Icons.warning,
-                      Colors.yellow,
-                      {'label': 'FERMER', "onTap": (){
-
-                        Navigator.pop(context);
-
-                      }},
-                      20,
-                      false);
-
-                  Provider.of<Auth>(context, listen: false).getToken().then((value){
-                    Provider.of<Auth>(context, listen: false).getSid().then((val){
-                      if(val != null){
-                        Navigator.pop(context);
-                        progresso_dialog(context, data.id, LatLng(data.get('latitude'), data.get('longitude')));
-                        setState(() {
-                          index = null;
-                        });
-                        FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
-                          'online': false,
-                          'ride': true,
-                          'ride_view': false,
-                        });
-                        FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses')
-                            .doc('courses')
-                            .set({
-                          'status': 'pending',
-                          'depart_longitude': widget.depart.longitude,
-                          'depart_latitude': widget.depart.latitude,
-                          'destination_longitude': widget.destination.longitude,
-                          'destination_latitude': widget.destination.latitude,
-                          'distance': calculateDistance(widget.depart, position).toStringAsFixed(2),
-                          'user_id': value!,
-                          'sid_user': val,
-                          'airport': widget.airport,
-                          'carType': carType
-                        });
-                      } else {
-                      }
+                  if(sms['code'] == 'OK'){
+                    Provider.of<Auth>(context, listen: false).getToken().then((value){
+                      Provider.of<Auth>(context, listen: false).getSid().then((val){
+                        if(val != null){
+                          Navigator.pop(context);
+                          progresso_dialog(context, data.id, LatLng(data.get('latitude'), data.get('longitude')));
+                          setState(() {
+                            index = null;
+                          });
+                          FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
+                            'online': false,
+                            'ride': true,
+                            'ride_view': false,
+                          });
+                          FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses')
+                              .doc('courses')
+                              .set({
+                            'status': 'pending',
+                            'depart_longitude': widget.depart.longitude,
+                            'depart_latitude': widget.depart.latitude,
+                            'destination_longitude': widget.destination.longitude,
+                            'destination_latitude': widget.destination.latitude,
+                            'distance': calculateDistance(widget.depart, position).toStringAsFixed(2),
+                            'user_id': value!,
+                            'sid_user': val,
+                            'airport': widget.airport,
+                            'carType': carType
+                          });
+                        } else {
+                        }
+                      });
                     });
-                  });
+                  } else {
+                    notification_dialog(
+                        context,
+                        "Ce Chauffeur Injoignable.",
+                        Icons.warning,
+                        Colors.yellow,
+                        {'label': 'FERMER', "onTap": (){
+                          Navigator.pop(context);
+                        }},
+                        20,
+                        false);
+                  }
                 });
               },
             ),
