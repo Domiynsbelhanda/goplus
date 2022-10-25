@@ -7,6 +7,7 @@ import 'package:goplus/screens/loadingAnimationWidget.dart';
 import 'package:location/location.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../pages/homePage.dart';
 import '../../utils/datas.dart';
 import '../../widget/app_button.dart';
 import '../../widget/backButton.dart';
@@ -121,8 +122,8 @@ class _Poly extends State<GoogleMapsPolylines> {
                         .doc(widget.id).collection('courses').doc('courses').snapshots(),
                     builder:
                     (BuildContext context, AsyncSnapshot<DocumentSnapshot> courses) {
-
                       var donnees = courses.data!.data() as Map<String, dynamic>;
+
                       return Stack(
                         children: [
                           SafeArea(
@@ -151,17 +152,13 @@ class _Poly extends State<GoogleMapsPolylines> {
                           ),
 
                           Positioned(
-                            right: 16,
-                            top: 16,
-                            child: CloseButtons(context),
-                          ),
-
-                          Positioned(
                               bottom: 0,
                               right: 16,
                               child: Padding(
                                 padding: const EdgeInsets.all(16.0),
-                                child: showDriver(data, donnees)
+                                child: donnees['status'] == 'end'
+                                    ? showCourse(data, donnees)
+                                    : showDriver(data, donnees)
                               )
                           ),
                         ],
@@ -242,6 +239,55 @@ class _Poly extends State<GoogleMapsPolylines> {
             AppButton(
               name: 'APPELER ',
               onTap: ()=>_makePhoneCall('+243${data['phone']}'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget showCourse(data, datas){
+    return Padding(
+      padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+      child: Container(
+        padding: const EdgeInsets.all(16.0),
+        height: MediaQuery.of(context).size.width / 2.5,
+        width: MediaQuery.of(context).size.width * 0.8,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(24)
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'La course viens de prendre fin.\n Vous devez payez',
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width / 25
+              ),
+            ),
+
+            Text(
+              '${datas['prix']} \$',
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: MediaQuery.of(context).size.width / 25
+              ),
+            ),
+
+            const SizedBox(height: 16.0,),
+            AppButton(
+              name: 'FERMER ',
+              onTap: ()=>Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => HomePage()
+              ),
+            ),
             ),
           ],
         ),
