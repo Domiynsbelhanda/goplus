@@ -186,7 +186,7 @@ class _HomePage extends State<HomePage>{
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Text(
-                                'Départ : \n     Longitude: ${selectedPlace!.latitude} \n     Latitude : ${selectedPlace!.longitude}',
+                                'Destination : \n     Longitude: ${selectedPlace!.latitude} \n     Latitude : ${selectedPlace!.longitude}',
                               style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold
@@ -205,7 +205,7 @@ class _HomePage extends State<HomePage>{
                           child: const Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Text(
-                              'Départ : Aeroport de NDJILI',
+                              'Destination : Aeroport de NDJILI',
                               style: TextStyle(
                                   fontSize: 12,
                                 fontWeight: FontWeight.bold
@@ -272,7 +272,7 @@ class _HomePage extends State<HomePage>{
                           child: Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Text(
-                              'Arrivée : \n     Longitude :${depart!.latitude} \n     Latitude : ${depart!.longitude}',
+                              'Départ : \n     Longitude :${depart!.latitude} \n     Latitude : ${depart!.longitude}',
                               style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold
