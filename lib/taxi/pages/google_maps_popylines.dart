@@ -191,8 +191,8 @@ class _Poly extends State<GoogleMapsPolylines> {
                   data['cartype'] == "1" ?
                   'assets/images/ist.png' : data['cartype'] == "2" ?
                   'assets/images/berline.png' : 'assets/images/van.png' ,
-                  width: 120,
-                  height: 60,
+                  width: 120.0,
+                  height: 60.0,
                   fit: BoxFit.fitWidth,
                 ),
                 const SizedBox(width: 16.0),
