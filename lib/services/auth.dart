@@ -25,21 +25,6 @@ class Auth extends ChangeNotifier{
       };
     }
   }
-  Future<String> sendOtp(BuildContext context, String phone) async {
-    try{
-      var data = {
-        "key": "create_user",
-        "action": "otp",
-        "phone": phone
-      };
-      Dio.Response response = await dio()!.post('/v1/', data: jsonEncode(data));
-      Map<String, dynamic> datas = jsonDecode(response.data);
-      notifyListeners();
-      return datas['code'];
-    } catch(e){
-      return "KO";
-    }
-  }
 
   Future<Map<String, dynamic>> checkSID(BuildContext context, var data) async {
     try{

@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:goplus/pages/homePage.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
+import 'package:toast/toast.dart';
 
 import '../services/auth.dart';
 import '../utils/app_colors.dart';
@@ -35,6 +36,7 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
+    ToastContext().init(context);
     return Scaffold(
       body: Stack(
         children: [
@@ -79,7 +81,14 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                   SizedBox(height: size.height * 0.05),
                   GestureDetector(
                     onTap: (){
-                      Provider.of<Auth>(context, listen: false).sendOtp(context, widget.phone);
+                      var data = {
+                        "key": "create_user",
+                        "action": "otp",
+                        "phone": widget.phone
+                      };
+                      Provider.of<Auth>(context, listen: false).request(data: data).then((value){
+                        Toast.show('Code OTP envoyé', duration: Toast.lengthLong, gravity: Toast.bottom);
+                      });
                     },
                     child: const Center(
                       child: Text.rich(
