@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:goplus/services/auth.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_select/smart_select.dart';
+import 'package:chips_choice/chips_choice.dart';
 
 import '../../utils/app_colors.dart';
 import '../../widget/app_button.dart';
@@ -22,19 +22,22 @@ class _SignupScreenState extends State<UserSignupScreen> {
   final formkey = GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
-  // TextEditingController postNomController = TextEditingController();
   TextEditingController prenomController = TextEditingController();
-  // TextEditingController adresseController = TextEditingController();
-  // TextEditingController villeController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   late List input;
 
-  String value = 'h';
-  List<S2Choice<String>> options = [
-    S2Choice<String>(value: 'h', title: 'Homme'),
-    S2Choice<String>(value: 'f', title: 'Femme'),
+  int genreTag = 0;
+  List<Map<String, dynamic>> genreOptions = [
+    {
+      'name': 'Homme',
+      'value' : 'H'
+    },
+    {
+      'name': 'Femme',
+      'value' : 'F'
+    }
   ];
 
   @override
@@ -58,18 +61,9 @@ class _SignupScreenState extends State<UserSignupScreen> {
       {
         'label': 'Nom', 'controller' : nameController
       },
-      // {
-      //   'label': 'PostNom', 'controller' : postNomController
-      // },
       {
         'label': 'Prénom', 'controller' : prenomController
       },
-      // {
-      //   'label': 'Adresse', 'controller' : adresseController, 'input': TextInputType.streetAddress
-      // },
-      // {
-      //   'label': 'Ville', 'controller' : villeController
-      // },
     ];
     return Scaffold(
       backgroundColor: Colors.white,
@@ -167,11 +161,14 @@ class _SignupScreenState extends State<UserSignupScreen> {
                         }).toList()
                       ),
 
-                      SmartSelect<String>.single(
-                          title: 'Genre',
-                          value: value,
-                          choiceItems: options,
-                          onChange: (state) => setState(() => value = state.value)
+                      ChipsChoice<int>.single(
+                        value: genreTag,
+                        onChanged: (val) => setState(() => genreTag = val),
+                        choiceItems: C2Choice.listFrom<int, Map<String, dynamic>>(
+                          source: genreOptions,
+                          value: (i, v) => i,
+                          label: (i, v) => v['name'],
+                        ),
                       ),
 
                       SizedBox(height: size.height * 0.07),
@@ -187,7 +184,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                 "firstn": nameController.text.toString(),
                                 "password": passwordController.text.trim(),
                                 "phone": phoneController.text.toString(),
-                                "gender": value
+                                "gender": genreOptions[genreTag]
                               };
 
                               Provider.of<Auth>(context, listen: false)
@@ -239,13 +236,6 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                           false);
                                     }
                               });
-
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (_) => HomePage(),
-                              //   ),
-                              // );
                             }
                           }),
                     ],
