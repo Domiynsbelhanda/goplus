@@ -225,7 +225,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                     "firstn": nameController.text.toString(),
                                     "password": passwordController.text.trim(),
                                     "phone": phoneController.text.toString(),
-                                    "gender": genreOptions[genreTag]
+                                    "gender": genreOptions[genreTag]['value']
                                   };
 
                                   Provider.of<Auth>(context, listen: false)
