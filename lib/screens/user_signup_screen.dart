@@ -6,9 +6,9 @@ import 'package:chips_choice/chips_choice.dart';
 
 import '../../utils/app_colors.dart';
 import '../../widget/app_button.dart';
+import '../utils/global_variable.dart';
 import 'verify_number_screen.dart';
 import '../widget/notification_dialog.dart';
-import '../widget/show_loader.dart';
 
 class UserSignupScreen extends StatefulWidget {
   const UserSignupScreen({Key? key}) : super(key: key);
@@ -190,7 +190,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                               Provider.of<Auth>(context, listen: false)
                                   .register(context: context, cred: data).then((value){
 
-                                    EasyLoading.dismiss();
+                                    disableLoader();
 
                                     if(value['code'].toString() == '400'){
                                       notification_dialog(
