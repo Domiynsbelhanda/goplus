@@ -6,6 +6,7 @@ import 'package:goplus/services/auth.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 import 'package:chips_choice/chips_choice.dart';
+import 'package:toast/toast.dart';
 
 import '../../utils/app_colors.dart';
 import '../../widget/app_button.dart';
@@ -211,7 +212,9 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                 "gender": genreOptions[genreTag]
                               };
 
-                              Provider.of<Auth>(context, listen: false)
+                              Toast.show('$data', duration: Toast.lengthLong, gravity: Toast.bottom);
+
+                              /*Provider.of<Auth>(context, listen: false)
                                   .request(data: data).then((value){
                                     disableLoader();
                                     if(value['code'].toString() == '400'){
@@ -259,7 +262,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                           20,
                                           false);
                                     }
-                              });
+                              });*/
                             }
                           }),
                     ],
