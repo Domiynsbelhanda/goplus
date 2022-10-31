@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:goplus/pages/homePage.dart';
-import 'package:goplus/widget/show_loader.dart';
 import 'package:provider/provider.dart';
 
 import '../services/auth.dart';
 import '../utils/app_colors.dart';
+import '../utils/global_variable.dart';
 import '../widget/app_button.dart';
 import '../widget/notification_dialog.dart';
 import '../widget/otp_text_field.dart';

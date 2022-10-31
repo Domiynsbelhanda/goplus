@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:goplus/screens/user_signup_screen.dart';
-import 'package:goplus/widget/show_loader.dart';
-// import 'package:goplus/widget/notification_loader.dart';
 import 'package:provider/provider.dart';
 import '../services/auth.dart';
+import '../utils/global_variable.dart';
 import 'verify_number_screen.dart';
 import '../utils/app_colors.dart';
-import '../widget/app_bar.dart';
 import '../widget/app_button.dart';
 import '../widget/notification_dialog.dart';
 

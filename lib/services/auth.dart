@@ -46,26 +46,6 @@ class Auth extends ChangeNotifier{
     }
   }
 
-  Future<Map<String, dynamic>> register ({required Map<String, dynamic> cred, required BuildContext context}) async {
-
-    try {
-      Dio.Response response = await dio()!.post('/v1/', data: cred);
-      Map<String, dynamic> res = jsonDecode(response.data);
-      if(response.statusCode == 200){
-        return res;
-      } else {
-        return {
-          'code': "NULL"
-        };
-      }
-    } catch (e){
-      return {
-        'code': "ERROR",
-        'error': e
-      };
-    }
-  }
-
   Future<String> sendOtp(BuildContext context, String phone) async {
     try{
       var data = {

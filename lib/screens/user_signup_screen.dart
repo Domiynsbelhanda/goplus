@@ -188,7 +188,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                               };
 
                               Provider.of<Auth>(context, listen: false)
-                                  .register(context: context, cred: data).then((value){
+                                  .request(data: data).then((value){
 
                                     disableLoader();
 
