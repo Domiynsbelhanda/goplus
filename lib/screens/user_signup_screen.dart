@@ -291,8 +291,12 @@ class _SignupScreenState extends State<UserSignupScreen> {
               child: FutureBuilder<bool>(
                   future: InternetConnectionChecker().hasConnection,
                   builder: (context, connected) {
+                    bool visible = false;
+                    if(connected.hasData){
+                      visible = !(connected.data!);
+                    }
                     return Visibility(
-                      visible: !(connected.data!),
+                      visible: visible,
                       child: const InternetNotAvailable(),
                     );
                   }
