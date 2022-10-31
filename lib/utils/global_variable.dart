@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:ui' as ui;
 
 final storage = const FlutterSecureStorage();
 
@@ -9,11 +11,14 @@ LatLng position = const LatLng(-4.4163009, 15.2732314);
 const double zoom = 15;
 
 
-Future<BitmapDescriptor> bitmap(String url) async{
-  return await BitmapDescriptor.fromAssetImage(
-    const ImageConfiguration(),
-    url,
-  );
+Future<BitmapDescriptor> bitmap(String url, int width) async{
+  ByteData data = await rootBundle.load(url);
+  ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+  ui.FrameInfo fi = await codec.getNextFrame();
+
+  final Uint8List markerIcon = (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+
+  return BitmapDescriptor.fromBytes(markerIcon);
 }
 
 void logOut() async{

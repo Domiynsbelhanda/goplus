@@ -71,7 +71,7 @@ class _HomePage extends State<HomePage>{
                       }
 
                       return FutureBuilder<BitmapDescriptor>(
-                        future: bitmap("assets/images/pictogramme.png"),
+                        future: bitmap("assets/images/pictogramme.png", 90),
                         builder: (context, pictogramme){
                           return body(position, pictogramme.data!);
                         },
