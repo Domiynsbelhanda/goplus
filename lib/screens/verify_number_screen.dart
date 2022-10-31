@@ -131,8 +131,6 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                           notification_dialog(
                               context,
                               'Erreur OTP, veuillez recommencer.',
-                              Icons.warning,
-                              Colors.yellow,
                               {'label': 'FERMER', "onTap": (){
                                 Navigator.pop(context);
                               }},
@@ -143,8 +141,6 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                           notification_dialog(
                               context,
                               "Vous êtes connectés.",
-                              Icons.verified,
-                              Colors.green,
                               {'label': 'SUIVANT', "onTap": (){
                                 Navigator.pop(context);
                                 Navigator.pushAndRemoveUntil(

@@ -486,8 +486,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                     notification_dialog(
                         context,
                         "Ce Chauffeur Injoignable.",
-                        Icons.warning,
-                        Colors.yellow,
                         {'label': 'FERMER', "onTap": (){
                           Navigator.pop(context);
                         }},

@@ -170,8 +170,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                   notification_dialog(
                                       context,
                                       "Votre compte n'exsite pas, creez en un.",
-                                      Icons.person,
-                                      Colors.red,
                                       {'label': "S'INSCRIRE", "onTap": (){
                                         Navigator.pushAndRemoveUntil(
                                           context,
@@ -189,8 +187,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                               notification_dialog(
                                   context,
                                   "Coordonée incorrect.",
-                                  Icons.person,
-                                  Colors.yellow,
                                   {'label': "FERMER", "onTap": (){
                                     Navigator.pop(context);
                                   }
@@ -201,8 +197,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                               notification_dialog(
                                   context,
                                   'Une erreur c\'est produite. ${value['error']}',
-                                  Icons.warning,
-                                  Colors.yellow,
                                   {'label': 'REESAYEZ', "onTap": (){
                                     Navigator.pop(context);
                                   }},
@@ -212,8 +206,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                               notification_dialog(
                                   context,
                                   'Une erreur c\'est produite. ${value['error']}',
-                                  Icons.warning,
-                                  Colors.yellow,
                                   {'label': 'FERMER', "onTap": (){
                                     Navigator.pop(context);
                                   }},
@@ -223,8 +215,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                               notification_dialog(
                                   context,
                                   'Une erreur c\'est produite. ${value['error']}',
-                                  Icons.warning,
-                                  Colors.yellow,
                                   {'label': 'FERMER', "onTap": (){
                                     Navigator.pop(context);
                                   }},

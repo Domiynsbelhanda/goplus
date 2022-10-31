@@ -235,8 +235,6 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                           notification_dialog(
                                               context,
                                               '${value['message']}',
-                                              Icons.warning,
-                                              Colors.yellow,
                                               {'label': 'FERMER', "onTap": (){
                                                 Navigator.pop(context);
                                               }},
@@ -268,8 +266,6 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                           notification_dialog(
                                               context,
                                               '${value['error']}',
-                                              Icons.warning,
-                                              Colors.yellow,
                                               {'label': 'FERMER', "onTap": (){
                                                 Navigator.pop(context);
                                               }},
