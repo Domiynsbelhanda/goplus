@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:goplus/services/auth.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -171,17 +172,17 @@ class _SignupScreenState extends State<UserSignupScreen> {
                               return TextFormField(
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return '${e['label']} incorect';
+                                    return '${e['label']} invalide';
                                   }
                                   return null;
                                 },
                                 cursorColor: AppColors.primaryColor,
-                                maxLength: e['max'] == null ? null : e['max'],
-                                keyboardType: e['input'] == null ? TextInputType.name : e['input'],
+                                maxLength: e['max'],
+                                keyboardType: e['input'] ?? TextInputType.name,
                                 controller: e['controller'],
                                 decoration: InputDecoration(
                                     hintText: '${e['label']}',
-                                    contentPadding: EdgeInsets.all(15.0)),
+                                    contentPadding: const EdgeInsets.all(15.0)),
                               );
                             }).toList()
                           ),
@@ -225,9 +226,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
 
                                   Provider.of<Auth>(context, listen: false)
                                       .request(data: data).then((value){
-
                                         disableLoader();
-
                                         if(value['code'].toString() == '400'){
                                           notification_dialog(
                                               context,
@@ -240,6 +239,8 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                               20,
                                               false);
                                         } else if(value['code'] == "OTP"){
+                                          FirebaseFirestore.instance.collection('clients')
+                                              .doc(phoneController.text.trim()).set(data);
                                           Navigator.pushAndRemoveUntil(
                                             context,
                                             MaterialPageRoute(
