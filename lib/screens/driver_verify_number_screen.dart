@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import '../pages/homePage.dart';
 import '../services/auth.dart';
 import '../utils/app_colors.dart';
-import '../widget/app_bar.dart';
 import '../widget/app_button.dart';
 import '../widget/notification_dialog.dart';
 import '../widget/otp_text_field.dart';
@@ -39,7 +38,6 @@ class _VerifyNumberState extends State<DriverVerifyNumberScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                APPBAR(),
                 SizedBox(height: size.height * 0.08),
                 Text(
                   'Vérification du numéro de téléphone \n+243${widget.phone}',

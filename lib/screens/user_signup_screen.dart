@@ -53,16 +53,23 @@ class _SignupScreenState extends State<UserSignupScreen> {
         'label': 'Numéro téléphone',
         'controller' : phoneController,
         'input': TextInputType.phone,
-        'max': 9
+        'max': 9,
+        'obscure': false
       },
       {
-        'label': 'Mot de passe', 'controller' : passwordController, 'input': TextInputType.visiblePassword
+        'label': 'Mot de passe',
+        'controller' : passwordController,
+        'obscure': true
       },
       {
-        'label': 'Nom', 'controller' : nameController
+        'label': 'Nom',
+        'controller' : nameController,
+        'obscure': false
       },
       {
-        'label': 'Prénom', 'controller' : prenomController
+        'label': 'Prénom',
+        'controller' : prenomController,
+        'obscure' : false
       },
     ];
     return Scaffold(
@@ -92,7 +99,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                 SizedBox(
                   width: size.width * 0.6,
                   child: const Text(
-                    'Créer votre compte pour utilisateur.',
+                    'Créer votre compte client.',
                     style: TextStyle(color: Colors.grey),
                   ),
                 ),
@@ -125,6 +132,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                 SizedBox(
                                   width: size.width / 1.4,
                                   child: TextFormField(
+                                    obscureText: e['obscure'],
                                     validator: (value) {
                                       if (value!.isEmpty) {
                                         return '${e['label']} incorect';

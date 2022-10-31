@@ -12,6 +12,7 @@ notification_dialog(
 
   // set up the button
   Widget okButton = TextButton(
+    onPressed: button['onTap'],
     child: Container(
       padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
@@ -20,12 +21,11 @@ notification_dialog(
         ),
         child: Text(
             '${button['label']}',
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black
           ),
         )
     ),
-    onPressed: button['onTap'],
   );
 
   double width = MediaQuery.of(context).size.width;
@@ -62,7 +62,7 @@ notification_dialog(
               ),
             ),
 
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
 
             okButton
           ]
