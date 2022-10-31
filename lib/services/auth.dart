@@ -2,12 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart' as Dio;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../utils/global_variable.dart';
 import 'dio.dart';
 
 class Auth extends ChangeNotifier{
-
-  final storage = const FlutterSecureStorage();
 
   Future<Map<String, dynamic>> login ({required Map<String, dynamic> creds, required BuildContext context}) async {
     try {
@@ -71,7 +69,7 @@ class Auth extends ChangeNotifier{
       Map<String, dynamic> datas = jsonDecode(response.data);
       notifyListeners();
       if(datas['code'] == 'OK'){
-        this.storage.write(key: 'sid', value: datas['sid']);
+        storage.write(key: 'sid', value: datas['sid']);
         storeToken(token: data['phone']);
       }
       return datas;
@@ -96,7 +94,7 @@ class Auth extends ChangeNotifier{
   }
 
   void storeToken({required String token}) async{
-    this.storage.write(key: 'token', value: token);
+    storage.write(key: 'token', value: token);
     notifyListeners();
   }
 
