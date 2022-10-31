@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:goplus/formulaire/dashboard.dart';
 import 'package:goplus/screens/quizwebview.dart';
 import 'package:goplus/screens/mapsPickLocation.dart';
 import 'package:goplus/widget/logo_text.dart';
@@ -361,31 +360,6 @@ class _HomePage extends State<HomePage>{
                   ),
                 ],
               )
-            ),
-
-            Padding(
-                padding: const EdgeInsets.only(left: 16.0, top: 16.0, bottom: 16.0),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: dashboardFormulaire(context).map((e) => Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                      child: MiniCardPicture(
-                        imagePath: '${e['mini_imagePath']}',
-                        title: '${e['title']}',
-                        description: '${e['description']}',
-                        onTap: (){
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Dashboard()
-                              )
-                          );
-                        },
-                      ),
-                    )).toList(),
-                  ),
-                ),
             ),
 
             Padding(
