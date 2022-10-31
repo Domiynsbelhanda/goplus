@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/screens/mapsPickLocation.dart';
+import 'package:goplus/widget/app_button.dart';
 import 'package:goplus/widget/logo_text.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../main.dart';
@@ -29,29 +30,10 @@ class _HomePage extends State<HomePage>{
   LatLng airport = const LatLng(-4.3884214, 15.4416188);
   bool checkairport = false;
 
-
-  @override
-  void initState() {
-    requestPermission();
-  }
-
   void requestPermission() async{
-    if(await Permission.location.serviceStatus.isEnabled){
-      var status = await Permission.location.status;
-      if(status.isGranted){
-
-      } else if(status.isDenied) {
-        Map<Permission, PermissionStatus> status = await [
-          Permission.location
-        ].request();
-      }
-    } else {
-
-    }
-
-    if(await Permission.location.isPermanentlyDenied){
-      openAppSettings();
-    }
+    Map<Permission, PermissionStatus> request =  await [
+      Permission.location
+    ].request();
   }
 
   @override
@@ -66,25 +48,51 @@ class _HomePage extends State<HomePage>{
         future: Permission.location.serviceStatus.isEnabled,
         builder: (context, snapshot) {
 
-          if(!snapshot.hasData){
-            return Text('${snapshot.hasData}');
-          }
-
           if(snapshot.data!){
+            return FutureBuilder<PermissionStatus>(
+              future: Permission.location.status,
+              builder: (context, status){
 
+                if(status.data!.isGranted){
+                  return Text('Is Garanted');
+                } else{
+                  requestPermission();
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Autorisé l'aplication à utiliser votre position. \nAllez dans les paramètres pour forcer l'autorisation.",
+                            textAlign: TextAlign.center,
+                          ),
+
+                          const SizedBox(height: 16.0,),
+
+                          AppButton(
+                            onTap: ()=>openAppSettings(),
+                            name: "Paramètre",
+                            color: AppColors.primaryColor,
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                }
+              }
+            );
           } else {
             return const Center(
               child: Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Text(
-                  "Activez la localisation pour utiliser l'application GoPlus",
+                  "Activez la localisation puis relancer l'application pour utiliser GoPlus",
                   textAlign: TextAlign.center,
                 ),
               ),
             );
           }
-
-          return Text('${snapshot.data}');
           return Stack(
             children: [
               GoogleMap(
