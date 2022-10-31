@@ -60,13 +60,20 @@ class _HomePage extends State<HomePage>{
                   return FutureBuilder<Position>(
                     future: Geolocator.getCurrentPosition(),
                     builder: (context, location){
+                      disableLoader();
                       if(location.hasData){
                         disableLoader();
                         position = LatLng(location.data!.latitude, location.data!.longitude);
                       } else {
-                        showLoader("Impossible de trouver votre position\nVerifiez votre connexion puis réessayez");
+                        showLoader("Recherche de votre position");
                       }
-                      return body(position);
+
+                      return FutureBuilder<BitmapDescriptor>(
+                        future: bitmap("assets/images/pictogramme.png"),
+                        builder: (context, pictogramme){
+                          return body(position, pictogramme.data!);
+                        },
+                      );
                     },
                   );
                 } else{
@@ -112,7 +119,7 @@ class _HomePage extends State<HomePage>{
     );
   }
 
-  Widget body(LatLng pos){
+  Widget body(LatLng pos, BitmapDescriptor? picto){
     return Stack(
       children: [
         GoogleMap(
@@ -120,7 +127,6 @@ class _HomePage extends State<HomePage>{
               target: pos,
               zoom: zoom
           ),
-          // Markers to be pointed
         ),
         Stack(
           children: [
