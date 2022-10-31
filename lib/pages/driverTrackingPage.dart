@@ -1,15 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:goplus/screens/loadingAnimationWidget.dart';
 import 'package:goplus/widget/backButton.dart';
 import 'package:goplus/widget/bottom_type_car.dart';
-import 'package:goplus/widget/notification_loader.dart';
 import 'package:goplus/widget/progresso_dialog.dart';
-import 'package:goplus/widget/show_loader.dart';
 import 'package:provider/provider.dart';
 
 import '../services/auth.dart';
@@ -120,7 +115,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   Widget build(BuildContext context){
     // TODO: implement build
     return position == null ?
-    LoadingWidget(message: 'Changement de votre position',)
+    Text('Changement de votre position')
     : SafeArea(
       child: StreamBuilder(
         stream: FirebaseFirestore.instance.collection("drivers").snapshots(),
@@ -274,8 +269,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               ],
             );
           }
-          return LoadingWidget(
-            message: 'Changement de la carte en cours...',
+          return Text(
+            'Changement de la carte en cours...',
           );
         },
       ),
