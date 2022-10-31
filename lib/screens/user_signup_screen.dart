@@ -243,28 +243,29 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                         } else if(value['code'] == "OTP"){
                                           FirebaseFirestore.instance.collection('clients')
                                               .doc(phoneController.text.trim()).set(data);
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (_) => VerifyNumberScreen(
+                                                        register: true,
+                                                        phone: phoneController.text.trim())
+                                                )
+                                            );
+                                        } else if(value['code'] == 'KO'){
+                                          FirebaseFirestore.instance.collection('clients')
+                                              .doc(phoneController.text.trim()).set(data);
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (_) => VerifyNumberScreen(
                                                     register: true,
                                                     phone: phoneController.text.trim())
-                                            )
-                                          );
-                                        } else if(value['code'] == 'KO'){
-                                          Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (_) => VerifyNumberScreen(
-                                                    register: true,
-                                                    phone: phoneController.text.trim())
                                             ),
-                                              (route)=>false
                                           );
                                         } else {
                                           notification_dialog(
                                               context,
-                                              '${value['error']}',
+                                              '$data ${value['error']}',
                                               {'label': 'FERMER', "onTap": (){
                                                 Navigator.pop(context);
                                               }},

@@ -158,7 +158,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                 "password": passwordController.text.trim()
                               };
                               Provider.of<Auth>(context, listen: false)
-                                  .login(context: context, creds: data).then((value){
+                                  .request(data: data).then((value){
 
                                     disableLoader();
 
@@ -191,7 +191,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                   else if (value['code'] == 'NOK'){
                                   notification_dialog(
                                       context,
-                                      "Coordonée incorrect.",
+                                      "Coordonée incorrect",
                                       {'label': "FERMER", "onTap": (){
                                         Navigator.pop(context);
                                       }
