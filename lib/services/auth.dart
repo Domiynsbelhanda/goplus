@@ -8,7 +8,7 @@ import 'dio.dart';
 class Auth extends ChangeNotifier{
   Future<Map<String, dynamic>> request ({required Map<String, dynamic> data}) async {
     try {
-      Dio.Response response = await dio()!.post('/v1s/', data: data);
+      Dio.Response response = await dio()!.post('/v1/', data: data);
       Map<String, dynamic> res = jsonDecode(response.data);
       if(response.statusCode == 200){
         return res;
@@ -62,23 +62,6 @@ class Auth extends ChangeNotifier{
     }
   }
 
-  Future<Map<String, dynamic>> checkOtp(BuildContext context, var data) async {
-    try{
-      Dio.Response response = await dio()!.post('/v1/', data: jsonEncode(data));
-      Map<String, dynamic> datas = jsonDecode(response.data);
-      notifyListeners();
-      if(datas['code'] == 'OK'){
-        storage.write(key: 'sid', value: datas['sid']);
-        storeToken(token: data['phone']);
-      }
-      return datas;
-    } catch(e){
-      return {
-        'code': "KO"
-      };
-    }
-  }
-
   Future<Map<String, dynamic>> checkSID(BuildContext context, var data) async {
     try{
       Dio.Response response = await dio()!.post('/v1/', data: jsonEncode(data));
@@ -92,10 +75,6 @@ class Auth extends ChangeNotifier{
     }
   }
 
-  void storeToken({required String token}) async{
-    storage.write(key: 'token', value: token);
-    notifyListeners();
-  }
 
   Future<String?> getToken() async{
     return await storage.read(key: 'token');
