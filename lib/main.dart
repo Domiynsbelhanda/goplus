@@ -6,7 +6,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:goplus/pages/homePage.dart';
 import 'package:goplus/screens/enter_phone_number_screen.dart';
 import 'package:goplus/services/auth.dart';
-import 'package:goplus/services/formulaireRequest.dart';
 import 'package:provider/provider.dart';
 import 'package:goplus/widget/theme_data.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
@@ -19,7 +18,6 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (context)=> Datas()),
       ChangeNotifierProvider(create: (context)=> Auth())
     ],
     child: MyApp(),

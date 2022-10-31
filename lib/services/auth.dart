@@ -7,7 +7,7 @@ import 'dio.dart';
 
 class Auth extends ChangeNotifier{
 
-  final storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   Future<Map<String, dynamic>> login ({required Map<String, dynamic> creds, required BuildContext context}) async {
     try {
