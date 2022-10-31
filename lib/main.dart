@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:goplus/pages/homePage.dart';
 import 'package:goplus/screens/enter_phone_number_screen.dart';
 import 'package:goplus/services/auth.dart';
@@ -20,7 +19,7 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (context)=> Auth())
     ],
-    child: MyApp(),
+    child: const MyApp(),
   ));
   configLoading();
 }
@@ -41,6 +40,9 @@ void configLoading() {
 }
 
 class MyApp extends StatefulWidget{
+
+  const MyApp({super.key});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -58,15 +60,6 @@ class _MyApp extends State<MyApp>{
       debugShowCheckedModeBanner: false,
       theme: AppTheme.themeData,
       title: "Go Plus",
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('fr', ''),
-        Locale('lg', ''),
-      ],
       builder: EasyLoading.init(),
       home: AnimatedSplashScreen(
         nextScreen: FutureBuilder(
@@ -81,7 +74,7 @@ class _MyApp extends State<MyApp>{
         ),
         duration: 2500,
         splash: "assets/icon/white-text.png",
-        backgroundColor : Color(0xFFFFD80E),
+        backgroundColor : const Color(0xFFFFD80E),
       ),
     );
   }
