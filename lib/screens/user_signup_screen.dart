@@ -85,10 +85,14 @@ class _SignupScreenState extends State<UserSignupScreen> {
               alignment: Alignment.bottomCenter,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
-                child: Visibility(
-                  visible: Provider.of<InternetConnectionStatus>(context) ==
-                      InternetConnectionStatus.disconnected,
-                  child: const InternetNotAvailable(),
+                child: FutureBuilder<bool>(
+                  future: InternetConnectionChecker().hasConnection,
+                  builder: (context, connected) {
+                    return Visibility(
+                      visible: !(connected.data!),
+                      child: const InternetNotAvailable(),
+                    );
+                  }
                 ),
               ),
             ),
