@@ -4,8 +4,6 @@ import 'package:goplus/utils/app_colors.dart';
 notification_dialog(
     BuildContext context,
     String text,
-    IconData? icons,
-    Color? color,
     var button,
     double? fontSize,
     bool? barriere) {
@@ -36,19 +34,11 @@ notification_dialog(
         borderRadius:
         BorderRadius.circular(20.0)),
     child: SizedBox(
-      height: width / 1.5,
+      height: width / 1.2,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Stack(
           children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: Icon(
-                icons,
-                color: color,
-                size: width / 5,
-              ),
-            ),
             Align(
               alignment: Alignment.center,
               child: SizedBox(
@@ -66,7 +56,14 @@ notification_dialog(
 
             Align(
               alignment: Alignment.bottomCenter,
-              child: okButton,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(4.0),
+                  decoration: const BoxDecoration(
+                    color: Colors.white
+                  ),
+                  child: okButton
+              ),
             )
           ],
         )
