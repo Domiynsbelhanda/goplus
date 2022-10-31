@@ -7,10 +7,10 @@ import 'package:goplus/screens/loadingAnimationWidget.dart';
 import 'package:location/location.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../pages/homePage.dart';
-import '../../utils/datas.dart';
-import '../../widget/app_button.dart';
-import '../../widget/backButton.dart';
+import 'homePage.dart';
+import '../utils/datas.dart';
+import '../widget/app_button.dart';
+import '../widget/backButton.dart';
 
 class GoogleMapsPolylines extends StatefulWidget {
   LatLng origine;

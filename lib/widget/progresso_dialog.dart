@@ -5,7 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/screens/loadingAnimationWidget.dart';
 import 'package:goplus/utils/app_colors.dart';
 
-import '../taxi/pages/google_maps_popylines.dart';
+import '../pages/google_maps_popylines.dart';
 
 progresso_dialog(
     BuildContext contexts,

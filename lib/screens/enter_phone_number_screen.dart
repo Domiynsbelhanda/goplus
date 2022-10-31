@@ -5,7 +5,7 @@ import 'package:goplus/widget/show_loader.dart';
 // import 'package:goplus/widget/notification_loader.dart';
 import 'package:provider/provider.dart';
 import '../services/auth.dart';
-import '../taxi/screens/verify_number_screen.dart';
+import 'verify_number_screen.dart';
 import '../utils/app_colors.dart';
 import '../widget/app_bar.dart';
 import '../widget/app_button.dart';

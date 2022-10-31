@@ -12,10 +12,10 @@ import 'package:goplus/widget/progresso_dialog.dart';
 import 'package:goplus/widget/show_loader.dart';
 import 'package:provider/provider.dart';
 
-import '../../services/auth.dart';
-import '../../utils/datas.dart';
-import '../../widget/app_button.dart';
-import '../../widget/notification_dialog.dart';
+import '../services/auth.dart';
+import '../utils/datas.dart';
+import '../widget/app_button.dart';
+import '../widget/notification_dialog.dart';
 
 const double ZOOM = 19;
 

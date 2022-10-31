@@ -6,7 +6,7 @@ import 'package:smart_select/smart_select.dart';
 
 import '../../utils/app_colors.dart';
 import '../../widget/app_button.dart';
-import '../taxi/screens/verify_number_screen.dart';
+import 'verify_number_screen.dart';
 import '../widget/notification_dialog.dart';
 import '../widget/show_loader.dart';
 
