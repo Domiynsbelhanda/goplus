@@ -25,6 +25,8 @@ class HomePage extends StatefulWidget{
 
 class _HomePage extends State<HomePage>{
 
+  Set<Marker> markers = {};
+
   late Size size;
   LatLng? selectedPlace;
   LatLng? depart;
@@ -120,6 +122,17 @@ class _HomePage extends State<HomePage>{
   }
 
   Widget body(LatLng pos, BitmapDescriptor? picto){
+    markers.add(
+        Marker( //add start location marker
+          markerId: const MarkerId('Ma Position'),
+          position: position, //position of marker
+          infoWindow: const InfoWindow( //popup info
+            title: 'Ma Position',
+            snippet: 'Moi',
+          ),
+          icon: picto!, //Icon for Marker
+        )
+    );
     return Stack(
       children: [
         GoogleMap(
@@ -127,6 +140,7 @@ class _HomePage extends State<HomePage>{
               target: pos,
               zoom: zoom
           ),
+          markers: markers,
         ),
         Stack(
           children: [
