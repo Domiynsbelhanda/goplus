@@ -155,28 +155,29 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                           };
                           Provider.of<Auth>(context, listen: false)
                               .login(context: context, creds: data).then((value){
-                                EasyLoading.dismiss();
+
+                                disableLoader();
+
                                 if(value['code'] == 'OTP'){
-                              Navigator.pushAndRemoveUntil(
+
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => VerifyNumberScreen(
                                         register: true,
                                         phone: phoneController.text.trim())
                                 ),
-                                  (route)=>false
                               );
                             } else if(value['code'] == 'KO'){
                                   notification_dialog(
                                       context,
                                       "Votre compte n'exsite pas, creez en un.",
                                       {'label': "S'INSCRIRE", "onTap": (){
-                                        Navigator.pushAndRemoveUntil(
+                                        Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (_) => const UserSignupScreen()
                                           ),
-                                                (route)=>false
                                         );
                                       }
                                       },
@@ -222,21 +223,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                   true);
                             }
                           });
-                          // var ref = FirebaseFirestore.instance.collection('drivers');
-                          // var doc = await ref.doc(phoneController.text.trim()).get();
-                          // if(doc.exists){
-                          //   storeToken(token: phoneController.text.trim());
-                          // }
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (_) => doc.exists ? HomePage(
-                          //       phone: phoneController.text.trim(),
-                          //     ) : SignupScreen(
-                          //       phone: phoneController.text.trim(),
-                          //     ),
-                          //   ),
-                          // );
                         }
                       },
                     ),

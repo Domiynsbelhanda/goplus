@@ -243,14 +243,13 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                         } else if(value['code'] == "OTP"){
                                           FirebaseFirestore.instance.collection('clients')
                                               .doc(phoneController.text.trim()).set(data);
-                                          Navigator.pushAndRemoveUntil(
+                                          Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (_) => VerifyNumberScreen(
                                                     register: true,
                                                     phone: phoneController.text.trim())
-                                            ),
-                                              (route)=>false
+                                            )
                                           );
                                         } else if(value['code'] == 'KO'){
                                           Navigator.pushAndRemoveUntil(
