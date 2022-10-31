@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:goplus/utils/app_colors.dart';
 
-class AppButton extends StatefulWidget {
+class AppButton extends StatelessWidget {
   var onTap;
   final String? name;
   final Color color;
-  AppButton({this.onTap, this.name, this.color = AppColors.primaryColor});
+  AppButton({super.key, this.onTap, this.name, this.color = AppColors.primaryColor});
 
-  @override
-  _AppButtonState createState() => _AppButtonState();
-}
-
-class _AppButtonState extends State<AppButton> {
   late Size size;
   @override
   Widget build(BuildContext context) {
@@ -21,7 +16,7 @@ class _AppButtonState extends State<AppButton> {
         margin: const EdgeInsets.symmetric(horizontal: 15),
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16),
         ),
         child: Material(
           shape: RoundedRectangleBorder(
@@ -30,13 +25,13 @@ class _AppButtonState extends State<AppButton> {
           clipBehavior: Clip.antiAlias,
           child: MaterialButton(
             highlightColor: Colors.yellow[600],
-            onPressed: () => widget.onTap(),
+            onPressed: () => onTap(),
             height: size.height * 0.07,
             minWidth: size.width * 0.9,
             color: AppColors.primaryColor,
             child: Text(
-              widget.name!,
-              style: TextStyle(
+              name!,
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 25,
                 fontFamily: 'Anton',
