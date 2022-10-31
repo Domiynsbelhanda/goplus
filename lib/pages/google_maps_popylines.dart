@@ -3,14 +3,12 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:goplus/screens/loadingAnimationWidget.dart';
 import 'package:location/location.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'homePage.dart';
 import '../utils/datas.dart';
 import '../widget/app_button.dart';
-import '../widget/backButton.dart';
 
 class GoogleMapsPolylines extends StatefulWidget {
   LatLng origine;
@@ -100,7 +98,7 @@ class _Poly extends State<GoogleMapsPolylines> {
             builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
 
               if(!snapshot.hasData){
-                return LoadingWidget(message: "Chargement en cours...");
+                return Text("Chargement en cours...");
               }
 
               var data = snapshot.data!.data() as Map<String, dynamic>;
