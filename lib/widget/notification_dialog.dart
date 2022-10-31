@@ -35,9 +35,7 @@ notification_dialog(
     shape: RoundedRectangleBorder(
         borderRadius:
         BorderRadius.circular(20.0)),
-    child: SizedBox(
-      width: width / 1,
-      height: width / 1.1,
+    child: Flexible(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -50,11 +48,11 @@ notification_dialog(
 
             const SizedBox(height: 16.0),
 
-            Container(
+            SizedBox(
               width : width / 1.5,
               height: width / 2.7,
               child: Text(
-                '${text}',
+                text,
                 style: TextStyle(
                   fontSize: fontSize,
                   color: Colors.black,
