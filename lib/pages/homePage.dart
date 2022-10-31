@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:goplus/screens/quizwebview.dart';
 import 'package:goplus/screens/mapsPickLocation.dart';
 import 'package:goplus/widget/logo_text.dart';
-import 'package:goplus/widget/mini_card_picture.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../main.dart';
-import '../screens/signup_screen.dart';
 import 'driverTrackingPage.dart';
 import '../utils/app_colors.dart';
-import '../utils/datas.dart';
 
 class HomePage extends StatefulWidget{
   LatLng? destination;
@@ -332,98 +328,6 @@ class _HomePage extends State<HomePage>{
                         )
                     )
                         : const SizedBox(),
-                  ],
-                ),
-              ),
-            ),
-
-            const SizedBox(
-              height: 36.0
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: Row(
-                children: [
-                  Text(
-                      'Tous les services du',
-                      style: TextStyle(
-                          fontSize: size.width / 20
-                      )
-                  ),
-                  Text(
-                      ' GO FLY SERVICES',
-                      style: TextStyle(
-                          fontSize: size.width / 20,
-                          fontFamily: 'Anton'
-                      )
-                  ),
-                ],
-              )
-            ),
-
-            Padding(
-                padding: const EdgeInsets.only(left: 16.0, bottom: 16.0, top: 16.0),
-                child: Row(
-                  children: [
-                    Text(
-                        'Offres sur mesures',
-                        style: TextStyle(
-                            fontSize: size.width / 20
-                        )
-                    )
-                  ],
-                )
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    MiniCardPicture(
-                      imagePath: 'assets/images/driver.png',
-                      title: 'Devenir chauffeur',
-                      description: 'Voulez-vous devenir chauffeur?',
-                      onTap: (){
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SignupScreen()
-                            )
-                        );
-                      },
-                    ),
-
-                    const SizedBox(width: 16.0),
-
-                    MiniCardPicture(
-                      imagePath: 'assets/images/aeroport.png',
-                      title: 'VOYAGE VERS L\'AEROPORT',
-                      description: '',
-                      onTap: (){
-                        setState(() {
-                          checkairport = true;
-                        });
-                      },
-                    ),
-
-                    const SizedBox(width: 16.0),
-
-                    MiniCardPicture(
-                      imagePath: 'assets/images/qcm.png',
-                      title: 'GO FLY QUIZ',
-                      description: 'Jouez et essayez de gagner',
-                      onTap: (){
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => QuizWebView()
-                            )
-                        );
-                      },
-                    ),
                   ],
                 ),
               ),
