@@ -35,35 +35,40 @@ notification_dialog(
     shape: RoundedRectangleBorder(
         borderRadius:
         BorderRadius.circular(20.0)),
-    child: Flexible(
+    child: SizedBox(
+      height: width / 1.5,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children : [
-            Icon(
-              icons,
-              color: color,
-              size: width / 5,
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topCenter,
+              child: Icon(
+                icons,
+                color: color,
+                size: width / 5,
+              ),
             ),
-
-            const SizedBox(height: 16.0),
-
-            SizedBox(
-              width : width / 1.5,
-              height: width / 2.7,
-              child: Text(
-                text,
-                style: TextStyle(
-                  fontSize: fontSize,
-                  color: Colors.black,
-                )
+            Align(
+              alignment: Alignment.center,
+              child: SizedBox(
+                child: SingleChildScrollView(
+                  child: Text(
+                      text,
+                      style: TextStyle(
+                        fontSize: fontSize,
+                        color: Colors.black,
+                      )
+                  ),
+                ),
               ),
             ),
 
-            const SizedBox(height: 16.0),
-
-            okButton
-          ]
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: okButton,
+            )
+          ],
         )
       ),
     ),
