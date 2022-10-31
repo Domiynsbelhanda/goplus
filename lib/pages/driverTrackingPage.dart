@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:goplus/utils/global_variable.dart';
 import 'package:goplus/widget/backButton.dart';
 import 'package:goplus/widget/bottom_type_car.dart';
 import 'package:goplus/widget/progresso_dialog.dart';
@@ -441,7 +442,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
             AppButton(
               name: 'RESERVER',
               onTap: (){
-                // notification_loader(context, "Reservation en cours", (){});
+
+                showLoader("Reservation en cours...");
 
                 var don = {
                   "key": "ride",
@@ -449,7 +451,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   "phone": data.id
                 };
 
-                Provider.of<Auth>(context, listen: false).checkSID(context, don).then((sms){
+                Provider.of<Auth>(context, listen: false).request(data : don).then((sms){
                   if(sms['code'] == 'OK'){
                     Provider.of<Auth>(context, listen: false).getToken().then((value){
                       Provider.of<Auth>(context, listen: false).getSid().then((val){
