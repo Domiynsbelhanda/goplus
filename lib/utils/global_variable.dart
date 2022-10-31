@@ -4,7 +4,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 final storage = const FlutterSecureStorage();
 
-LatLng? position;
+LatLng position = const LatLng(-4.4163009, 15.2732314);
+const double zoom = 19;
 
 void showLoader(String message)async{
   await EasyLoading.show(
