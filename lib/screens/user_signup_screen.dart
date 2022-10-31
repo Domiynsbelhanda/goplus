@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:goplus/services/auth.dart';
 import 'package:provider/provider.dart';
@@ -106,6 +108,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                 Form(
                   key: formkey,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Column(
                         children: input.map((e){
@@ -168,14 +171,25 @@ class _SignupScreenState extends State<UserSignupScreen> {
                         }).toList()
                       ),
 
-                      ChipsChoice<int>.single(
-                        value: genreTag,
-                        onChanged: (val) => setState(() => genreTag = val),
-                        choiceItems: C2Choice.listFrom<int, Map<String, dynamic>>(
-                          source: genreOptions,
-                          value: (i, v) => i,
-                          label: (i, v) => v['name'],
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Genre :',
+                            style: TextStyle(
+                              fontSize: size.width / 25
+                            )
+                          ),
+                          ChipsChoice<int>.single(
+                            value: genreTag,
+                            onChanged: (val) => setState(() => genreTag = val),
+                            choiceItems: C2Choice.listFrom<int, Map<String, dynamic>>(
+                              source: genreOptions,
+                              value: (i, v) => i,
+                              label: (i, v) => v['name'],
+                            ),
+                          ),
+                        ],
                       ),
 
                       SizedBox(height: size.height * 0.07),

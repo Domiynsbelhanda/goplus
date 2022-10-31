@@ -57,6 +57,7 @@ dependencies:
   flutter_easyloading: ^3.0.5
   url_launcher: ^6.1.5
   toast: ^0.2.9
+  internet_connection_checker: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:
