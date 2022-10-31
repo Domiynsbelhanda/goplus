@@ -7,7 +7,6 @@ import 'package:location/location.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'homePage.dart';
-import '../utils/datas.dart';
 import '../widget/app_button.dart';
 
 class GoogleMapsPolylines extends StatefulWidget {
@@ -224,7 +223,8 @@ class _Poly extends State<GoogleMapsPolylines> {
             const SizedBox(height: 16,),
 
             Text(
-              'est à ${calculateDistance(LatLng(data['latitude'], data['longitude']), LatLng(datas['depart_latitude'], datas['depart_longitude'])).toStringAsFixed(2)} m du lieu de départ.',
+              'Fuso',
+              // 'est à ${calculateDistance(LatLng(data['latitude'], data['longitude']), LatLng(datas['depart_latitude'], datas['depart_longitude'])).toStringAsFixed(2)} m du lieu de départ.',
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                   fontWeight: FontWeight.w500,

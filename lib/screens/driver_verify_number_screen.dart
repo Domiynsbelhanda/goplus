@@ -6,7 +6,6 @@ import '../utils/app_colors.dart';
 import '../widget/app_bar.dart';
 import '../widget/app_button.dart';
 import '../widget/notification_dialog.dart';
-import '../widget/notification_loader.dart';
 import '../widget/otp_text_field.dart';
 
 class DriverVerifyNumberScreen extends StatefulWidget {
@@ -101,7 +100,6 @@ class _VerifyNumberState extends State<DriverVerifyNumberScreen> {
                   name: 'VERIFIEZ',
                   color: AppColors.primaryColor,
                   onTap: () async{
-                    notification_loader(context, 'Vérification OTP en cours...', (){});
                     if(otp != null){
                       var data = {
                         'key': "create_user",

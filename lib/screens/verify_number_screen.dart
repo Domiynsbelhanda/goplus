@@ -6,10 +6,8 @@ import 'package:provider/provider.dart';
 
 import '../services/auth.dart';
 import '../utils/app_colors.dart';
-import '../widget/app_bar.dart';
 import '../widget/app_button.dart';
 import '../widget/notification_dialog.dart';
-import '../widget/notification_loader.dart';
 import '../widget/otp_text_field.dart';
 
 class VerifyNumberScreen extends StatefulWidget {

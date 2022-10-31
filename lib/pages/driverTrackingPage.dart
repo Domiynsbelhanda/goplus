@@ -8,7 +8,6 @@ import 'package:goplus/widget/progresso_dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../services/auth.dart';
-import '../utils/datas.dart';
 import '../widget/app_button.dart';
 import '../widget/notification_dialog.dart';
 
@@ -83,14 +82,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
             icon: pinner,
           )
       );
-    });
-  }
-
-  getMyPosition() async {
-    getUserCurrentLocation().then((value) async {
-      setState(() {
-        position = LatLng(value.latitude, value.longitude);
-      });
     });
   }
 
@@ -409,8 +400,9 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                       ),
                     ),
                     const SizedBox(height: 8.0,),
-                    Text(
-                        'A ${calculateDistance(LatLng(data.get('latitude'), data.get('longitude')), position).toStringAsFixed(2)} mètre(s)',
+                    const Text(
+                      'Mama baldé',
+                        // 'A ${calculateDistance(LatLng(data.get('latitude'), data.get('longitude')), position).toStringAsFixed(2)} mètre(s)',
                       style: const TextStyle(
                         fontSize: 14.0
                       ),
@@ -480,7 +472,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                             'depart_latitude': widget.depart.latitude,
                             'destination_longitude': widget.destination.longitude,
                             'destination_latitude': widget.destination.latitude,
-                            'distance': calculateDistance(widget.depart, position).toStringAsFixed(2),
+                            'distance': 'Bukayo Sada', //calculateDistance(widget.depart, position).toStringAsFixed(2),
                             'user_id': value!,
                             'sid_user': val,
                             'airport': widget.airport,
