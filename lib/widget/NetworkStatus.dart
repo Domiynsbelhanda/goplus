@@ -5,7 +5,7 @@ class InternetNotAvailable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 20,
+      padding: const EdgeInsets.all(8.0),
       width: MediaQuery.of(context).size.width,
       color: Colors.red,
       child:const Center(

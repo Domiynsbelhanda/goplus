@@ -255,13 +255,12 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
 
                     GestureDetector(
                       onTap: (){
-                        Navigator.pushAndRemoveUntil(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
                                   const UserSignupScreen()
-                          ),
-                                (route)=>false
+                          )
                         );
                       },
                       child: const Text(
