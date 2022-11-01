@@ -60,20 +60,14 @@ class _HomePage extends State<HomePage>{
                   return FutureBuilder<Position>(
                     future: Geolocator.getCurrentPosition(),
                     builder: (context, location){
-                      disableLoader();
-                      if(location.hasData){
                         disableLoader();
                         position = LatLng(location.data!.latitude, location.data!.longitude);
-                      } else {
-                        showLoader("Recherche de votre position");
-                      }
-
-                      return FutureBuilder<BitmapDescriptor>(
-                        future: bitmap("assets/images/pictogramme.png", 90),
-                        builder: (context, pictogramme){
-                          return body(position, pictogramme.data!);
-                        },
-                      );
+                        return FutureBuilder<BitmapDescriptor>(
+                          future: bitmap("assets/images/pictogramme.png", 90),
+                          builder: (context, pictogramme){
+                            return body(position, pictogramme.data!);
+                          },
+                        );
                     },
                   );
                 } else{
@@ -131,14 +125,26 @@ class _HomePage extends State<HomePage>{
           icon: picto!,
         )
     );
+    CameraPosition? cam = CameraPosition(
+        target: pos,
+        zoom: zoom
+    );
+
     return Stack(
       children: [
         GoogleMap(
-          initialCameraPosition: CameraPosition(
-              target: pos,
-              zoom: zoom
-          ),
+          initialCameraPosition: cam,
           markers: markers,
+          onMapCreated: (GoogleMapController _controller){
+            _controller.animateCamera(
+              CameraUpdate.newCameraPosition(
+                CameraPosition(
+                    target: pos,
+                    zoom: zoom
+                ),
+              ),
+            );
+          },
         ),
         Stack(
           children: [
