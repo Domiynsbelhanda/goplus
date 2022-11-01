@@ -5,6 +5,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:goplus/pages/homePage.dart';
 import 'package:goplus/screens/enter_phone_number_screen.dart';
 import 'package:goplus/services/auth.dart';
+import 'package:goplus/widget/NetworkStatus.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 import 'package:goplus/widget/theme_data.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
@@ -65,11 +67,33 @@ class _MyApp extends State<MyApp>{
         nextScreen: FutureBuilder(
           future: Provider.of<Auth>(context,listen: false).getToken(),
           builder: (context, snapshot){
-            if(!snapshot.hasData){
-              return const PhoneNumberScreen();
-            } else {
-              return HomePage();
-            }
+            return Stack(
+              children: [
+                !snapshot.hasData ?
+                    const PhoneNumberScreen()
+                    : HomePage(),
+
+                Positioned(
+                  bottom: 0.0,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 0.0),
+                    child: FutureBuilder<bool>(
+                        future: InternetConnectionChecker().hasConnection,
+                        builder: (context, connected) {
+                          bool visible = false;
+                          if(connected.hasData){
+                            visible = !(connected.data!);
+                          }
+                          return Visibility(
+                            visible: visible,
+                            child: const InternetNotAvailable(),
+                          );
+                        }
+                    ),
+                  ),
+                ),
+              ],
+            );
           }
         ),
         duration: 2500,

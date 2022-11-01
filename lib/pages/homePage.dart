@@ -12,7 +12,7 @@ import '../utils/app_colors.dart';
 class HomePage extends StatefulWidget{
   LatLng? destination;
   LatLng? depart;
-  HomePage({this.destination, this.depart});
+  HomePage({super.key, this.destination, this.depart});
 
   @override
   State<StatefulWidget> createState() {
