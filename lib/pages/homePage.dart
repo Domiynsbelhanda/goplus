@@ -217,17 +217,19 @@ class _HomePage extends State<HomePage>{
                         padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0),
                         child: Image.asset(
                           'assets/images/bonjour.png',
-                          height: size.width / 7,
+                          height: size.width / 9,
                           fit: BoxFit.fitWidth,
                         ),
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.only(left: 16.0, top: 16.0, bottom: 16.0),
+                        padding: const EdgeInsets.only(left: 36.0, bottom: 16.0),
                         child: Text(
-                            'Nos taxis vous y conduiront en toute sécurité et convivialité à bord.',
+                            "OU ALLEZ-VOUS?",
                             style: TextStyle(
-                                fontSize: size.width / 25
+                                fontSize: size.width / 15,
+                              fontFamily: 'Anton',
+                              color: Colors.white
                             )
                         ),
                       ),
