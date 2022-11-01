@@ -201,12 +201,10 @@ class _HomePage extends State<HomePage>{
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0),
-                        child: Text(
-                            'Où Allez-vous?',
-                            style: TextStyle(
-                              fontSize: size.width / 20,
-                              fontFamily: 'Anton',
-                            )
+                        child: Image.asset(
+                          'assets/images/bonjour.png',
+                          height: size.width / 7,
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
 
