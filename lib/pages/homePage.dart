@@ -48,65 +48,79 @@ class _HomePage extends State<HomePage>{
       body: FutureBuilder<bool>(
         future: Permission.location.serviceStatus.isEnabled,
         builder: (context, snapshot) {
-          if(snapshot.data!){
-            return FutureBuilder<PermissionStatus>(
-              future: Permission.location.status,
-              builder: (context, status){
-                if(!status.hasData){
-                  requestPermission();
-                }
-                if(status.data!.isGranted){
-                  showLoader("Recherche de votre position\nVeuillez patienter...");
-                  return FutureBuilder<Position>(
-                    future: Geolocator.getCurrentPosition(),
-                    builder: (context, location){
-                        disableLoader();
-                        position = LatLng(location.data!.latitude, location.data!.longitude);
-                        return FutureBuilder<BitmapDescriptor>(
-                          future: bitmap("assets/images/pictogramme.png", 90),
-                          builder: (context, pictogramme){
-                            return body(position, pictogramme.data!);
+          if(snapshot.hasData){
+            if(snapshot.data!){
+              return FutureBuilder<PermissionStatus>(
+                  future: Permission.location.status,
+                  builder: (context, status){
+                    if(status.hasData){
+                      if(status.data!.isGranted){
+                        showLoader("Recherche de votre position\nVeuillez patienter...");
+                        return FutureBuilder<Position>(
+                          future: Geolocator.getCurrentPosition(),
+                          builder: (context, location){
+                            if(location.hasData){
+                              disableLoader();
+                              position = LatLng(location.data!.latitude, location.data!.longitude);
+                              return FutureBuilder<BitmapDescriptor>(
+                                future: bitmap("assets/images/pictogramme.png", 90),
+                                builder: (context, pictogramme){
+                                  if(pictogramme.hasData){
+                                    return body(position, pictogramme.data!);
+                                  } else {
+                                    return Container();
+                                  }
+                                },
+                              );
+                            } else {
+                              return Container();
+                            }
                           },
                         );
-                    },
-                  );
-                } else{
-                  requestPermission();
-                  return Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Autorisé l'aplication à utiliser votre position. \nAllez dans les paramètres pour forcer l'autorisation.",
-                            textAlign: TextAlign.center,
+                      } else{
+                        requestPermission();
+                        return Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  "Autorisé l'aplication à utiliser votre position. \nAllez dans les paramètres pour forcer l'autorisation.",
+                                  textAlign: TextAlign.center,
+                                ),
+
+                                const SizedBox(height: 16.0,),
+
+                                AppButton(
+                                  onTap: ()=>openAppSettings(),
+                                  name: "Paramètre",
+                                  color: AppColors.primaryColor,
+                                )
+                              ],
+                            ),
                           ),
-
-                          const SizedBox(height: 16.0,),
-
-                          AppButton(
-                            onTap: ()=>openAppSettings(),
-                            name: "Paramètre",
-                            color: AppColors.primaryColor,
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                }
-              }
-            );
-          } else {
-            return const Center(
-              child: Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Text(
-                  "Activez la localisation puis relancer l'application pour utiliser GoPlus",
-                  textAlign: TextAlign.center,
+                        );
+                      }
+                    } else {
+                      requestPermission();
+                      return Container();
+                    }
+                  }
+              );
+            } else {
+              return const Center(
+                child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    "Activez la localisation puis relancer l'application pour utiliser GoPlus",
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
-            );
+              );
+            }
+          } else {
+            return Container();
           }
         }
       ),
