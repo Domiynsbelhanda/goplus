@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:goplus/utils/app_colors.dart';
 import 'package:goplus/utils/global_variable.dart';
 import 'package:goplus/widget/backButton.dart';
 import 'package:goplus/widget/bottom_type_car.dart';
@@ -440,6 +441,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
             const SizedBox(height: 16.0,),
 
             AppButton(
+              color: AppColors.primaryColor,
               name: 'RESERVER',
               onTap: (){
 

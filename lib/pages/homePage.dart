@@ -261,33 +261,13 @@ class _HomePage extends State<HomePage>{
                                 ),
                               );
                             },
-                            child: Container(
-                              height: size.width / 7,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(48),
-                                  border: Border.all(
-                                      color: Colors.black,
-                                      width: 0.5
-                                  )
-                              ),
-                              child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: const [
-                                        Icon(
-                                            Icons.map_outlined
-                                        ),
-                                        SizedBox(width: 4.0,),
-                                        Text(
-                                          'Selectionner votre destination',
-                                          textAlign: TextAlign.left,
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                              ),
-                            ),
+                            child: AppButton(
+                              color: Colors.black,
+                              name: 'SUIVANT',
+                              onTap: (){
+
+                              },
+                            )
                           )
                       ),
 

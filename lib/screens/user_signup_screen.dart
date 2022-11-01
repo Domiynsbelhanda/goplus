@@ -194,6 +194,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
 
                     SizedBox(height: size.height * 0.07),
                     AppButton(
+                      color: AppColors.primaryColor,
                         name: 'S\'INSRIRE',
                         onTap: (){
                           if(formkey.currentState!.validate()){

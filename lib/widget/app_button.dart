@@ -5,7 +5,7 @@ class AppButton extends StatelessWidget {
   var onTap;
   final String? name;
   final Color color;
-  AppButton({super.key, this.onTap, this.name, this.color = AppColors.primaryColor});
+  AppButton({super.key, this.onTap, this.name, required this.color});
 
   late Size size;
   @override
@@ -24,7 +24,7 @@ class AppButton extends StatelessWidget {
           ),
           clipBehavior: Clip.antiAlias,
           child: MaterialButton(
-            highlightColor: Colors.yellow[600],
+            highlightColor: color,
             onPressed: () => onTap(),
             height: size.height * 0.07,
             minWidth: size.width * 0.9,

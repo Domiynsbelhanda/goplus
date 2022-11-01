@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:goplus/utils/app_colors.dart';
 import 'package:location/location.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -235,6 +236,7 @@ class _Poly extends State<GoogleMapsPolylines> {
             const SizedBox(height: 16.0,),
 
             AppButton(
+              color: AppColors.primaryColor,
               name: 'APPELER ',
               onTap: ()=>_makePhoneCall('+243${data['phone']}'),
             ),
@@ -279,6 +281,7 @@ class _Poly extends State<GoogleMapsPolylines> {
 
             const SizedBox(height: 16.0,),
             AppButton(
+              color: AppColors.primaryColor,
               name: 'FERMER ',
               onTap: ()=>Navigator.push(
               context,
