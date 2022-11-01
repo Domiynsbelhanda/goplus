@@ -197,7 +197,7 @@ class _HomePage extends State<HomePage>{
               child: Padding(
                 padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
                 child: Container(
-                  height: size.width / 1.7,
+                  height: size.width / 1.5,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(size.width / 15),
                     color: AppColors.primaryColor,
@@ -231,6 +231,19 @@ class _HomePage extends State<HomePage>{
                               fontFamily: 'Anton',
                               color: Colors.white
                             )
+                        ),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              hintText: 'Choisir une destination',
+                              contentPadding: const EdgeInsets.all(15.0),
+                            prefixIcon: Icon(
+                              Icons.search
+                            )
+                          ),
                         ),
                       ),
 
@@ -277,115 +290,6 @@ class _HomePage extends State<HomePage>{
                             ),
                           )
                       ),
-
-                      !checkairport ?
-                      selectedPlace != null ?
-                      Padding(
-                          padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-                          child: Card(
-                            elevation: 2.0,
-                            child: SizedBox(
-                              width: size.width,
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Text(
-                                  'Destination : \n     Longitude: ${selectedPlace!.latitude} \n     Latitude : ${selectedPlace!.longitude}',
-                                  style: const TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                      ) : const SizedBox()
-                          : Padding(
-                        padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-                        child: Card(
-                          elevation: 2.0,
-                          child: SizedBox(
-                            width: size.width,
-                            child: const Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: Text(
-                                'Destination : Aeroport de NDJILI',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      selectedPlace != null || airport != null ?
-                      Padding(
-                          padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
-                          child: GestureDetector(
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) => PickLocation(
-                                      place: checkairport ? airport : selectedPlace,
-                                      destination: false,
-                                    )
-                                ),
-                              );
-                            },
-                            child: Container(
-                              height: size.width / 7,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(48),
-                                  border: Border.all(
-                                      color: Colors.black,
-                                      width: 0.5
-                                  )
-                              ),
-                              child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: const [
-                                        Icon(
-                                            Icons.map_rounded
-                                        ),
-                                        SizedBox(width: 4.0,),
-                                        Text(
-                                          'Selectionner lieu de départ',
-                                          textAlign: TextAlign.left,
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                              ),
-                            ),
-                          )
-                      )
-                          : const SizedBox(),
-
-                      depart != null ?
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-                        child: Card(
-                          elevation: 2.0,
-                          child: SizedBox(
-                            width: size.width,
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Text(
-                                'Départ : \n     Longitude :${depart!.latitude} \n     Latitude : ${depart!.longitude}',
-                                style: const TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ) : const SizedBox(),
-
 
                       selectedPlace != null && depart != null ?
                       Padding(
