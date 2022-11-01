@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/screens/mapsPickLocation.dart';
 import 'package:goplus/widget/app_button.dart';
-import 'package:goplus/widget/logo_text.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
 import '../main.dart';
@@ -123,14 +121,14 @@ class _HomePage extends State<HomePage>{
 
   Widget body(LatLng pos, BitmapDescriptor? picto){
     markers.add(
-        Marker( //add start location marker
+        Marker(
           markerId: const MarkerId('Ma Position'),
-          position: position, //position of marker
-          infoWindow: const InfoWindow( //popup info
+          position: position,
+          infoWindow: const InfoWindow(
             title: 'Ma Position',
             snippet: 'Moi',
           ),
-          icon: picto!, //Icon for Marker
+          icon: picto!,
         )
     );
     return Stack(
@@ -161,7 +159,7 @@ class _HomePage extends State<HomePage>{
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                              builder: (BuildContext context) => MyApp()
+                              builder: (BuildContext context) => const MyApp()
                           ),
                               (Route<dynamic> route) => false
                       );
@@ -178,176 +176,92 @@ class _HomePage extends State<HomePage>{
               alignment: Alignment.bottomCenter,
               child: Padding(
                 padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-                child: SizedBox(
-                  height: size.width / 2,
-                  child: Card(
-                    elevation: 0.4,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0),
-                          child: Text(
-                              'Où Allez-vous?',
-                              style: TextStyle(
-                                fontSize: size.width / 20,
-                                fontFamily: 'Anton',
-                              )
-                          ),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.only(left: 16.0, top: 16.0, bottom: 16.0),
-                          child: Text(
-                              'Nos taxis vous y conduiront en toute sécurité et convivialité à bord.',
-                              style: TextStyle(
-                                  fontSize: size.width / 25
-                              )
-                          ),
-                        ),
-
-                        Padding(
-                            padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
-                            child: GestureDetector(
-                              onTap: (){
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          PickLocation(
-                                            destination: true,
-                                          )
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                height: size.width / 7,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(48),
-                                    border: Border.all(
-                                        color: Colors.black,
-                                        width: 0.5
-                                    )
-                                ),
-                                child: Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        children: const [
-                                          Icon(
-                                              Icons.map_outlined
-                                          ),
-                                          SizedBox(width: 4.0,),
-                                          Text(
-                                            'Selectionner votre destination',
-                                            textAlign: TextAlign.left,
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                ),
-                              ),
+                child: Container(
+                  height: size.width / 1.7,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(size.width / 30),
+                    color: AppColors.primaryColor
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0),
+                        child: Text(
+                            'Où Allez-vous?',
+                            style: TextStyle(
+                              fontSize: size.width / 20,
+                              fontFamily: 'Anton',
                             )
                         ),
+                      ),
 
-                        !checkairport ?
-                        selectedPlace != null ?
-                        Padding(
-                            padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-                            child: Card(
-                              elevation: 2.0,
-                              child: SizedBox(
-                                width: size.width,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Text(
-                                    'Destination : \n     Longitude: ${selectedPlace!.latitude} \n     Latitude : ${selectedPlace!.longitude}',
-                                    style: const TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0, top: 16.0, bottom: 16.0),
+                        child: Text(
+                            'Nos taxis vous y conduiront en toute sécurité et convivialité à bord.',
+                            style: TextStyle(
+                                fontSize: size.width / 25
+                            )
+                        ),
+                      ),
+
+                      Padding(
+                          padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        PickLocation(
+                                          destination: true,
+                                        )
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: size.width / 7,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(48),
+                                  border: Border.all(
+                                      color: Colors.black,
+                                      width: 0.5
+                                  )
+                              ),
+                              child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: const [
+                                        Icon(
+                                            Icons.map_outlined
+                                        ),
+                                        SizedBox(width: 4.0,),
+                                        Text(
+                                          'Selectionner votre destination',
+                                          textAlign: TextAlign.left,
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ),
-                              ),
-                            )
-                        ) : const SizedBox()
-                            : Padding(
-                          padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-                          child: Card(
-                            elevation: 2.0,
-                            child: SizedBox(
-                              width: size.width,
-                              child: const Padding(
-                                padding: EdgeInsets.all(16.0),
-                                child: Text(
-                                  'Destination : Aeroport de NDJILI',
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
+                                  )
                               ),
                             ),
-                          ),
-                        ),
+                          )
+                      ),
 
-                        selectedPlace != null || airport != null ?
-                        Padding(
-                            padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
-                            child: GestureDetector(
-                              onTap: (){
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) => PickLocation(
-                                        place: checkairport ? airport : selectedPlace,
-                                        destination: false,
-                                      )
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                height: size.width / 7,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(48),
-                                    border: Border.all(
-                                        color: Colors.black,
-                                        width: 0.5
-                                    )
-                                ),
-                                child: Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        children: const [
-                                          Icon(
-                                              Icons.map_rounded
-                                          ),
-                                          SizedBox(width: 4.0,),
-                                          Text(
-                                            'Selectionner lieu de départ',
-                                            textAlign: TextAlign.left,
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                ),
-                              ),
-                            )
-                        )
-                            : const SizedBox(),
-
-                        depart != null ?
-                        Padding(
+                      !checkairport ?
+                      selectedPlace != null ?
+                      Padding(
                           padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
                           child: Card(
                             elevation: 2.0,
                             child: SizedBox(
                               width: size.width,
                               child: Padding(
-                                padding: EdgeInsets.all(16.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Text(
-                                  'Départ : \n     Longitude :${depart!.latitude} \n     Latitude : ${depart!.longitude}',
+                                  'Destination : \n     Longitude: ${selectedPlace!.latitude} \n     Latitude : ${selectedPlace!.longitude}',
                                   style: const TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold
@@ -355,61 +269,146 @@ class _HomePage extends State<HomePage>{
                                 ),
                               ),
                             ),
-                          ),
-                        ) : const SizedBox(),
-
-
-                        selectedPlace != null && depart != null ?
-                        Padding(
-                            padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
-                            child: GestureDetector(
-                              onTap: (){
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) => DriverTrackingPage(
-                                        depart: depart!,
-                                        destination: checkairport ? airport : selectedPlace!,
-                                        airport: checkairport,
-                                      )
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                height: size.width / 7,
-                                decoration: BoxDecoration(
-                                    color: AppColors.primaryColor,
-                                    borderRadius: BorderRadius.circular(48),
-                                    border: Border.all(
-                                        color: Colors.black,
-                                        width: 0.5
-                                    )
-                                ),
-                                child: Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: const [
-                                          Text(
-                                            'TROUVEZ UN TAXI',
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                                fontFamily: 'Anton',
-                                                color: Colors.white,
-                                                fontSize: 24
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    )
+                          )
+                      ) : const SizedBox()
+                          : Padding(
+                        padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+                        child: Card(
+                          elevation: 2.0,
+                          child: SizedBox(
+                            width: size.width,
+                            child: const Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Text(
+                                'Destination : Aeroport de NDJILI',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold
                                 ),
                               ),
-                            )
-                        )
-                            : const SizedBox(),
-                      ],
-                    ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      selectedPlace != null || airport != null ?
+                      Padding(
+                          padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) => PickLocation(
+                                      place: checkairport ? airport : selectedPlace,
+                                      destination: false,
+                                    )
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: size.width / 7,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(48),
+                                  border: Border.all(
+                                      color: Colors.black,
+                                      width: 0.5
+                                  )
+                              ),
+                              child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: const [
+                                        Icon(
+                                            Icons.map_rounded
+                                        ),
+                                        SizedBox(width: 4.0,),
+                                        Text(
+                                          'Selectionner lieu de départ',
+                                          textAlign: TextAlign.left,
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                              ),
+                            ),
+                          )
+                      )
+                          : const SizedBox(),
+
+                      depart != null ?
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+                        child: Card(
+                          elevation: 2.0,
+                          child: SizedBox(
+                            width: size.width,
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text(
+                                'Départ : \n     Longitude :${depart!.latitude} \n     Latitude : ${depart!.longitude}',
+                                style: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ) : const SizedBox(),
+
+
+                      selectedPlace != null && depart != null ?
+                      Padding(
+                          padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) => DriverTrackingPage(
+                                      depart: depart!,
+                                      destination: checkairport ? airport : selectedPlace!,
+                                      airport: checkairport,
+                                    )
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: size.width / 7,
+                              decoration: BoxDecoration(
+                                  color: AppColors.primaryColor,
+                                  borderRadius: BorderRadius.circular(48),
+                                  border: Border.all(
+                                      color: Colors.black,
+                                      width: 0.5
+                                  )
+                              ),
+                              child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: const [
+                                        Text(
+                                          'TROUVEZ UN TAXI',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                              fontFamily: 'Anton',
+                                              color: Colors.white,
+                                              fontSize: 24
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                              ),
+                            ),
+                          )
+                      )
+                          : const SizedBox(),
+                    ],
                   ),
                 ),
               ),
