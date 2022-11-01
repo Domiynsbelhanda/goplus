@@ -185,8 +185,16 @@ class _HomePage extends State<HomePage>{
                 child: Container(
                   height: size.width / 1.7,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(size.width / 30),
-                    color: AppColors.primaryColor
+                    borderRadius: BorderRadius.circular(size.width / 15),
+                    color: AppColors.primaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: const Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
