@@ -275,17 +275,102 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GestureDetector(
-              child: const Icon(
-                Icons.close,
-                color: Colors.black,
-              ),
-              onTap: (){
-                setState(() {
-                  index = null;
-                });
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "DETAILS DU CHAUFFEUR",
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: size.width / 20
+                  ),
+                ),
+
+                GestureDetector(
+                  child: const Icon(
+                    Icons.close,
+                    color: Colors.black,
+                  ),
+                  onTap: (){
+                    setState(() {
+                      index = null;
+                    });
+                  },
+                ),
+              ],
             ),
+
+
+
+            const SizedBox(height: 8.0,),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  height: 120,
+                  width: 100,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(60),
+                      image: const DecorationImage(
+                        image: NetworkImage(
+                          'https://firebasestorage.googleapis.com/v0/b/taxigo-e3fcc.appspot.com/o/profile.jpg?alt=media&token=609b45f5-2f3c-4edb-b5f4-c041b9eb0457',
+                        ),
+                        fit: BoxFit.fitWidth,
+                      )
+                  ),
+                ),
+
+                const SizedBox(
+                  width: 8.0,
+                ),
+
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${data.get('firstn')} ${data.get('midn')}',
+                      style: TextStyle(
+                          fontSize: size.width / 18,
+                        fontFamily: 'Anton'
+                      ),
+                    ),
+                    const SizedBox(height: 8.0,),
+                    const Text(
+                      'Mama baldé',
+                      // 'A ${calculateDistance(LatLng(data.get('latitude'), data.get('longitude')), position).toStringAsFixed(2)} mètre(s)',
+                      style: TextStyle(
+                          fontSize: 14.0
+                      ),
+                    ),
+
+                    GestureDetector(
+                      onTap: (){},
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.whatsapp,
+                            color: Colors.green,
+                          ),
+
+                          const SizedBox(
+                            width: 4.0,
+                          ),
+
+                          Text(
+                            '+243${data.get('phone')}',
+                            style: const TextStyle(
+                                fontSize: 14.0
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -341,78 +426,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
 
             const SizedBox(height: 4.0,),
 
-            const Text(
-              "DETAILS DU CHAUFFEUR",
-              overflow: TextOverflow.ellipsis,
-            ),
 
-            const SizedBox(height: 8.0,),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  height: 120,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(60),
-                    image: const DecorationImage(
-                      image: NetworkImage(
-                        'https://firebasestorage.googleapis.com/v0/b/taxigo-e3fcc.appspot.com/o/profile.jpg?alt=media&token=609b45f5-2f3c-4edb-b5f4-c041b9eb0457',
-                      ),
-                      fit: BoxFit.fitWidth,
-                    )
-                  ),
-                ),
-
-                const SizedBox(
-                  width: 8.0,
-                ),
-
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${data.get('firstn')} ${data.get('midn')}',
-                      style: const TextStyle(
-                          fontSize: 16.0
-                      ),
-                    ),
-                    const SizedBox(height: 8.0,),
-                    const Text(
-                      'Mama baldé',
-                        // 'A ${calculateDistance(LatLng(data.get('latitude'), data.get('longitude')), position).toStringAsFixed(2)} mètre(s)',
-                      style: TextStyle(
-                        fontSize: 14.0
-                      ),
-                    ),
-
-                    GestureDetector(
-                      onTap: (){},
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.whatsapp,
-                            color: Colors.green,
-                          ),
-
-                          const SizedBox(
-                            width: 4.0,
-                          ),
-
-                          Text(
-                              '+243${data.get('phone')}',
-                            style: const TextStyle(
-                              fontSize: 14.0
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ),
 
 
             const SizedBox(height: 16.0,),
