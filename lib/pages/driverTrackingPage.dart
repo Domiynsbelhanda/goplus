@@ -44,6 +44,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   bool offre = false;
   List<LatLng> driverPolylines = [];
   PolylineResult? driverResult;
+  bool ride = false;
 
   @override
   void initState() {
@@ -109,7 +110,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   GeoPoint location = GeoPoint(latitude, longitude);
 
                   if (location == null) {
-                    return Text("There was no location data");
+                    return const Text("There was no location data");
                   }
                   final latLng = LatLng(location.latitude, location.longitude);
 
@@ -252,6 +253,14 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   child: Align(
                       alignment: Alignment.center,
                       child: showDriver(data[index!])
+                  ),
+                ) : const SizedBox(),
+
+                ride ?
+                Positioned.fill(
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: ProgressoDialog(text: data[index!].id,)
                   ),
                 ) : const SizedBox(),
               ],
@@ -431,14 +440,19 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                       Provider.of<Auth>(context, listen: false).getSid().then((val){
                         disableLoader();
                         if(val != null){
-                          progresso_dialog(context, data.id, LatLng(data.get('latitude'), data.get('longitude')));
                           setState(() {
+                            ride = true;
                             index = null;
                           });
                           FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
                             'online': false,
                             'ride': true,
                             'ride_view': false,
+                          });
+                          FirebaseFirestore.instance.collection('clients').doc(value!).update({
+                            'ride': true,
+                            'status': 'pending',
+                            'driver': data.id
                           });
                           FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses')
                               .doc('courses')
@@ -448,10 +462,9 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                             'depart_latitude': widget.origine.latitude,
                             'destination_longitude': widget.destination.longitude,
                             'destination_latitude': widget.destination.latitude,
-                            'distance': 'Bukayo Sada', //calculateDistance(widget.depart, position).toStringAsFixed(2),
-                            'user_id': value!,
+                            'distance': distanceDeuxPoint(driverPolylines),
+                            'user_id': value,
                             'sid_user': val,
-                            'airport': '',
                             'carType': carType
                           });
                         } else {
