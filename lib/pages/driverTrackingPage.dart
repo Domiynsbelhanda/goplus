@@ -275,8 +275,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                 .doc(data[index!].id).collection('courses').doc('courses').snapshots(),
                             builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot){
                               if(snapshot.hasData){
-                                Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
-                                if(data['status'] == 'cancel'){
+                                Map<String, dynamic> donne = snapshot.data!.data() as Map<String, dynamic>;
+                                if(donne['status'] == 'cancel'){
                                   return SizedBox(
                                     width: size.width / 1,
                                     height: size.width / 1.1,
@@ -320,7 +320,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                                     )
                                                 ),
                                                 onPressed: (){
-                                                  FirebaseFirestore.instance.collection('drivers').doc(data[index].id).collection('courses')
+                                                  FirebaseFirestore.instance.collection('drivers').doc(data[index!].id).collection('courses')
                                                       .doc('courses')
                                                       .delete();
                                                   setState(() {
@@ -332,7 +332,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                         )
                                     ),
                                   );
-                                } else if (data['status'] == 'accept'){
+                                } else if (donne['status'] == 'accept'){
                                   return SizedBox(
                                     width: size.width / 1,
                                     height: size.width / 1.1,
@@ -381,8 +381,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                                       MaterialPageRoute(
                                                           builder: (BuildContext context) =>
                                                               GoogleMapsPolylines(
-                                                                destination: LatLng(data['destination_latitude'], data['destination_longitude']),
-                                                                origine: LatLng(data['depart_latitude'], data['depart_longitude']),
+                                                                destination: LatLng(donne['destination_latitude'], donne['destination_longitude']),
+                                                                origine: LatLng(donne['depart_latitude'], donne['depart_longitude']),
                                                                 position: position,
                                                                 id: data[index!].id,
                                                               )
