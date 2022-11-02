@@ -7,6 +7,7 @@ import 'package:goplus/utils/app_colors.dart';
 import 'package:location/location.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../utils/global_variable.dart';
 import 'homePage.dart';
 import '../widget/app_button.dart';
 
@@ -238,7 +239,7 @@ class _Poly extends State<GoogleMapsPolylines> {
             AppButton(
               color: AppColors.primaryColor,
               name: 'APPELER ',
-              onTap: ()=>_makePhoneCall('+243${data['phone']}'),
+              onTap: ()=>makePhoneCall('+243${data['phone']}'),
             ),
           ],
         ),
@@ -294,13 +295,5 @@ class _Poly extends State<GoogleMapsPolylines> {
         ),
       ),
     );
-  }
-
-  Future<void> _makePhoneCall(String phoneNumber) async {
-    final Uri launchUri = Uri(
-      scheme: 'tel',
-      path: phoneNumber,
-    );
-    await launchUrl(launchUri);
   }
 }

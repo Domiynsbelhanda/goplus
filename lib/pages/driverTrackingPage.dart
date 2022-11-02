@@ -336,16 +336,9 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                       ),
                     ),
                     const SizedBox(height: 8.0,),
-                    const Text(
-                      'Mama baldé',
-                      // 'A ${calculateDistance(LatLng(data.get('latitude'), data.get('longitude')), position).toStringAsFixed(2)} mètre(s)',
-                      style: TextStyle(
-                          fontSize: 14.0
-                      ),
-                    ),
 
                     GestureDetector(
-                      onTap: (){},
+                      onTap: ()=>makePhoneCall('+243${data.get('phone')}'),
                       child: Row(
                         children: [
                           const Icon(
