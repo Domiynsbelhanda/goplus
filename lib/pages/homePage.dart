@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
+import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_webservice/places.dart';
 import 'package:goplus/screens/mapsPickLocation.dart';
 import 'package:goplus/widget/app_button.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -23,7 +26,7 @@ class _HomePage extends State<HomePage>{
 
   Set<Marker> markers = {};
   late Size size;
-  TextEditingController destinationController = TextEditingController();
+  String? destination;
 
   void requestPermission() async{
     Map<Permission, PermissionStatus> request =  await [
@@ -227,21 +230,56 @@ class _HomePage extends State<HomePage>{
 
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                        child: TextFormField(
-                          controller: destinationController,
-                          decoration: InputDecoration(
-                              hintText: 'Entrez votre destination',
-                              contentPadding: const EdgeInsets.all(15.0),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16.0),
-                                borderSide: const BorderSide(
-                                  color: Colors.black,
-                                  width: 2.0,
+                        child: GestureDetector(
+                          onTap: () async {
+                            var place = await PlacesAutocomplete.show(
+                                context: context,
+                                apiKey: androidApiKey,
+                                mode: Mode.overlay,
+                                types: [],
+                                strictbounds: false,
+                                components: [Component(Component.country, 'cd')],
+                                //google_map_webservice package
+                                onError: (err){
+                                  print(err);
+                                }
+                            );
+
+                            if(place != null){
+                              //form google_maps_webservice package
+                              final plist = GoogleMapsPlaces(apiKey:androidApiKey,
+                                apiHeaders: await const GoogleApiHeaders().getHeaders(),
+                                //from google_api_headers package
+                              );
+                              String placeid = place.placeId ?? "0";
+                              final detail = await plist.getDetailsByPlaceId(placeid);
+                              final geometry = detail.result.geometry!;
+                              final lat = geometry.location.lat;
+                              final lang = geometry.location.lng;
+                              var newlatlang = LatLng(lat, lang);
+
+                            }
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(16.0),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16.0)
+                            ),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.search
                                 ),
-                              ),
-                            prefixIcon: const Icon(
-                              Icons.search
-                            )
+
+                                const SizedBox(
+                                  width: 8.0,
+                                ),
+
+                                Text(
+                                  destination != null ? '$destination!' : "Entrez votre destination"
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -252,7 +290,7 @@ class _HomePage extends State<HomePage>{
                             color: Colors.black,
                             name: 'SUIVANT',
                             onTap: (){
-                              if(destinationController.text.isEmpty){
+                              if(destination == null){
                                 Toast.show('Veuillez entrée une destination', duration: Toast.lengthLong, gravity: Toast.bottom);
                                 return;
                               }

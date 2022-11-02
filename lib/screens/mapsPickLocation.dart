@@ -7,6 +7,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:goplus/pages/homePage.dart';
 
+import '../utils/global_variable.dart';
+
 class PickLocation extends StatefulWidget{
   bool destination;
   LatLng? place;
@@ -21,7 +23,6 @@ class PickLocation extends StatefulWidget{
 
 class _PickLocation extends State<PickLocation>{
 
-  String androidApiKey = 'AIzaSyAFtipYv6W0AWKFWsipPRhrgRdPHF5MOvk';
   Completer<GoogleMapController> _controller = Completer();
   static const CameraPosition _kPosition = CameraPosition(
     target: LatLng(-11.6565, 27.4782),
@@ -216,7 +217,7 @@ class _PickLocation extends State<PickLocation>{
                       }
                     },
                     child:Padding(
-                      padding: EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(15),
                       child: Card(
                         child: Container(
                             padding: EdgeInsets.all(0),
