@@ -141,11 +141,9 @@ class _PickLocation extends State<PickLocation>{
               mapType: MapType.normal,
               onCameraMove: (CameraPosition camposition) {
                 setState(() {
+                  destination = camposition.target;
                   addPoly(camposition.target);
                 });
-
-
-                print('$destination');
               },
             ),
 

@@ -31,20 +31,21 @@ class _PickLocation extends State<OriginePickLocation>{
   PolylinePoints polylinePoints = PolylinePoints();
   Map<PolylineId, Polyline> polylines = {};
   List<LatLng> polylineCoordinates = [];
+  List<LatLng> polylinesCoordinates = [];
   GoogleMapController? mapController;
 
   String location = "Chercher un lieu";
-  late LatLng destination;
+  late LatLng origine;
 
   late Size size;
   late CameraPosition cam = CameraPosition(
-    target: widget.destination,
+    target: widget.positions,
     zoom: 15
     );
 
   void _onMapCreated(GoogleMapController controller) async {
     mapController = controller;
-    refresh(widget.destination);
+    refresh(widget.positions);
   }
 
   void refresh(target) async {
@@ -58,18 +59,18 @@ class _PickLocation extends State<OriginePickLocation>{
     );
   }
 
-  addPolyLine(List<LatLng> polylineCoordinates) {
-    PolylineId id = const PolylineId("Trajet une");
+  addPolyLine(List<LatLng> polylineCoordinates, color, pinId) {
+    PolylineId id = PolylineId("$pinId");
     Polyline polyline = Polyline(
       polylineId: id,
-      color: Colors.red,
+      color: color,
       points: polylineCoordinates,
       width: 8,
     );
     polylines[id] = polyline;
   }
 
-  void addPoly(desti) async{
+  void addPoly(origine) async{
     markers.clear();
     markers.add(
         Marker(
@@ -85,40 +86,61 @@ class _PickLocation extends State<OriginePickLocation>{
     markers.add(
         Marker(
           markerId: const MarkerId('Destination'),
-          position: desti,
+          position: widget.destination,
           infoWindow: const InfoWindow(
             title: 'Votre Destination',
-            snippet: "Destiantion",
+            snippet: "Destination",
+          ),
+          icon: arriveBitmap!,
+        )
+    );
+
+    markers.add(
+        Marker(
+          markerId: const MarkerId('Depart'),
+          position: origine,
+          infoWindow: const InfoWindow(
+            title: 'Lieu de depart',
+            snippet: "Depart",
           ),
           icon: pinner!,
         )
     );
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+    PolylineResult origines = await polylinePoints.getRouteBetweenCoordinates(
         androidApiKey,
         PointLatLng(widget.positions.latitude, widget.positions.longitude),
-        PointLatLng(desti.latitude, desti.longitude)
+        PointLatLng(origine.latitude, origine.longitude)
     );
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+        androidApiKey,
+        PointLatLng(origine.latitude, origine.longitude),
+        PointLatLng(widget.destination.latitude, widget.destination.longitude)
+    );
+
+    polylinesCoordinates.clear();
+    if(origines.points.isNotEmpty){
+      for (var points in origines.points) {
+        polylinesCoordinates.add(LatLng(points.latitude, points.longitude));
+      }
+      setState(() {
+        addPolyLine(polylinesCoordinates, Colors.red, 1);
+      });
+    }
+    polylineCoordinates.clear();
     if (result.points.isNotEmpty) {
-      polylineCoordinates.clear();
       for (var point in result.points) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
       }
       setState(() {
-        addPolyLine(polylineCoordinates);
+        addPolyLine(polylineCoordinates, Colors.green, 2);
       });
-    } else {
-      Toast.show(
-          '${result.errorMessage}',
-          duration: Toast.lengthLong,
-          gravity: Toast.bottom
-      );
     }
   }
 
   @override
   void initState() {
-    destination = widget.destination;
-    addPoly(destination);
+    origine = widget.positions;
+    addPoly(widget.positions);
   }
 
   @override
@@ -140,11 +162,9 @@ class _PickLocation extends State<OriginePickLocation>{
               mapType: MapType.normal,
               onCameraMove: (CameraPosition camposition) {
                 setState(() {
+                  origine = camposition.target;
                   addPoly(camposition.target);
                 });
-
-
-                print('$destination');
               },
             ),
 
