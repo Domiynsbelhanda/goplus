@@ -45,6 +45,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   List<LatLng> driverPolylines = [];
   PolylineResult? driverResult;
   bool ride = false;
+  bool driver = false;
 
   @override
   void initState() {
@@ -122,6 +123,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                           icon: car_android!,
                           onTap: (){
                             setState(() {
+                              driver = true;
                               index = i;
                             });
                           }
@@ -248,7 +250,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   ),
                 ),
 
-                index != null ?
+                driver ?
                 Positioned.fill(
                   child: Align(
                       alignment: Alignment.center,
@@ -260,7 +262,10 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                 Positioned.fill(
                   child: Align(
                       alignment: Alignment.center,
-                      child: ProgressoDialog(text: data[index!].id,)
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: ProgressoDialog(text: "818045132",),
+                      )
                   ),
                 ) : const SizedBox(),
               ],
@@ -437,11 +442,10 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                     Provider.of<Auth>(context, listen: false).getToken().then((value){
                       Provider.of<Auth>(context, listen: false).getSid().then((val){
                         disableLoader();
-                        print('SSID : $val');
                         if(val != null){
                           setState(() {
                             ride = true;
-                            index = null;
+                            driver = false;
                           });
                           FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
                             'online': false,
