@@ -41,6 +41,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   int? index;
   GoogleMapController? mapController;
   late Size size;
+  bool offre = false;
 
   @override
   void initState() {
@@ -164,7 +165,17 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                         ),
                       ],
                     ),
-                    child: Column(
+                    child: offre ?
+                        AppButton(
+                          name: 'CHOISIR OFFRE',
+                          color: Colors.black,
+                          onTap: (){
+                            setState(() {
+                              offre = !offre;
+                            });
+                          },
+                        )
+                        : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -179,7 +190,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                         const SizedBox(
                           height: 8.0,
                         ),
-
 
                         BottomTypeCar(
                           image: 'assets/images/ist.png',
@@ -211,6 +221,20 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                           active: carType == "2",
 
                         ),
+
+                        const SizedBox(
+                          height: 8.0,
+                        ),
+
+                        AppButton(
+                          color: Colors.black,
+                          name: 'SUIVANT',
+                          onTap: (){
+                            setState(() {
+                              offre = !offre;
+                            });
+                          },
+                        )
                       ],
                     ),
                   ),
@@ -293,11 +317,11 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                       ),
                     ),
                   ],
-                ),
+                )
               ],
             ),
 
-            SizedBox(height: 8.0,),
+            const SizedBox(height: 8.0,),
 
             Text(
               "- Climatisé \n - Wi-fi à bord \n - Coffre pour 3 valises. \n - Couleur : ${data.get('colour')}",
