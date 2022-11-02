@@ -328,9 +328,7 @@ class _PickLocation extends State<OriginePickLocation>{
                                   DriverTrackingPage(
                                     destination: widget.destination,
                                     picto: widget.picto,
-                                    position: widget.positions,
                                     origine: origine,
-                                    originePolylines: polylinesCoordinates,
                                     destinationPolylines: polylineCoordinates,
                                   )
                           ),

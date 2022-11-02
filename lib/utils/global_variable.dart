@@ -15,6 +15,7 @@ LatLng position = const LatLng(-4.4163009, 15.2732314);
 const double zoom = 15;
 
 BitmapDescriptor? pinner;
+BitmapDescriptor? car_android;
 BitmapDescriptor? departBitmap;
 BitmapDescriptor? arriveBitmap;
 
@@ -32,6 +33,11 @@ readBitconMarkerPinner() async {
   arriveBitmap = await BitmapDescriptor.fromAssetImage(
     const ImageConfiguration(),
     "assets/images/drapeau.png",
+  );
+
+  car_android = await BitmapDescriptor.fromAssetImage(
+    const ImageConfiguration(),
+    "assets/images/car_android.png",
   );
 }
 

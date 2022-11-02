@@ -18,17 +18,13 @@ const double ZOOM = 19;
 class DriverTrackingPage extends StatefulWidget{
   LatLng origine;
   LatLng destination;
-  LatLng position;
   BitmapDescriptor picto;
-  List<LatLng> originePolylines;
   List<LatLng> destinationPolylines;
   DriverTrackingPage({
     Key? key,
-    required this.position,
     required this.destination,
     required this.origine,
     required this.picto,
-    required this.originePolylines,
     required this.destinationPolylines
   }) : super(key: key);
 
@@ -41,26 +37,15 @@ class DriverTrackingPage extends StatefulWidget{
 
 class _DriverTrackingPage extends State<DriverTrackingPage>{
 
-  Completer<GoogleMapController> _controller = Completer();
-  static const CameraPosition _kPosition = CameraPosition(
-    target: LatLng(-11.6565, 27.4782),
-    zoom: 14.4746,
-  );
-  Set<Marker> markers = Set();
-  Set<Circle> circles = Set();
-  late BitmapDescriptor markerbitmap;
-  late BitmapDescriptor pinner;
-  late LatLng position;
-  double? distance;
-  int? index;
+  Set<Marker> markers = {};
+  Set<Circle> circles = {};
   String carType = "1";
+  int? index;
+  GoogleMapController? mapController;
 
   @override
   void initState() {
-    position = widget.depart;
-    readBitconMarker();
-    readBitconMarkerPinner();
-    data(position);
+    data(widget.origine);
     // getMyPosition();
   }
 
@@ -70,47 +55,31 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
       zoom: 13,
     );
 
-
-
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-
     setState(() {
       circles = {Circle(
         strokeColor: Colors.red,
         strokeWidth: 2,
         fillColor: Colors.red.withOpacity(0.2),
-        circleId: CircleId('1'),
+        circleId: const CircleId('1'),
         center: LatLng(value.latitude, value.longitude),
         radius: 3700,
       )};
-
-      markers.add(
-          Marker(
-            markerId: const MarkerId("1"),
-            position: position,
-            infoWindow: const InfoWindow(
-              title: 'Votre Position',
-            ),
-            icon: pinner,
-          )
-      );
     });
   }
 
-  readBitconMarker() async {
-    markerbitmap = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(),
-      "assets/images/car_android.png",
-    );
+  void _onMapCreated(GoogleMapController controller) async {
+    mapController = controller;
+    refresh(widget.origine);
   }
 
-  readBitconMarkerPinner() async {
-    pinner = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(
-
-      ),
-      "assets/icon/pinner.png",
+  void refresh(target) async {
+    mapController!.animateCamera(
+        CameraUpdate.newCameraPosition(
+            CameraPosition(
+                target: target,
+                zoom: 15.0
+            )
+        )
     );
   }
 
@@ -118,9 +87,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   @override
   Widget build(BuildContext context){
     // TODO: implement build
-    return position == null ?
-    Text('Changement de votre position')
-    : SafeArea(
+    return SafeArea(
       child: StreamBuilder(
         stream: FirebaseFirestore.instance.collection("drivers").snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -134,7 +101,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   infoWindow: const InfoWindow(
                     title: 'Votre Position',
                   ),
-                  icon: pinner,
+                  icon: widget.picto,
                 )
             );
             for(var i = 0; i < data.length; i++){
@@ -144,19 +111,17 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   double longitude = data[i].get('longitude');
                   GeoPoint location = GeoPoint(latitude, longitude);
 
-                  // Check if location is valid
                   if (location == null) {
                     return Text("There was no location data");
                   }
                   final latLng = LatLng(location.latitude, location.longitude);
 
-                  // Add new marker with markerId.
                   markers
                       .add(
                       Marker(
                           markerId: MarkerId(data[i].id),
                           position: latLng,
-                          icon: markerbitmap,
+                          icon: car_android!,
                           onTap: (){
                             setState(() {
                               index = i;
@@ -165,17 +130,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                       )
                   );
                 }
-              } else {
-                markers.add(
-                    Marker(
-                      markerId: MarkerId("1"),
-                      position: position,
-                      infoWindow: const InfoWindow(
-                        title: 'Votre Position',
-                      ),
-                      icon: pinner,
-                    )
-                );
               }
             }
 
@@ -189,9 +143,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   // Markers to be pointed
                   markers: markers,
                   circles: circles,
-                  onMapCreated: (GoogleMapController controller){
-                    _controller.complete(controller);
-                  },
+                  onMapCreated: _onMapCreated,
                 ),
 
                 Positioned(
@@ -214,7 +166,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                             image: 'assets/images/ist.png',
                             type: 'TAXI Mini',
                             place: '4 personnes',
-                            prices: widget.airport ? '40\$' : '10\$ / 30 Min',
+                            prices: '10\$ / Heure',
                             onTap: (){
                               setState(() {
                                 carType = "1";
@@ -231,7 +183,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                             image: 'assets/images/berline.png',
                             type: 'Berline VIP',
                             place: '4 personnes',
-                            prices: widget.airport ? '55\$' : '12\$ / 30 Min',
+                            prices: '20\$ / Heure',
                             onTap: (){
                               setState(() {
                                 carType = "2";
@@ -239,23 +191,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                             },
                             active: carType == "2",
 
-                          ),
-
-                          const SizedBox(
-                            width: 16.0,
-                          ),
-
-                          BottomTypeCar(
-                            image: 'assets/images/van.png',
-                            type: 'Taxi Bus',
-                            place: '8 personnes',
-                            prices: widget.airport ? '95\$' : '14\$ / 30 Min',
-                            onTap: (){
-                              setState(() {
-                                carType = "3";
-                              });
-                            },
-                            active: carType == "3",
                           ),
                         ],
                       ),
@@ -273,7 +208,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               ],
             );
           }
-          return Text(
+          return const Text(
             'Changement de la carte en cours...',
           );
         },
@@ -296,7 +231,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             GestureDetector(
-              child: Icon(
+              child: const Icon(
                 Icons.close,
                 color: Colors.black,
               ),
@@ -341,20 +276,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                         fontFamily: 'Anton',
                       ),
                     ),
-
-                    widget.airport ?
-                    Text(
-                      data.get('cartype') == "1" ?
-                      '40\$' : data.get('cartype') == "2" ?
-                      '55\$' : '95\$',
-                      overflow: TextOverflow.ellipsis,
-                    )
-                    :Text(
-                      data.get('cartype') == "1" ?
-                      '10\$ / par heure' : data.get('cartype') == "2" ?
-                      '12\$ / par heure' : '14\$ / par heure',
-                      overflow: TextOverflow.ellipsis,
-                    )
                   ],
                 ),
               ],
@@ -483,14 +404,14 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                               .doc('courses')
                               .set({
                             'status': 'pending',
-                            'depart_longitude': widget.depart.longitude,
-                            'depart_latitude': widget.depart.latitude,
+                            'depart_longitude': widget.origine.longitude,
+                            'depart_latitude': widget.origine.latitude,
                             'destination_longitude': widget.destination.longitude,
                             'destination_latitude': widget.destination.latitude,
                             'distance': 'Bukayo Sada', //calculateDistance(widget.depart, position).toStringAsFixed(2),
                             'user_id': value!,
                             'sid_user': val,
-                            'airport': widget.airport,
+                            'airport': '',
                             'carType': carType
                           });
                         } else {
