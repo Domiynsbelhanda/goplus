@@ -151,7 +151,7 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                                 false
                             );
                           } else {
-                            storage.write(key: 'sid', value: data['sid']);
+                            storage.write(key: 'sid', value: value['sid']);
                             storage.write(key: 'token', value: data['phone']);
                             notification_dialog(
                                 context,

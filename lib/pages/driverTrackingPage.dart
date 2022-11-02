@@ -331,8 +331,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               ],
             ),
 
-
-
             const SizedBox(height: 8.0,),
 
             Row(
@@ -439,6 +437,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                     Provider.of<Auth>(context, listen: false).getToken().then((value){
                       Provider.of<Auth>(context, listen: false).getSid().then((val){
                         disableLoader();
+                        print('SSID : $val');
                         if(val != null){
                           setState(() {
                             ride = true;
