@@ -323,6 +323,11 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                                   FirebaseFirestore.instance.collection('drivers').doc(data[index!].id).collection('courses')
                                                       .doc('courses')
                                                       .delete();
+                                                  FirebaseFirestore.instance.collection('clients').doc(donne['user_id']).update({
+                                                    'ride': false,
+                                                    'status': 'cancel',
+                                                    'driver': null
+                                                  });
                                                   setState(() {
                                                     ride = false;
                                                   });
@@ -376,6 +381,11 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                                     )
                                                 ),
                                                 onPressed: (){
+                                                  FirebaseFirestore.instance.collection('clients').doc(donne['user_id']).update({
+                                                    'ride': true,
+                                                    'status': 'accept',
+                                                    'driver': data[index!].id
+                                                  });
                                                   Navigator.pushAndRemoveUntil(
                                                       context,
                                                       MaterialPageRoute(
@@ -439,6 +449,11 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                                       .update({
                                                     'status': 'cancel',
                                                   });
+                                                  FirebaseFirestore.instance.collection('clients').doc(donne['user_id']).update({
+                                                    'ride': false,
+                                                    'status': 'cancel',
+                                                    'driver': null
+                                                  });
                                                   setState(() {
                                                     ride = false;
                                                   });
@@ -470,7 +485,11 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                                       .update({
                                                     'status': 'cancel',
                                                   });
-
+                                                  FirebaseFirestore.instance.collection('clients').doc(donne['user_id']).update({
+                                                    'ride': false,
+                                                    'status': 'cancel',
+                                                    'driver': null
+                                                  });
                                                   setState(() {
                                                     ride = false;
                                                   });
