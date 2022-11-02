@@ -24,11 +24,11 @@ class AppButton extends StatelessWidget {
           ),
           clipBehavior: Clip.antiAlias,
           child: MaterialButton(
-            highlightColor: color,
+            highlightColor: Colors.yellow[600],
             onPressed: () => onTap(),
             height: size.height * 0.07,
             minWidth: size.width * 0.9,
-            color: AppColors.primaryColor,
+            color: color,
             child: Text(
               name!,
               style: const TextStyle(
