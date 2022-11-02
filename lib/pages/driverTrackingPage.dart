@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goplus/utils/app_colors.dart';
 import 'package:goplus/utils/global_variable.dart';
 import 'package:goplus/widget/backButton.dart';
 import 'package:goplus/widget/bottom_type_car.dart';
-import 'package:goplus/widget/progresso_dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../services/auth.dart';
 import '../widget/app_button.dart';
 import '../widget/notification_dialog.dart';
+import 'google_maps_popylines.dart';
 
 class DriverTrackingPage extends StatefulWidget{
   LatLng origine;
@@ -264,7 +265,228 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                       alignment: Alignment.center,
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
-                        child: ProgressoDialog(text: "818045132",),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(24)
+                          ),
+                          child: StreamBuilder<DocumentSnapshot>(
+                            stream: FirebaseFirestore.instance.collection('drivers')
+                                .doc(data[index!].id).collection('courses').doc('courses').snapshots(),
+                            builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot){
+                              if(snapshot.hasData){
+                                Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+                                if(data['status'] == 'cancel'){
+                                  return SizedBox(
+                                    width: size.width / 1,
+                                    height: size.width / 1.1,
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Column(
+                                            children : [
+                                              Icon(
+                                                Icons.close,
+                                                color: Colors.red,
+                                                size: size.width / 5,
+                                              ),
+
+                                              const SizedBox(height: 16.0),
+
+                                              SizedBox(
+                                                width : size.width / 1.5,
+                                                child: const Text(
+                                                    'Votre commande a été annulée par le chauffeur.',
+                                                    style: TextStyle(
+                                                      fontSize: 20,
+                                                      color: Colors.black,
+                                                    )
+                                                ),
+                                              ),
+
+                                              const SizedBox(height: 16.0),
+
+                                              TextButton(
+                                                child: Container(
+                                                    padding: const EdgeInsets.all(16.0),
+                                                    decoration: BoxDecoration(
+                                                        color: AppColors.primaryColor,
+                                                        borderRadius: BorderRadius.circular(8.0)
+                                                    ),
+                                                    child: const Text(
+                                                      'FERMER',
+                                                      style: TextStyle(
+                                                          color: Colors.black
+                                                      ),
+                                                    )
+                                                ),
+                                                onPressed: (){
+                                                  FirebaseFirestore.instance.collection('drivers').doc(data[index].id).collection('courses')
+                                                      .doc('courses')
+                                                      .delete();
+                                                  setState(() {
+                                                    ride = false;
+                                                  });
+                                                },
+                                              )
+                                            ]
+                                        )
+                                    ),
+                                  );
+                                } else if (data['status'] == 'accept'){
+                                  return SizedBox(
+                                    width: size.width / 1,
+                                    height: size.width / 1.1,
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Column(
+                                            children : [
+                                              Icon(
+                                                Icons.check_circle,
+                                                color: Colors.green,
+                                                size: size.width / 4,
+                                              ),
+
+                                              const SizedBox(height: 16.0),
+
+                                              SizedBox(
+                                                width : size.width / 1.5,
+                                                child: const Text(
+                                                    'Votre commande a été acceptée.',
+                                                    style: TextStyle(
+                                                      fontSize: 20,
+                                                      color: Colors.black,
+                                                    )
+                                                ),
+                                              ),
+
+                                              const SizedBox(height: 16.0),
+
+                                              TextButton(
+                                                child: Container(
+                                                    padding: const EdgeInsets.all(16.0),
+                                                    decoration: BoxDecoration(
+                                                        color: AppColors.primaryColor,
+                                                        borderRadius: BorderRadius.circular(8.0)
+                                                    ),
+                                                    child: const Text(
+                                                      'SUIVRE LE CHAUFEUR',
+                                                      style: TextStyle(
+                                                          color: Colors.black
+                                                      ),
+                                                    )
+                                                ),
+                                                onPressed: (){
+                                                  Navigator.pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (BuildContext context) =>
+                                                              GoogleMapsPolylines(
+                                                                destination: LatLng(data['destination_latitude'], data['destination_longitude']),
+                                                                origine: LatLng(data['depart_latitude'], data['depart_longitude']),
+                                                                position: position,
+                                                                id: data[index!].id,
+                                                              )
+                                                      ),
+                                                          (Route<dynamic> route) => false
+                                                  );
+                                                },
+                                              )
+                                            ]
+                                        )
+                                    ),
+                                  );
+                                }
+                                else {
+                                  return SizedBox(
+                                    width: size.width / 1,
+                                    height: size.width /1.3,
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children : [
+                                              const Text(
+                                                'En attente de la réponse',
+                                                style: TextStyle(
+                                                    fontSize: 25,
+                                                    fontWeight: FontWeight.bold
+                                                ),
+                                              ),
+
+                                              TimerCountdown(
+                                                secondsDescription: 'Secondes',
+                                                minutesDescription: 'Minutes',
+                                                timeTextStyle: const TextStyle(
+                                                    fontSize: 25,
+                                                    fontWeight: FontWeight.bold
+                                                ),
+                                                format: CountDownTimerFormat.minutesSeconds,
+                                                endTime: DateTime.now().add(
+                                                  const Duration(
+                                                    minutes: 1,
+                                                    seconds: 35,
+                                                  ),
+                                                ),
+                                                onEnd: () {
+                                                  FirebaseFirestore.instance.collection('drivers')
+                                                      .doc(data[index!].id).update({
+                                                    'online': true,
+                                                    'ride': false,
+                                                    'ride_view': false
+                                                  });
+                                                  FirebaseFirestore.instance.collection('drivers').doc(data[index!].id).collection('courses')
+                                                      .doc('courses')
+                                                      .update({
+                                                    'status': 'cancel',
+                                                  });
+                                                  setState(() {
+                                                    ride = false;
+                                                  });
+                                                },
+                                              ),
+
+                                              TextButton(
+                                                child: Container(
+                                                    padding: const EdgeInsets.all(16.0),
+                                                    decoration: BoxDecoration(
+                                                        color: AppColors.primaryColor,
+                                                        borderRadius: BorderRadius.circular(8.0)
+                                                    ),
+                                                    child: const Text(
+                                                      'ANNULER VOTRE COMMANDE',
+                                                      style: TextStyle(
+                                                          color: Colors.black
+                                                      ),
+                                                    )
+                                                ),
+                                                onPressed: (){
+                                                  FirebaseFirestore.instance.collection('drivers').doc(data[index!].id).update({
+                                                    'online': true,
+                                                    'ride': false,
+                                                    'ride_view': false
+                                                  });
+                                                  FirebaseFirestore.instance.collection('drivers').doc(data[index!].id).collection('courses')
+                                                      .doc('courses')
+                                                      .update({
+                                                    'status': 'cancel',
+                                                  });
+
+                                                  setState(() {
+                                                    ride = false;
+                                                  });
+                                                },
+                                              ),
+                                            ]
+                                        )
+                                    ),
+                                  );
+                                }
+                              }
+
+                              return Container();
+                            },
+                          ),
+                        ),
                       )
                   ),
                 ) : const SizedBox(),
