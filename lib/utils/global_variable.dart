@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -42,6 +44,31 @@ Future<BitmapDescriptor> bitmap(String url, int width) async{
   final Uint8List markerIcon = (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
 
   return BitmapDescriptor.fromBytes(markerIcon);
+}
+
+double coordinateDistance(lat1, lon1, lat2, lon2) {
+  var p = 0.017453292519943295;
+  var c = cos;
+  var a = 0.5 -
+      c((lat2 - lat1) * p) / 2 +
+      c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
+  return 12742 * asin(sqrt(a));
+}
+
+String distanceDeuxPoint(polylineCoordinates){
+  double totalDistance = 0.0;
+  for (int i = 0; i < polylineCoordinates.length - 1; i++) {
+    totalDistance += coordinateDistance(
+      polylineCoordinates[i].latitude,
+      polylineCoordinates[i].longitude,
+      polylineCoordinates[i + 1].latitude,
+      polylineCoordinates[i + 1].longitude,
+    );
+  }
+  if(totalDistance < 1){
+    return '${(totalDistance * 1000).toStringAsFixed(2)} mètre (s)';
+  }
+  return '${totalDistance.toStringAsFixed(2)} Km';
 }
 
 void logOut() async{

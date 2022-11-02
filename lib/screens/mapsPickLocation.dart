@@ -9,6 +9,7 @@ import 'package:google_maps_webservice/places.dart';
 import 'package:toast/toast.dart';
 
 import '../utils/global_variable.dart';
+import '../widget/app_button.dart';
 
 class PickLocation extends StatefulWidget{
   LatLng destination;
@@ -213,6 +214,57 @@ class _PickLocation extends State<PickLocation>{
                     )
                 )
             ),
+
+            Positioned(
+              bottom: 32.0,
+              right: 16,
+              left: 16.0,
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(size.width / 30),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      'Votre destination est à :',
+                      style: TextStyle(
+                        fontSize: size.width / 25,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+
+                    const SizedBox(height: 4.0,),
+
+                    Text(
+                      '${distanceDeuxPoint(polylineCoordinates)}',
+                      style: TextStyle(
+                        fontSize: size.width / 20
+                      ),
+                    ),
+
+                    const SizedBox(height: 16.0),
+
+                    AppButton(
+                      color: Colors.black,
+                      name: 'SUIVANT',
+                      onTap: (){
+
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            )
           ],
         )
     );
