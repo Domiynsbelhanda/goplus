@@ -38,14 +38,11 @@ class _PickLocation extends State<PickLocation>{
 
   @override
   void initState() {
-    if(widget.place != null){
-      selectedPlace = widget.place;
-    }
     readBitconMarkerPinner();
   }
 
   void assetLocation(LatLng value) async{
-    CameraPosition cameraPosition = new CameraPosition(
+    CameraPosition cameraPosition = CameraPosition(
       target: value,
       zoom: 13,
     );
@@ -102,11 +99,6 @@ class _PickLocation extends State<PickLocation>{
                   icon: pinner,
                 );
                 setState(() {
-                  if(widget.destination){
-                    selectedPlace = position;
-                  } else {
-                    departPlace = position;
-                  }
                   markers.add(marker);
                 });
               },
@@ -154,12 +146,7 @@ class _PickLocation extends State<PickLocation>{
                                     Icons.map_outlined
                                 ),
                                 const SizedBox(width: 4.0,),
-                                widget.destination ?
                                 Text(
-                                  selectedPlace == null
-                                      ? 'Cliquez sur votre destination' : 'VALIDEZ VOTRE CHOIX',
-                                  textAlign: TextAlign.left,
-                                ) : Text(
                                   departPlace == null
                                       ? 'Cliquez sur le point de départ' : 'VALIDEZ VOTRE CHOIX',
                                   textAlign: TextAlign.left,
