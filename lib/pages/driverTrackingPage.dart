@@ -288,7 +288,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
       padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        height: MediaQuery.of(context).size.width + 120,
+        height: MediaQuery.of(context).size.width - 8,
         width: MediaQuery.of(context).size.width * 0.8,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -399,57 +399,13 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
 
             const SizedBox(height: 8.0,),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Image.asset(
-                  data.get('cartype') == "1" ?
-                  'assets/images/ist.png' : data.get('cartype') == "2" ?
-                  'assets/images/berline.png' : 'assets/images/van.png' ,
-                  width: 120,
-                  height: 60,
-                  fit: BoxFit.fitHeight,
-                ),
-                const SizedBox(width: 16.0),
-                Column(
-                  children: [
-                    Text(
-                      data.get('cartype') == "1" ?
-                      'TAXI Mini' : data.get('cartype') == "2" ?
-                      'Berline VIP' : 'TAXI Bus',
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Anton'
-                      ),
-                    ),
-
-                    Text(
-                      data.get('cartype') == "1" ?
-                      '4 personnes' : data.get('cartype') == "2" ?
-                      '4 personnes' : '8 personnes',
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                        fontFamily: 'Anton',
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-
-            const SizedBox(height: 8.0,),
-
-            Text(
-              "- Climatisé \n - Wi-fi à bord \n - Coffre pour 3 valises. \n - Couleur : ${data.get('colour')}",
-              overflow: TextOverflow.ellipsis,
-            ),
-
-            const SizedBox(height: 4.0,),
-
             const Divider(
               height: 8.0,
+            ),
+
+            Text(
+              "Plaque : ${data.get('carplate')}\nCouleur : ${data.get('colour')}",
+              overflow: TextOverflow.ellipsis,
             ),
 
             const SizedBox(height: 4.0,),
@@ -473,8 +429,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   if(sms['code'] == 'OK'){
                     Provider.of<Auth>(context, listen: false).getToken().then((value){
                       Provider.of<Auth>(context, listen: false).getSid().then((val){
+                        disableLoader();
                         if(val != null){
-                          Navigator.pop(context);
                           progresso_dialog(context, data.id, LatLng(data.get('latitude'), data.get('longitude')));
                           setState(() {
                             index = null;
