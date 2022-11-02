@@ -128,8 +128,6 @@ class _PickLocation extends State<PickLocation>{
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) => HomePage(
-                                destination: selectedPlace,
-                                depart: departPlace,
                               )
                           ),
                         );

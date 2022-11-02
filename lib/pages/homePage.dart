@@ -6,13 +6,10 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
 import '../main.dart';
 import '../utils/global_variable.dart';
-import 'driverTrackingPage.dart';
 import '../utils/app_colors.dart';
 
 class HomePage extends StatefulWidget{
-  LatLng? destination;
-  LatLng? depart;
-  HomePage({super.key, this.destination, this.depart});
+  HomePage({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -26,10 +23,6 @@ class _HomePage extends State<HomePage>{
   Set<Marker> markers = {};
 
   late Size size;
-  LatLng? selectedPlace;
-  LatLng? depart;
-  LatLng airport = const LatLng(-4.3884214, 15.4416188);
-  bool checkairport = false;
 
   void requestPermission() async{
     Map<Permission, PermissionStatus> request =  await [
@@ -40,9 +33,6 @@ class _HomePage extends State<HomePage>{
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
-    selectedPlace = widget.destination;
-    depart = widget.depart;
-
 
     return Scaffold(
       body: FutureBuilder<bool>(
@@ -277,56 +267,6 @@ class _HomePage extends State<HomePage>{
                             )
                           )
                       ),
-
-                      selectedPlace != null && depart != null ?
-                      Padding(
-                          padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
-                          child: GestureDetector(
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) => DriverTrackingPage(
-                                      depart: depart!,
-                                      destination: checkairport ? airport : selectedPlace!,
-                                      airport: checkairport,
-                                    )
-                                ),
-                              );
-                            },
-                            child: Container(
-                              height: size.width / 7,
-                              decoration: BoxDecoration(
-                                  color: AppColors.primaryColor,
-                                  borderRadius: BorderRadius.circular(48),
-                                  border: Border.all(
-                                      color: Colors.black,
-                                      width: 0.5
-                                  )
-                              ),
-                              child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: const [
-                                        Text(
-                                          'TROUVEZ UN TAXI',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                              fontFamily: 'Anton',
-                                              color: Colors.white,
-                                              fontSize: 24
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                              ),
-                            ),
-                          )
-                      )
-                          : const SizedBox(),
                     ],
                   ),
                 ),
