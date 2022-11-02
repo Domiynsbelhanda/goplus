@@ -6,7 +6,6 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
-import 'package:goplus/pages/homePage.dart';
 import 'package:toast/toast.dart';
 
 import '../utils/global_variable.dart';
@@ -31,8 +30,32 @@ class _PickLocation extends State<PickLocation>{
   PolylinePoints polylinePoints = PolylinePoints();
   Map<PolylineId, Polyline> polylines = {};
   List<LatLng> polylineCoordinates = [];
+  GoogleMapController? mapController;
+
   String location = "Chercher un lieu";
+  late LatLng destination;
+
   late Size size;
+  late CameraPosition cam = CameraPosition(
+    target: widget.destination,
+    zoom: 15
+    );
+
+  void _onMapCreated(GoogleMapController controller) async {
+    mapController = controller;
+    refresh(widget.destination);
+  }
+
+  void refresh(target) async {
+    mapController!.animateCamera(
+        CameraUpdate.newCameraPosition(
+            CameraPosition(
+              target: target,
+                zoom: 15.0
+            )
+        )
+    );
+  }
 
   addPolyLine(List<LatLng> polylineCoordinates) {
     PolylineId id = const PolylineId("Trajet une");
@@ -45,7 +68,8 @@ class _PickLocation extends State<PickLocation>{
     polylines[id] = polyline;
   }
 
-  void initMarker() async{
+  void addPoly(desti) async{
+    markers.clear();
     markers.add(
         Marker(
           markerId: const MarkerId('Ma Position'),
@@ -60,7 +84,7 @@ class _PickLocation extends State<PickLocation>{
     markers.add(
         Marker(
           markerId: const MarkerId('Destination'),
-          position: widget.destination,
+          position: desti,
           infoWindow: const InfoWindow(
             title: 'Votre Destination',
             snippet: "Destiantion",
@@ -68,15 +92,12 @@ class _PickLocation extends State<PickLocation>{
           icon: pinner!,
         )
     );
-
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
         androidApiKey,
         PointLatLng(widget.positions.latitude, widget.positions.longitude),
-        PointLatLng(widget.destination.latitude, widget.destination.longitude)
+        PointLatLng(desti.latitude, desti.longitude)
     );
-
     if (result.points.isNotEmpty) {
-      markers.clear();
       polylineCoordinates.clear();
       for (var point in result.points) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
@@ -94,12 +115,16 @@ class _PickLocation extends State<PickLocation>{
   }
 
   @override
+  void initState() {
+    destination = widget.destination;
+    addPoly(destination);
+  }
+
+  @override
   Widget build(BuildContext context) {
     readBitconMarkerPinner();
     size = MediaQuery.of(context).size;
     ToastContext().init(context);
-    initMarker();
-
     return SizedBox(
         child: Stack(
           children: [
@@ -108,12 +133,18 @@ class _PickLocation extends State<PickLocation>{
               myLocationEnabled: true,
               myLocationButtonEnabled: true,
               markers: markers,
+              onMapCreated: _onMapCreated,
               polylines: Set<Polyline>.of(polylines.values),
-              initialCameraPosition: CameraPosition(
-                  target: widget.destination,
-                  zoom: 15
-              ),
+              initialCameraPosition: cam,
               mapType: MapType.normal,
+              onCameraMove: (CameraPosition camposition) {
+                setState(() {
+                  addPoly(camposition.target);
+                });
+
+
+                print('$destination');
+              },
             ),
 
             Positioned(  //search input bar
@@ -152,8 +183,16 @@ class _PickLocation extends State<PickLocation>{
 
                         CameraPosition cameraPosition = CameraPosition(
                           target: newlatlang,
-                          zoom: 13,
+                          zoom: 15,
                         );
+
+                        setState(() {
+                          mapController!.animateCamera(
+                              CameraUpdate.newCameraPosition(
+                                  cameraPosition
+                              )
+                          );
+                        });
                       }
                     },
                     child:Padding(
