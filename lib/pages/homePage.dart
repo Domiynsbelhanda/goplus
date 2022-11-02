@@ -4,6 +4,7 @@ import 'package:goplus/screens/mapsPickLocation.dart';
 import 'package:goplus/widget/app_button.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:toast/toast.dart';
 import '../main.dart';
 import '../utils/global_variable.dart';
 import '../utils/app_colors.dart';
@@ -21,8 +22,8 @@ class HomePage extends StatefulWidget{
 class _HomePage extends State<HomePage>{
 
   Set<Marker> markers = {};
-
   late Size size;
+  TextEditingController destinationController = TextEditingController();
 
   void requestPermission() async{
     Map<Permission, PermissionStatus> request =  await [
@@ -33,7 +34,7 @@ class _HomePage extends State<HomePage>{
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
-
+    ToastContext().init(context);
     return Scaffold(
       body: FutureBuilder<bool>(
         future: Permission.location.serviceStatus.isEnabled,
@@ -227,6 +228,7 @@ class _HomePage extends State<HomePage>{
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0, right: 16.0),
                         child: TextFormField(
+                          controller: destinationController,
                           decoration: InputDecoration(
                               hintText: 'Entrez votre destination',
                               contentPadding: const EdgeInsets.all(15.0),
@@ -246,8 +248,14 @@ class _HomePage extends State<HomePage>{
 
                       Padding(
                           padding: const EdgeInsets.only(left: 0, top: 16.0, right: 0, bottom: 16.0),
-                          child: GestureDetector(
+                          child: AppButton(
+                            color: Colors.black,
+                            name: 'SUIVANT',
                             onTap: (){
+                              if(destinationController.text.isEmpty){
+                                Toast.show('Veuillez entrée une destination', duration: Toast.lengthLong, gravity: Toast.bottom);
+                                return;
+                              }
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -258,13 +266,6 @@ class _HomePage extends State<HomePage>{
                                 ),
                               );
                             },
-                            child: AppButton(
-                              color: Colors.black,
-                              name: 'SUIVANT',
-                              onTap: (){
-
-                              },
-                            )
                           )
                       ),
                     ],
