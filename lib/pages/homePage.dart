@@ -50,7 +50,6 @@ class _HomePage extends State<HomePage>{
       width: 8,
     );
     polylines[id] = polyline;
-    setState(() {});
   }
 
   @override
@@ -283,8 +282,8 @@ class _HomePage extends State<HomePage>{
                               );
 
                               if (result.points.isNotEmpty) {
-                                polylines.clear();
                                 markers.clear();
+                                polylineCoordinates.clear();
                                 for (var point in result.points) {
                                   polylineCoordinates.add(LatLng(point.latitude, point.longitude));
                                 }
