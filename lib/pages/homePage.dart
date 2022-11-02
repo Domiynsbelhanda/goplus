@@ -28,6 +28,7 @@ class _HomePage extends State<HomePage>{
   late Size size;
   String? destination;
   LatLng? destinationLatLng;
+  CameraPosition? cam;
 
   void requestPermission() async{
     Map<Permission, PermissionStatus> request =  await [
@@ -39,6 +40,7 @@ class _HomePage extends State<HomePage>{
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
     ToastContext().init(context);
+    readBitconMarkerPinner();
     return Scaffold(
       body: FutureBuilder<bool>(
         future: Permission.location.serviceStatus.isEnabled,
@@ -134,7 +136,7 @@ class _HomePage extends State<HomePage>{
           icon: picto!,
         )
     );
-    CameraPosition? cam = CameraPosition(
+    cam = CameraPosition(
         target: pos,
         zoom: zoom
     );
@@ -142,7 +144,7 @@ class _HomePage extends State<HomePage>{
     return Stack(
       children: [
         GoogleMap(
-          initialCameraPosition: cam,
+          initialCameraPosition: cam!,
           markers: markers,
           onMapCreated: (GoogleMapController _controller){
             _controller.animateCamera(
@@ -192,7 +194,7 @@ class _HomePage extends State<HomePage>{
               child: Padding(
                 padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
                 child: Container(
-                  height: size.width / 1.5,
+                  height: size.width / 1.2,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(size.width / 15),
                     color: AppColors.primaryColor,
@@ -247,18 +249,34 @@ class _HomePage extends State<HomePage>{
                             );
 
                             if(place != null){
-                              //form google_maps_webservice package
                               final plist = GoogleMapsPlaces(apiKey:androidApiKey,
                                 apiHeaders: await const GoogleApiHeaders().getHeaders(),
-                                //from google_api_headers package
                               );
                               String placeid = place.placeId ?? "0";
                               final detail = await plist.getDetailsByPlaceId(placeid);
                               final geometry = detail.result.geometry!;
                               final lat = geometry.location.lat;
                               final lang = geometry.location.lng;
-                              destinationLatLng = LatLng(lat, lang);
-                              destination = place.description.toString();
+                              setState(() {
+                                destinationLatLng = LatLng(lat, lang);
+                                destination = place.description.toString();
+                                CameraPosition cameraPosition = CameraPosition(
+                                  target: LatLng(lat, lang),
+                                  zoom: 13,
+                                );
+                                cam = cameraPosition;
+                                markers.add(
+                                    Marker(
+                                      markerId: const MarkerId('Destination'),
+                                      position: destinationLatLng!,
+                                      infoWindow: InfoWindow(
+                                        title: 'Votre Destination',
+                                        snippet: '$destination!',
+                                      ),
+                                      icon: pinner!,
+                                    )
+                                );
+                              });
                             }
                           },
                           child: Container(
@@ -278,8 +296,10 @@ class _HomePage extends State<HomePage>{
                                   width: 8.0,
                                 ),
 
-                                Text(
-                                  destination != null ? '$destination!' : "Entrez votre destination"
+                                Flexible(
+                                  child: Text(
+                                    destination != null ? '$destination!' : "Entrez votre destination"
+                                  ),
                                 )
                               ],
                             ),

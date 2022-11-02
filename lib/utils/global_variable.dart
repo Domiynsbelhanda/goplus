@@ -12,6 +12,15 @@ String androidApiKey = 'AIzaSyAFtipYv6W0AWKFWsipPRhrgRdPHF5MOvk';
 LatLng position = const LatLng(-4.4163009, 15.2732314);
 const double zoom = 15;
 
+BitmapDescriptor? pinner;
+
+readBitconMarkerPinner() async {
+  pinner = await BitmapDescriptor.fromAssetImage(
+    const ImageConfiguration(),
+    "assets/icon/pinner.png",
+  );
+}
+
 
 Future<BitmapDescriptor> bitmap(String url, int width) async{
   ByteData data = await rootBundle.load(url);
