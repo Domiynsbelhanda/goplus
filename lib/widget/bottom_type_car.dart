@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goplus/utils/app_colors.dart';
 
 class BottomTypeCar extends StatelessWidget{
 
@@ -16,47 +17,64 @@ class BottomTypeCar extends StatelessWidget{
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: MediaQuery.of(context).size.width / 2.3,
-        width: MediaQuery.of(context).size.width / 2.8,
         decoration: BoxDecoration(
-            color: active ? Colors.yellow.withOpacity(.5) : Colors.white,
+            color: active ? Colors.white : Colors.transparent,
             borderRadius: BorderRadius.circular(8.0),
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
+          child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Image.asset(
                 image,
+                height: MediaQuery.of(context).size.width / 11,
               ),
-              const SizedBox(height: 10.0),
-              Flexible(
-                child: Text(
-                  type,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Anton'
+              const SizedBox(width: 8.0),
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 1.7,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          type,
+                          style: TextStyle(
+                              fontFamily: 'Anton',
+                            fontSize: MediaQuery.of(context).size.width / 15,
+                          ),
+                        ),
+
+                        Text(
+                          prices,
+                          style: TextStyle(
+                            fontFamily: 'Anton',
+                            fontSize: MediaQuery.of(context).size.width / 15,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ),
-              Flexible(
-                child: Text(
-                  place,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'Anton'
+
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 1.7,
+                    child: Flexible(
+                      child: Text(
+                        place,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width / 27,
+                          color: active ? AppColors.primaryColor : Colors.black
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-              Flexible(
-                child: Text(
-                  prices,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              )
             ],
           ),
         ),

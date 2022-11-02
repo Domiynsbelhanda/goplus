@@ -175,10 +175,16 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                             color: Colors.white
                           ),
                         ),
+
+                        const SizedBox(
+                          height: 8.0,
+                        ),
+
+
                         BottomTypeCar(
                           image: 'assets/images/ist.png',
-                          type: 'TAXI Mini',
-                          place: '4 personnes',
+                          type: 'GO+',
+                          place: "Petite voiture de 3 places \nIdéale pour les Courses rapides et à bon prix",
                           prices: '10\$ / Heure',
                           onTap: (){
                             setState(() {
@@ -189,13 +195,13 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                         ),
 
                         const SizedBox(
-                          width: 16.0,
+                          height: 16.0,
                         ),
 
                         BottomTypeCar(
                           image: 'assets/images/berline.png',
-                          type: 'Berline VIP',
-                          place: '4 personnes',
+                          type: 'GO+ VIP',
+                          place: "Berline de 4 places\nIdéal pour des trajets moyens et longs",
                           prices: '20\$ / Heure',
                           onTap: (){
                             setState(() {
