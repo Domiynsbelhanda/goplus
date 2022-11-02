@@ -27,6 +27,7 @@ class _HomePage extends State<HomePage>{
   Set<Marker> markers = {};
   late Size size;
   String? destination;
+  LatLng? destinationLatLng;
 
   void requestPermission() async{
     Map<Permission, PermissionStatus> request =  await [
@@ -256,14 +257,16 @@ class _HomePage extends State<HomePage>{
                               final geometry = detail.result.geometry!;
                               final lat = geometry.location.lat;
                               final lang = geometry.location.lng;
-                              var newlatlang = LatLng(lat, lang);
-
+                              destinationLatLng = LatLng(lat, lang);
+                              destination = place.description.toString();
                             }
                           },
                           child: Container(
                             padding: const EdgeInsets.all(16.0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16.0)
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(width: 1.0, color: Colors.black),
+                              )
                             ),
                             child: Row(
                               children: [
