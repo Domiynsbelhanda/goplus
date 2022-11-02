@@ -8,6 +8,7 @@ import 'package:goplus/widget/app_button.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:toast/toast.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import '../main.dart';
 import '../utils/global_variable.dart';
 import '../utils/app_colors.dart';
@@ -25,6 +26,10 @@ class HomePage extends StatefulWidget{
 class _HomePage extends State<HomePage>{
 
   Set<Marker> markers = {};
+  PolylinePoints polylinePoints = PolylinePoints();
+  Map<PolylineId, Polyline> polylines = {};
+  List<LatLng> polylineCoordinates = [];
+
   late Size size;
   String? destination;
   LatLng? destinationLatLng;
@@ -34,6 +39,18 @@ class _HomePage extends State<HomePage>{
     Map<Permission, PermissionStatus> request =  await [
       Permission.location
     ].request();
+  }
+
+  addPolyLine(List<LatLng> polylineCoordinates) {
+    PolylineId id = const PolylineId("Trajet une");
+    Polyline polyline = Polyline(
+      polylineId: id,
+      color: Colors.red,
+      points: polylineCoordinates,
+      width: 8,
+    );
+    polylines[id] = polyline;
+    setState(() {});
   }
 
   @override
@@ -146,6 +163,7 @@ class _HomePage extends State<HomePage>{
         GoogleMap(
           initialCameraPosition: cam!,
           markers: markers,
+          polylines: Set<Polyline>.of(polylines.values),
           onMapCreated: (GoogleMapController _controller){
             _controller.animateCamera(
               CameraUpdate.newCameraPosition(
@@ -194,7 +212,7 @@ class _HomePage extends State<HomePage>{
               child: Padding(
                 padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
                 child: Container(
-                  height: size.width / 1.2,
+                  height: destination != null ? size.width / 1.3 : size.width / 1.5,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(size.width / 15),
                     color: AppColors.primaryColor,
@@ -257,6 +275,30 @@ class _HomePage extends State<HomePage>{
                               final geometry = detail.result.geometry!;
                               final lat = geometry.location.lat;
                               final lang = geometry.location.lng;
+
+                              PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+                                androidApiKey,
+                                PointLatLng(position.latitude, position.longitude),
+                                PointLatLng(lat, lang)
+                              );
+
+                              if (result.points.isNotEmpty) {
+                                polylines.clear();
+                                markers.clear();
+                                for (var point in result.points) {
+                                  polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+                                }
+                                setState(() {
+                                  addPolyLine(polylineCoordinates);
+                                });
+                              } else {
+                                Toast.show(
+                                    '${result.errorMessage}',
+                                    duration: Toast.lengthLong,
+                                    gravity: Toast.bottom
+                                );
+                              }
+
                               setState(() {
                                 destinationLatLng = LatLng(lat, lang);
                                 destination = place.description.toString();
@@ -265,6 +307,17 @@ class _HomePage extends State<HomePage>{
                                   zoom: 13,
                                 );
                                 cam = cameraPosition;
+                                markers.add(
+                                    Marker(
+                                      markerId: const MarkerId('Ma Position'),
+                                      position: position,
+                                      infoWindow: const InfoWindow(
+                                        title: 'Ma Position',
+                                        snippet: 'Moi',
+                                      ),
+                                      icon: picto!,
+                                    )
+                                );
                                 markers.add(
                                     Marker(
                                       markerId: const MarkerId('Destination'),
