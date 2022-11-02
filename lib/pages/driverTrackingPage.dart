@@ -16,10 +16,21 @@ import '../widget/notification_dialog.dart';
 const double ZOOM = 19;
 
 class DriverTrackingPage extends StatefulWidget{
-  LatLng depart;
+  LatLng origine;
   LatLng destination;
-  bool airport;
-  DriverTrackingPage({Key? key, required this.depart, required this.destination, required this.airport}) : super(key: key);
+  LatLng position;
+  BitmapDescriptor picto;
+  List<LatLng> originePolylines;
+  List<LatLng> destinationPolylines;
+  DriverTrackingPage({
+    Key? key,
+    required this.position,
+    required this.destination,
+    required this.origine,
+    required this.picto,
+    required this.originePolylines,
+    required this.destinationPolylines
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {

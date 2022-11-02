@@ -6,6 +6,7 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
+import 'package:goplus/pages/driverTrackingPage.dart';
 import 'package:toast/toast.dart';
 
 import '../utils/app_colors.dart';
@@ -288,7 +289,7 @@ class _PickLocation extends State<OriginePickLocation>{
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Votre destination est à :',
+                          'Votre destination est à : ',
                           style: TextStyle(
                             fontSize: size.width / 25,
                             fontWeight: FontWeight.bold
@@ -320,7 +321,21 @@ class _PickLocation extends State<OriginePickLocation>{
                       color: Colors.black,
                       name: 'TROUVER UN TAXI',
                       onTap: (){
-
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  DriverTrackingPage(
+                                    destination: widget.destination,
+                                    picto: widget.picto,
+                                    position: widget.positions,
+                                    origine: origine,
+                                    originePolylines: polylinesCoordinates,
+                                    destinationPolylines: polylineCoordinates,
+                                  )
+                          ),
+                            (route)=>false
+                        );
                       },
                     ),
                   ],
