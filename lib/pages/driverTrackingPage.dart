@@ -155,9 +155,14 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                     padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(size.width / 15),
-                      color: AppColors.primaryColor,
+                      color: offre ? Colors.transparent : AppColors.primaryColor,
                       boxShadow: [
-                        BoxShadow(
+                        offre ? BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 0,
+                          blurRadius: 0,
+                          offset: const Offset(0, 0), // changes position of shadow
+                        ): BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 5,
                           blurRadius: 7,
