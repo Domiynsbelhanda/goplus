@@ -45,7 +45,7 @@ class _PickLocation extends State<PickLocation>{
     polylines[id] = polyline;
   }
 
-  void initMarker(){
+  void initMarker() async{
     markers.add(
         Marker(
           markerId: const MarkerId('Ma Position'),
@@ -68,6 +68,29 @@ class _PickLocation extends State<PickLocation>{
           icon: pinner!,
         )
     );
+
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+        androidApiKey,
+        PointLatLng(widget.positions.latitude, widget.positions.longitude),
+        PointLatLng(widget.destination.latitude, widget.destination.longitude)
+    );
+
+    if (result.points.isNotEmpty) {
+      markers.clear();
+      polylineCoordinates.clear();
+      for (var point in result.points) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      }
+      setState(() {
+        addPolyLine(polylineCoordinates);
+      });
+    } else {
+      Toast.show(
+          '${result.errorMessage}',
+          duration: Toast.lengthLong,
+          gravity: Toast.bottom
+      );
+    }
   }
 
   @override
@@ -87,7 +110,7 @@ class _PickLocation extends State<PickLocation>{
               markers: markers,
               polylines: Set<Polyline>.of(polylines.values),
               initialCameraPosition: CameraPosition(
-                  target: widget.positions!,
+                  target: widget.destination,
                   zoom: 15
               ),
               mapType: MapType.normal,
