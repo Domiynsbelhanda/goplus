@@ -10,14 +10,13 @@ import 'package:toast/toast.dart';
 
 import '../utils/global_variable.dart';
 import '../widget/app_button.dart';
-import 'mapsOriginePickLocation.dart';
 
-class PickLocation extends StatefulWidget{
+class OriginePickLocation extends StatefulWidget{
   LatLng destination;
   LatLng positions;
   BitmapDescriptor picto;
 
-  PickLocation({super.key, required this.destination, required this.positions, required this.picto});
+  OriginePickLocation({super.key, required this.destination, required this.positions, required this.picto});
 
   @override
   State<StatefulWidget> createState() {
@@ -26,7 +25,7 @@ class PickLocation extends StatefulWidget{
   }
 }
 
-class _PickLocation extends State<PickLocation>{
+class _PickLocation extends State<OriginePickLocation>{
 
   Set<Marker> markers = {};
   PolylinePoints polylinePoints = PolylinePoints();
@@ -259,17 +258,7 @@ class _PickLocation extends State<PickLocation>{
                       color: Colors.black,
                       name: 'SUIVANT',
                       onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  OriginePickLocation(
-                                    positions: widget.positions,
-                                    destination: destination,
-                                    picto: widget.picto,
-                                  )
-                          ),
-                        );
+
                       },
                     ),
                   ],
