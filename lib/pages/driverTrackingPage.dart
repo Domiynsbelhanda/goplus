@@ -152,7 +152,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                 Positioned(
                   bottom: 16,
                   left: 16.0,
-                  right: 16.0,
+                  right: offre ? 72 : 16.0,
                   child: Container(
                     padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
