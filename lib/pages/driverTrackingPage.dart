@@ -40,6 +40,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   String carType = "1";
   int? index;
   GoogleMapController? mapController;
+  late Size size;
 
   @override
   void initState() {
@@ -79,6 +80,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
 
   @override
   Widget build(BuildContext context){
+    size = MediaQuery.of(context).size;
     return SafeArea(
       child: StreamBuilder(
         stream: FirebaseFirestore.instance.collection("drivers").snapshots(),
@@ -147,45 +149,63 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                 Positioned(
                   bottom: 16,
                   left: 16.0,
-                  right: 58.0,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          BottomTypeCar(
-                            image: 'assets/images/ist.png',
-                            type: 'TAXI Mini',
-                            place: '4 personnes',
-                            prices: '10\$ / Heure',
-                            onTap: (){
-                              setState(() {
-                                carType = "1";
-                              });
-                            },
-                            active: carType == "1",
+                  right: 16.0,
+                  child: Container(
+                    padding: const EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(size.width / 15),
+                      color: AppColors.primaryColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: const Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'CHOISISSEZ UNE OFFRE',
+                          style: TextStyle(
+                            fontSize: size.width / 15,
+                            fontFamily: 'Anton',
+                            color: Colors.white
                           ),
+                        ),
+                        BottomTypeCar(
+                          image: 'assets/images/ist.png',
+                          type: 'TAXI Mini',
+                          place: '4 personnes',
+                          prices: '10\$ / Heure',
+                          onTap: (){
+                            setState(() {
+                              carType = "1";
+                            });
+                          },
+                          active: carType == "1",
+                        ),
 
-                          const SizedBox(
-                            width: 16.0,
-                          ),
+                        const SizedBox(
+                          width: 16.0,
+                        ),
 
-                          BottomTypeCar(
-                            image: 'assets/images/berline.png',
-                            type: 'Berline VIP',
-                            place: '4 personnes',
-                            prices: '20\$ / Heure',
-                            onTap: (){
-                              setState(() {
-                                carType = "2";
-                              });
-                            },
-                            active: carType == "2",
+                        BottomTypeCar(
+                          image: 'assets/images/berline.png',
+                          type: 'Berline VIP',
+                          place: '4 personnes',
+                          prices: '20\$ / Heure',
+                          onTap: (){
+                            setState(() {
+                              carType = "2";
+                            });
+                          },
+                          active: carType == "2",
 
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
