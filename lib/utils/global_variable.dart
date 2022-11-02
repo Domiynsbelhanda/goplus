@@ -13,11 +13,23 @@ LatLng position = const LatLng(-4.4163009, 15.2732314);
 const double zoom = 15;
 
 BitmapDescriptor? pinner;
+BitmapDescriptor? departBitmap;
+BitmapDescriptor? arriveBitmap;
 
 readBitconMarkerPinner() async {
   pinner = await BitmapDescriptor.fromAssetImage(
     const ImageConfiguration(),
     "assets/icon/pinner.png",
+  );
+
+  departBitmap = await BitmapDescriptor.fromAssetImage(
+    const ImageConfiguration(),
+    "assets/images/drapeau-a-damier.png",
+  );
+
+  arriveBitmap = await BitmapDescriptor.fromAssetImage(
+    const ImageConfiguration(),
+    "assets/images/drapeau.png",
   );
 }
 

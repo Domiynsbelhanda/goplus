@@ -160,6 +160,9 @@ class _HomePage extends State<HomePage>{
     return Stack(
       children: [
         GoogleMap(
+          zoomGesturesEnabled: true,
+          myLocationEnabled: true,
+          myLocationButtonEnabled: true,
           initialCameraPosition: cam!,
           markers: markers,
           polylines: Set<Polyline>.of(polylines.values),
@@ -374,8 +377,9 @@ class _HomePage extends State<HomePage>{
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         PickLocation(
-                                          position: position,
-                                          destination: destinationLatLng,
+                                          positions: pos,
+                                          destination: destinationLatLng!,
+                                          picto: picto,
                                         )
                                 ),
                               );
