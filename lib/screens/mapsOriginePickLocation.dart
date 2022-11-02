@@ -8,6 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:toast/toast.dart';
 
+import '../utils/app_colors.dart';
 import '../utils/global_variable.dart';
 import '../widget/app_button.dart';
 
@@ -255,28 +256,69 @@ class _PickLocation extends State<OriginePickLocation>{
                 ),
                 child: Column(
                   children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Vous êtes à  : ',
+                          style: TextStyle(
+                              fontSize: size.width / 25,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+                        Text(
+                          '${distanceDeuxPoint(polylinesCoordinates)}',
+                          style: TextStyle(
+                              fontSize: size.width / 20
+                          ),
+                        ),
+                      ],
+                    ),
+
                     Text(
-                      'Votre destination est à :',
+                      'de votre lieu de départ et',
                       style: TextStyle(
-                        fontSize: size.width / 25,
-                        fontWeight: FontWeight.bold
+                          fontSize: size.width / 22
                       ),
                     ),
 
-                    const SizedBox(height: 4.0,),
+                    const SizedBox(height: 8.0,),
 
-                    Text(
-                      '${distanceDeuxPoint(polylineCoordinates)}',
-                      style: TextStyle(
-                        fontSize: size.width / 20
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Votre destination est à :',
+                          style: TextStyle(
+                            fontSize: size.width / 25,
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+
+                        Text(
+                          '${distanceDeuxPoint(polylineCoordinates)}',
+                          style: TextStyle(
+                              fontSize: size.width / 20
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 16.0),
+
+                    AppButton(
+                      color: AppColors.primaryColor,
+                      name: 'MODIFIER DESTINATION',
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
                     ),
 
                     const SizedBox(height: 16.0),
 
                     AppButton(
                       color: Colors.black,
-                      name: 'SUIVANT',
+                      name: 'TROUVER UN TAXI',
                       onTap: (){
 
                       },
