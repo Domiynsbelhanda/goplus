@@ -1,5 +1,5 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goplus/utils/app_colors.dart';
@@ -42,6 +42,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   GoogleMapController? mapController;
   late Size size;
   bool offre = false;
+  List<LatLng> driverPolylines = [];
+  PolylineResult? driverResult;
 
   @override
   void initState() {
@@ -261,7 +263,27 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
     );
   }
 
+  getResult(LatLng driver) async{
+    PolylinePoints polylinePoints = PolylinePoints();
+    PolylineResult resultat = await polylinePoints.getRouteBetweenCoordinates(
+        androidApiKey,
+        PointLatLng(driver.latitude, driver.longitude),
+        PointLatLng(widget.origine.latitude, widget.origine.longitude)
+    );
+    setState(() {
+      driverResult = resultat;
+    });
+  }
+
   Widget showDriver(data){
+    getResult(LatLng(data.get('latitude'), data.get('longitude')));
+    driverPolylines.clear();
+    PolylineResult result  = driverResult!;
+    if(result.points.isNotEmpty){
+      for (var points in result.points) {
+        driverPolylines.add(LatLng(points.latitude, points.longitude));
+      }
+    }
     return Padding(
       padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Container(
@@ -364,6 +386,19 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               ],
             ),
 
+            const SizedBox(
+              height: 8.0,
+            ),
+
+            Text(
+              "Ce chauffeur est à ${distanceDeuxPoint(driverPolylines)} de votre position.",
+              style: const TextStyle(
+                  fontSize: 14.0
+              ),
+            ),
+
+            const SizedBox(height: 8.0,),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -418,9 +453,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
             ),
 
             const SizedBox(height: 4.0,),
-
-
-
 
             const SizedBox(height: 16.0,),
 
