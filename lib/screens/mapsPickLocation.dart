@@ -10,9 +10,10 @@ import 'package:goplus/pages/homePage.dart';
 import '../utils/global_variable.dart';
 
 class PickLocation extends StatefulWidget{
-  bool destination;
-  LatLng? place;
-  PickLocation({this.place, required this.destination});
+  LatLng? destination;
+  LatLng? position;
+
+  PickLocation({required this.destination, required position});
 
   @override
   State<StatefulWidget> createState() {

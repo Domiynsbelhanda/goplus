@@ -374,7 +374,8 @@ class _HomePage extends State<HomePage>{
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         PickLocation(
-                                          destination: true,
+                                          position: position,
+                                          destination: destinationLatLng,
                                         )
                                 ),
                               );
