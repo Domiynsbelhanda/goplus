@@ -13,8 +13,6 @@ import '../services/auth.dart';
 import '../widget/app_button.dart';
 import '../widget/notification_dialog.dart';
 
-const double ZOOM = 19;
-
 class DriverTrackingPage extends StatefulWidget{
   LatLng origine;
   LatLng destination;
@@ -50,11 +48,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   }
 
   void data(LatLng value) async{
-    CameraPosition cameraPosition = CameraPosition(
-      target: LatLng(value.latitude, value.longitude),
-      zoom: 13,
-    );
-
     setState(() {
       circles = {Circle(
         strokeColor: Colors.red,
@@ -77,7 +70,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
         CameraUpdate.newCameraPosition(
             CameraPosition(
                 target: target,
-                zoom: 15.0
+                zoom: 12.0
             )
         )
     );
@@ -86,7 +79,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
 
   @override
   Widget build(BuildContext context){
-    // TODO: implement build
     return SafeArea(
       child: StreamBuilder(
         stream: FirebaseFirestore.instance.collection("drivers").snapshots(),
@@ -137,8 +129,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               children: [
                 GoogleMap(
                   initialCameraPosition: CameraPosition(
-                      target: position,
-                      zoom: ZOOM
+                      target: widget.origine,
+                      zoom: 12
                   ),
                   // Markers to be pointed
                   markers: markers,
@@ -156,7 +148,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   bottom: 16,
                   left: 16.0,
                   right: 58.0,
-                  child: Container(
+                  child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -208,9 +200,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               ],
             );
           }
-          return const Text(
-            'Changement de la carte en cours...',
-          );
+          return Container();
         },
       ),
     );
@@ -337,7 +327,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                     const Text(
                       'Mama baldé',
                         // 'A ${calculateDistance(LatLng(data.get('latitude'), data.get('longitude')), position).toStringAsFixed(2)} mètre(s)',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 14.0
                       ),
                     ),
