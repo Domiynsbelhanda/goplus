@@ -117,8 +117,10 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
 
                   var distance = coordinateDistance(widget.origine.latitude, widget.origine.longitude, latitude, longitude);
 
+                  print('This driver is at $distance');
+
                   if(distance > 3){
-                    print('This driver is at $distance');
+
                   }
 
                   markers
