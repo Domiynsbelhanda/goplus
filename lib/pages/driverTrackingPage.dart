@@ -51,7 +51,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   @override
   void initState() {
     data(widget.origine);
-    // getMyPosition();
   }
 
   void data(LatLng value) async{
@@ -105,7 +104,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                 )
             );
             for(var i = 0; i < data.length; i++){
-              if(data[i].get('online')){
+              // if(data[i].get('online')){
                 if(data[i].get('cartype') == carType){
                   double latitude = data[i].get('latitude');
                   double longitude = data[i].get('longitude');
@@ -115,6 +114,12 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                     return const Text("There was no location data");
                   }
                   final latLng = LatLng(location.latitude, location.longitude);
+
+                  var distance = coordinateDistance(widget.origine.latitude, widget.origine.longitude, latitude, longitude);
+
+                  if(distance > 3){
+                    print('This driver is at $distance');
+                  }
 
                   markers
                       .add(
@@ -131,7 +136,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                       )
                   );
                 }
-              }
+              // }
             }
 
             return Stack(

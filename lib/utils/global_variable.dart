@@ -79,6 +79,10 @@ String distanceDeuxPoint(polylineCoordinates){
   return '${totalDistance.toStringAsFixed(2)} Km';
 }
 
+double distance(){
+  return 0.0;
+}
+
 void logOut() async{
   await storage.delete(key: 'token');
   await storage.delete(key: 'sid');
