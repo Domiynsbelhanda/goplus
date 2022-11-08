@@ -291,25 +291,28 @@ class _PickLocation extends State<PickLocation>{
                             'destination_latitude': destination.latitude,
                             'destination_longitude': destination.longitude,
                             'uuid': uuid
+                          }).then((val){
+                            FirebaseFirestore.instance.collection('clients').doc(token).update({
+                              'ride': true,
+                              'status': 'create',
+                              'uuid': uuid
+                            }).then((value){
+                              disableLoader();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        DriverTrackingPage(
+                                            destination: destination,
+                                            picto: widget.picto,
+                                            origine: widget.positions,
+                                            destinationPolylines: polylineCoordinates,
+                                            uuid: uuid
+                                        )
+                                ),
+                              );
+                            });
                           });
-                          FirebaseFirestore.instance.collection('clients').doc(token).update({
-                            'ride': true,
-                            'status': 'create',
-                            'uuid': uuid
-                          });
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    DriverTrackingPage(
-                                      destination: destination,
-                                      picto: widget.picto,
-                                      origine: widget.positions,
-                                      destinationPolylines: polylineCoordinates,
-                                      uuid: uuid
-                                    )
-                            ),
-                          );
                         });
                       },
                     ),
