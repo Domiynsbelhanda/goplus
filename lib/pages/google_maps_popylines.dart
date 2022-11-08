@@ -28,11 +28,12 @@ class _Poly extends State<GoogleMapsPolylines> {
   PolylinePoints polylinePoints = PolylinePoints();
   Map<PolylineId, Polyline> polylines = {};
   List<LatLng> polylineCoordinates = [];
+  List<LatLng> destinationPolylineCoordinates = [];
   CameraPosition? cam;
   late Size size;
 
-  addPolyLine(List<LatLng> polylineCoordinates) {
-    PolylineId id = const PolylineId("Trajet une");
+  addPolyLine(List<LatLng> polylineCoordinates, String ids) {
+    PolylineId id = PolylineId(ids);
     Polyline polyline = Polyline(
       polylineId: id,
       color: Colors.red,
@@ -42,20 +43,46 @@ class _Poly extends State<GoogleMapsPolylines> {
     polylines[id] = polyline;
   }
 
-  addPoly(LatLng origine, LatLng destination) async{
+  addDestinationPolyLine(List<LatLng> polylineCoordinates, String ids) {
+    PolylineId id = PolylineId(ids);
+    Polyline polyline = Polyline(
+      polylineId: id,
+      color: Colors.green,
+      points: polylineCoordinates,
+      width: 8,
+    );
+    polylines[id] = polyline;
+  }
+
+  addPoly(LatLng driver, LatLng depart, LatLng destination) async{
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
         androidApiKey,
-        PointLatLng(origine.latitude, origine.longitude),
+        PointLatLng(driver.latitude, driver.longitude),
+        PointLatLng(depart.latitude, depart.longitude)
+    );
+
+    PolylineResult destinations = await polylinePoints.getRouteBetweenCoordinates(
+        androidApiKey,
+        PointLatLng(depart.latitude, depart.longitude),
         PointLatLng(destination.latitude, destination.longitude)
     );
 
+    polylineCoordinates.clear();
     if (result.points.isNotEmpty) {
-      polylineCoordinates.clear();
       for (var point in result.points) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
       }
       setState(() {
-        addPolyLine(polylineCoordinates);
+        addPolyLine(polylineCoordinates, 'frist');
+      });
+    }
+
+    if (destinations.points.isNotEmpty) {
+      for (var points in destinations.points) {
+        destinationPolylineCoordinates.add(LatLng(points.latitude, points.longitude));
+      }
+      setState(() {
+        addDestinationPolyLine(destinationPolylineCoordinates, 'second');
       });
     }
   }
@@ -76,6 +103,8 @@ class _Poly extends State<GoogleMapsPolylines> {
               }
 
               Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+
+              markers.clear();
 
               markers.add(
                   Marker(
@@ -120,7 +149,8 @@ class _Poly extends State<GoogleMapsPolylines> {
 
               addPoly(
                   LatLng(data['driver_latitude'], data['driver_longitude']),
-                  LatLng(data['depart_latitude'], data['depart_longitude'])
+                  LatLng(data['depart_latitude'], data['depart_longitude']),
+                  LatLng(data['destination_latitude'], data['destination_longitude'])
               );
 
               return Stack(
