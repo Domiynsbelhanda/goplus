@@ -330,6 +330,7 @@ class _PickLocation extends State<OriginePickLocation>{
                                     picto: widget.picto,
                                     origine: origine,
                                     destinationPolylines: polylineCoordinates,
+                                    uuid: '',
                                   )
                           ),
                             (route)=>false

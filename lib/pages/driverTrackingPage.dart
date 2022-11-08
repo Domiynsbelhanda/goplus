@@ -19,12 +19,14 @@ class DriverTrackingPage extends StatefulWidget{
   LatLng destination;
   BitmapDescriptor picto;
   List<LatLng> destinationPolylines;
+  String uuid;
   DriverTrackingPage({
     Key? key,
     required this.destination,
     required this.origine,
     required this.picto,
-    required this.destinationPolylines
+    required this.destinationPolylines,
+    required this.uuid
   }) : super(key: key);
 
   @override

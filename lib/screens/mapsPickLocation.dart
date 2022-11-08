@@ -287,6 +287,7 @@ class _PickLocation extends State<PickLocation>{
                                       picto: widget.picto,
                                       origine: widget.positions,
                                       destinationPolylines: polylineCoordinates,
+                                      uuid: uuid
                                     )
                             ),
                           );
