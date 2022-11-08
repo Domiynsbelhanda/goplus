@@ -7,6 +7,8 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
+import 'package:goplus/pages/homePage.dart';
+import 'package:goplus/utils/app_colors.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
 
@@ -258,6 +260,23 @@ class _PickLocation extends State<PickLocation>{
                     const SizedBox(height: 16.0),
 
                     AppButton(
+                      name: 'ANNULER',
+                      color: AppColors.primaryColor,
+                      onTap: (){
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  HomePage()
+                          ),
+                            (route)=> false
+                        );
+                      }
+                    ),
+
+                    const SizedBox(height: 16.0),
+
+                    AppButton(
                       color: Colors.black,
                       name: 'TROUVEZ UN TAXI',
                       onTap: (){
@@ -275,7 +294,7 @@ class _PickLocation extends State<PickLocation>{
                           });
                           FirebaseFirestore.instance.collection('clients').doc(token).update({
                             'ride': true,
-                            'status': 'pending',
+                            'status': 'create',
                             'uuid': uuid
                           });
                           Navigator.push(
