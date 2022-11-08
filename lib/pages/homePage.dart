@@ -90,6 +90,7 @@ class _HomePage extends State<HomePage>{
                                       return FutureBuilder<Position>(
                                         future: Geolocator.getCurrentPosition(),
                                         builder: (context, location){
+                                          disableLoader();
                                           if(location.hasData){
                                             disableLoader();
                                             position = LatLng(location.data!.latitude, location.data!.longitude);
@@ -109,6 +110,7 @@ class _HomePage extends State<HomePage>{
                                         },
                                       );
                                     } else{
+                                      disableLoader();
                                       requestPermission();
                                       return Center(
                                         child: Padding(

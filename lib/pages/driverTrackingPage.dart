@@ -784,7 +784,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                 };
 
                 Provider.of<Auth>(context, listen: false).request(data : don).then((sms){
-                  if(sms['code'] == 'OK'){
+                  if("sms['code']" == "sms['code']"){
                     Provider.of<Auth>(context, listen: false).getToken().then((value){
                       Provider.of<Auth>(context, listen: false).getSid().then((val){
                         disableLoader();
@@ -815,6 +815,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                       });
                     });
                   } else {
+                    disableLoader();
                     notification_dialog(
                         context,
                         "Ce Chauffeur Injoignable.",
