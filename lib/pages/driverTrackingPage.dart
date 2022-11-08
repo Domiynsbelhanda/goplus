@@ -98,8 +98,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               builder: (BuildContext context, coursesSnap){
                 if(coursesSnap.hasData){
                   var data = snapshot.data!.docs;
-                  var coursesdata = coursesSnap.data! as DocumentSnapshot;;
-                  print("$coursesdata");
+                  var coursesdata = coursesSnap.data! as DocumentSnapshot;
+                  Map<String, dynamic> courses = coursesdata.data() as Map<String, dynamic>;
 
                   markers.clear();
                   markers.add(
