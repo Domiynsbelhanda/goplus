@@ -284,7 +284,7 @@ class _PickLocation extends State<PickLocation>{
                         Provider.of<Auth>(context, listen: false).getToken().then((token){
                           disableLoader();
                           String uuid = '$token${DateTime.now().toString()}';
-                          FirebaseFirestore.instance.collection('courses').doc(uuid).update({
+                          FirebaseFirestore.instance.collection('courses').doc(uuid).set({
                             'users': token,
                             'depart_latitude': widget.positions.latitude,
                             'depart_longitude': widget.positions.longitude,
