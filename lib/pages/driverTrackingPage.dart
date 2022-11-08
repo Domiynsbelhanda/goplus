@@ -465,21 +465,16 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                                           )
                                                       ),
                                                       onPressed: (){
-                                                        var ind;
+                                                        String number = courses['driver'];
                                                         for(var x = 0; x < data.length; x++){
-                                                          if(data[x].id == courses['drivers']){
+                                                          if(data[x].id == number){
                                                             setState(() {
-                                                              ind = x;
                                                               index = x;
+                                                              ride = false;
+                                                              driver = true;
                                                             });
                                                           }
                                                         }
-
-                                                        setState(() {
-                                                          ride = false;
-                                                          driver = true;
-                                                          index = ind;
-                                                        });
                                                       },
                                                     )
                                                   ]
