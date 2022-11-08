@@ -465,10 +465,19 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                                           )
                                                       ),
                                                       onPressed: (){
+                                                        var ind;
+                                                        for(var x = 0; x < data.length; x++){
+                                                          if(data[x].id == courses['drivers']){
+                                                            setState(() {
+                                                              ind = x;
+                                                              index = x;
+                                                            });
+                                                          }
+                                                        }
                                                         setState(() {
                                                           ride = false;
                                                           driver = true;
-                                                          index = 0;
+                                                          index = ind;
                                                         });
                                                       },
                                                     )
@@ -727,28 +736,22 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                             ride = true;
                             driver = false;
                           });
-                          FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
-                            'online': false,
-                            'ride': true,
-                            'ride_view': false,
-                          });
-                          FirebaseFirestore.instance.collection('clients').doc(value!).update({
-                            'ride': true,
-                            'status': 'pending',
-                            'driver': data.id
-                          });
-                          FirebaseFirestore.instance.collection('drivers').doc(data.id).collection('courses')
-                              .doc('courses')
-                              .set({
-                            'status': 'pending',
+                          FirebaseFirestore.instance.collection('courses').doc(widget.uuid).update({
+                            'status': "confirm",
                             'depart_longitude': widget.origine.longitude,
                             'depart_latitude': widget.origine.latitude,
                             'destination_longitude': widget.destination.longitude,
                             'destination_latitude': widget.destination.latitude,
-                            'distance': distanceDeuxPoint(driverPolylines),
-                            'user_id': value,
                             'sid_user': val,
-                            'carType': carType
+                          }).then((val){
+                            FirebaseFirestore.instance.collection('clients').doc(value!).update({
+                              'status': 'confirm',
+                            });
+                          });
+                          FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
+                            'online': false,
+                            'ride': true,
+                            'uuid': widget.uuid,
                           });
                         } else {
                         }
