@@ -474,6 +474,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                                             });
                                                           }
                                                         }
+
                                                         setState(() {
                                                           ride = false;
                                                           driver = true;

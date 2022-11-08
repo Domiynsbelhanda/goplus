@@ -120,7 +120,7 @@ class _Poly extends State<GoogleMapsPolylines> {
 
               addPoly(
                   LatLng(data['driver_latitude'], data['driver_longitude']),
-                  LatLng(data['origine_latitude'], data['origine_longitude'])
+                  LatLng(data['depart_latitude'], data['depart_longitude'])
               );
 
               return Stack(
@@ -169,7 +169,7 @@ class _Poly extends State<GoogleMapsPolylines> {
       padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        height: MediaQuery.of(context).size.width / 2,
+        height: MediaQuery.of(context).size.width / 2.8,
         width: MediaQuery.of(context).size.width * 0.8,
         decoration: BoxDecoration(
             color: Colors.white,
@@ -178,23 +178,11 @@ class _Poly extends State<GoogleMapsPolylines> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Image.asset(
-                  data['carType'] == "1" ?
-                  'assets/images/ist.png' : data['carType'] == "2" ?
-                  'assets/images/berline.png' : 'assets/images/van.png' ,
-                  width: 120.0,
-                  height: 60.0,
-                  fit: BoxFit.fitWidth,
-                ),
-              ],
-            ),
-            const SizedBox(height: 16,),
+
             Text(
-                polylineCoordinates.length != 0 ? 'est à ${distanceDeuxPoint(polylineCoordinates)}' : "",
+                polylineCoordinates.length != 0 ? 'est à ${distanceDeuxPoint(polylineCoordinates)}' : "Distance",
               overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
               style: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: MediaQuery.of(context).size.width / 25
@@ -219,7 +207,7 @@ class _Poly extends State<GoogleMapsPolylines> {
       padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        height: MediaQuery.of(context).size.width / 2.5,
+        height: MediaQuery.of(context).size.width / 2.3,
         width: MediaQuery.of(context).size.width * 0.8,
         decoration: BoxDecoration(
             color: Colors.white,
