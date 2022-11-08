@@ -210,7 +210,7 @@ class _Poly extends State<GoogleMapsPolylines> {
           children: [
 
             Text(
-                polylineCoordinates.length != 0 ? 'est à ${distanceDeuxPoint(polylineCoordinates)}' : "Distance",
+                polylineCoordinates.length != 0 ? 'est à ${distanceDeuxPoint(polylineCoordinates)} de votre position.' : "Distance",
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               style: TextStyle(

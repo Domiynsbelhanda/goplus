@@ -72,6 +72,7 @@ class _HomePage extends State<HomePage>{
                   if(yourCourses.hasData){
                     Map<String, dynamic> donn = yourCourses.data!.data() as Map<String, dynamic>;
                     if(donn['status'] == 'confirm'){
+                      disableLoader();
                       return GoogleMapsPolylines(uuid: donn['uuid']);
                     }
                   }
