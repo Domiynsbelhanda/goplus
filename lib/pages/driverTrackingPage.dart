@@ -124,14 +124,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                         }
                         final latLng = LatLng(location.latitude, location.longitude);
 
-                        var distance = coordinateDistance(widget.origine.latitude, widget.origine.longitude, latitude, longitude);
-
-                        print('This driver is at $distance');
-
-                        if(distance > 3){
-
-                        }
-
                         markers
                             .add(
                             Marker(
@@ -329,22 +321,13 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                                     ),
                                                   ),
                                                   onEnd: () {
-                                                    // FirebaseFirestore.instance.collection('drivers')
-                                                    //     .doc(data[index!].id).update({
-                                                    //   'online': true,
-                                                    //   'ride': false,
-                                                    //   'ride_view': false
-                                                    // });
-                                                    // FirebaseFirestore.instance.collection('drivers').doc(data[index!].id).collection('courses')
-                                                    //     .doc('courses')
-                                                    //     .update({
-                                                    //   'status': 'cancel',
-                                                    // });
-                                                    // FirebaseFirestore.instance.collection('clients').doc(donne['user_id']).update({
-                                                    //   'ride': false,
-                                                    //   'status': 'cancel',
-                                                    //   'driver': null
-                                                    // });
+                                                    FirebaseFirestore.instance.collection('courses').doc(widget.uuid).update({
+                                                      'status': "no"
+                                                    }).then((value){
+                                                      FirebaseFirestore.instance.collection('clients').doc('${courses['users']}').update({
+                                                        'status': 'cancel',
+                                                      });
+                                                    });
                                                     setState(() {
                                                       ride = false;
                                                     });
@@ -366,21 +349,13 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                                       )
                                                   ),
                                                   onPressed: (){
-                                                    // FirebaseFirestore.instance.collection('drivers').doc(data[index!].id).update({
-                                                    //   'online': true,
-                                                    //   'ride': false,
-                                                    //   'ride_view': false
-                                                    // });
-                                                    // FirebaseFirestore.instance.collection('drivers').doc(data[index!].id).collection('courses')
-                                                    //     .doc('courses')
-                                                    //     .update({
-                                                    //   'status': 'cancel',
-                                                    // });
-                                                    // FirebaseFirestore.instance.collection('clients').doc(donne['user_id']).update({
-                                                    //   'ride': false,
-                                                    //   'status': 'cancel',
-                                                    //   'driver': null
-                                                    // });
+                                                    FirebaseFirestore.instance.collection('courses').doc(widget.uuid).update({
+                                                      'status': "cancel"
+                                                    }).then((value){
+                                                      FirebaseFirestore.instance.collection('clients').doc('${courses['users']}').update({
+                                                        'status': 'cancel',
+                                                      });
+                                                    });
                                                     setState(() {
                                                       ride = false;
                                                     });
@@ -409,7 +384,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                                 SizedBox(
                                                   width : size.width / 1.5,
                                                   child: const Text(
-                                                      'Votre commande a été annulée par le chauffeur.',
+                                                      'Votre commande a été annulée.',
                                                       style: TextStyle(
                                                         fontSize: 20,
                                                         color: Colors.black,
@@ -434,14 +409,9 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                                       )
                                                   ),
                                                   onPressed: (){
-                                                    // FirebaseFirestore.instance.collection('drivers').doc(data[index!].id).collection('courses')
-                                                    //     .doc('courses')
-                                                    //     .delete();
-                                                    // FirebaseFirestore.instance.collection('clients').doc(donne['user_id']).update({
-                                                    //   'ride': false,
-                                                    //   'status': 'cancel',
-                                                    //   'driver': null
-                                                    // });
+                                                    FirebaseFirestore.instance.collection('clients').doc('${courses['users']}').update({
+                                                      'status': 'cancel',
+                                                    });
                                                     setState(() {
                                                       ride = false;
                                                     });
@@ -488,31 +458,75 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                                               borderRadius: BorderRadius.circular(8.0)
                                                           ),
                                                           child: const Text(
-                                                            'SUIVRE LE CHAUFEUR',
+                                                            'VOIR LE CHAUFFEUR',
                                                             style: TextStyle(
                                                                 color: Colors.black
                                                             ),
                                                           )
                                                       ),
                                                       onPressed: (){
-                                                        // FirebaseFirestore.instance.collection('clients').doc(donne['user_id']).update({
-                                                        //   'ride': true,
-                                                        //   'status': 'accept',
-                                                        //   'driver': data[index!].id
-                                                        // });
-                                                        // Navigator.pushAndRemoveUntil(
-                                                        //     context,
-                                                        //     MaterialPageRoute(
-                                                        //         builder: (BuildContext context) =>
-                                                        //             GoogleMapsPolylines(
-                                                        //               destination: LatLng(donne['destination_latitude'], donne['destination_longitude']),
-                                                        //               origine: LatLng(donne['depart_latitude'], donne['depart_longitude']),
-                                                        //               position: position,
-                                                        //               id: data[index!].id,
-                                                        //             )
-                                                        //     ),
-                                                        //         (Route<dynamic> route) => false
-                                                        // );
+                                                        setState(() {
+                                                          ride = false;
+                                                          driver = true;
+                                                          index = 0;
+                                                        });
+                                                      },
+                                                    )
+                                                  ]
+                                              )
+                                          ),
+                                        )
+                                        :
+                                        courses['status'] == 'no' ?
+                                        SizedBox(
+                                          width: size.width / 1,
+                                          height: size.width / 1.1,
+                                          child: Padding(
+                                              padding: const EdgeInsets.all(16.0),
+                                              child: Column(
+                                                  children : [
+                                                    Icon(
+                                                      Icons.close,
+                                                      color: Colors.red,
+                                                      size: size.width / 5,
+                                                    ),
+
+                                                    const SizedBox(height: 16.0),
+
+                                                    SizedBox(
+                                                      width : size.width / 1.5,
+                                                      child: const Text(
+                                                          'Pas de chauffeur disponible',
+                                                          style: TextStyle(
+                                                            fontSize: 20,
+                                                            color: Colors.black,
+                                                          )
+                                                      ),
+                                                    ),
+
+                                                    const SizedBox(height: 16.0),
+
+                                                    TextButton(
+                                                      child: Container(
+                                                          padding: const EdgeInsets.all(16.0),
+                                                          decoration: BoxDecoration(
+                                                              color: AppColors.primaryColor,
+                                                              borderRadius: BorderRadius.circular(8.0)
+                                                          ),
+                                                          child: const Text(
+                                                            'FERMER',
+                                                            style: TextStyle(
+                                                                color: Colors.black
+                                                            ),
+                                                          )
+                                                      ),
+                                                      onPressed: (){
+                                                        FirebaseFirestore.instance.collection('courses').doc(widget.uuid).update({
+                                                          'status': "cancel"
+                                                        });
+                                                        setState(() {
+                                                          ride = false;
+                                                        });
                                                       },
                                                     )
                                                   ]
@@ -589,8 +603,13 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                     color: Colors.black,
                   ),
                   onTap: (){
+                    FirebaseFirestore.instance.collection('courses').doc(widget.uuid).update({
+                      'status': "pending"
+                    });
                     setState(() {
                       index = null;
+                      ride = true;
+                      driver = false;
                     });
                   },
                 ),
