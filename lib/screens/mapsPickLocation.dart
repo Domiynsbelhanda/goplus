@@ -290,7 +290,8 @@ class _PickLocation extends State<PickLocation>{
                             'depart_longitude': widget.positions.longitude,
                             'destination_latitude': destination.latitude,
                             'destination_longitude': destination.longitude,
-                            'uuid': uuid
+                            'uuid': uuid,
+                            'status': 'create'
                           }).then((val){
                             FirebaseFirestore.instance.collection('clients').doc(token).update({
                               'ride': true,
