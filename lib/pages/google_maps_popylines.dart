@@ -12,12 +12,9 @@ import 'homePage.dart';
 import '../widget/app_button.dart';
 
 class GoogleMapsPolylines extends StatefulWidget {
-  LatLng origine;
-  LatLng destination;
-  LatLng position;
-  String? id;
+  String uuid;
 
-  GoogleMapsPolylines({Key? key, this.id, required this.origine, required this.destination, required this.position}) : super(key: key);
+  GoogleMapsPolylines({Key? key, required this.uuid}) : super(key: key);
 
   @override
   _Poly createState() => _Poly();
@@ -25,69 +22,11 @@ class GoogleMapsPolylines extends StatefulWidget {
 
 class _Poly extends State<GoogleMapsPolylines> {
 
-  Completer<GoogleMapController> _controller = Completer();
-  Location _location = Location();
-  CameraPosition _kGoogle = const CameraPosition(
-    target: LatLng(19.0759837, 72.8776559),
-    zoom: 14,
-  );
-  late LatLng position;
-  final Set<Marker> _markers = {};
-  final Set<Polyline> _polyline = {};
-
-  // list of locations to display polylines
-  late List<LatLng> latLen;
-
-  BitmapDescriptor? markerbitmap;
-
-  void readBitmap() async {
-    markerbitmap = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(),
-      "assets/images/car_android.png",
-    );
-  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    readBitmap();
-
-    latLen = [
-      widget.position,
-      widget.origine,
-      widget.destination,
-    ];
-
-    _kGoogle = CameraPosition(
-      target: widget.position,
-      zoom: 14,
-    );
-
-    // declared for loop for various locations
-    for(int i=1; i<latLen.length; i++){
-      _markers.add(
-        // added markers
-          Marker(
-              markerId: MarkerId(i.toString()),
-              position: latLen[i],
-              infoWindow: InfoWindow(
-                title: i == 1 ? 'Lieu de ramassage' : i == 2 ? 'Destination du client' : '',
-                snippet: '',
-              )
-          )
-      );
-      setState(() {
-
-      });
-      _polyline.add(
-          Polyline(
-            polylineId: PolylineId('1'),
-            points: latLen,
-            color: Colors.green,
-          )
-      );
-    }
   }
 
   @override
@@ -95,86 +34,65 @@ class _Poly extends State<GoogleMapsPolylines> {
     return Scaffold(
       body: Container(
         child : StreamBuilder(
-            stream: FirebaseFirestore.instance.collection("drivers").doc(widget.id).snapshots(),
+            stream: FirebaseFirestore.instance.collection("courses").doc(widget.uuid).snapshots(),
             builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
 
               if(!snapshot.hasData){
                 return Text("Chargement en cours...");
               }
 
-              var data = snapshot.data!.data() as Map<String, dynamic>;
-              _markers.clear();
-              _markers.add(
-                  Marker(
-                    markerId: MarkerId('DriverPosition'),
-                    position: LatLng(data['latitude'], data['longitude']),
-                    infoWindow: const InfoWindow(
-                      title: 'Driver Position',
-                      snippet: '',
-                    ),
-                    icon: markerbitmap!,
-                  )
-              );
+              Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
 
-              return StreamBuilder(
-                    stream: FirebaseFirestore.instance.collection('drivers')
-                        .doc(widget.id).collection('courses').doc('courses').snapshots(),
-                    builder:
-                    (BuildContext context, AsyncSnapshot<DocumentSnapshot> courses) {
-                      var donnees = courses.data!.data() as Map<String, dynamic>;
-
-                      return Stack(
-                        children: [
-                          SafeArea(
-                              child : GoogleMap(
-                                initialCameraPosition: _kGoogle,
-                                mapType: MapType.normal,
-                                markers: _markers,
-                                myLocationEnabled: true,
-                                myLocationButtonEnabled: true,
-                                compassEnabled: true,
-                                onMapCreated: (ctrl){
-                                  ctrl.animateCamera(
-                                      CameraUpdate.newCameraPosition(
-                                          CameraPosition(
-                                              target: LatLng(
-                                                  data['latitude'],
-                                                  data['longitude']
-                                              ),
-                                              zoom: 17)
-                                        //17 is new zoom level
-                                      )
-                                  );
-                                  _controller.complete(ctrl);
-                                },
+              return Stack(
+                children: [
+                  SafeArea(
+                      child : GoogleMap(
+                        initialCameraPosition: _kGoogle,
+                        mapType: MapType.normal,
+                        markers: _markers,
+                        myLocationEnabled: true,
+                        myLocationButtonEnabled: true,
+                        compassEnabled: true,
+                        onMapCreated: (ctrl){
+                          ctrl.animateCamera(
+                              CameraUpdate.newCameraPosition(
+                                  CameraPosition(
+                                      target: LatLng(
+                                          data['latitude'],
+                                          data['longitude']
+                                      ),
+                                      zoom: 17)
+                                //17 is new zoom level
                               )
-                          ),
+                          );
+                          _controller.complete(ctrl);
+                        },
+                      )
+                  ),
 
-                          Positioned(
-                              bottom: 0,
-                              right: 16,
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: donnees['status'] == 'end'
-                                    ? showCourse(data, donnees)
-                                    : showDriver(data, donnees)
-                              )
-                          ),
-                        ],
-                      );
-                    }
+                  Positioned(
+                      bottom: 0,
+                      right: 16,
+                      child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: data['status'] == 'end'
+                              ? showCourse(data)
+                              : showDriver(data)
+                      )
+                  ),
+                ],
               );
             })
       ),
     );
   }
 
-  Widget showDriver(data, datas){
+  Widget showDriver(data){
     return Padding(
       padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        height: MediaQuery.of(context).size.width / 1.77,
+        height: MediaQuery.of(context).size.width / 2,
         width: MediaQuery.of(context).size.width * 0.8,
         decoration: BoxDecoration(
             color: Colors.white,
@@ -187,43 +105,16 @@ class _Poly extends State<GoogleMapsPolylines> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image.asset(
-                  data['cartype'] == "1" ?
-                  'assets/images/ist.png' : data['cartype'] == "2" ?
+                  data['carType'] == "1" ?
+                  'assets/images/ist.png' : data['carType'] == "2" ?
                   'assets/images/berline.png' : 'assets/images/van.png' ,
                   width: 120.0,
                   height: 60.0,
                   fit: BoxFit.fitWidth,
                 ),
-                const SizedBox(width: 16.0),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: (MediaQuery.of(context).size.width * 0.8) - 120 - 40,
-                      child: Text(
-                        '${data['firstn']} ${data['midn']}',
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Anton'
-                        ),
-                      ),
-                    ),
-
-                    Text(
-                      "- Couleur : ${data['colour']} \n- Plaque : ${data['carplate']}",
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 13
-                      ),
-                    ),
-                  ],
-                ),
               ],
             ),
-
             const SizedBox(height: 16,),
-
             Text(
               'Fuso',
               // 'est à ${calculateDistance(LatLng(data['latitude'], data['longitude']), LatLng(datas['depart_latitude'], datas['depart_longitude'])).toStringAsFixed(2)} m du lieu de départ.',
@@ -247,7 +138,7 @@ class _Poly extends State<GoogleMapsPolylines> {
     );
   }
 
-  Widget showCourse(data, datas){
+  Widget showCourse(data){
     return Padding(
       padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Container(
@@ -271,7 +162,7 @@ class _Poly extends State<GoogleMapsPolylines> {
             ),
 
             Text(
-              '${datas['prix']} \$',
+              '${data['prix']} \$',
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               style: TextStyle(
