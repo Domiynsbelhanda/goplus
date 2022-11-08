@@ -104,7 +104,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                 )
             );
             for(var i = 0; i < data.length; i++){
-              // if(data[i].get('online')){
+              if(data[i].get('online')){
                 if(data[i].get('cartype') == carType){
                   double latitude = data[i].get('latitude');
                   double longitude = data[i].get('longitude');
@@ -138,7 +138,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                       )
                   );
                 }
-              // }
+              }
             }
 
             return Stack(

@@ -1,14 +1,17 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
+import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
 
 import '../pages/driverTrackingPage.dart';
+import '../services/auth.dart';
 import '../utils/global_variable.dart';
 import '../widget/app_button.dart';
 import 'mapsOriginePickLocation.dart';
@@ -258,18 +261,36 @@ class _PickLocation extends State<PickLocation>{
                       color: Colors.black,
                       name: 'TROUVEZ UN TAXI',
                       onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  DriverTrackingPage(
-                                    destination: destination,
-                                    picto: widget.picto,
-                                    origine: widget.positions,
-                                    destinationPolylines: polylineCoordinates,
-                                  )
-                          ),
-                        );
+                        showLoader("Recherche d'un taxi en cours...");
+                        Provider.of<Auth>(context, listen: false).getToken().then((token){
+                          disableLoader();
+                          String uuid = '$token${DateTime.now().toString()}';
+                          FirebaseFirestore.instance.collection('courses').doc(uuid).update({
+                            'users': token,
+                            'depart_latitude': widget.positions.latitude,
+                            'depart_longitude': widget.positions.longitude,
+                            'destination_latitude': destination.latitude,
+                            'destination_longitude': destination.longitude,
+                            'uuid': uuid
+                          });
+                          FirebaseFirestore.instance.collection('clients').doc(token).update({
+                            'ride': true,
+                            'status': 'pending',
+                            'uuid': uuid
+                          });
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    DriverTrackingPage(
+                                      destination: destination,
+                                      picto: widget.picto,
+                                      origine: widget.positions,
+                                      destinationPolylines: polylineCoordinates,
+                                    )
+                            ),
+                          );
+                        });
                       },
                     ),
                   ],
