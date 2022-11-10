@@ -199,18 +199,33 @@ class _Poly extends State<GoogleMapsPolylines> {
       padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        height: MediaQuery.of(context).size.width / 2.8,
+        height: MediaQuery.of(context).size.width / 3.0,
         width: MediaQuery.of(context).size.width * 0.8,
         decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(24)
+            borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ],
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-
-            Text(
-                polylineCoordinates.length != 0 ? 'est à ${distanceDeuxPoint(polylineCoordinates)} de votre position.' : "Distance",
+            data['status'] == "start" ?
+                Text(
+                  'Votre course est en cours...',
+                  style: TextStyle(
+                    fontFamily: 'Anton',
+                    fontSize: MediaQuery.of(context).size.width / 15
+                  ),
+                )
+                : Text(
+                polylineCoordinates.length != 0 ? 'Le chauffeur est à ${distanceDeuxPoint(polylineCoordinates)} de votre position.' : "Distance",
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -221,10 +236,12 @@ class _Poly extends State<GoogleMapsPolylines> {
 
             const SizedBox(height: 16.0,),
 
+            data['status'] == "start" ?
+                const SizedBox() :
             AppButton(
               color: AppColors.primaryColor,
               name: 'APPELER ',
-              onTap: ()=>makePhoneCall('+243${data['phone']}'),
+              onTap: ()=>makePhoneCall('+243${data['driver']}'),
             ),
           ],
         ),
