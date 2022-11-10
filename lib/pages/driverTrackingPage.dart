@@ -319,7 +319,12 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                                       'status': "no"
                                                     }).then((value){
                                                       FirebaseFirestore.instance.collection('clients').doc('${courses['users']}').update({
-                                                        'status': 'cancel',
+                                                        'status': 'no',
+                                                      });
+                                                      FirebaseFirestore.instance.collection('drivers').doc(data[index!].id).update({
+                                                        'online': true,
+                                                        'ride': false,
+                                                        'uuid': null,
                                                       });
                                                     });
                                                     setState(() {
@@ -348,6 +353,12 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                                     }).then((value){
                                                       FirebaseFirestore.instance.collection('clients').doc('${courses['users']}').update({
                                                         'status': 'cancel',
+                                                      });
+
+                                                      FirebaseFirestore.instance.collection('drivers').doc(data[index!].id).update({
+                                                        'online': true,
+                                                        'ride': false,
+                                                        'uuid': null,
                                                       });
                                                     });
                                                     setState(() {
@@ -603,9 +614,6 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                     color: Colors.black,
                   ),
                   onTap: (){
-                    FirebaseFirestore.instance.collection('courses').doc(widget.uuid).update({
-                      'status': "pending"
-                    });
                     setState(() {
                       index = null;
                       ride = true;
@@ -708,9 +716,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
               color: AppColors.primaryColor,
               name: 'RESERVER',
               onTap: (){
-
                 showLoader("Reservation en cours...");
-
                 var don = {
                   "key": "ride",
                   "action": "create",
@@ -736,7 +742,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                             'sid_user': val,
                           }).then((val){
                             FirebaseFirestore.instance.collection('clients').doc(value!).update({
-                              'status': 'confirm',
+                              'status': 'pending',
                             });
                           });
                           FirebaseFirestore.instance.collection('drivers').doc(data.id).update({
