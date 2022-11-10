@@ -254,7 +254,7 @@ class _Poly extends State<GoogleMapsPolylines> {
       padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        height: MediaQuery.of(context).size.width / 2.3,
+        height: MediaQuery.of(context).size.width / 2.0,
         width: MediaQuery.of(context).size.width * 0.8,
         decoration: BoxDecoration(
             color: Colors.white,
@@ -264,7 +264,7 @@ class _Poly extends State<GoogleMapsPolylines> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'La course viens de prendre fin.\n Vous devez payez',
+              'La course vient de prendre fin.\n Vous devez payez',
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -273,7 +273,7 @@ class _Poly extends State<GoogleMapsPolylines> {
             ),
 
             Text(
-              '${data['prix']} \$',
+              '${data['prix'].toString().substring(0, 5)} \$',
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               style: TextStyle(
