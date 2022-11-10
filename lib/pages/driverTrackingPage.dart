@@ -250,11 +250,11 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                 name: 'SUIVANT',
                                 onTap: (){
                                   FirebaseFirestore.instance.collection('courses').doc(widget.uuid).update({
-                                    'status': "pending",
+                                    'status': "create",
                                     'carType': carType
                                   }).then((value){
                                     FirebaseFirestore.instance.collection('clients').doc('${courses['users']}').update({
-                                      'status': 'pending',
+                                      'status': 'create',
                                     }).then((value){
 
                                     });
