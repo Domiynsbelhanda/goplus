@@ -289,7 +289,7 @@ class _Poly extends State<GoogleMapsPolylines> {
             ),
 
             Text(
-              '${data['prix'].toString().substring(0, 5)} \$',
+              data['prix'].toString().length < 5 ? '${data['prix'].toString()} \$' :'${data['prix'].toString().substring(0, 5)} \$',
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               style: TextStyle(
