@@ -100,7 +100,7 @@ class _HomePage extends State<HomePage>{
                                                 if(pictogramme.hasData){
                                                   return body(position, pictogramme.data!);
                                                 } else {
-                                                  return Container();
+                                                  return const Text('Chargement...');
                                                 }
                                               },
                                             );
