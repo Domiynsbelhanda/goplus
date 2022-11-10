@@ -187,7 +187,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                           ),
                           child: offre ?
                           AppButton(
-                            name: 'CHOISIR OFFRE',
+                            name: 'MODIFIEZ L\'OFFRE',
                             color: Colors.black,
                             onTap: (){
                               setState(() {
@@ -589,7 +589,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
       padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        height: MediaQuery.of(context).size.width - 8,
+        height: MediaQuery.of(context).size.width + 17,
         width: MediaQuery.of(context).size.width * 0.8,
         decoration: BoxDecoration(
           color: Colors.white,

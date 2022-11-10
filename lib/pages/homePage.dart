@@ -105,7 +105,7 @@ class _HomePage extends State<HomePage>{
                                               },
                                             );
                                           } else {
-                                            return Container();
+                                            return const Text('Chargement...');
                                           }
                                         },
                                       );

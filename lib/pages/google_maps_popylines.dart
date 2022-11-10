@@ -244,7 +244,7 @@ class _Poly extends State<GoogleMapsPolylines> {
             borderRadius: BorderRadius.circular(24)
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               'La course viens de prendre fin.\n Vous devez payez',
@@ -269,12 +269,15 @@ class _Poly extends State<GoogleMapsPolylines> {
             AppButton(
               color: AppColors.primaryColor,
               name: 'FERMER ',
-              onTap: ()=>Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => HomePage()
-              ),
-            ),
+              onTap: (){
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => HomePage()
+                  ),
+                    (route)=>false
+                );
+              }
             ),
           ],
         ),
