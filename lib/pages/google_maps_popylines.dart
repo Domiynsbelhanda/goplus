@@ -99,7 +99,23 @@ class _Poly extends State<GoogleMapsPolylines> {
             builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
 
               if(!snapshot.hasData){
-                return Text("Chargement en cours...");
+                return Center(
+                  child: SizedBox(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: const [
+                        CircularProgressIndicator(
+                          color: AppColors.primaryColor,
+                        ),
+
+                        SizedBox(height: 16.0,),
+
+                        Text('Chargement en cours...'),
+                      ],
+                    ),
+                  ),
+                );
               }
 
               Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;

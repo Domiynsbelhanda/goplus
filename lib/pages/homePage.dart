@@ -71,7 +71,7 @@ class _HomePage extends State<HomePage>{
                 builder: (context, AsyncSnapshot<DocumentSnapshot> yourCourses) {
                   if(yourCourses.hasData){
                     Map<String, dynamic> donn = yourCourses.data!.data() as Map<String, dynamic>;
-                    if(donn['status'] == 'confirm'){
+                    if(donn['status'] == 'confirm' || donn['status'] == 'start'){
                       disableLoader();
                       return GoogleMapsPolylines(uuid: donn['uuid']);
                     }
@@ -86,7 +86,6 @@ class _HomePage extends State<HomePage>{
                                 builder: (context, status){
                                   if(status.hasData){
                                     if(status.data!.isGranted){
-                                      showLoader("Recherche de votre position\nVeuillez patienter...");
                                       return FutureBuilder<Position>(
                                         future: Geolocator.getCurrentPosition(),
                                         builder: (context, location){
