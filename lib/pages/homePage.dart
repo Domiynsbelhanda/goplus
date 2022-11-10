@@ -49,7 +49,7 @@ class _HomePage extends State<HomePage>{
     PolylineId id = const PolylineId("Trajet une");
     Polyline polyline = Polyline(
       polylineId: id,
-      color: Colors.red,
+      color: AppColors.primaryColor,
       points: polylineCoordinates,
       width: 8,
     );
@@ -161,7 +161,10 @@ class _HomePage extends State<HomePage>{
             );
           }
 
-          return Text('Veuillez patienter');
+          return const Center(
+              child:
+              Text('Veuillez patienter')
+          );
         }
       ),
     );
@@ -241,7 +244,7 @@ class _HomePage extends State<HomePage>{
               child: Padding(
                 padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
                 child: Container(
-                  height: destination != null ? size.width / 1.3 : size.width / 1.5,
+                  height: destination != null ? size.width / 1.1 : size.width / 1.5,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(size.width / 15),
                     color: AppColors.primaryColor,
