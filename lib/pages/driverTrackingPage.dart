@@ -238,7 +238,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                 image: 'assets/images/berline.png',
                                 type: 'GO+ VIP',
                                 place: "Berline de 4 places\nIdéal pour des trajets moyens et longs",
-                                prices: '20\$ / Heure',
+                                prices: '15\$ / Heure',
                                 onTap: (){
                                   FirebaseFirestore.instance.collection('courses').doc(widget.uuid).update({
                                         'carType': carType
