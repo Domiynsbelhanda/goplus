@@ -220,6 +220,9 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                   setState(() {
                                     carType = "1";
                                   });
+                                  FirebaseFirestore.instance.collection('courses').doc(widget.uuid).update({
+                                    'carType': carType
+                                  });
                                 },
                                 active: carType == "1",
                               ),
@@ -234,6 +237,9 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                 place: "Berline de 4 places\nIdéal pour des trajets moyens et longs",
                                 prices: '20\$ / Heure',
                                 onTap: (){
+                                  FirebaseFirestore.instance.collection('courses').doc(widget.uuid).update({
+                                        'carType': carType
+                                  });
                                   setState(() {
                                     carType = "2";
                                   });
@@ -242,24 +248,24 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
 
                               ),
 
-                              const SizedBox(
-                                height: 8.0,
-                              ),
-
-                              AppButton(
-                                color: Colors.black,
-                                name: 'SUIVANT',
-                                onTap: (){
-                                  FirebaseFirestore.instance.collection('courses').doc(widget.uuid).update({
-                                    'carType': carType
-                                  }).then((value){
-                                  });
-                                  setState(() {
-                                    offre = !offre;
-                                    ride = !ride;
-                                  });
-                                },
-                              )
+                              // const SizedBox(
+                              //   height: 8.0,
+                              // ),
+                              //
+                              // AppButton(
+                              //   color: Colors.black,
+                              //   name: 'SUIVANT',
+                              //   onTap: (){
+                              //     FirebaseFirestore.instance.collection('courses').doc(widget.uuid).update({
+                              //       'carType': carType
+                              //     }).then((value){
+                              //     });
+                              //     setState(() {
+                              //       offre = !offre;
+                              //       ride = !ride;
+                              //     });
+                              //   },
+                              // )
                             ],
                           ),
                         ),

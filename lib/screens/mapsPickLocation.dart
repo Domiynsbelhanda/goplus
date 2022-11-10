@@ -69,7 +69,7 @@ class _PickLocation extends State<PickLocation>{
     PolylineId id = const PolylineId("Trajet une");
     Polyline polyline = Polyline(
       polylineId: id,
-      color: Colors.red,
+      color: AppColors.primaryColor,
       points: polylineCoordinates,
       width: 8,
     );
