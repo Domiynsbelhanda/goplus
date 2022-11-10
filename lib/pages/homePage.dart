@@ -100,31 +100,43 @@ class _HomePage extends State<HomePage>{
                                                 if(pictogramme.hasData){
                                                   return body(position, pictogramme.data!);
                                                 } else {
-                                                  return Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                                    children: const [
-                                                      CircularProgressIndicator(),
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      child: Column(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                        children: const [
+                                                          CircularProgressIndicator(
+                                                            color: AppColors.primaryColor,
+                                                          ),
 
-                                                      SizedBox(height: 16.0,),
+                                                          SizedBox(height: 16.0,),
 
-                                                      Text('Chargement...'),
-                                                    ],
+                                                          Text('Chargement...'),
+                                                        ],
+                                                      ),
+                                                    ),
                                                   );
                                                 }
                                               },
                                             );
                                           } else {
-                                            return Column(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                              children: const [
-                                                CircularProgressIndicator(),
+                                            return Center(
+                                              child: SizedBox(
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  children: const [
+                                                    CircularProgressIndicator(
+                                                      color: AppColors.primaryColor,
+                                                    ),
 
-                                                SizedBox(height: 16.0,),
+                                                    SizedBox(height: 16.0,),
 
-                                                Text('Chargement...'),
-                                              ],
+                                                    Text('Chargement...'),
+                                                  ],
+                                                ),
+                                              ),
                                             );
                                           }
                                         },
