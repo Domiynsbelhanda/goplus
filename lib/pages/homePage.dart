@@ -244,7 +244,7 @@ class _HomePage extends State<HomePage>{
               child: Padding(
                 padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
                 child: Container(
-                  height: destination != null ? size.width / 1.1 : size.width / 1.5,
+                  height: destination != null ? size.width / 1.1 : size.width / 1.4,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(size.width / 15),
                     color: AppColors.primaryColor,
