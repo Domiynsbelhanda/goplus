@@ -100,12 +100,32 @@ class _HomePage extends State<HomePage>{
                                                 if(pictogramme.hasData){
                                                   return body(position, pictogramme.data!);
                                                 } else {
-                                                  return const Text('Chargement...');
+                                                  return Column(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: const [
+                                                      CircularProgressIndicator(),
+
+                                                      SizedBox(height: 16.0,),
+
+                                                      Text('Chargement...'),
+                                                    ],
+                                                  );
                                                 }
                                               },
                                             );
                                           } else {
-                                            return const Text('Chargement...');
+                                            return Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: const [
+                                                CircularProgressIndicator(),
+
+                                                SizedBox(height: 16.0,),
+
+                                                Text('Chargement...'),
+                                              ],
+                                            );
                                           }
                                         },
                                       );

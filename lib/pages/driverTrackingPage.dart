@@ -298,7 +298,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                     ),
                                   ],
                                 ),
-                                child: courses['status'] == 'pending' ?
+                                child: courses['status'] == 'pending' || courses['status'] == 'view' ?
                                     SizedBox(
                                       width: size.width / 1,
                                       height: size.width /1.3,
