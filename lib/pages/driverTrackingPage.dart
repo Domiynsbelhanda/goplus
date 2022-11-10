@@ -88,6 +88,9 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   @override
   Widget build(BuildContext context){
     size = MediaQuery.of(context).size;
+    FirebaseFirestore.instance.collection('courses').doc(widget.uuid).update({
+      'carType': carType
+    });
     return SafeArea(
       child: StreamBuilder(
         stream: FirebaseFirestore.instance.collection("drivers").snapshots(),
