@@ -288,7 +288,15 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                               child: Container(
                                 decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(24)
+                                    borderRadius: BorderRadius.circular(24),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 5,
+                                      blurRadius: 7,
+                                      offset: const Offset(0, 3), // changes position of shadow
+                                    ),
+                                  ],
                                 ),
                                 child: courses['status'] == 'pending' ?
                                     SizedBox(
@@ -649,9 +657,9 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   width: 100,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(60),
-                      image: const DecorationImage(
+                      image: DecorationImage(
                         image: NetworkImage(
-                          'https://firebasestorage.googleapis.com/v0/b/taxigo-e3fcc.appspot.com/o/profile.jpg?alt=media&token=609b45f5-2f3c-4edb-b5f4-c041b9eb0457',
+                          data.get('image') != null ? data.get('image')! : 'https://firebasestorage.googleapis.com/v0/b/taxigo-e3fcc.appspot.com/o/profile.jpg?alt=media&token=609b45f5-2f3c-4edb-b5f4-c041b9eb0457',
                         ),
                         fit: BoxFit.fitWidth,
                       )
