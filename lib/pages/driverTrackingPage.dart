@@ -131,9 +131,10 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                 position: latLng,
                                 icon: car_android!,
                                 onTap: (){
+                                  index = i;
                                   setState(() {
-                                    driver = true;
                                     index = i;
+                                    driver = true;
                                   });
                                 }
                             )
