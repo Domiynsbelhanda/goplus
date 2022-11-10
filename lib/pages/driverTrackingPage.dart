@@ -250,14 +250,8 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                 name: 'SUIVANT',
                                 onTap: (){
                                   FirebaseFirestore.instance.collection('courses').doc(widget.uuid).update({
-                                    'status': "create",
                                     'carType': carType
                                   }).then((value){
-                                    FirebaseFirestore.instance.collection('clients').doc('${courses['users']}').update({
-                                      'status': 'create',
-                                    }).then((value){
-
-                                    });
                                   });
                                   setState(() {
                                     offre = !offre;
@@ -420,67 +414,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                               ]
                                           )
                                       ),
-                                    ) :
-                                    courses['status'] == 'accept' ?
-                                        SizedBox(
-                                          width: size.width / 1,
-                                          height: size.width / 1.1,
-                                          child: Padding(
-                                              padding: const EdgeInsets.all(16.0),
-                                              child: Column(
-                                                  children : [
-                                                    Icon(
-                                                      Icons.check_circle,
-                                                      color: Colors.green,
-                                                      size: size.width / 4,
-                                                    ),
-
-                                                    const SizedBox(height: 16.0),
-
-                                                    SizedBox(
-                                                      width : size.width / 1.5,
-                                                      child: const Text(
-                                                          'Votre commande a été acceptée.',
-                                                          style: TextStyle(
-                                                            fontSize: 20,
-                                                            color: Colors.black,
-                                                          )
-                                                      ),
-                                                    ),
-
-                                                    const SizedBox(height: 16.0),
-
-                                                    TextButton(
-                                                      child: Container(
-                                                          padding: const EdgeInsets.all(16.0),
-                                                          decoration: BoxDecoration(
-                                                              color: AppColors.primaryColor,
-                                                              borderRadius: BorderRadius.circular(8.0)
-                                                          ),
-                                                          child: const Text(
-                                                            'VOIR LE CHAUFFEUR',
-                                                            style: TextStyle(
-                                                                color: Colors.black
-                                                            ),
-                                                          )
-                                                      ),
-                                                      onPressed: (){
-                                                        String number = courses['driver'];
-                                                        for(var x = 0; x < data.length; x++){
-                                                          if(data[x].id == number){
-                                                            setState(() {
-                                                              index = x;
-                                                              ride = false;
-                                                              driver = true;
-                                                            });
-                                                          }
-                                                        }
-                                                      },
-                                                    )
-                                                  ]
-                                              )
-                                          ),
-                                        )
+                                    )
                                         :
                                         courses['status'] == 'no' ?
                                         SizedBox(
@@ -794,7 +728,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                             driver = false;
                           });
                           FirebaseFirestore.instance.collection('courses').doc(widget.uuid).update({
-                            'status': "confirm",
+                            'status': "pending",
                             'depart_longitude': widget.origine.longitude,
                             'depart_latitude': widget.origine.latitude,
                             'destination_longitude': widget.destination.longitude,
