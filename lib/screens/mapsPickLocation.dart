@@ -40,7 +40,7 @@ class _PickLocation extends State<PickLocation>{
   List<LatLng> polylineCoordinates = [];
   GoogleMapController? mapController;
 
-  String location = "Chercher un lieu";
+  String location = "Modifier la destination";
   late LatLng destination;
 
   late Size size;
