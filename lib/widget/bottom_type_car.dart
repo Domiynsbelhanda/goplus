@@ -62,14 +62,12 @@ class BottomTypeCar extends StatelessWidget{
 
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 1.7,
-                    child: Flexible(
-                      child: Text(
-                        place,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width / 27,
-                          color: active ? AppColors.primaryColor : Colors.black
-                        ),
+                    child: Text(
+                      place,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.width / 27,
+                        color: active ? AppColors.primaryColor : Colors.black
                       ),
                     ),
                   ),

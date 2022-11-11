@@ -11,7 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 final storage = const FlutterSecureStorage();
 
-String androidApiKey = 'AIzaSyAFtipYv6W0AWKFWsipPRhrgRdPHF5MOvk';
+String androidApiKey = 'AIzaSyCtB2P_ByBV1I5o5BNRK7J4_GK75FvJpvs';
 
 LatLng position = const LatLng(-4.4163009, 15.2732314);
 const double zoom = 15;

@@ -171,6 +171,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                         right: offre ? 72 : 16.0,
                         child: Container(
                           padding: const EdgeInsets.all(16.0),
+                          height : MediaQuery.of(context).size.width / 1.315,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(size.width / 15),
                             color: offre ? Colors.transparent : AppColors.primaryColor,
