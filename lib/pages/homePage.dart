@@ -89,13 +89,13 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
                                             return KFDrawer(
                                                borderRadius: 16.0,
                                                shadowBorderRadius: 16.0,
-                                               menuPadding: const EdgeInsets.all(32.0),
+                                               menuPadding: const EdgeInsets.all(8.0),
                                                scrollable: true,
                                               controller: _drawerController,
                                               header: Align(
                                                 alignment: Alignment.centerLeft,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(16.0),
+                                                  padding: const EdgeInsets.only(bottom: 64.0),
                                                   child: Container(
                                                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                                                     width: MediaQuery.of(context).size.width * 0.6,
@@ -130,7 +130,7 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
                                                 gradient: LinearGradient(
                                                   begin: Alignment.topLeft,
                                                   end: Alignment.bottomRight,
-                                                  colors: [AppColors.primaryColor, Colors.yellowAccent],
+                                                  colors: [Colors.orange, AppColors.primaryColor],
                                                   tileMode: TileMode.repeated,
                                                 ),
                                               ),
