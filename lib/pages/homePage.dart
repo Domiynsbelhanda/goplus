@@ -93,32 +93,7 @@ class _HomePage extends State<HomePage>{
                                           if(location.hasData){
                                             disableLoader();
                                             position = LatLng(location.data!.latitude, location.data!.longitude);
-                                            return FutureBuilder<BitmapDescriptor>(
-                                              future: bitmap("assets/images/pictogramme.png", 90),
-                                              builder: (context, pictogramme){
-                                                if(pictogramme.hasData){
-                                                  return body(position, pictogramme.data!);
-                                                } else {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      child: Column(
-                                                        mainAxisAlignment: MainAxisAlignment.center,
-                                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                                        children: const [
-                                                          CircularProgressIndicator(
-                                                            color: AppColors.primaryColor,
-                                                          ),
-
-                                                          SizedBox(height: 16.0,),
-
-                                                          Text('Chargement...'),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  );
-                                                }
-                                              },
-                                            );
+                                            return body(position);
                                           } else {
                                             return Center(
                                               child: SizedBox(
@@ -201,7 +176,7 @@ class _HomePage extends State<HomePage>{
     );
   }
 
-  Widget body(LatLng pos, BitmapDescriptor? picto){
+  Widget body(LatLng pos){
     markers.add(
         Marker(
           markerId: const MarkerId('Ma Position'),
@@ -210,7 +185,7 @@ class _HomePage extends State<HomePage>{
             title: 'Ma Position',
             snippet: 'Moi',
           ),
-          icon: picto!,
+          icon: pinner!,
         )
     );
     cam = CameraPosition(
@@ -378,7 +353,7 @@ class _HomePage extends State<HomePage>{
                                         title: 'Ma Position',
                                         snippet: 'Moi',
                                       ),
-                                      icon: picto!,
+                                      icon: pinner!,
                                     )
                                 );
                                 markers.add(
@@ -440,7 +415,7 @@ class _HomePage extends State<HomePage>{
                                         PickLocation(
                                           positions: pos,
                                           destination: destinationLatLng!,
-                                          picto: picto,
+                                          picto: pinner!,
                                         )
                                 ),
                               );
