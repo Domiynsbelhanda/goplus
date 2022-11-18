@@ -91,9 +91,9 @@ class _BodyPage extends State<BodyPage>{
         Stack(
           children: [
             Align(
-              alignment: Alignment.topRight,
+              alignment: Alignment.topLeft,
               child: Padding(
-                padding: const EdgeInsets.only(top: 16.0, right: 16.0),
+                padding: const EdgeInsets.only(top: 16.0, left: 16.0),
                 child: Container(
                   height: 48,
                   width: 48,
@@ -102,11 +102,9 @@ class _BodyPage extends State<BodyPage>{
                       borderRadius: BorderRadius.circular(48.0)
                   ),
                   child: IconButton(
-                    onPressed: () {
-
-                    },
+                    onPressed: widget.onMenuPressed,
                     icon: const Icon(
-                      Icons.logout,
+                      Icons.menu,
                     ),
                   ),
                 ),

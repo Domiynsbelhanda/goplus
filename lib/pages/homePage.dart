@@ -42,7 +42,7 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
       initialPage: ClassBuilder.fromString('BodyPage'),
       items: [
         KFDrawerItem.initWithPage(
-          text: const Text('ACCUEIL', style: TextStyle(color: Colors.white)),
+          text: const Text('Accueil', style: TextStyle(color: Colors.white)),
           icon: const Icon(Icons.home, color: Colors.white),
           page: BodyPage(),
         ),
@@ -87,25 +87,28 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
                                             disableLoader();
                                             position = LatLng(location.data!.latitude, location.data!.longitude);
                                             return KFDrawer(
-                                               borderRadius: 0.0,
-                                               shadowBorderRadius: 0.0,
-                                               menuPadding: const EdgeInsets.all(0.0),
+                                               borderRadius: 16.0,
+                                               shadowBorderRadius: 16.0,
+                                               menuPadding: const EdgeInsets.all(32.0),
                                                scrollable: true,
                                               controller: _drawerController,
                                               header: Align(
                                                 alignment: Alignment.centerLeft,
-                                                child: Container(
-                                                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                                                  width: MediaQuery.of(context).size.width * 0.6,
-                                                  child: Image.asset(
-                                                    'assets/icon/white-text.png',
-                                                    alignment: Alignment.centerLeft,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(16.0),
+                                                  child: Container(
+                                                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                                    width: MediaQuery.of(context).size.width * 0.6,
+                                                    child: Image.asset(
+                                                      'assets/icon/white-text.png',
+                                                      alignment: Alignment.centerLeft,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
                                               footer: KFDrawerItem(
                                                 text: const Text(
-                                                  'DECONNEXION',
+                                                  'Deconnexion',
                                                   style: TextStyle(color: Colors.white),
                                                 ),
                                                 icon: const Icon(
@@ -127,7 +130,7 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
                                                 gradient: LinearGradient(
                                                   begin: Alignment.topLeft,
                                                   end: Alignment.bottomRight,
-                                                  colors: [Color.fromRGBO(255, 255, 255, 1.0), Color.fromRGBO(44, 72, 171, 1.0)],
+                                                  colors: [AppColors.primaryColor, Colors.yellowAccent],
                                                   tileMode: TileMode.repeated,
                                                 ),
                                               ),
