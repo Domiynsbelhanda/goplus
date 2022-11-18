@@ -314,28 +314,29 @@ class _HomePage extends State<HomePage>{
                               final lat = geometry.location.lat;
                               final lang = geometry.location.lng;
 
-                              PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-                                androidApiKey,
-                                PointLatLng(position.latitude, position.longitude),
-                                PointLatLng(lat, lang)
-                              );
+                              // PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+                              //   androidApiKey,
+                              //   PointLatLng(position.latitude, position.longitude),
+                              //   PointLatLng(lat, lang)
+                              // );
 
-                              if (result.points.isNotEmpty) {
-                                markers.clear();
-                                polylineCoordinates.clear();
-                                for (var point in result.points) {
-                                  polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-                                }
-                                setState(() {
-                                  addPolyLine(polylineCoordinates);
-                                });
-                              } else {
-                                Toast.show(
-                                    '${result.errorMessage}',
-                                    duration: Toast.lengthLong,
-                                    gravity: Toast.bottom
-                                );
-                              }
+                              // if (result.points.isNotEmpty) {
+                              //
+                              // } else {
+                              //   Toast.show(
+                              //       '${result.errorMessage}',
+                              //       duration: Toast.lengthLong,
+                              //       gravity: Toast.bottom
+                              //   );
+                              // }
+
+                              markers.clear();
+                              polylineCoordinates.clear();
+                              polylineCoordinates.add(LatLng(position.latitude, position.longitude));
+                              polylineCoordinates.add(LatLng(lat, lang));
+                              setState(() {
+                                addPolyLine(polylineCoordinates);
+                              });
 
                               setState(() {
                                 destinationLatLng = LatLng(lat, lang);
