@@ -51,47 +51,51 @@ class _HistoryPage extends State<HistoryPage>{
               ),
             ),
 
-            Align(
-              alignment: Alignment.center,
-              child: StreamBuilder<QuerySnapshot>(
-                stream: _coursesStream,
-                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
-                    if(snapshot.hasError){
-                      return const Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Something went wrong'
-                        ),
-                      );
-                    }
-
-                    if(snapshot.connectionState == ConnectionState.waiting){
-                      return Align(
-                        alignment: Alignment.center,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
-                            CircularProgressIndicator(),
-                            SizedBox(height: 16.0,),
-                            Text(
-                              'Chargement de vos courses...'
-                            )
-                          ],
-                        ),
-                      );
-                    }
-
-                    return ListView(
-                      children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                        Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-                        return ListTile(
-                          title: Text(data['users']),
-                          subtitle: Text(data['status']),
+            Positioned(
+              top: 100.0,
+              child: SizedBox(
+                width: size.width,
+                height: size.height - 130,
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: _coursesStream,
+                    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+                      if(snapshot.hasError){
+                        return const Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Something went wrong'
+                          ),
                         );
-                      }).toList(),
-                    );
-                  }
+                      }
+
+                      if(snapshot.connectionState == ConnectionState.waiting){
+                        return Align(
+                          alignment: Alignment.center,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: const [
+                              CircularProgressIndicator(),
+                              SizedBox(height: 16.0,),
+                              Text(
+                                'Chargement de vos courses...'
+                              )
+                            ],
+                          ),
+                        );
+                      }
+
+                      return ListView(
+                        children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                          Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+                          return ListTile(
+                            title: Text(data['users']),
+                            subtitle: Text(data['status']),
+                          );
+                        }).toList(),
+                      );
+                    }
+                ),
               ),
             )
           ],
