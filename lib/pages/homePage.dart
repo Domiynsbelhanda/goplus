@@ -14,6 +14,7 @@ import '../utils/class_builder.dart';
 import '../utils/global_variable.dart';
 import '../utils/app_colors.dart';
 import 'AboutPage.dart';
+import 'HistoryPage.dart';
 import 'google_maps_popylines.dart';
 
 class HomePage extends StatefulWidget{
@@ -85,7 +86,7 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
               size: 24,
             ),
           ),
-          page: AboutPage(),
+          page: HistoryPage(),
         ),
 
         KFDrawerItem.initWithPage(

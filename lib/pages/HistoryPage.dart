@@ -1,18 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart' as Maps;
-import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:google_api_headers/google_api_headers.dart';
-import 'package:google_maps_webservice/directions.dart';
-import 'package:google_maps_webservice/places.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:toast/toast.dart';
 
-import '../screens/mapsPickLocation.dart';
 import '../utils/app_colors.dart';
-import '../utils/global_variable.dart';
-import '../widget/app_button.dart';
 
 class HistoryPage extends KFDrawerContent {
   HistoryPage({
@@ -28,6 +19,7 @@ class HistoryPage extends KFDrawerContent {
 class _HistoryPage extends State<HistoryPage>{
 
   late Size size;
+  final Stream<QuerySnapshot> _coursesStream = FirebaseFirestore.instance.collection('courses').snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +51,47 @@ class _HistoryPage extends State<HistoryPage>{
               ),
             ),
 
-            const Align(
+            Align(
               alignment: Alignment.center,
-              child: Text(
-                'About page'
+              child: StreamBuilder<QuerySnapshot>(
+                stream: _coursesStream,
+                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+                    if(snapshot.hasError){
+                      return const Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Something went wrong'
+                        ),
+                      );
+                    }
+
+                    if(snapshot.connectionState == ConnectionState.waiting){
+                      return Align(
+                        alignment: Alignment.center,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: const [
+                            CircularProgressIndicator(),
+                            SizedBox(height: 16.0,),
+                            Text(
+                              'Chargement de vos courses...'
+                            )
+                          ],
+                        ),
+                      );
+                    }
+
+                    return ListView(
+                      children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                        Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+                        return ListTile(
+                          title: Text(data['users']),
+                          subtitle: Text(data['status']),
+                        );
+                      }).toList(),
+                    );
+                  }
               ),
             )
           ],
