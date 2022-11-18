@@ -6,6 +6,7 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_webservice/directions.dart';
 import 'package:google_maps_webservice/places.dart';
+import 'package:kf_drawer/kf_drawer.dart';
 import 'package:toast/toast.dart';
 
 import '../screens/mapsPickLocation.dart';
@@ -13,9 +14,9 @@ import '../utils/app_colors.dart';
 import '../utils/global_variable.dart';
 import '../widget/app_button.dart';
 
-class BodyPage extends StatefulWidget{
+class BodyPage extends KFDrawerContent {
   BodyPage({
-    super.key,
+    Key? key
   });
   @override
   State<StatefulWidget> createState() {
@@ -102,14 +103,7 @@ class _BodyPage extends State<BodyPage>{
                   ),
                   child: IconButton(
                     onPressed: () {
-                      // logOut();
-                      // Navigator.pushAndRemoveUntil(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (BuildContext context) => const MyApp()
-                      //     ),
-                      //         (Route<dynamic> route) => false
-                      // );
+
                     },
                     icon: const Icon(
                       Icons.logout,

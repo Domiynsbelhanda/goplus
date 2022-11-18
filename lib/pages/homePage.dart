@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:goplus/pages/BodyPage.dart';
 import 'package:goplus/widget/app_button.dart';
+import 'package:kf_drawer/kf_drawer.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
+import '../main.dart';
 import '../services/auth.dart';
+import '../utils/class_builder.dart';
 import '../utils/global_variable.dart';
 import '../utils/app_colors.dart';
 import 'google_maps_popylines.dart';
@@ -22,14 +25,29 @@ class HomePage extends StatefulWidget{
   }
 }
 
-class _HomePage extends State<HomePage>{
+class _HomePage extends State<HomePage> with TickerProviderStateMixin{
 
-
+  late KFDrawerController _drawerController;
 
   void requestPermission() async{
     Map<Permission, PermissionStatus> request =  await [
       Permission.location
     ].request();
+  }
+
+
+  @override
+  void initState() {
+    _drawerController = KFDrawerController(
+      initialPage: ClassBuilder.fromString('BodyPage'),
+      items: [
+        KFDrawerItem.initWithPage(
+          text: const Text('ACCUEIL', style: TextStyle(color: Colors.white)),
+          icon: const Icon(Icons.home, color: Colors.white),
+          page: BodyPage(),
+        ),
+      ],
+    );
   }
 
   @override
@@ -68,7 +86,52 @@ class _HomePage extends State<HomePage>{
                                           if(location.hasData){
                                             disableLoader();
                                             position = LatLng(location.data!.latitude, location.data!.longitude);
-                                            return BodyPage();
+                                            return KFDrawer(
+                                               borderRadius: 0.0,
+                                               shadowBorderRadius: 0.0,
+                                               menuPadding: const EdgeInsets.all(0.0),
+                                               scrollable: true,
+                                              controller: _drawerController,
+                                              header: Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: Container(
+                                                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                                  width: MediaQuery.of(context).size.width * 0.6,
+                                                  child: Image.asset(
+                                                    'assets/icon/white-text.png',
+                                                    alignment: Alignment.centerLeft,
+                                                  ),
+                                                ),
+                                              ),
+                                              footer: KFDrawerItem(
+                                                text: const Text(
+                                                  'DECONNEXION',
+                                                  style: TextStyle(color: Colors.white),
+                                                ),
+                                                icon: const Icon(
+                                                  Icons.input,
+                                                  color: Colors.white,
+                                                ),
+                                                onPressed: () {
+                                                  logOut();
+                                                  Navigator.pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (BuildContext context) => const MyApp()
+                                                      ),
+                                                          (Route<dynamic> route) => false
+                                                  );
+                                                },
+                                              ),
+                                              decoration: const BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  begin: Alignment.topLeft,
+                                                  end: Alignment.bottomRight,
+                                                  colors: [Color.fromRGBO(255, 255, 255, 1.0), Color.fromRGBO(44, 72, 171, 1.0)],
+                                                  tileMode: TileMode.repeated,
+                                                ),
+                                              ),
+                                            );
                                           } else {
                                             return Center(
                                               child: SizedBox(
