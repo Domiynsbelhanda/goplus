@@ -97,7 +97,7 @@ class _PickLocation extends State<PickLocation>{
             title: 'Votre Destination',
             snippet: "Destiantion",
           ),
-          icon: arriveBitmap!,
+          icon: pinner!,
         )
     );
     // PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
