@@ -124,6 +124,7 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
         future: Provider.of<Auth>(context, listen: false).getToken(),
         builder: (context, yourToken) {
           if(yourToken.hasData){
+            token = yourToken.data;
             return StreamBuilder(
                 stream: FirebaseFirestore.instance.collection("clients").doc(yourToken.data!).snapshots(),
                 builder: (context, AsyncSnapshot<DocumentSnapshot> yourCourses) {

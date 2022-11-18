@@ -16,6 +16,8 @@ String androidApiKey = 'AIzaSyCtB2P_ByBV1I5o5BNRK7J4_GK75FvJpvs';
 LatLng position = const LatLng(-4.4163009, 15.2732314);
 const double zoom = 15;
 
+String? token;
+
 BitmapDescriptor? pinner;
 BitmapDescriptor? car_android;
 BitmapDescriptor? departBitmap;

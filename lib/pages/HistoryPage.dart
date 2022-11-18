@@ -4,6 +4,7 @@ import 'package:kf_drawer/kf_drawer.dart';
 import 'package:toast/toast.dart';
 
 import '../utils/app_colors.dart';
+import '../utils/global_variable.dart';
 
 class HistoryPage extends KFDrawerContent {
   HistoryPage({
@@ -88,10 +89,96 @@ class _HistoryPage extends State<HistoryPage>{
                       return ListView(
                         children: snapshot.data!.docs.map((DocumentSnapshot document) {
                           Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-                          return ListTile(
-                            title: Text(data['users']),
-                            subtitle: Text(data['status']),
-                          );
+                          if(!(data['users'] == token)){
+                            if(data['status'] != 'create'){
+                              if(data['status'] == 'end'){
+                                return Container(
+                                  margin: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 1,
+                                        offset: const Offset(0, 1), // changes position of shadow
+                                      ),
+                                    ],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Text(
+                                                '${data['status']}'
+                                            )
+                                          ],
+                                        ),
+                                        // ListTile(
+                                        //   title: Text(data['users']),
+                                        //   subtitle: Text(data['status']),
+                                        // ),
+
+                                        const Icon(
+                                          Icons.verified_outlined,
+                                          color: Colors.green,
+                                          size: 24.0,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }
+                              return Container(
+                                margin: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 1,
+                                      blurRadius: 1,
+                                      offset: const Offset(0, 1), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Text(
+                                              '${data['status']}'
+                                          )
+                                        ],
+                                      ),
+                                      // ListTile(
+                                      //   title: Text(data['users']),
+                                      //   subtitle: Text(data['status']),
+                                      // ),
+
+                                      const Icon(
+                                        Icons.error_outline_outlined,
+                                        color: Colors.red,
+                                        size: 24.0,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return const SizedBox();
+                            }
+                          } else {
+                            return const SizedBox();
+                          }
                         }).toList(),
                       );
                     }
