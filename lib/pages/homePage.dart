@@ -29,6 +29,7 @@ class HomePage extends StatefulWidget{
 class _HomePage extends State<HomePage> with TickerProviderStateMixin{
 
   late KFDrawerController _drawerController;
+  late Size size;
 
   void requestPermission() async{
     Map<Permission, PermissionStatus> request =  await [
@@ -39,6 +40,7 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
 
   @override
   void initState() {
+    size = MediaQuery.of(context).size;
     _drawerController = KFDrawerController(
       initialPage: ClassBuilder.fromString('BodyPage'),
       items: [
@@ -62,6 +64,28 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
             ),
           ),
           page: BodyPage(),
+        ),
+
+        KFDrawerItem.initWithPage(
+          text: Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: Text(
+                'Historique',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: size.width / 15
+                )
+            ),
+          ),
+          icon: Padding(
+            padding: const EdgeInsets.only(bottom : 16.0, left: 8.0),
+            child: Icon(
+              Icons.list_alt,
+              color: Colors.white,
+              size: size.width / 15,
+            ),
+          ),
+          page: AboutPage(),
         ),
 
         KFDrawerItem.initWithPage(
