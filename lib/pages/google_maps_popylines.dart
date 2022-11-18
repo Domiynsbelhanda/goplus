@@ -34,7 +34,7 @@ class _Poly extends State<GoogleMapsPolylines> {
     PolylineId id = PolylineId(ids);
     Polyline polyline = Polyline(
       polylineId: id,
-      color: Colors.red,
+      color: Colors.deepOrange,
       points: polylineCoordinates,
       width: 8,
     );
@@ -45,7 +45,7 @@ class _Poly extends State<GoogleMapsPolylines> {
     PolylineId id = PolylineId(ids);
     Polyline polyline = Polyline(
       polylineId: id,
-      color: Colors.black,
+      color: Colors.deepOrange,
       points: polylineCoordinates,
       width: 8,
     );
@@ -53,38 +53,20 @@ class _Poly extends State<GoogleMapsPolylines> {
   }
 
   addPoly(LatLng driver, LatLng depart, LatLng destination) async{
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-        androidApiKey,
-        PointLatLng(driver.latitude, driver.longitude),
-        PointLatLng(depart.latitude, depart.longitude)
-    );
-
-    PolylineResult destinations = await polylinePoints.getRouteBetweenCoordinates(
-        androidApiKey,
-        PointLatLng(depart.latitude, depart.longitude),
-        PointLatLng(destination.latitude, destination.longitude)
-    );
 
     polylineCoordinates.clear();
-    if (result.points.isNotEmpty) {
-      for (var point in result.points) {
-        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      }
-      setState(() {
-        addPolyLine(polylineCoordinates, 'frist');
-      });
-    }
+    polylineCoordinates.add(LatLng(driver.latitude, driver.longitude));
+    polylineCoordinates.add(LatLng(depart.latitude, depart.longitude));
+    setState(() {
+      addPolyLine(polylineCoordinates, 'frist');
+    });
 
     destinationPolylineCoordinates.clear();
-
-    if (destinations.points.isNotEmpty) {
-      for (var points in destinations.points) {
-        destinationPolylineCoordinates.add(LatLng(points.latitude, points.longitude));
-      }
-      setState(() {
-        addDestinationPolyLine(destinationPolylineCoordinates, 'second');
-      });
-    }
+    destinationPolylineCoordinates.add(LatLng(depart.latitude, depart.longitude));
+    destinationPolylineCoordinates.add(LatLng(destination.latitude, destination.longitude));
+    setState(() {
+      addDestinationPolyLine(destinationPolylineCoordinates, 'second');
+    });
   }
 
   @override

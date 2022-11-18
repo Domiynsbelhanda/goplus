@@ -582,27 +582,29 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
     );
   }
 
-  getResult(LatLng driver) async{
-    PolylinePoints polylinePoints = PolylinePoints();
-    PolylineResult resultat = await polylinePoints.getRouteBetweenCoordinates(
-        androidApiKey,
-        PointLatLng(driver.latitude, driver.longitude),
-        PointLatLng(widget.origine.latitude, widget.origine.longitude)
-    );
-    setState(() {
-      driverResult = resultat;
-    });
-  }
+  // getResult(LatLng driver) async{
+  //   PolylinePoints polylinePoints = PolylinePoints();
+  //   PolylineResult resultat = await polylinePoints.getRouteBetweenCoordinates(
+  //       androidApiKey,
+  //       PointLatLng(driver.latitude, driver.longitude),
+  //       PointLatLng(widget.origine.latitude, widget.origine.longitude)
+  //   );
+  //   setState(() {
+  //     driverResult = resultat;
+  //   });
+  // }
 
   Widget showDriver(data){
-    getResult(LatLng(data.get('latitude'), data.get('longitude')));
+    // getResult(LatLng(data.get('latitude'), data.get('longitude')));
     driverPolylines.clear();
-    PolylineResult result  = driverResult!;
-    if(result.points.isNotEmpty){
-      for (var points in result.points) {
-        driverPolylines.add(LatLng(points.latitude, points.longitude));
-      }
-    }
+    driverPolylines.add(LatLng(data.get('latitude'), data.get('longitude')));
+    driverPolylines.add(LatLng(widget.origine.latitude, widget.origine.longitude));
+    // PolylineResult result  = driverResult!;
+    // if(result.points.isNotEmpty){
+    //   for (var points in result.points) {
+    //     driverPolylines.add(LatLng(points.latitude, points.longitude));
+    //   }
+    // }
     return Padding(
       padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Container(
