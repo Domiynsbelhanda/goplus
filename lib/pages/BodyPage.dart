@@ -14,10 +14,8 @@ import '../utils/global_variable.dart';
 import '../widget/app_button.dart';
 
 class BodyPage extends StatefulWidget{
-  LatLng position;
   BodyPage({
     super.key,
-    required this.position
   });
   @override
   State<StatefulWidget> createState() {
@@ -56,7 +54,7 @@ class _BodyPage extends State<BodyPage>{
     markers.add(
         Marker(
           markerId: const MarkerId('Ma Position'),
-          position: widget.position,
+          position: position,
           infoWindow: const InfoWindow(
             title: 'Ma Position',
             snippet: 'Moi',
@@ -65,7 +63,7 @@ class _BodyPage extends State<BodyPage>{
         )
     );
     cam = CameraPosition(
-        target: widget.position,
+        target: position,
         zoom: zoom
     );
 
@@ -82,7 +80,7 @@ class _BodyPage extends State<BodyPage>{
             _controller.animateCamera(
               CameraUpdate.newCameraPosition(
                 CameraPosition(
-                    target: widget.position,
+                    target: position,
                     zoom: zoom
                 ),
               ),
@@ -208,7 +206,7 @@ class _BodyPage extends State<BodyPage>{
 
                               markers.clear();
                               polylineCoordinates.clear();
-                              polylineCoordinates.add(LatLng(widget.position.latitude, widget.position.longitude));
+                              polylineCoordinates.add(LatLng(position.latitude, position.longitude));
                               polylineCoordinates.add(LatLng(lat, lang));
                               setState(() {
                                 addPolyLine(polylineCoordinates);
@@ -225,7 +223,7 @@ class _BodyPage extends State<BodyPage>{
                                 markers.add(
                                     Marker(
                                       markerId: const MarkerId('Ma Position'),
-                                      position: widget.position,
+                                      position: position,
                                       infoWindow: const InfoWindow(
                                         title: 'Ma Position',
                                         snippet: 'Moi',
@@ -290,7 +288,7 @@ class _BodyPage extends State<BodyPage>{
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         PickLocation(
-                                          positions: widget.position,
+                                          positions: position,
                                           destination: destinationLatLng!,
                                           picto: pinner!,
                                         )

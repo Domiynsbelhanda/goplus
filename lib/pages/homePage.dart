@@ -68,7 +68,7 @@ class _HomePage extends State<HomePage>{
                                           if(location.hasData){
                                             disableLoader();
                                             position = LatLng(location.data!.latitude, location.data!.longitude);
-                                            return BodyPage(position : position);
+                                            return BodyPage();
                                           } else {
                                             return Center(
                                               child: SizedBox(
