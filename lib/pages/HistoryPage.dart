@@ -90,7 +90,7 @@ class _HistoryPage extends State<HistoryPage>{
                       return ListView(
                         children: snapshot.data!.docs.map((DocumentSnapshot document) {
                           Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-                          if(!(data['users'] == token)){
+                          if((data['users'] == token)){
                             if(data['status'] != 'create'){
                               if(data['status'] == 'end'){
                                 return Container(
