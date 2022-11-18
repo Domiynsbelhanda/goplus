@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:toast/toast.dart';
 
@@ -112,9 +113,18 @@ class _HistoryPage extends State<HistoryPage>{
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                                '${data['status']}'
+                                                'Course du ${DateFormat('d MMM y, à hh:mm a').format(DateTime.parse(data['start_time'].toDate().toString()))}',
+                                            ),
+
+                                            Text(
+                                              'Id du chauffeur : ${data['sid_driver']}',
+                                            ),
+
+                                            Text(
+                                              'Prix : \$ ${data['prix']}',
                                             )
                                           ],
                                         ),
@@ -133,6 +143,7 @@ class _HistoryPage extends State<HistoryPage>{
                                   ),
                                 );
                               }
+                              return const SizedBox();
                               return Container(
                                 margin: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
                                 decoration: BoxDecoration(
@@ -155,7 +166,11 @@ class _HistoryPage extends State<HistoryPage>{
                                       Column(
                                         children: [
                                           Text(
-                                              '${data['status']}'
+                                            'Course du ${DateFormat('d MMM y, à hh:mm a').format(DateTime.parse(data['start_time'].toDate().toString()))}',
+                                          ),
+
+                                          Text(
+                                            'ok',
                                           )
                                         ],
                                       ),
