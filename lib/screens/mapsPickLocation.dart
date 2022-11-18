@@ -69,7 +69,7 @@ class _PickLocation extends State<PickLocation>{
     PolylineId id = const PolylineId("Trajet une");
     Polyline polyline = Polyline(
       polylineId: id,
-      color: Colors.black,
+      color: Colors.deepOrange,
       points: polylineCoordinates,
       width: 8,
     );
@@ -97,29 +97,31 @@ class _PickLocation extends State<PickLocation>{
             title: 'Votre Destination',
             snippet: "Destiantion",
           ),
-          icon: pinner!,
+          icon: arriveBitmap!,
         )
     );
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-        androidApiKey,
-        PointLatLng(widget.positions.latitude, widget.positions.longitude),
-        PointLatLng(desti.latitude, desti.longitude)
-    );
-    if (result.points.isNotEmpty) {
+    // PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+    //     androidApiKey,
+    //     PointLatLng(widget.positions.latitude, widget.positions.longitude),
+    //     PointLatLng(desti.latitude, desti.longitude)
+    // );
+    // if (result.points.isNotEmpty) {
       polylineCoordinates.clear();
-      for (var point in result.points) {
-        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      }
+      polylineCoordinates.add(LatLng(widget.positions.latitude, widget.positions.longitude));
+      polylineCoordinates.add(LatLng(desti.latitude, desti.longitude));
+      // for (var point in result.points) {
+      //   polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      // }
       setState(() {
         addPolyLine(polylineCoordinates);
       });
-    } else {
-      Toast.show(
-          '${result.errorMessage}',
-          duration: Toast.lengthLong,
-          gravity: Toast.bottom
-      );
-    }
+    // } else {
+    //   Toast.show(
+    //       '${result.errorMessage}',
+    //       duration: Toast.lengthLong,
+    //       gravity: Toast.bottom
+    //   );
+    // }
   }
 
   @override

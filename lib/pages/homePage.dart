@@ -49,7 +49,7 @@ class _HomePage extends State<HomePage>{
     PolylineId id = const PolylineId("Trajet une");
     Polyline polyline = Polyline(
       polylineId: id,
-      color: Colors.black,
+      color: Colors.deepOrange,
       points: polylineCoordinates,
       width: 8,
     );
@@ -365,7 +365,7 @@ class _HomePage extends State<HomePage>{
                                         title: 'Votre Destination',
                                         snippet: '$destination!',
                                       ),
-                                      icon: pinner!,
+                                      icon: arriveBitmap!,
                                     )
                                 );
                               });
