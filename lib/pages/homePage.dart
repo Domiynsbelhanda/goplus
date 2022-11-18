@@ -13,6 +13,7 @@ import '../services/auth.dart';
 import '../utils/class_builder.dart';
 import '../utils/global_variable.dart';
 import '../utils/app_colors.dart';
+import 'AboutPage.dart';
 import 'google_maps_popylines.dart';
 
 class HomePage extends StatefulWidget{
@@ -42,15 +43,47 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
       initialPage: ClassBuilder.fromString('BodyPage'),
       items: [
         KFDrawerItem.initWithPage(
-          text: const Text('Accueil', style: TextStyle(color: Colors.white)),
-          icon: const Icon(Icons.home, color: Colors.white),
+          text: const Padding(
+            padding: EdgeInsets.only(bottom: 16.0),
+            child: Text(
+                'Accueil',
+                style: TextStyle(
+                    color: Colors.white,
+                  fontSize: 24.0
+                )
+            ),
+          ),
+          icon: const Padding(
+            padding: EdgeInsets.only(bottom : 16.0, left: 8.0),
+            child: Icon(
+                Icons.home,
+                color: Colors.white,
+              size: 24.0,
+            ),
+          ),
           page: BodyPage(),
         ),
 
         KFDrawerItem.initWithPage(
-          text: const Text('About', style: TextStyle(color: Colors.white)),
-          icon: const Icon(Icons.settings, color: Colors.white),
-          page: BodyPage(),
+          text: const Padding(
+            padding: EdgeInsets.only(bottom: 16.0),
+            child: Text(
+                'APropos',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24.0
+                )
+            ),
+          ),
+          icon: const Padding(
+            padding: EdgeInsets.only(bottom : 16.0, left: 8.0),
+            child: Icon(
+              Icons.settings,
+              color: Colors.white,
+              size: 24.0,
+            ),
+          ),
+          page: AboutPage(),
         ),
       ],
     );
@@ -113,13 +146,23 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
                                                 ),
                                               ),
                                               footer: KFDrawerItem(
-                                                text: const Text(
-                                                  'Deconnexion',
-                                                  style: TextStyle(color: Colors.white),
+                                                text: const Padding(
+                                                  padding: EdgeInsets.only(bottom: 16.0),
+                                                  child: Text(
+                                                      'Deconnexion',
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 24.0
+                                                      )
+                                                  ),
                                                 ),
-                                                icon: const Icon(
-                                                  Icons.input,
-                                                  color: Colors.white,
+                                                icon: const Padding(
+                                                  padding: EdgeInsets.only(bottom : 16.0, left: 8.0),
+                                                  child: Icon(
+                                                    Icons.logout,
+                                                    color: Colors.white,
+                                                    size: 24.0,
+                                                  ),
                                                 ),
                                                 onPressed: () {
                                                   logOut();
