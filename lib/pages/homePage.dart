@@ -46,6 +46,12 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
           icon: const Icon(Icons.home, color: Colors.white),
           page: BodyPage(),
         ),
+
+        KFDrawerItem.initWithPage(
+          text: const Text('About', style: TextStyle(color: Colors.white)),
+          icon: const Icon(Icons.settings, color: Colors.white),
+          page: BodyPage(),
+        ),
       ],
     );
   }

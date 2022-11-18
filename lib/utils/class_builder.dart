@@ -1,4 +1,5 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:goplus/pages/AboutPage.dart';
 
 import '../pages/BodyPage.dart';
 import '../pages/homePage.dart';
@@ -14,6 +15,7 @@ void register<T>(Constructor<T> constructor) {
 class ClassBuilder {
   static void registerClasses() {
     register<BodyPage>(() => BodyPage());
+    register<AboutPage>(() => AboutPage());
   }
 
   static dynamic fromString(String type) {
