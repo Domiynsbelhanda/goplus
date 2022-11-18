@@ -40,7 +40,7 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
 
   @override
   void initState() {
-    size = MediaQuery.of(context).size;
+    super.initState();
     _drawerController = KFDrawerController(
       initialPage: ClassBuilder.fromString('BodyPage'),
       items: [
@@ -67,22 +67,22 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
         ),
 
         KFDrawerItem.initWithPage(
-          text: Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
+          text: const Padding(
+            padding: EdgeInsets.only(bottom: 16.0),
             child: Text(
                 'Historique',
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: size.width / 15
+                    fontSize: 24
                 )
             ),
           ),
-          icon: Padding(
-            padding: const EdgeInsets.only(bottom : 16.0, left: 8.0),
+          icon: const Padding(
+            padding: EdgeInsets.only(bottom : 16.0, left: 8.0),
             child: Icon(
               Icons.list_alt,
               color: Colors.white,
-              size: size.width / 15,
+              size: 24,
             ),
           ),
           page: AboutPage(),
@@ -115,6 +115,7 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
+    size = MediaQuery.of(context).size;
     ToastContext().init(context);
     readBitconMarkerPinner();
     return Scaffold(
