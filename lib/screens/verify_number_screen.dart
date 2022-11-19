@@ -87,7 +87,7 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                   SizedBox(height: size.height * 0.05),
                   GestureDetector(
                     onTap: (){
-                      showLoader("Renvoie OTP enc cours...");
+                      showLoader("Renvoie OTP en cours...");
                       var data = {
                         "key": "check_user",
                         "action": "client",
