@@ -27,6 +27,7 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
   late String code;
   late bool onEditing = false;
   String? otp;
+  bool message = false;
 
   @override
   void initState() {
@@ -57,6 +58,10 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                   ),
                   const SizedBox(height: 8.0,),
 
+                  message ? const Text(
+                    'Requête envoyée, veuillez patienter.'
+                  ) : const SizedBox(),
+
                   SizedBox(height: size.height * 0.02),
                   SizedBox(
                     height: size.height * 0.05,
@@ -81,13 +86,17 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                   SizedBox(height: size.height * 0.05),
                   GestureDetector(
                     onTap: (){
+                      showLoader("Renvoie OTP enc cours...");
                       var data = {
                         "key": "create_user",
                         "action": "otp",
                         "phone": widget.phone
                       };
                       Provider.of<Auth>(context, listen: false).request(data: data).then((value){
-                        Toast.show('Code OTP envoyé', duration: Toast.lengthLong, gravity: Toast.bottom);
+                        disableLoader();
+                        setState(() {
+                          message = true;
+                        });
                       });
                     },
                     child: const Center(
@@ -99,7 +108,7 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                           ),
                           children: <TextSpan>[
                             TextSpan(
-                              text: 'RENVOYEZ',
+                              text: ' RENVOYEZ',
                               style: TextStyle(
                                 color: AppColors.primaryColor,
                               ),
