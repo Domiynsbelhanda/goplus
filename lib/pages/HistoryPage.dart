@@ -91,12 +91,12 @@ class _HistoryPage extends State<HistoryPage>{
                         children: snapshot.data!.docs.map((DocumentSnapshot document) {
                           Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
 
-                          CollectionReference clients = FirebaseFirestore.instance.collection('drivers');
-                          if((data['driver'] == token)){
+                          CollectionReference driverCollection = FirebaseFirestore.instance.collection('drivers');
+                          if((data['users'] == token)){
                             if(data['status'] != 'create'){
                               if(data['status'] == 'end'){
                                 return FutureBuilder(
-                                    future : clients.doc(data['users']).get(),
+                                    future : driverCollection.doc(data['driver']).get(),
                                     builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshotClient) {
 
                                       if(snapshotClient.hasError){
@@ -125,7 +125,7 @@ class _HistoryPage extends State<HistoryPage>{
                                         );
                                       }
 
-                                      Map<String, dynamic> clients = snapshotClient.data!.data() as Map<String, dynamic>;
+                                      Map<String, dynamic> driver = snapshotClient.data!.data() as Map<String, dynamic>;
 
                                       return Container(
                                         margin: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
@@ -154,7 +154,7 @@ class _HistoryPage extends State<HistoryPage>{
                                                   ),
 
                                                   Text(
-                                                    'Id du chauffeur : ${clients['firstn']} ${clients['midn']}',
+                                                    'Driver : ${driver['firstn']} ${driver['lastn']}',
                                                   ),
 
                                                   Text(
