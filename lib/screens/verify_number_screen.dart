@@ -16,7 +16,8 @@ import '../widget/otp_text_field.dart';
 class VerifyNumberScreen extends StatefulWidget {
   bool register;
   String phone;
-  VerifyNumberScreen({Key? key, required this.phone, required this.register}) : super(key: key);
+  String password;
+  VerifyNumberScreen({Key? key, required this.phone, required this.password, required this.register}) : super(key: key);
 
   @override
   _VerifyNumberState createState() => _VerifyNumberState();
@@ -88,9 +89,10 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                     onTap: (){
                       showLoader("Renvoie OTP enc cours...");
                       var data = {
-                        "key": "create_user",
-                        "action": "otp",
-                        "phone": widget.phone
+                        "key": "check_user",
+                        "action": "client",
+                        "phone": widget.phone,
+                        "password": widget.password
                       };
                       Provider.of<Auth>(context, listen: false).request(data: data).then((value){
                         disableLoader();

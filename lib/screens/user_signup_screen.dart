@@ -240,6 +240,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (_) => VerifyNumberScreen(
+                                                password: passwordController.text.trim(),
                                                   register: true,
                                                   phone: phoneController.text.trim())
                                           )
@@ -251,6 +252,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (_) => VerifyNumberScreen(
+                                            password: passwordController.text.trim(),
                                               register: true,
                                               phone: phoneController.text.trim())
                                       ),

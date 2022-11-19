@@ -163,6 +163,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => VerifyNumberScreen(
+                                        password: passwordController.text.trim(),
                                         register: true,
                                         phone: phoneController.text.trim())
                                 ),
