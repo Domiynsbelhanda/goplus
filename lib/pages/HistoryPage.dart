@@ -21,7 +21,7 @@ class HistoryPage extends KFDrawerContent {
 class _HistoryPage extends State<HistoryPage>{
 
   late Size size;
-  final Stream<QuerySnapshot> _coursesStream = FirebaseFirestore.instance.collection('courses').snapshots();
+  final Stream<QuerySnapshot> _coursesStream = FirebaseFirestore.instance.collection('courses').orderBy('uuid', descending: true).snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -150,11 +150,11 @@ class _HistoryPage extends State<HistoryPage>{
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'Course du ${DateFormat('d MMM y, à hh:mm a').format(DateTime.parse(data['start_time'].toDate().toString()))}',
+                                                    'Course du ${DateFormat('d MMM y, à HH:mm').format(DateTime.parse(data['start_time'].toDate().toString()))}',
                                                   ),
 
                                                   Text(
-                                                    'Driver : ${driver['firstn']} ${driver['lastn']}',
+                                                    'Chauffeur : ${driver['firstn']} ${driver['lastn']}',
                                                   ),
 
                                                   Text(
