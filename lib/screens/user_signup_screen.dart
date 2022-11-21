@@ -158,8 +158,13 @@ class _SignupScreenState extends State<UserSignupScreen> {
                             if (value!.isEmpty) {
                               return '${e['label']} invalide';
                             }
+
+                            if(e['obscure'] && value!.length < 6){
+                              return 'Mot de passe trop cours';
+                            }
                             return null;
                           },
+                          obscureText: e['obscure'],
                           cursorColor: AppColors.primaryColor,
                           maxLength: e['max'],
                           keyboardType: e['input'] ?? TextInputType.name,
@@ -200,13 +205,11 @@ class _SignupScreenState extends State<UserSignupScreen> {
                           if(formkey.currentState!.validate()){
                             showLoader("Inscription en cours\nVeuillez patienter...");
                             if(phoneController.text.trim().length != 9){
-                              Toast.show('Numéro de téléphone court', duration: Toast.lengthLong, gravity: Toast.bottom);
                               disableLoader();
                               return;
                             }
 
-                            if(passwordController.text.trim().length < 6){
-                              Toast.show('Mot de passe court', duration: Toast.lengthLong, gravity: Toast.bottom);
+                            if(passwordController.text.trim().length < 3){
                               disableLoader();
                               return;
                             }
