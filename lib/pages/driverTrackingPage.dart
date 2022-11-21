@@ -504,64 +504,21 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                         )
                                         :
                                             courses['status'] == 'confirm' ?
-                                            SizedBox(
-                                              width: size.width / 1,
-                                              height: size.width / 1.1,
-                                              child: Padding(
-                                                  padding: const EdgeInsets.all(16.0),
-                                                  child: Column(
-                                                      children : [
-                                                        Icon(
-                                                          Icons.drive_eta_rounded,
-                                                          color: Colors.green,
-                                                          size: size.width / 5,
-                                                        ),
-
-                                                        const SizedBox(height: 16.0),
-
-                                                        SizedBox(
-                                                          width : size.width / 1.5,
-                                                          child: const Text(
-                                                              'Votre course a été confirmée.',
-                                                              style: TextStyle(
-                                                                fontSize: 20,
-                                                                color: Colors.black,
-                                                              )
-                                                          ),
-                                                        ),
-
-                                                        const SizedBox(height: 16.0),
-
-                                                        TextButton(
-                                                          child: Container(
-                                                              padding: const EdgeInsets.all(16.0),
-                                                              decoration: BoxDecoration(
-                                                                  color: AppColors.primaryColor,
-                                                                  borderRadius: BorderRadius.circular(8.0)
-                                                              ),
-                                                              child: const Text(
-                                                                'SUIVRE LE CHAUFFEUR',
-                                                                style: TextStyle(
-                                                                    color: Colors.black
-                                                                ),
-                                                              )
-                                                          ),
-                                                          onPressed: (){
-                                                            Navigator.pushAndRemoveUntil(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (BuildContext context) =>
-                                                                      GoogleMapsPolylines(
-                                                                        uuid: widget.uuid
-                                                                      )
-                                                              ),
-                                                                (route)=> false
-                                                            );
-                                                          },
-                                                        )
-                                                      ]
-                                                  )
-                                              ),
+                                            AppButton(
+                                              onTap: (){
+                                                Navigator.pushAndRemoveUntil(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (BuildContext context) =>
+                                                            GoogleMapsPolylines(
+                                                                uuid: widget.uuid
+                                                            )
+                                                    ),
+                                                        (route)=> false
+                                                );
+                                              },
+                                                color: AppColors.primaryColor,
+                                              name: 'SUIVRE LE CHAUFFEUR',
                                             )
                                         :
                                         const SizedBox()
@@ -757,6 +714,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                     Provider.of<Auth>(context, listen: false).getToken().then((value){
                       Provider.of<Auth>(context, listen: false).getSid().then((val){
                         disableLoader();
+                        print('sid et token donne : ${value} and $val');
                         if(val != null){
                           setState(() {
                             ride = true;

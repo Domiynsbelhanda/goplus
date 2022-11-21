@@ -150,7 +150,8 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                             .then((value){
 
                           disableLoader();
-
+                          storage.write(key: 'sid', value: value['sid']);
+                          storage.write(key: 'token', value: data['phone']);
                           if(value['code'] == 'KO'){
                             notification_dialog(
                                 context,
@@ -162,8 +163,6 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                                 false
                             );
                           } else {
-                            storage.write(key: 'sid', value: value['sid']);
-                            storage.write(key: 'token', value: data['phone']);
                             notification_dialog(
                                 context,
                                 "Vous êtes connectés.",
