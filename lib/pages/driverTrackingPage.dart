@@ -105,7 +105,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   var coursesdata = coursesSnap.data! as DocumentSnapshot;
                   Map<String, dynamic> courses = coursesdata.data() as Map<String, dynamic>;
 
-                  if(courses['status'] == 'confirm'){
+                  if(courses['status'] == 'confirm' || courses['status'] == 'start' || courses['status'] == 'end'){
                     return GoogleMapsPolylines(
                         uuid: widget.uuid
                     );
