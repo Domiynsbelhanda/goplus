@@ -168,10 +168,10 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                         phone: phoneController.text.trim())
                                 ),
                               );
-                            } else if(value['code'] == 'KO'){
+                            } else if(value['code'] == '400'){
                                   notification_dialog(
                                       context,
-                                      "Votre compte n'exsite pas, creez en un.",
+                                      "${value['message']}",
                                       {'label': "S'INSCRIRE", "onTap": (){
                                         Navigator.push(
                                           context,
@@ -179,6 +179,18 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                               builder: (_) => const UserSignupScreen()
                                           ),
                                         );
+                                      }
+                                      },
+                                      20,
+                                      false);
+                                }
+
+                                else if(value['code'] == 'KO'){
+                                  notification_dialog(
+                                      context,
+                                      "${value['message']}",
+                                      {'label': "FERMER", "onTap": (){
+                                        Navigator.pop(context);
                                       }
                                       },
                                       20,
