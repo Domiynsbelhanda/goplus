@@ -189,8 +189,16 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                   notification_dialog(
                                       context,
                                       "${value['message']}",
-                                      {'label': "FERMER", "onTap": (){
-                                        Navigator.pop(context);
+                                      {'label': "SUIVANT", "onTap": (){
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) => VerifyNumberScreen(
+                                                  password: passwordController.text.trim(),
+                                                  register: false,
+                                                  phone: phoneController.text.trim())
+                                          ),
+                                        );
                                       }
                                       },
                                       20,
