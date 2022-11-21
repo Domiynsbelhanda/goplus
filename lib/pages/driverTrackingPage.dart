@@ -504,21 +504,53 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                         )
                                         :
                                             courses['status'] == 'confirm' ?
-                                            AppButton(
-                                              onTap: (){
-                                                Navigator.pushAndRemoveUntil(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (BuildContext context) =>
-                                                            GoogleMapsPolylines(
-                                                                uuid: widget.uuid
-                                                            )
+
+                                            SizedBox(
+                                              height: size.width / 2,
+                                              width: size.width / 1,
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(16.0),
+                                                child: Column(
+                                                  children: [
+                                                    Icon(
+                                                      Icons.close,
+                                                      color: Colors.red,
+                                                      size: size.width / 5,
                                                     ),
-                                                        (route)=> false
-                                                );
-                                              },
-                                                color: AppColors.primaryColor,
-                                              name: 'SUIVRE LE CHAUFFEUR',
+
+                                                    const SizedBox(height: 16.0),
+
+                                                    SizedBox(
+                                                      width : size.width / 1.5,
+                                                      child: const Text(
+                                                        'Pas de chauffeur disponible',
+                                                        style: TextStyle(
+                                                        fontSize: 20,
+                                                        color: Colors.black,
+                                                        )
+                                                      ),
+                                                    ),
+
+                                                    const SizedBox(height: 16.0),
+
+                                                    AppButton(
+                                                      name: 'SUIVRE LE CHAUFFEUR',
+                                                      onTap: (){
+                                                        Navigator.pushAndRemoveUntil(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (BuildContext context) =>
+                                                                    GoogleMapsPolylines(
+                                                                        uuid: widget.uuid
+                                                                    )
+                                                            ),
+                                                                (route)=> false
+                                                        );
+                                                      }, color: AppColors.primaryColor,
+                                                    )
+                                                  ],
+                                                )
+                                              )
                                             )
                                         :
                                         const SizedBox()
