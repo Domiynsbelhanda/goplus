@@ -506,29 +506,16 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                             courses['status'] == 'confirm' ?
 
                                             SizedBox(
-                                              height: size.width / 2,
+                                              height: size.width / 1.5,
                                               width: size.width / 1,
                                               child: Padding(
                                                 padding: const EdgeInsets.all(16.0),
                                                 child: Column(
                                                   children: [
                                                     Icon(
-                                                      Icons.close,
+                                                      Icons.drive_eta_outlined,
                                                       color: Colors.red,
                                                       size: size.width / 5,
-                                                    ),
-
-                                                    const SizedBox(height: 16.0),
-
-                                                    SizedBox(
-                                                      width : size.width / 1.5,
-                                                      child: const Text(
-                                                        'Pas de chauffeur disponible',
-                                                        style: TextStyle(
-                                                        fontSize: 20,
-                                                        color: Colors.black,
-                                                        )
-                                                      ),
                                                     ),
 
                                                     const SizedBox(height: 16.0),
