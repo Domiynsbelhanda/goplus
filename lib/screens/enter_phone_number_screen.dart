@@ -199,14 +199,25 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                               else if (value['code'] == 'NOK'){
                               notification_dialog(
                                   context,
-                                  "Coordonée incorrect",
+                                  "Adresse email ou mot de passe incorrect.",
                                   {'label': "FERMER", "onTap": (){
                                     Navigator.pop(context);
                                   }
                                   },
                                   20,
                                   false);
-                            } else if(value['code'] == 'NULL'){
+                            } else if (value['code'] == '500'){
+                                notification_dialog(
+                                context,
+                                "Connexion impossible au serveur OTP",
+                                {'label': "FERMER", "onTap": (){
+                                Navigator.pop(context);
+                                }
+                                },
+                                20,
+                                false);
+                              }
+                              else if(value['code'] == 'NULL'){
                               notification_dialog(
                                   context,
                                   'Une erreur c\'est produite. ${value['error']}',
