@@ -85,6 +85,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
   }
 
 
+
   @override
   Widget build(BuildContext context){
     size = MediaQuery.of(context).size;
@@ -103,6 +104,12 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                   var data = snapshot.data!.docs;
                   var coursesdata = coursesSnap.data! as DocumentSnapshot;
                   Map<String, dynamic> courses = coursesdata.data() as Map<String, dynamic>;
+
+                  if(courses['status'] == 'confirm'){
+                    return GoogleMapsPolylines(
+                        uuid: widget.uuid
+                    );
+                  }
 
                   markers.clear();
                   markers.add(
@@ -512,29 +519,22 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
                                                 padding: const EdgeInsets.all(16.0),
                                                 child: Column(
                                                   children: [
-                                                    Icon(
-                                                      Icons.drive_eta_outlined,
-                                                      color: Colors.red,
-                                                      size: size.width / 5,
-                                                    ),
 
-                                                    const SizedBox(height: 16.0),
-
-                                                    AppButton(
-                                                      name: 'SUIVRE LE CHAUFFEUR',
-                                                      onTap: (){
-                                                        Navigator.pushAndRemoveUntil(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder: (BuildContext context) =>
-                                                                    GoogleMapsPolylines(
-                                                                        uuid: widget.uuid
-                                                                    )
-                                                            ),
-                                                                (route)=> false
-                                                        );
-                                                      }, color: AppColors.primaryColor,
-                                                    )
+                                                    // AppButton(
+                                                    //   name: 'SUIVRE LE CHAUFFEUR',
+                                                    //   onTap: (){
+                                                    //     Navigator.pushAndRemoveUntil(
+                                                    //         context,
+                                                    //         MaterialPageRoute(
+                                                    //             builder: (BuildContext context) =>
+                                                    //                 GoogleMapsPolylines(
+                                                    //                     uuid: widget.uuid
+                                                    //                 )
+                                                    //         ),
+                                                    //             (route)=> false
+                                                    //     );
+                                                    //   }, color: AppColors.primaryColor,
+                                                    // )
                                                   ],
                                                 )
                                               )
