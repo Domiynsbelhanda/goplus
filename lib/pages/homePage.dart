@@ -132,7 +132,10 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
                     Map<String, dynamic> donn = yourCourses.data!.data() as Map<String, dynamic>;
                     if(donn['status'] == 'confirm' || donn['status'] == 'start'){
                       disableLoader();
-                      return GoogleMapsPolylines(uuid: donn['uuid']);
+                      return GoogleMapsPolylines(
+                        data: donn,
+                          uuid: donn['uuid']
+                      );
                     }
                   }
                   return FutureBuilder<bool>(
