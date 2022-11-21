@@ -205,7 +205,7 @@ class _HistoryPage extends State<HistoryPage>{
                                             'Course du ${DateFormat('d MMM y, à hh:mm a').format(DateTime.parse(data['start_time'].toDate().toString()))}',
                                           ),
 
-                                          Text(
+                                          const Text(
                                             'ok',
                                           )
                                         ],
