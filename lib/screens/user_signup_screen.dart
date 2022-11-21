@@ -248,15 +248,22 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                   } else if(value['code'] == 'KO'){
                                     FirebaseFirestore.instance.collection('clients')
                                         .doc(phoneController.text.trim()).set(data);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) => VerifyNumberScreen(
-                                            password: passwordController.text.trim(),
-                                              register: true,
-                                              phone: phoneController.text.trim())
-                                      ),
-                                    );
+                                    notification_dialog(
+                                        context,
+                                        '${value['message']}',
+                                        {'label': 'SUIVANT', "onTap": (){
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) => VerifyNumberScreen(
+                                                    password: passwordController.text.trim(),
+                                                    register: true,
+                                                    phone: phoneController.text.trim())
+                                            ),
+                                          );
+                                        }},
+                                        20,
+                                        false);
                                   } else {
                                     notification_dialog(
                                         context,
