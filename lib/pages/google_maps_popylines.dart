@@ -13,8 +13,9 @@ import '../widget/app_button.dart';
 
 class GoogleMapsPolylines extends StatefulWidget {
   String uuid;
+  Map<String, dynamic> data;
 
-  GoogleMapsPolylines({Key? key, required this.uuid}) : super(key: key);
+  GoogleMapsPolylines({Key? key, required this.uuid, required this.data}) : super(key: key);
 
   @override
   _Poly createState() => _Poly();
@@ -72,122 +73,94 @@ class _Poly extends State<GoogleMapsPolylines> {
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
-    ToastContext().init(context);
     readBitconMarkerPinner();
+
+    markers.clear();
+
+    markers.add(
+        Marker(
+          markerId: const MarkerId('Depart'),
+          position: LatLng(widget.data['depart_latitude'], widget.data['depart_longitude']),
+          infoWindow: const InfoWindow(
+            title: 'Depart',
+            snippet: 'Moi',
+          ),
+          icon: departBitmap!,
+        )
+    );
+
+    markers.add(
+        Marker(
+          markerId: const MarkerId('Arrivée'),
+          position: LatLng(widget.data['destination_latitude'], widget.data['destination_longitude']),
+          infoWindow: const InfoWindow(
+            title: 'Arrivée',
+            snippet: 'Moi',
+          ),
+          icon: arriveBitmap!,
+        )
+    );
+
+    markers.add(
+        Marker(
+          markerId: const MarkerId('Driver'),
+          position: LatLng(widget.data['driver_latitude'], widget.data['driver_longitude']),
+          infoWindow: const InfoWindow(
+            title: 'Driver',
+            snippet: 'Moi',
+          ),
+          icon: car_android!,
+        )
+    );
+
+    cam = CameraPosition(
+        target: LatLng(widget.data['driver_latitude'], widget.data['driver_longitude']),
+        zoom: zoom
+    );
+
+    addPoly(
+        LatLng(widget.data['driver_latitude'], widget.data['driver_longitude']),
+        LatLng(widget.data['depart_latitude'], widget.data['depart_longitude']),
+        LatLng(widget.data['destination_latitude'], widget.data['destination_longitude'])
+    );
     return Scaffold(
-      body: Container(
-        child : StreamBuilder(
-            stream: FirebaseFirestore.instance.collection("courses").doc(widget.uuid).snapshots(),
-            builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+      body: SizedBox(
+        child : Stack(
+          children: [
+            SafeArea(
+                child : GoogleMap(
+                  zoomGesturesEnabled: true,
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: true,
+                  initialCameraPosition: cam!,
+                  markers: markers,
+                  polylines: Set<Polyline>.of(polylines.values),
+                  compassEnabled: true,
+                  onMapCreated: (ctrl){
+                    ctrl.animateCamera(
+                        CameraUpdate.newCameraPosition(
+                            CameraPosition(
+                                target: LatLng(widget.data['driver_latitude'], widget.data['driver_longitude']),
+                                zoom: 17)
+                          //17 is new zoom level
+                        )
+                    );
+                  },
+                )
+            ),
 
-              if(!snapshot.hasData){
-                return Center(
-                  child: SizedBox(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
-                        CircularProgressIndicator(
-                          color: AppColors.primaryColor,
-                        ),
-
-                        SizedBox(height: 16.0,),
-
-                        Text('Chargement en cours...'),
-                      ],
-                    ),
-                  ),
-                );
-              }
-
-              Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
-
-              markers.clear();
-
-              markers.add(
-                  Marker(
-                    markerId: const MarkerId('Depart'),
-                    position: LatLng(data['depart_latitude'], data['depart_longitude']),
-                    infoWindow: const InfoWindow(
-                      title: 'Depart',
-                      snippet: 'Moi',
-                    ),
-                    icon: departBitmap!,
-                  )
-              );
-
-              markers.add(
-                  Marker(
-                    markerId: const MarkerId('Arrivée'),
-                    position: LatLng(data['destination_latitude'], data['destination_longitude']),
-                    infoWindow: const InfoWindow(
-                      title: 'Arrivée',
-                      snippet: 'Moi',
-                    ),
-                    icon: arriveBitmap!,
-                  )
-              );
-
-              markers.add(
-                  Marker(
-                    markerId: const MarkerId('Driver'),
-                    position: LatLng(data['driver_latitude'], data['driver_longitude']),
-                    infoWindow: const InfoWindow(
-                      title: 'Driver',
-                      snippet: 'Moi',
-                    ),
-                    icon: car_android!,
-                  )
-              );
-
-              cam = CameraPosition(
-                  target: LatLng(data['driver_latitude'], data['driver_longitude']),
-                  zoom: zoom
-              );
-
-              addPoly(
-                  LatLng(data['driver_latitude'], data['driver_longitude']),
-                  LatLng(data['depart_latitude'], data['depart_longitude']),
-                  LatLng(data['destination_latitude'], data['destination_longitude'])
-              );
-
-              return Stack(
-                children: [
-                  SafeArea(
-                      child : GoogleMap(
-                        zoomGesturesEnabled: true,
-                        myLocationEnabled: true,
-                        myLocationButtonEnabled: true,
-                        initialCameraPosition: cam!,
-                        markers: markers,
-                        polylines: Set<Polyline>.of(polylines.values),
-                        compassEnabled: true,
-                        onMapCreated: (ctrl){
-                          ctrl.animateCamera(
-                              CameraUpdate.newCameraPosition(
-                                  CameraPosition(
-                                      target: LatLng(data['driver_latitude'], data['driver_longitude']),
-                                      zoom: 17)
-                                //17 is new zoom level
-                              )
-                          );
-                        },
-                      )
-                  ),
-
-                  Positioned(
-                      bottom: 0,
-                      right: 16,
-                      child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: data['status'] == 'end'
-                              ? showCourse(data)
-                              : showDriver(data)
-                      )
-                  ),
-                ],
-              );
-            })
+            Positioned(
+                bottom: 0,
+                right: 16,
+                child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: widget.data['status'] == 'end'
+                        ? showCourse(widget.data)
+                        : showDriver(widget.data)
+                )
+            ),
+          ],
+        )
       ),
     );
   }

@@ -107,6 +107,7 @@ class _DriverTrackingPage extends State<DriverTrackingPage>{
 
                   if(courses['status'] == 'confirm' || courses['status'] == 'start' || courses['status'] == 'end'){
                     return GoogleMapsPolylines(
+                        data : courses,
                         uuid: widget.uuid
                     );
                   }
