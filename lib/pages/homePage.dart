@@ -130,17 +130,21 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
                 builder: (context, AsyncSnapshot<DocumentSnapshot> yourCourses) {
                   if(yourCourses.hasData){
                     Map<String, dynamic> donn = yourCourses.data!.data() as Map<String, dynamic>;
-                    if(donn['status'] == 'confirm' || donn['status'] == 'start'){
+                    if(donn['uuid'] != null){
                       disableLoader();
                       return StreamBuilder(
                         stream: FirebaseFirestore.instance.collection("courses").doc(donn['uuid']).snapshots(),
                         builder: (context, AsyncSnapshot<DocumentSnapshot> coursesSnap){
                           if(coursesSnap.hasData){
                             Map<String, dynamic> dataCourses = coursesSnap.data!.data() as Map<String, dynamic>;
-                            return GoogleMapsPolylines(
-                                data: dataCourses,
-                                uuid: donn['uuid']
-                            );
+                            if(dataCourses['status']=='confirm' || dataCourses['status']=='start' || dataCourses['status']=='end'){
+                              return GoogleMapsPolylines(
+                                  data: dataCourses,
+                                  uuid: donn['uuid']
+                              );
+                            }
+
+                            return BodyContent();
                           }
                           return Center(
                             child: SizedBox(
@@ -180,65 +184,7 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
                                           if(location.hasData){
                                             disableLoader();
                                             position = LatLng(location.data!.latitude, location.data!.longitude);
-                                            return KFDrawer(
-                                               borderRadius: 16.0,
-                                               shadowBorderRadius: 16.0,
-                                               menuPadding: const EdgeInsets.all(8.0),
-                                               scrollable: true,
-                                              controller: _drawerController,
-                                              header: Align(
-                                                alignment: Alignment.centerLeft,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.only(bottom: 64.0),
-                                                  child: Container(
-                                                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                                                    width: MediaQuery.of(context).size.width * 0.6,
-                                                    child: Image.asset(
-                                                      'assets/icon/white-text.png',
-                                                      alignment: Alignment.centerLeft,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              footer: KFDrawerItem(
-                                                text: const Padding(
-                                                  padding: EdgeInsets.only(bottom: 16.0),
-                                                  child: Text(
-                                                      'Deconnexion',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 24.0
-                                                      )
-                                                  ),
-                                                ),
-                                                icon: const Padding(
-                                                  padding: EdgeInsets.only(bottom : 16.0, left: 8.0),
-                                                  child: Icon(
-                                                    Icons.logout,
-                                                    color: Colors.white,
-                                                    size: 24.0,
-                                                  ),
-                                                ),
-                                                onPressed: () {
-                                                  logOut();
-                                                  Navigator.pushAndRemoveUntil(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (BuildContext context) => const MyApp()
-                                                      ),
-                                                          (Route<dynamic> route) => false
-                                                  );
-                                                },
-                                              ),
-                                              decoration: const BoxDecoration(
-                                                gradient: LinearGradient(
-                                                  begin: Alignment.topLeft,
-                                                  end: Alignment.bottomRight,
-                                                  colors: [Colors.orange, AppColors.primaryColor],
-                                                  tileMode: TileMode.repeated,
-                                                ),
-                                              ),
-                                            );
+                                            return BodyContent();
                                           } else {
                                             return Center(
                                               child: SizedBox(
@@ -317,6 +263,68 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
               Text('Veuillez patienter')
           );
         }
+      ),
+    );
+  }
+
+  Widget BodyContent(){
+    return KFDrawer(
+      borderRadius: 16.0,
+      shadowBorderRadius: 16.0,
+      menuPadding: const EdgeInsets.all(8.0),
+      scrollable: true,
+      controller: _drawerController,
+      header: Align(
+        alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 64.0),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            width: MediaQuery.of(context).size.width * 0.6,
+            child: Image.asset(
+              'assets/icon/white-text.png',
+              alignment: Alignment.centerLeft,
+            ),
+          ),
+        ),
+      ),
+      footer: KFDrawerItem(
+        text: const Padding(
+          padding: EdgeInsets.only(bottom: 16.0),
+          child: Text(
+              'Deconnexion',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24.0
+              )
+          ),
+        ),
+        icon: const Padding(
+          padding: EdgeInsets.only(bottom : 16.0, left: 8.0),
+          child: Icon(
+            Icons.logout,
+            color: Colors.white,
+            size: 24.0,
+          ),
+        ),
+        onPressed: () {
+          logOut();
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => const MyApp()
+              ),
+                  (Route<dynamic> route) => false
+          );
+        },
+      ),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Colors.orange, AppColors.primaryColor],
+          tileMode: TileMode.repeated,
+        ),
       ),
     );
   }

@@ -258,12 +258,10 @@ class _Poly extends State<GoogleMapsPolylines> {
               color: AppColors.primaryColor,
               name: 'FERMER ',
               onTap: (){
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => HomePage()
-                  ),
-                    (route)=>false
+                FirebaseFirestore.instance.collection('clients').doc(token!).update(
+                  {
+                    'uuid': null
+                  }
                 );
               }
             ),
