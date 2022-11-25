@@ -69,32 +69,56 @@ class _MyApp extends State<MyApp>{
         nextScreen: FutureBuilder(
           future: Provider.of<Auth>(context,listen: false).getToken(),
           builder: (context, snapshot){
-            return Stack(
-              children: [
-                !snapshot.hasData ?
-                    const PhoneNumberScreen()
-                    : HomePage(),
-
-                Positioned(
-                  bottom: 0.0,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 0.0),
-                    child: FutureBuilder<bool>(
-                        future: InternetConnectionChecker().hasConnection,
-                        builder: (context, connected) {
-                          bool visible = false;
-                          if(connected.hasData){
-                            visible = !(connected.data!);
+            return FutureBuilder(
+              future: Provider.of<Auth>(context,listen: false).getSid(),
+              builder: (context, sidSnap) {
+                if(sidSnap.hasData){
+                  return FutureBuilder(
+                      future: Provider.of<Auth>(context, listen: false).request(data: {
+                        'key': 'check_user',
+                        'action': 'sid',
+                        'sid': sidSnap.data,
+                        'level': '3'
+                      }),
+                      builder: (context, sidSnapResponse) {
+                        if(sidSnapResponse.hasData){
+                          Map datas = sidSnapResponse.data! as Map;
+                          if(datas['status'] == 'NOK'){
+                            return const PhoneNumberScreen();
                           }
-                          return Visibility(
-                            visible: visible,
-                            child: const InternetNotAvailable(),
-                          );
                         }
-                    ),
-                  ),
-                ),
-              ],
+                        return Stack(
+                          children: [
+                            !snapshot.hasData ?
+                            const PhoneNumberScreen()
+                                : HomePage(),
+
+                            Positioned(
+                              bottom: 0.0,
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 0.0),
+                                child: FutureBuilder<bool>(
+                                    future: InternetConnectionChecker().hasConnection,
+                                    builder: (context, connected) {
+                                      bool visible = false;
+                                      if(connected.hasData){
+                                        visible = !(connected.data!);
+                                      }
+                                      return Visibility(
+                                        visible: visible,
+                                        child: const InternetNotAvailable(),
+                                      );
+                                    }
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+                  );
+                }
+                return const PhoneNumberScreen();
+              }
             );
           }
         ),

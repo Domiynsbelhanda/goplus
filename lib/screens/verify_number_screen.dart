@@ -163,22 +163,13 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                                 false
                             );
                           } else {
-                            notification_dialog(
+                            Navigator.pushAndRemoveUntil(
                                 context,
-                                "Vous êtes connectés.",
-                                {'label': 'SUIVANT', "onTap": (){
-                                  Navigator.pop(context);
-                                  Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            HomePage()
-                                    ),
-                                          (route)=>false
-                                  );
-                                }},
-                                20,
-                                false
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        HomePage()
+                                ),
+                                    (route)=>false
                             );
                           }
                         });
