@@ -83,7 +83,7 @@ class _MyApp extends State<MyApp>{
                       builder: (context, sidSnapResponse) {
                         if(sidSnapResponse.hasData){
                           Map datas = sidSnapResponse.data! as Map;
-                          if(datas['status'] == 'NOK'){
+                          if(!(datas['status'] == 'NOK')){
                             return const PhoneNumberScreen();
                           }
                         }

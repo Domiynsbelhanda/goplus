@@ -5,6 +5,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
 
+import '../main.dart';
 import '../services/auth.dart';
 import '../utils/app_colors.dart';
 import '../utils/global_variable.dart';
@@ -167,7 +168,7 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        HomePage()
+                                        const MyApp()
                                 ),
                                     (route)=>false
                             );
