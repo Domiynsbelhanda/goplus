@@ -132,9 +132,34 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
                     Map<String, dynamic> donn = yourCourses.data!.data() as Map<String, dynamic>;
                     if(donn['status'] == 'confirm' || donn['status'] == 'start'){
                       disableLoader();
-                      return GoogleMapsPolylines(
-                        data: donn,
-                          uuid: donn['uuid']
+                      return StreamBuilder(
+                        stream: FirebaseFirestore.instance.collection("courses").doc(donn['uuid']).snapshots(),
+                        builder: (context, AsyncSnapshot<DocumentSnapshot> coursesSnap){
+                          if(coursesSnap.hasData){
+                            Map<String, dynamic> dataCourses = coursesSnap.data!.data() as Map<String, dynamic>;
+                            return GoogleMapsPolylines(
+                                data: dataCourses,
+                                uuid: donn['uuid']
+                            );
+                          }
+                          return Center(
+                            child: SizedBox(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const [
+                                  CircularProgressIndicator(
+                                    color: AppColors.primaryColor,
+                                  ),
+
+                                  SizedBox(height: 16.0,),
+
+                                  Text('Chargement...'),
+                                ],
+                              ),
+                            ),
+                          );
+                        }
                       );
                     }
                   }
