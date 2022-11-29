@@ -75,7 +75,7 @@ class _MyApp extends State<MyApp>{
                 if(sidSnap.hasData){
                   return FutureBuilder(
                       future: Provider.of<Auth>(context, listen: false).request(data: {
-                        'key': 'check_user',
+                        'key': 'sid',
                         'action': 'sid',
                         'sid': sidSnap.data,
                         'level': '3'
@@ -83,7 +83,7 @@ class _MyApp extends State<MyApp>{
                       builder: (context, sidSnapResponse) {
                         if(sidSnapResponse.hasData){
                           Map datas = sidSnapResponse.data! as Map;
-                          if(!(datas['status'] == 'NOK')){
+                          if((datas['status'] == 'NOK')){
                             return const PhoneNumberScreen();
                           }
                         }
