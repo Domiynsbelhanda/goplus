@@ -1,150 +1,33 @@
 {
   "project_info": {
-    "project_number": "960527024682",
-    "firebase_url": "https://taxigo-e3fcc-default-rtdb.firebaseio.com",
-    "project_id": "taxigo-e3fcc",
-    "storage_bucket": "taxigo-e3fcc.appspot.com"
+    "project_number": "89552948344",
+    "project_id": "go-plus-22",
+    "storage_bucket": "go-plus-22.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:960527024682:android:92f3f474b596bc96f0b953",
-        "android_client_info": {
-          "package_name": "cd.belhanda.taxi"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "960527024682-l9svui6rdqqaj77is6skithvvpsi9b6c.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDMU4bZSvasDrSFyf5WNrLsxU1vqJ5pMsI"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "960527024682-l9svui6rdqqaj77is6skithvvpsi9b6c.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:960527024682:android:82cfe9290b3a0997f0b953",
-        "android_client_info": {
-          "package_name": "cd.belhanda.taxigo_driver"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "960527024682-l9svui6rdqqaj77is6skithvvpsi9b6c.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDMU4bZSvasDrSFyf5WNrLsxU1vqJ5pMsI"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "960527024682-l9svui6rdqqaj77is6skithvvpsi9b6c.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:960527024682:android:ca754a50d6fc02d2f0b953",
-        "android_client_info": {
-          "package_name": "cd.belhanda.taxigo_user_app"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "960527024682-l9svui6rdqqaj77is6skithvvpsi9b6c.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDMU4bZSvasDrSFyf5WNrLsxU1vqJ5pMsI"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "960527024682-l9svui6rdqqaj77is6skithvvpsi9b6c.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:960527024682:android:b509cf1d1fba0894f0b953",
+        "mobilesdk_app_id": "1:89552948344:android:7abea1dc29cb961ebb718d",
         "android_client_info": {
           "package_name": "com.gofly.goplus"
         }
       },
       "oauth_client": [
         {
-          "client_id": "960527024682-l9svui6rdqqaj77is6skithvvpsi9b6c.apps.googleusercontent.com",
+          "client_id": "89552948344-igu1851pjti8pc7of2cd4s0eee3977dv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDMU4bZSvasDrSFyf5WNrLsxU1vqJ5pMsI"
+          "current_key": "AIzaSyCwfLR_u5y7WMqGYHtEh_9d7Dl-JeHxzWk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "960527024682-l9svui6rdqqaj77is6skithvvpsi9b6c.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:960527024682:android:b1a2892c4a05668ff0b953",
-        "android_client_info": {
-          "package_name": "com.gofly.goplus_driver"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "960527024682-l9svui6rdqqaj77is6skithvvpsi9b6c.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDMU4bZSvasDrSFyf5WNrLsxU1vqJ5pMsI"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "960527024682-l9svui6rdqqaj77is6skithvvpsi9b6c.apps.googleusercontent.com",
+              "client_id": "89552948344-igu1851pjti8pc7of2cd4s0eee3977dv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
