@@ -143,7 +143,6 @@ class _HomePage extends State<HomePage> with TickerProviderStateMixin{
                                   uuid: donn['uuid']
                               );
                             }
-
                             return BodyContent();
                           }
                           return Center(
