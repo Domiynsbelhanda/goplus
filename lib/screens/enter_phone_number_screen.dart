@@ -156,18 +156,16 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                               .request(data: data).then((value){
 
                                 disableLoader();
-
                                 if(value['code'] == 'OTP'){
-
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => VerifyNumberScreen(
-                                        password: passwordController.text.trim(),
-                                        register: true,
-                                        phone: phoneController.text.trim())
-                                ),
-                              );
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => VerifyNumberScreen(
+                                            password: passwordController.text.trim(),
+                                            register: true,
+                                            phone: phoneController.text.trim())
+                                    ),
+                                  );
                             } else if(value['code'] == '400'){
                                   notification_dialog(
                                       context,
