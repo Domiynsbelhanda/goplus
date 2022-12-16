@@ -13,6 +13,7 @@ import '../widget/NetworkStatus.dart';
 import '../widget/app_button.dart';
 import '../widget/notification_dialog.dart';
 import '../widget/otp_text_field.dart';
+import 'enter_phone_number_screen.dart';
 
 class VerifyNumberScreen extends StatefulWidget {
   bool register;
@@ -177,6 +178,31 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                       }
                     },
                   ),
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 24.0, top: 16),
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                const PhoneNumberScreen()
+                            ),
+                              (route)=>false
+                        );
+                      },
+                      child: const Text(
+                        'Impossible de continuer? Fermer.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+
                   SizedBox(height: size.height * 0.2),
                 ],
               ),

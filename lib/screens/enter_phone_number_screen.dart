@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:goplus/screens/user_signup_screen.dart';
 import 'package:provider/provider.dart';
@@ -154,7 +155,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                           };
                           Provider.of<Auth>(context, listen: false)
                               .request(data: data).then((value){
-
                                 disableLoader();
                                 if(value['code'] == 'OTP'){
                                   Navigator.push(
@@ -235,7 +235,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                             } else if(value['code'] == 'ERROR'){
                               notification_dialog(
                                   context,
-                                  'Une erreur c\'est produite. ${value['error']}',
+                                  'Une erreur c\'est produite this. ${value['error']}',
                                   {'label': 'FERMER', "onTap": (){
                                     Navigator.pop(context);
                                   }},
