@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:goplus/screens/enter_phone_number_screen.dart';
 import 'package:goplus/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:chips_choice/chips_choice.dart';
@@ -159,7 +160,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                               return '${e['label']} invalide';
                             }
 
-                            if(e['obscure'] && value!.length < 6){
+                            if(e['obscure'] && value.length < 6){
                               return 'Mot de passe trop cours';
                             }
                             return null;
@@ -270,7 +271,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                   } else {
                                     notification_dialog(
                                         context,
-                                        '$data ${value['error']}',
+                                        '${value['error']}',
                                         {'label': 'FERMER', "onTap": (){
                                           Navigator.pop(context);
                                         }},
@@ -283,7 +284,33 @@ class _SignupScreenState extends State<UserSignupScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 15),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 24.0, top: 16),
+                child: GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                            const PhoneNumberScreen()
+                        )
+                    );
+                  },
+                  child: const Text(
+                    'Vous avez un compte? Connectez-vous.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+
+              const SizedBox(
+                height: 16.0,
+              )
             ],
           ),
         ),

@@ -182,7 +182,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                       20,
                                       false);
                                 }
-
                                 else if(value['code'] == 'KO'){
                                   notification_dialog(
                                       context,
@@ -200,7 +199,8 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                       }
                                       },
                                       20,
-                                      false);
+                                      false
+                                  );
                                 }
                               else if (value['code'] == 'NOK'){
                               notification_dialog(
