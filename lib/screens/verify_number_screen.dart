@@ -164,7 +164,18 @@ class _VerifyNumberState extends State<VerifyNumberScreen> {
                                 20,
                                 false
                             );
-                          } else {
+                          } else if(value['code'] == 'NOK'){
+                            notification_dialog(
+                                context,
+                                'Erreur OTP, veuillez recommencer.',
+                                {'label': 'FERMER', "onTap": (){
+                                  Navigator.pop(context);
+                                }},
+                                20,
+                                false
+                            );
+                          }
+                          else {
                             Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
