@@ -269,7 +269,7 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                         20,
                                         false);
                                   }
-                                  else if(value['status'].toString() == 'NOK'){
+                                  else if(value['code'].toString() == 'NOK'){
                                     notification_dialog(
                                         context,
                                         '${value['message']}',

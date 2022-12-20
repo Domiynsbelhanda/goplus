@@ -156,7 +156,20 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                           Provider.of<Auth>(context, listen: false)
                               .request(data: data).then((value){
                                 disableLoader();
-                                if(value['code'] == 'OTP'){
+                                if(value['code'] == 'OK'){
+                                  storage.write(key: 'sid', value: value['sid']);
+                                  storage.write(key: 'token', value: data['phone']);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => VerifyNumberScreen(
+                                            password: passwordController.text.trim(),
+                                            register: true,
+                                            phone: phoneController.text.trim())
+                                    ),
+                                  );
+                                }
+                                else if(value['code'] == 'OTP'){
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
