@@ -94,7 +94,6 @@ class _HistoryPage extends State<HistoryPage>{
                           CollectionReference driverCollection = FirebaseFirestore.instance.collection('drivers');
                           if((data['users'] == token)){
                             if(data['status'] != 'create'){
-                              if(data['status'] == 'end'){
                                 return FutureBuilder(
                                     future : driverCollection.doc(data['driver']).get(),
                                     builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshotClient) {
@@ -127,103 +126,121 @@ class _HistoryPage extends State<HistoryPage>{
 
                                       Map<String, dynamic> driver = snapshotClient.data!.data() as Map<String, dynamic>;
 
-                                      return Container(
-                                        margin: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(8.0),
-                                          color: Colors.white,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.grey.withOpacity(0.5),
-                                              spreadRadius: 1,
-                                              blurRadius: 1,
-                                              offset: const Offset(0, 1), // changes position of shadow
-                                            ),
-                                          ],
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Course du ${DateFormat('d MMM y, à HH:mm').format(DateTime.parse(data['start_time'].toDate().toString()))}',
-                                                  ),
-
-                                                  Text(
-                                                    'Chauffeur : ${driver['firstn']} ${driver['lastn']}',
-                                                  ),
-
-                                                  Text(
-                                                    'Prix : \$ ${data['prix']}',
-                                                  )
-                                                ],
+                                      if(data['status'] == 'end'){
+                                        return Container(
+                                          margin: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(8.0),
+                                            color: Colors.grey,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.grey.withOpacity(0.5),
+                                                spreadRadius: 1,
+                                                blurRadius: 1,
+                                                offset: const Offset(0, 1), // changes position of shadow
                                               ),
-                                              // ListTile(
-                                              //   title: Text(data['users']),
-                                              //   subtitle: Text(data['status']),
-                                              // ),
-
-                                              const Icon(
-                                                Icons.verified_outlined,
-                                                color: Colors.green,
-                                                size: 24.0,
-                                              )
                                             ],
                                           ),
-                                        ),
-                                      );
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Course du ${DateFormat('d MMM y, à HH:mm').format(DateTime.parse(data['start_time'].toDate().toString()))}',
+                                                      style: const TextStyle(
+                                                          color: Colors.black
+                                                      ),
+                                                    ),
+
+                                                    Text(
+                                                      'Chauffeur : ${driver['firstn']} ${driver['lastn']}',
+                                                      style: const TextStyle(
+                                                          color: Colors.black
+                                                      ),
+                                                    ),
+
+                                                    Text(
+                                                      'Prix : \$ ${data['prix']}',
+                                                      style: const TextStyle(
+                                                          color: Colors.black
+                                                      ),
+                                                    ),
+
+                                                    const Text(
+                                                      'Status : Course terminée',
+                                                      style: TextStyle(
+                                                          color: Colors.black
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+
+                                                const Icon(
+                                                  Icons.verified_outlined,
+                                                  color: Colors.green,
+                                                  size: 48.0,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      } else {
+                                        return Container(
+                                          margin: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(8.0),
+                                            color: Colors.white,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.grey.withOpacity(0.5),
+                                                spreadRadius: 1,
+                                                blurRadius: 1,
+                                                offset: const Offset(0, 1), // changes position of shadow
+                                              ),
+                                            ],
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Course du ${DateFormat('d MMM y, à HH:mm').format(DateTime.parse(data['start_time'].toDate().toString()))}',
+                                                    ),
+
+                                                    Text(
+                                                      'Chauffeur : ${driver['firstn']} ${driver['lastn']}',
+                                                    ),
+
+                                                    Text(
+                                                      'Prix : \$ ${data['prix']}',
+                                                    )
+                                                  ],
+                                                ),
+                                                // ListTile(
+                                                //   title: Text(data['users']),
+                                                //   subtitle: Text(data['status']),
+                                                // ),
+
+                                                const Icon(
+                                                  Icons.verified_outlined,
+                                                  color: Colors.green,
+                                                  size: 24.0,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      }
                                     }
                                 );
-                              }
-                              return const SizedBox();
-                              return Container(
-                                margin: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 1,
-                                      blurRadius: 1,
-                                      offset: const Offset(0, 1), // changes position of shadow
-                                    ),
-                                  ],
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Text(
-                                            'Course du ${DateFormat('d MMM y, à hh:mm a').format(DateTime.parse(data['start_time'].toDate().toString()))}',
-                                          ),
-
-                                          const Text(
-                                            'ok',
-                                          )
-                                        ],
-                                      ),
-                                      // ListTile(
-                                      //   title: Text(data['users']),
-                                      //   subtitle: Text(data['status']),
-                                      // ),
-
-                                      const Icon(
-                                        Icons.error_outline_outlined,
-                                        color: Colors.red,
-                                        size: 24.0,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
                             } else {
                               return const SizedBox();
                             }
