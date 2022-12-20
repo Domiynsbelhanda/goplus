@@ -268,7 +268,18 @@ class _SignupScreenState extends State<UserSignupScreen> {
                                         }},
                                         20,
                                         false);
-                                  } else {
+                                  }
+                                  else if(value['status'].toString() == 'NOK'){
+                                    notification_dialog(
+                                        context,
+                                        '${value['message']}',
+                                        {'label': 'FERMER', "onTap": (){
+                                          Navigator.pop(context);
+                                        }},
+                                        20,
+                                        false);
+                                  }
+                                  else {
                                     notification_dialog(
                                         context,
                                         '${value['error']}',
