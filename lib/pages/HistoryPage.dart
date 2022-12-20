@@ -6,6 +6,8 @@ import 'package:toast/toast.dart';
 
 import '../utils/app_colors.dart';
 import '../utils/global_variable.dart';
+import '../widget/app_button.dart';
+import 'google_maps_popylines.dart';
 
 class HistoryPage extends KFDrawerContent {
   HistoryPage({
@@ -193,7 +195,7 @@ class _HistoryPage extends State<HistoryPage>{
                                           margin: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(8.0),
-                                            color: Colors.white,
+                                            color: data['status'] == 'confirm' ? Colors.white : Colors.yellow,
                                             boxShadow: [
                                               BoxShadow(
                                                 color: Colors.grey.withOpacity(0.5),
@@ -221,19 +223,36 @@ class _HistoryPage extends State<HistoryPage>{
 
                                                     Text(
                                                       'Prix : \$ ${data['prix']}',
-                                                    )
+                                                    ),
+
+                                                    Text(
+                                                      'Status : ${data['status'] == 'confirm' ? 'Course confirmée' : 'Course demarée.'}',
+                                                    ),
+
+                                                    const SizedBox(
+                                                      height: 8.0,
+                                                    ),
+
+                                                    SizedBox(
+                                                      width: size.width / 1.4,
+                                                      child: AppButton(
+                                                        color: data['status'] == 'confirm' ?
+                                                        AppColors.primaryColor : Colors.grey,
+                                                        name: data['status'] == 'confirm' ? 'VOIR' : 'VOIR',
+                                                        onTap: ()=>Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (BuildContext context)
+                                                                => GoogleMapsPolylines(
+                                                                  data: data,
+                                                                    uuid: data['uuid']
+                                                                )
+                                                            )
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ],
                                                 ),
-                                                // ListTile(
-                                                //   title: Text(data['users']),
-                                                //   subtitle: Text(data['status']),
-                                                // ),
-
-                                                const Icon(
-                                                  Icons.verified_outlined,
-                                                  color: Colors.green,
-                                                  size: 24.0,
-                                                )
                                               ],
                                             ),
                                           ),
