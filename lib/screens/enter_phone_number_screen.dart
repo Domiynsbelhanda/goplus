@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:goplus/screens/user_signup_screen.dart';
 import 'package:provider/provider.dart';
+import '../main.dart';
 import '../services/auth.dart';
 import '../utils/global_variable.dart';
 import 'verify_number_screen.dart';
@@ -159,14 +160,13 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                 if(value['code'] == 'OK'){
                                   storage.write(key: 'sid', value: value['sid']);
                                   storage.write(key: 'token', value: data['phone']);
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => VerifyNumberScreen(
-                                            password: passwordController.text.trim(),
-                                            register: true,
-                                            phone: phoneController.text.trim())
-                                    ),
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                          const MyApp()
+                                      ),
+                                          (route)=>false
                                   );
                                 }
                                 else if(value['code'] == 'OTP'){
