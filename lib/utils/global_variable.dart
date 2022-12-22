@@ -45,13 +45,16 @@ readBitconMarkerPinner() async {
   );
 }
 
-
-Future<BitmapDescriptor> bitmap(String url, int width) async{
+Future<BitmapDescriptor> bitmap(String url, int width) async {
   ByteData data = await rootBundle.load(url);
-  ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+  ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+      targetWidth: width);
   ui.FrameInfo fi = await codec.getNextFrame();
 
-  final Uint8List markerIcon = (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+  final Uint8List markerIcon =
+      (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+          .buffer
+          .asUint8List();
 
   return BitmapDescriptor.fromBytes(markerIcon);
 }
@@ -65,7 +68,7 @@ double coordinateDistance(lat1, lon1, lat2, lon2) {
   return 12742 * asin(sqrt(a));
 }
 
-String distanceDeuxPoint(polylineCoordinates){
+String distanceDeuxPoint(polylineCoordinates) {
   double totalDistance = 0.0;
   for (int i = 0; i < polylineCoordinates.length - 1; i++) {
     totalDistance += coordinateDistance(
@@ -75,29 +78,29 @@ String distanceDeuxPoint(polylineCoordinates){
       polylineCoordinates[i + 1].longitude,
     );
   }
-  if(totalDistance < 1){
+  if (totalDistance < 1) {
     return '${(totalDistance * 1000).toStringAsFixed(2)} mètre (s)';
   }
   return '${totalDistance.toStringAsFixed(2)} Km';
 }
 
-double distance(){
+double distance() {
   return 0.0;
 }
 
-void logOut() async{
+void logOut() async {
   await storage.delete(key: 'token');
   await storage.delete(key: 'sid');
 }
 
-void showLoader(String message)async{
+void showLoader(String message) async {
   await EasyLoading.show(
     status: '$message',
     maskType: EasyLoadingMaskType.black,
   );
 }
 
-void disableLoader()async{
+void disableLoader() async {
   await EasyLoading.dismiss();
 }
 
