@@ -18,7 +18,6 @@ class PhoneNumberScreen extends StatefulWidget {
 }
 
 class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
-
   late Size size;
   final formkey = GlobalKey<FormState>();
   TextEditingController phoneController = TextEditingController();
@@ -42,25 +41,17 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: size.height * 0.08),
-
               const Text(
                 'CONNEXION',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 26.0
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26.0),
               ),
-
-              SizedBox(height: size.height * 0.09,),
-
+              SizedBox(
+                height: size.height * 0.09,
+              ),
               const Text(
                 'Entrez votre numéro de téléphone',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24.0
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
               ),
-
               SizedBox(height: size.height * 0.02),
               SizedBox(height: size.height * 0.05),
               const Text(
@@ -71,7 +62,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                 ),
               ),
               SizedBox(height: size.height * 0.02),
-
               Form(
                 key: formkey,
                 child: Column(
@@ -85,8 +75,8 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                           margin: const EdgeInsets.only(right: 15),
                           decoration: BoxDecoration(
                               border: Border.all(
-                                color: AppColors.primaryColor,
-                              )),
+                            color: AppColors.primaryColor,
+                          )),
                           child: const Text(
                             "+243",
                             style: TextStyle(
@@ -94,16 +84,16 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                             ),
                           ),
                         ),
-
-                        const SizedBox(width: 10.0,),
-
+                        const SizedBox(
+                          width: 10.0,
+                        ),
                         Expanded(
                           child: TextFormField(
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Numéro de téléphone incorrect';
                               }
-                              if(value.length != 9){
+                              if (value.length != 9) {
                                 return 'Numéro de téléphone incorrect, vérifiez.';
                               }
                               return null;
@@ -120,9 +110,9 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                         ),
                       ],
                     ),
-
-                    const SizedBox(height: 16.0,),
-
+                    const SizedBox(
+                      height: 16.0,
+                    ),
                     SizedBox(
                       width: size.width,
                       child: TextFormField(
@@ -140,14 +130,14 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                             contentPadding: EdgeInsets.all(15.0)),
                       ),
                     ),
-
                     SizedBox(height: size.height * 0.08),
                     AppButton(
                       color: AppColors.primaryColor,
                       name: 'CONNEXION',
                       onTap: () async {
-                        if (formkey.currentState!.validate()){
-                          showLoader('Connexion en cours\nVeuillez patienter...');
+                        if (formkey.currentState!.validate()) {
+                          showLoader(
+                              'Connexion en cours\nVeuillez patienter...');
                           var data = {
                             "key": "check_user",
                             "action": "client",
@@ -155,112 +145,125 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                             "password": passwordController.text.trim()
                           };
                           Provider.of<Auth>(context, listen: false)
-                              .request(data: data).then((value){
-                                disableLoader();
-                                if(value['code'] == 'OK'){
-                                  storage.write(key: 'sid', value: value['sid']);
-                                  storage.write(key: 'token', value: data['phone']);
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                          const MyApp()
-                                      ),
-                                          (route)=>false
-                                  );
-                                }
-                                else if(value['code'] == 'OTP'){
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => VerifyNumberScreen(
-                                            password: passwordController.text.trim(),
-                                            register: true,
-                                            phone: phoneController.text.trim())
-                                    ),
-                                  );
-                            } else if(value['code'] == '400'){
-                                  notification_dialog(
-                                      context,
-                                      "${value['message']}",
-                                      {'label': "S'INSCRIRE", "onTap": (){
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) => const UserSignupScreen()
-                                          ),
-                                        );
-                                      }
-                                      },
-                                      20,
-                                      false);
-                                }
-                                else if(value['code'] == 'KO'){
-                                  notification_dialog(
-                                      context,
-                                      "${value['message']}",
-                                      {'label': "SUIVANT", "onTap": (){
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) => VerifyNumberScreen(
-                                                  password: passwordController.text.trim(),
-                                                  register: false,
-                                                  phone: phoneController.text.trim())
-                                          ),
-                                        );
-                                      }
-                                      },
-                                      20,
-                                      false
-                                  );
-                                }
-                              else if (value['code'] == 'NOK'){
+                              .request(data: data)
+                              .then((value) {
+                            disableLoader();
+                            if (value['code'] == 'OK') {
+                              storage.write(key: 'sid', value: value['sid']);
+                              storage.write(key: 'token', value: data['phone']);
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          const MyApp()),
+                                  (route) => false);
+                            } else if (value['code'] == 'OTP') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => VerifyNumberScreen(
+                                        password:
+                                            passwordController.text.trim(),
+                                        register: true,
+                                        phone: phoneController.text.trim())),
+                              );
+                            } else if (value['code'] == '400') {
                               notification_dialog(
                                   context,
-                                  "Numéro téléphone ou mot de passe incorrect.",
-                                  {'label': "FERMER", "onTap": (){
-                                    Navigator.pop(context);
-                                  }
+                                  "${value['message']}",
+                                  {
+                                    'label': "S'INSCRIRE",
+                                    "onTap": () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                const UserSignupScreen()),
+                                      );
+                                    }
                                   },
                                   20,
                                   false);
-                            } else if (value['code'] == '500'){
-                                notification_dialog(
-                                context,
-                                "Connexion impossible au serveur OTP",
-                                {'label': "FERMER", "onTap": (){
-                                Navigator.pop(context);
-                                }
-                                },
-                                20,
-                                false);
-                              }
-                              else if(value['code'] == 'NULL'){
+                            } else if (value['code'] == 'KO') {
+                              notification_dialog(
+                                  context,
+                                  "${value['message']}",
+                                  {
+                                    'label': "SUIVANT",
+                                    "onTap": () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => VerifyNumberScreen(
+                                                password: passwordController
+                                                    .text
+                                                    .trim(),
+                                                register: false,
+                                                phone: phoneController.text
+                                                    .trim())),
+                                      );
+                                    }
+                                  },
+                                  20,
+                                  false);
+                            } else if (value['code'] == 'NOK') {
+                              notification_dialog(
+                                  context,
+                                  "Numéro téléphone ou mot de passe incorrect.",
+                                  {
+                                    'label': "FERMER",
+                                    "onTap": () {
+                                      Navigator.pop(context);
+                                    }
+                                  },
+                                  20,
+                                  false);
+                            } else if (value['code'] == '500') {
+                              notification_dialog(
+                                  context,
+                                  "Connexion impossible au serveur OTP",
+                                  {
+                                    'label': "FERMER",
+                                    "onTap": () {
+                                      Navigator.pop(context);
+                                    }
+                                  },
+                                  20,
+                                  false);
+                            } else if (value['code'] == 'NULL') {
                               notification_dialog(
                                   context,
                                   'Une erreur c\'est produite. ${value['error']}',
-                                  {'label': 'REESAYEZ', "onTap": (){
-                                    Navigator.pop(context);
-                                  }},
+                                  {
+                                    'label': 'REESAYEZ',
+                                    "onTap": () {
+                                      Navigator.pop(context);
+                                    }
+                                  },
                                   20,
                                   false);
-                            } else if(value['code'] == 'ERROR'){
+                            } else if (value['code'] == 'ERROR') {
                               notification_dialog(
                                   context,
                                   'Une erreur c\'est produite this. ${value['error']}',
-                                  {'label': 'FERMER', "onTap": (){
-                                    Navigator.pop(context);
-                                  }},
+                                  {
+                                    'label': 'FERMER',
+                                    "onTap": () {
+                                      Navigator.pop(context);
+                                    }
+                                  },
                                   20,
                                   false);
                             } else {
                               notification_dialog(
                                   context,
                                   'Une erreur c\'est produite. ${value['error']}',
-                                  {'label': 'FERMER', "onTap": (){
-                                    Navigator.pop(context);
-                                  }},
+                                  {
+                                    'label': 'FERMER',
+                                    "onTap": () {
+                                      Navigator.pop(context);
+                                    }
+                                  },
                                   20,
                                   true);
                             }
@@ -268,18 +271,16 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                         }
                       },
                     ),
-
-                    const SizedBox(height: 16.0,),
-
+                    const SizedBox(
+                      height: 16.0,
+                    ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  const UserSignupScreen()
-                          )
-                        );
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    const UserSignupScreen()));
                       },
                       child: const Text(
                         'Pas de compte? Créez en un.',
@@ -289,7 +290,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                         ),
                       ),
                     ),
-
                     SizedBox(height: size.height * 0.1),
                   ],
                 ),
