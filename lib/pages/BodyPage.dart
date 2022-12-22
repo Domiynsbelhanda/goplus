@@ -15,9 +15,8 @@ import '../utils/global_variable.dart';
 import '../widget/app_button.dart';
 
 class BodyPage extends KFDrawerContent {
-  BodyPage({
-    Key? key
-  });
+  BodyPage({Key? key});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -25,8 +24,7 @@ class BodyPage extends KFDrawerContent {
   }
 }
 
-class _BodyPage extends State<BodyPage>{
-
+class _BodyPage extends State<BodyPage> {
   Set<Marker> markers = {};
   PolylinePoints polylinePoints = PolylinePoints();
   Map<PolylineId, Maps.Polyline> polylines = {};
@@ -52,21 +50,16 @@ class _BodyPage extends State<BodyPage>{
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
     ToastContext().init(context);
-    markers.add(
-        Marker(
-          markerId: const MarkerId('Ma Position'),
-          position: position,
-          infoWindow: const InfoWindow(
-            title: 'Ma Position',
-            snippet: 'Moi',
-          ),
-          icon: pinner!,
-        )
-    );
-    cam = CameraPosition(
-        target: position,
-        zoom: zoom
-    );
+    markers.add(Marker(
+      markerId: const MarkerId('Ma Position'),
+      position: position,
+      infoWindow: const InfoWindow(
+        title: 'Ma Position',
+        snippet: 'Moi',
+      ),
+      icon: pinner!,
+    ));
+    cam = CameraPosition(target: position, zoom: zoom);
 
     return Stack(
       children: [
@@ -77,13 +70,10 @@ class _BodyPage extends State<BodyPage>{
           initialCameraPosition: cam!,
           markers: markers,
           polylines: Set<Maps.Polyline>.of(polylines.values),
-          onMapCreated: (GoogleMapController _controller){
+          onMapCreated: (GoogleMapController _controller) {
             _controller.animateCamera(
               CameraUpdate.newCameraPosition(
-                CameraPosition(
-                    target: position,
-                    zoom: zoom
-                ),
+                CameraPosition(target: position, zoom: zoom),
               ),
             );
           },
@@ -99,8 +89,7 @@ class _BodyPage extends State<BodyPage>{
                   width: 48,
                   decoration: BoxDecoration(
                       color: AppColors.primaryColor,
-                      borderRadius: BorderRadius.circular(48.0)
-                  ),
+                      borderRadius: BorderRadius.circular(48.0)),
                   child: IconButton(
                     onPressed: widget.onMenuPressed,
                     icon: const Icon(
@@ -110,13 +99,14 @@ class _BodyPage extends State<BodyPage>{
                 ),
               ),
             ),
-
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+                padding: const EdgeInsets.only(
+                    left: 16.0, right: 16.0, bottom: 16.0),
                 child: Container(
-                  height: destination != null ? size.width / 1.1 : size.width / 1.4,
+                  height:
+                      destination != null ? size.width / 1.1 : size.width / 1.4,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(size.width / 15),
                     color: AppColors.primaryColor,
@@ -125,7 +115,8 @@ class _BodyPage extends State<BodyPage>{
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 5,
                         blurRadius: 7,
-                        offset: const Offset(0, 3), // changes position of shadow
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -133,26 +124,23 @@ class _BodyPage extends State<BodyPage>{
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0),
+                        padding: const EdgeInsets.only(
+                            left: 16.0, top: 16.0, right: 16.0),
                         child: Image.asset(
                           'assets/images/bonjour.png',
                           height: size.width / 9,
                           fit: BoxFit.fitWidth,
                         ),
                       ),
-
                       Padding(
-                        padding: const EdgeInsets.only(left: 36.0, bottom: 16.0),
-                        child: Text(
-                            "OU ALLEZ-VOUS?",
+                        padding:
+                            const EdgeInsets.only(left: 36.0, bottom: 16.0),
+                        child: Text("OU ALLEZ-VOUS?",
                             style: TextStyle(
                                 fontSize: size.width / 15,
                                 fontFamily: 'Anton',
-                                color: Colors.white
-                            )
-                        ),
+                                color: Colors.white)),
                       ),
-
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0, right: 16.0),
                         child: GestureDetector(
@@ -163,19 +151,23 @@ class _BodyPage extends State<BodyPage>{
                                 mode: Mode.overlay,
                                 types: [],
                                 strictbounds: false,
-                                components: [Component(Component.country, 'cd')],
+                                components: [
+                                  Component(Component.country, 'cd')
+                                ],
                                 //google_map_webservice package
-                                onError: (err){
+                                onError: (err) {
                                   print(err);
-                                }
-                            );
+                                });
 
-                            if(place != null){
-                              final plist = GoogleMapsPlaces(apiKey:androidApiKey,
-                                apiHeaders: await const GoogleApiHeaders().getHeaders(),
+                            if (place != null) {
+                              final plist = GoogleMapsPlaces(
+                                apiKey: androidApiKey,
+                                apiHeaders:
+                                    await const GoogleApiHeaders().getHeaders(),
                               );
                               String placeid = place.placeId ?? "0";
-                              final detail = await plist.getDetailsByPlaceId(placeid);
+                              final detail =
+                                  await plist.getDetailsByPlaceId(placeid);
                               final geometry = detail.result.geometry!;
                               final lat = geometry.location.lat;
                               final lang = geometry.location.lng;
@@ -198,7 +190,8 @@ class _BodyPage extends State<BodyPage>{
 
                               markers.clear();
                               polylineCoordinates.clear();
-                              polylineCoordinates.add(LatLng(position.latitude, position.longitude));
+                              polylineCoordinates.add(LatLng(
+                                  position.latitude, position.longitude));
                               polylineCoordinates.add(LatLng(lat, lang));
                               setState(() {
                                 addPolyLine(polylineCoordinates);
@@ -212,28 +205,24 @@ class _BodyPage extends State<BodyPage>{
                                   zoom: 13,
                                 );
                                 cam = cameraPosition;
-                                markers.add(
-                                    Marker(
-                                      markerId: const MarkerId('Ma Position'),
-                                      position: position,
-                                      infoWindow: const InfoWindow(
-                                        title: 'Ma Position',
-                                        snippet: 'Moi',
-                                      ),
-                                      icon: pinner!,
-                                    )
-                                );
-                                markers.add(
-                                    Marker(
-                                      markerId: const MarkerId('Destination'),
-                                      position: destinationLatLng!,
-                                      infoWindow: InfoWindow(
-                                        title: 'Votre Destination',
-                                        snippet: '${destination}',
-                                      ),
-                                      icon: arriveBitmap!,
-                                    )
-                                );
+                                markers.add(Marker(
+                                  markerId: const MarkerId('Ma Position'),
+                                  position: position,
+                                  infoWindow: const InfoWindow(
+                                    title: 'Ma Position',
+                                    snippet: 'Moi',
+                                  ),
+                                  icon: pinner!,
+                                ));
+                                markers.add(Marker(
+                                  markerId: const MarkerId('Destination'),
+                                  position: destinationLatLng!,
+                                  infoWindow: InfoWindow(
+                                    title: 'Votre Destination',
+                                    snippet: '${destination}',
+                                  ),
+                                  icon: arriveBitmap!,
+                                ));
                               });
                             }
                           },
@@ -241,38 +230,36 @@ class _BodyPage extends State<BodyPage>{
                             padding: const EdgeInsets.all(16.0),
                             decoration: const BoxDecoration(
                                 border: Border(
-                                  bottom: BorderSide(width: 1.0, color: Colors.black),
-                                )
-                            ),
+                              bottom:
+                                  BorderSide(width: 1.0, color: Colors.black),
+                            )),
                             child: Row(
                               children: [
-                                const Icon(
-                                    Icons.search
-                                ),
-
+                                const Icon(Icons.search),
                                 const SizedBox(
                                   width: 8.0,
                                 ),
-
                                 Flexible(
-                                  child: Text(
-                                      destination != null ? '${destination}' : "Entrez votre destination"
-                                  ),
+                                  child: Text(destination != null
+                                      ? '${destination}'
+                                      : "Entrez votre destination"),
                                 )
                               ],
                             ),
                           ),
                         ),
                       ),
-
                       Padding(
-                          padding: const EdgeInsets.only(left: 0, top: 16.0, right: 0, bottom: 16.0),
+                          padding: const EdgeInsets.only(
+                              left: 0, top: 16.0, right: 0, bottom: 16.0),
                           child: AppButton(
                             color: Colors.black,
                             name: 'SUIVANT',
-                            onTap: (){
-                              if(destination == null){
-                                Toast.show('Veuillez entrée une destination', duration: Toast.lengthLong, gravity: Toast.bottom);
+                            onTap: () {
+                              if (destination == null) {
+                                Toast.show('Veuillez entrée une destination',
+                                    duration: Toast.lengthLong,
+                                    gravity: Toast.bottom);
                                 return;
                               }
                               Navigator.push(
@@ -283,12 +270,10 @@ class _BodyPage extends State<BodyPage>{
                                           positions: position,
                                           destination: destinationLatLng!,
                                           picto: pinner!,
-                                        )
-                                ),
+                                        )),
                               );
                             },
-                          )
-                      ),
+                          )),
                     ],
                   ),
                 ),
