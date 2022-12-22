@@ -32,14 +32,8 @@ class _SignupScreenState extends State<UserSignupScreen> {
 
   int genreTag = 0;
   List<Map<String, dynamic>> genreOptions = [
-    {
-      'name': 'Homme',
-      'value' : 'H'
-    },
-    {
-      'name': 'Femme',
-      'value' : 'F'
-    }
+    {'name': 'Homme', 'value': 'H'},
+    {'name': 'Femme', 'value': 'F'}
   ];
 
   @override
@@ -53,26 +47,18 @@ class _SignupScreenState extends State<UserSignupScreen> {
     input = [
       {
         'label': 'Numéro téléphone',
-        'controller' : phoneController,
+        'controller': phoneController,
         'input': TextInputType.phone,
         'max': 9,
         'obscure': false
       },
       {
         'label': 'Mot de passe',
-        'controller' : passwordController,
+        'controller': passwordController,
         'obscure': true
       },
-      {
-        'label': 'Nom',
-        'controller' : nameController,
-        'obscure': false
-      },
-      {
-        'label': 'Prénom',
-        'controller' : prenomController,
-        'obscure' : false
-      },
+      {'label': 'Nom', 'controller': nameController, 'obscure': false},
+      {'label': 'Prénom', 'controller': prenomController, 'obscure': false},
     ];
     ToastContext().init(context);
     return Scaffold(
@@ -112,84 +98,79 @@ class _SignupScreenState extends State<UserSignupScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Column(
-                      children: input.map((e){
-                        if(e['max'] != null){
-                          return Row(
-                            children: [
-                              Container(
-                                alignment: Alignment.center,
-                                height: size.height * 0.06,
-                                width: size.height * 0.08,
-                                margin: const EdgeInsets.only(right: 15),
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: AppColors.primaryColor,
-                                    )),
-                                child: const Text(
-                                  "+243",
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                  ),
+                        children: input.map((e) {
+                      if (e['max'] != null) {
+                        return Row(
+                          children: [
+                            Container(
+                              alignment: Alignment.center,
+                              height: size.height * 0.06,
+                              width: size.height * 0.08,
+                              margin: const EdgeInsets.only(right: 15),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                color: AppColors.primaryColor,
+                              )),
+                              child: const Text(
+                                "+243",
+                                style: TextStyle(
+                                  fontSize: 16.0,
                                 ),
                               ),
-                              SizedBox(
-                                width: size.width / 1.4,
-                                child: TextFormField(
-                                  obscureText: e['obscure'],
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return '${e['label']} incorect';
-                                    }
-                                    return null;
-                                  },
-                                  cursorColor: AppColors.primaryColor,
-                                  maxLength: e['max'],
-                                  keyboardType: e['input'] ?? TextInputType.name,
-                                  controller: e['controller'],
-                                  decoration: InputDecoration(
-                                      hintText: '${e['label']}',
-                                      contentPadding: const EdgeInsets.all(15.0)),
-                                ),
-                              )
-                            ],
-                          );
-                        }
-                        return TextFormField(
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return '${e['label']} invalide';
-                            }
-
-                            if(e['obscure'] && value.length < 6){
-                              return 'Mot de passe trop cours';
-                            }
-                            return null;
-                          },
-                          obscureText: e['obscure'],
-                          cursorColor: AppColors.primaryColor,
-                          maxLength: e['max'],
-                          keyboardType: e['input'] ?? TextInputType.name,
-                          controller: e['controller'],
-                          decoration: InputDecoration(
-                              hintText: '${e['label']}',
-                              contentPadding: const EdgeInsets.all(15.0)),
+                            ),
+                            SizedBox(
+                              width: size.width / 1.4,
+                              child: TextFormField(
+                                obscureText: e['obscure'],
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return '${e['label']} incorect';
+                                  }
+                                  return null;
+                                },
+                                cursorColor: AppColors.primaryColor,
+                                maxLength: e['max'],
+                                keyboardType: e['input'] ?? TextInputType.name,
+                                controller: e['controller'],
+                                decoration: InputDecoration(
+                                    hintText: '${e['label']}',
+                                    contentPadding: const EdgeInsets.all(15.0)),
+                              ),
+                            )
+                          ],
                         );
-                      }).toList()
-                    ),
+                      }
+                      return TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return '${e['label']} invalide';
+                          }
 
+                          if (e['obscure'] && value.length < 6) {
+                            return 'Mot de passe trop cours';
+                          }
+                          return null;
+                        },
+                        obscureText: e['obscure'],
+                        cursorColor: AppColors.primaryColor,
+                        maxLength: e['max'],
+                        keyboardType: e['input'] ?? TextInputType.name,
+                        controller: e['controller'],
+                        decoration: InputDecoration(
+                            hintText: '${e['label']}',
+                            contentPadding: const EdgeInsets.all(15.0)),
+                      );
+                    }).toList()),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(
-                          'Genre :',
-                          style: TextStyle(
-                            fontSize: size.width / 25
-                          )
-                        ),
+                        Text('Genre :',
+                            style: TextStyle(fontSize: size.width / 25)),
                         ChipsChoice<int>.single(
                           value: genreTag,
                           onChanged: (val) => setState(() => genreTag = val),
-                          choiceItems: C2Choice.listFrom<int, Map<String, dynamic>>(
+                          choiceItems:
+                              C2Choice.listFrom<int, Map<String, dynamic>>(
                             source: genreOptions,
                             value: (i, v) => i,
                             label: (i, v) => v['name'],
@@ -197,20 +178,20 @@ class _SignupScreenState extends State<UserSignupScreen> {
                         ),
                       ],
                     ),
-
                     SizedBox(height: size.height * 0.07),
                     AppButton(
-                      color: AppColors.primaryColor,
+                        color: AppColors.primaryColor,
                         name: 'S\'INSRIRE',
-                        onTap: (){
-                          if(formkey.currentState!.validate()){
-                            showLoader("Inscription en cours\nVeuillez patienter...");
-                            if(phoneController.text.trim().length != 9){
+                        onTap: () {
+                          if (formkey.currentState!.validate()) {
+                            showLoader(
+                                "Inscription en cours\nVeuillez patienter...");
+                            if (phoneController.text.trim().length != 9) {
                               disableLoader();
                               return;
                             }
 
-                            if(passwordController.text.trim().length < 3){
+                            if (passwordController.text.trim().length < 3) {
                               disableLoader();
                               return;
                             }
@@ -226,87 +207,104 @@ class _SignupScreenState extends State<UserSignupScreen> {
                             };
 
                             Provider.of<Auth>(context, listen: false)
-                                .request(data: data).then((value){
-                                  disableLoader();
-                                  if(value['code'].toString() == '400'){
-                                    notification_dialog(
-                                        context,
-                                        '${value['message']}',
-                                        {'label': 'FERMER', "onTap": (){
-                                          Navigator.pop(context);
-                                        }},
-                                        20,
-                                        false);
-                                  } else if(value['code'] == "OTP"){
-                                    FirebaseFirestore.instance.collection('clients')
-                                        .doc(phoneController.text.trim()).set(data);
-                                      Navigator.push(
+                                .request(data: data)
+                                .then((value) {
+                              disableLoader();
+                              if (value['code'].toString() == '400') {
+                                notification_dialog(
+                                    context,
+                                    '${value['message']}',
+                                    {
+                                      'label': 'FERMER',
+                                      "onTap": () {
+                                        Navigator.pop(context);
+                                      }
+                                    },
+                                    20,
+                                    false);
+                              } else if (value['code'] == "OTP") {
+                                FirebaseFirestore.instance
+                                    .collection('clients')
+                                    .doc(phoneController.text.trim())
+                                    .set(data);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => VerifyNumberScreen(
+                                            password:
+                                                passwordController.text.trim(),
+                                            register: true,
+                                            phone:
+                                                phoneController.text.trim())));
+                              } else if (value['code'] == 'KO') {
+                                FirebaseFirestore.instance
+                                    .collection('clients')
+                                    .doc(phoneController.text.trim())
+                                    .set(data);
+                                notification_dialog(
+                                    context,
+                                    '${value['message']}',
+                                    {
+                                      'label': 'SUIVANT',
+                                      "onTap": () {
+                                        Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (_) => VerifyNumberScreen(
-                                                password: passwordController.text.trim(),
-                                                  register: true,
-                                                  phone: phoneController.text.trim())
-                                          )
-                                      );
-                                  } else if(value['code'] == 'KO'){
-                                    FirebaseFirestore.instance.collection('clients')
-                                        .doc(phoneController.text.trim()).set(data);
-                                    notification_dialog(
-                                        context,
-                                        '${value['message']}',
-                                        {'label': 'SUIVANT', "onTap": (){
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (_) => VerifyNumberScreen(
-                                                    password: passwordController.text.trim(),
-                                                    register: true,
-                                                    phone: phoneController.text.trim())
-                                            ),
-                                          );
-                                        }},
-                                        20,
-                                        false);
-                                  }
-                                  else if(value['code'].toString() == 'NOK'){
-                                    notification_dialog(
-                                        context,
-                                        '${value['message']}',
-                                        {'label': 'FERMER', "onTap": (){
-                                          Navigator.pop(context);
-                                        }},
-                                        20,
-                                        false);
-                                  }
-                                  else {
-                                    notification_dialog(
-                                        context,
-                                        '${value['error']}',
-                                        {'label': 'FERMER', "onTap": (){
-                                          Navigator.pop(context);
-                                        }},
-                                        20,
-                                        false);
-                                  }
+                                              builder: (_) =>
+                                                  VerifyNumberScreen(
+                                                      password:
+                                                          passwordController
+                                                              .text
+                                                              .trim(),
+                                                      register: true,
+                                                      phone: phoneController
+                                                          .text
+                                                          .trim())),
+                                        );
+                                      }
+                                    },
+                                    20,
+                                    false);
+                              } else if (value['code'].toString() == 'NOK') {
+                                notification_dialog(
+                                    context,
+                                    '${value['message']}',
+                                    {
+                                      'label': 'FERMER',
+                                      "onTap": () {
+                                        Navigator.pop(context);
+                                      }
+                                    },
+                                    20,
+                                    false);
+                              } else {
+                                notification_dialog(
+                                    context,
+                                    '${value['error']}',
+                                    {
+                                      'label': 'FERMER',
+                                      "onTap": () {
+                                        Navigator.pop(context);
+                                      }
+                                    },
+                                    20,
+                                    false);
+                              }
                             });
                           }
                         }),
                   ],
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.only(left: 24.0, top: 16),
                 child: GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext context) =>
-                            const PhoneNumberScreen()
-                        )
-                    );
+                                const PhoneNumberScreen()));
                   },
                   child: const Text(
                     'Vous avez un compte? Connectez-vous.',
@@ -318,7 +316,6 @@ class _SignupScreenState extends State<UserSignupScreen> {
                   ),
                 ),
               ),
-
               const SizedBox(
                 height: 16.0,
               )
