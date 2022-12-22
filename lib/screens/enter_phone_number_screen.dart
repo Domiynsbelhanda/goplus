@@ -218,7 +218,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                               else if (value['code'] == 'NOK'){
                               notification_dialog(
                                   context,
-                                  "Adresse email ou mot de passe incorrect.",
+                                  "Numéro téléphone ou mot de passe incorrect.",
                                   {'label': "FERMER", "onTap": (){
                                     Navigator.pop(context);
                                   }
